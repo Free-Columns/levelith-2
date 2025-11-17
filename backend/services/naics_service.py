@@ -23,6 +23,7 @@ from backend.models.naics import (
     NAICSLevel,
     normalize_naics_code,
     FALLBACK_NAICS,
+    NAICS_FALLBACK_CODE,
 )
 from backend.models.experience import ExperienceType, ExperienceCategory
 from backend.repositories.naics_repository import NAICSRepository
@@ -153,7 +154,13 @@ class NAICSService:
             >>> normalized
             '123456'
         """
+        original_code = code.strip() if code else ""
         normalized = normalize_naics_code(code)
+
+        # If normalization resulted in fallback code and it's different from original,
+        # the original code was invalid
+        if normalized == NAICS_FALLBACK_CODE and original_code.upper() != NAICS_FALLBACK_CODE:
+            return (False, FALLBACK_NAICS.code)
 
         # Check if it's in the official database
         is_valid = self.naics_repo.is_valid_code(normalized)

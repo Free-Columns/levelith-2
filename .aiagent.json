@@ -14,6 +14,12 @@
     "key_directories": {
       "dev/": "Development tools and AI agent navigation",
       "tests/": "Comprehensive test suite (unit, integration, e2e)",
+      "backend/": "FastAPI backend with domain models, services, repositories, and API routes",
+      "backend/models/": "Domain models including NAICS code system",
+      "backend/services/": "Business logic layer including NAICS service",
+      "backend/repositories/": "Data access layer with in-memory NAICS repository",
+      "backend/api/routes/": "REST API endpoints including 12 NAICS endpoints",
+      "backend/data/": "Static data files including naics_codes_2022.json",
       "docs/": "Documentation files",
       ".github/workflows/": "CI/CD pipelines enforcing golden rules",
       ".": "Project root with core configuration"
@@ -57,7 +63,11 @@
         "type_hints": true,
         "important_modules": [
           "dev/aiagent_navigator.py",
-          "tests/test_system.py"
+          "tests/test_system.py",
+          "backend/models/naics.py",
+          "backend/repositories/naics_repository.py",
+          "backend/services/naics_service.py",
+          "backend/api/routes/naics.py"
         ]
       },
       "javascript": {
@@ -114,7 +124,11 @@
       "✓ Security scanning is automated - avoid vulnerabilities",
       "✓ Code quality standards enforced via CI/CD",
       "✓ Run 'python tests/test_system.py generate <file>' to create test templates",
-      "✓ Run 'python tests/test_system.py enforce' before committing"
+      "✓ Run 'python tests/test_system.py enforce' before committing",
+      "📊 NAICS Domain: Complete NAICS 2022 implementation with 148 tests (98% coverage)",
+      "📊 NAICS Architecture: 4-layer (Domain → Repository → Service → API) with 12 REST endpoints",
+      "📊 NAICS Data: 60+ official codes in backend/data/naics_codes_2022.json",
+      "📊 NAICS Route Order: Static paths → Specific params → Generic /{code} → Compound paths"
     ],
     "workflow": [
       "1. Read MANIFEST.md for project context (first time or significant changes)",

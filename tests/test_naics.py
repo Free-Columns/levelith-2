@@ -61,7 +61,7 @@ class TestNAICSCodeNormalization:
 
     def test_normalize_invalid_length(self):
         """Test normalization of invalid length returns fallback."""
-        assert normalize_naics_code("123") == NAICS_FALLBACK_CODE
+        assert normalize_naics_code("1") == NAICS_FALLBACK_CODE
         assert normalize_naics_code("12345") == NAICS_FALLBACK_CODE
         assert normalize_naics_code("1234567") == NAICS_FALLBACK_CODE
 
@@ -92,7 +92,7 @@ class TestNAICSLevelDetection:
 
     def test_get_level_invalid(self):
         """Test level detection for invalid code returns None."""
-        assert get_naics_level("123") is None
+        assert get_naics_level("1") is None
         assert get_naics_level("12345") is None
         assert get_naics_level("") is None
         assert get_naics_level(None) is None

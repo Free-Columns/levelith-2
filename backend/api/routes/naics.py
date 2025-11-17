@@ -108,38 +108,6 @@ def _naics_to_response(naics: NAICSCode) -> NAICSCodeResponse:
     return NAICSCodeResponse(**naics_dict)
 
 
-@router.get(
-    "/{code}",
-    response_model=NAICSCodeResponse,
-    status_code=status.HTTP_200_OK,
-    summary="Get NAICS code details",
-    description="Look up a NAICS code and return its complete metadata including title, description, hierarchy, and category."
-)
-async def get_naics_code(
-    code: str = Path(..., description="NAICS code (2, 3, 4, or 6 digits)", example="541511")
-) -> NAICSCodeResponse:
-    """
-    Get detailed information about a NAICS code.
-
-    Args:
-        code: NAICS code to look up
-
-    Returns:
-        NAICSCodeResponse with complete metadata
-
-    Raises:
-        HTTPException: 404 if code not found
-    """
-    naics = naics_service.lookup_code(code)
-
-    if not naics:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"NAICS code '{code}' not found"
-        )
-
-    return _naics_to_response(naics)
-
 
 @router.get(
     "/validate/{code}",
@@ -320,6 +288,40 @@ async def get_naics_by_level(
 
     codes = naics_service.get_by_level(level)
     return [_naics_to_response(naics) for naics in codes]
+
+
+
+@router.get(
+    "/{code}",
+    response_model=NAICSCodeResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Get NAICS code details",
+    description="Look up a NAICS code and return its complete metadata including title, description, hierarchy, and category."
+)
+async def get_naics_code(
+    code: str = Path(..., description="NAICS code (2, 3, 4, or 6 digits)", example="541511")
+) -> NAICSCodeResponse:
+    """
+    Get detailed information about a NAICS code.
+
+    Args:
+        code: NAICS code to look up
+
+    Returns:
+        NAICSCodeResponse with complete metadata
+
+    Raises:
+        HTTPException: 404 if code not found
+    """
+    naics = naics_service.lookup_code(code)
+
+    if not naics:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"NAICS code '{code}' not found"
+        )
+
+    return _naics_to_response(naics)
 
 
 @router.get(

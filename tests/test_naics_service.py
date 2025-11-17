@@ -188,6 +188,7 @@ class TestExperienceSuggestions:
     def test_suggest_for_full_time_with_title(self, naics_service, mock_repo, sample_naics_code):
         """Test suggesting for full-time experience with title."""
         mock_repo.search_by_title.return_value = [sample_naics_code]
+        mock_repo.find_by_category.return_value = []
 
         results = naics_service.suggest_for_experience(
             experience_type="full_time",

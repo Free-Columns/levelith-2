@@ -17,6 +17,24 @@
 This module defines the core Experience model and all its subtypes.
 Accord
 
+### `tests/test_api_naics.py`
+- **Reason**: 13 exports, complexity: 42
+- **Exports**: TestGetNAICSCode, TestValidateNAICSCode, TestSearchNAICSCodes, TestAutocompleteNAICS, TestSuggestForExperience, TestGetByCategory, TestGetByLevel, TestGetHierarchy, TestGetChildren, TestGetParent, TestCategoriesSummary, TestListCategories, TestAPIResponseFormat
+- **Description**: Tests for NAICS API Endpoints
+
+This module tests the NAICS REST API endpoints.
+
+Test coverage includ
+
+### `tests/test_naics_service.py`
+- **Reason**: 13 exports, complexity: 41
+- **Exports**: TestNAICSServiceInitialization, TestCodeLookup, TestCodeValidation, TestSearch, TestAutocomplete, TestExperienceSuggestions, TestCategoryOperations, TestLevelOperations, TestHierarchicalOperations, TestExperienceCategoryMapping, mock_repo, naics_service, sample_naics_code
+- **Description**: Tests for NAICS Service
+
+This module tests the NAICS service business logic layer.
+
+Test coverage in
+
 ### `backend/models/db_models.py`
 - **Reason**: 11 exports, complexity: 40
 - **Exports**: UserDB, ExperienceDB, CertificateDB, DegreeDB, CourseDB, GigDB, PartTimeDB, FullTimeDB, SoftSkillDB, HardSkillDB, NativeSkillDB
@@ -24,6 +42,15 @@ Accord
 
 Database models for User and Experience using SQLAlchemy ORM.
 These models ma
+
+### `tests/test_naics_repository.py`
+- **Reason**: 12 exports, complexity: 39
+- **Exports**: TestNAICSRepositoryInitialization, TestNAICSCodeLookup, TestCategoryFiltering, TestLevelFiltering, TestNAICSSearch, TestHierarchicalOperations, TestCodeValidation, TestRepositoryQueries, TestIndexConsistency, sample_naics_data, temp_naics_file, naics_repo
+- **Description**: Tests for NAICS Repository
+
+This module tests the NAICS repository data access layer.
+
+Test coverage
 
 ### `tests/test_experience.py`
 - **Reason**: 12 exports, complexity: 39
@@ -39,6 +66,13 @@ Comprehensive tests for Experience model, all 9 experience subtypes, a
 
 Comprehensive tests for experience CRUD operations via REST
 
+### `backend/api/routes/naics.py`
+- **Reason**: 8 exports, complexity: 29
+- **Exports**: NAICSCodeResponse, NAICSValidationResponse, NAICSSearchResponse, NAICSSuggestionResponse, NAICSCategorySummary, Config, Config, _naics_to_response
+- **Description**: NAICS Code API Endpoints
+
+Provides endpoints for NAICS code lookups, search, validation, and suggest
+
 ### `tests/test_api_users.py`
 - **Reason**: 9 exports, complexity: 29
 - **Exports**: TestUserCreation, TestUserRetrieval, TestUserUpdate, TestUserDeletion, TestUserLogin, override_get_db, setup_database, client, sample_user_data
@@ -53,42 +87,20 @@ Comprehensive tests for user CRUD operations via REST API.
 
 Pydantic models for user-related API requests and responses.
 
-### `backend/database.py`
-- **Reason**: 7 exports, complexity: 23
-- **Exports**: DatabaseHealthCheck, set_sqlite_pragma, get_db, get_db_context, init_db, drop_db, reset_db
-- **Description**: Database Configuration and Session Management
-
-Provides SQLAlchemy engine, session management, and b
-
-### `backend/schemas/experience.py`
-- **Reason**: 6 exports, complexity: 22
-- **Exports**: ExperienceBase, ExperienceCreate, ExperienceUpdate, ExperienceResponse, ExperienceList, Config
-- **Description**: Experience API Schemas
-
-Pydantic models for experience-related API requests and responses.
-
-### `tests/test_system.py`
-- **Reason**: 5 exports, complexity: 21
-- **Exports**: TestRequirement, TestGenerator, TestValidator, enforce_test_requirements, main
-- **Description**: Levelith-2 Internal Test System
-
-This module provides a comprehensive testing framework for all code
-
-### `tests/test_test_system.py`
-- **Reason**: 4 exports, complexity: 19
-- **Exports**: TestTestRequirement, TestTestGenerator, TestTestValidator, TestTestSystemIntegration
-- **Description**: Unit tests for the test system itself.
-
-This demonstrates the test framework in action and validates
-
 ## Complexity Hotspots
 
 - `backend/models/experience.py` (complexity: 42)
+- `tests/test_api_naics.py` (complexity: 42)
+- `tests/test_naics_service.py` (complexity: 41)
 - `backend/models/db_models.py` (complexity: 40)
+- `tests/test_naics_repository.py` (complexity: 39)
 - `tests/test_experience.py` (complexity: 39)
 - `tests/test_api_experiences.py` (complexity: 32)
+- `backend/api/routes/naics.py` (complexity: 29)
 - `tests/test_api_users.py` (complexity: 29)
 - `backend/schemas/user.py` (complexity: 27)
+- `tests/test_naics.py` (complexity: 27)
 - `backend/database.py` (complexity: 23)
 - `backend/schemas/experience.py` (complexity: 22)
+- `backend/models/naics.py` (complexity: 21)
 - `tests/test_system.py` (complexity: 21)

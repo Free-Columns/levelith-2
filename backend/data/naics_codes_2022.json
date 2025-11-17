@@ -1,0 +1,415 @@
+[
+  {
+    "code": "123456",
+    "title": "General/Unclassified",
+    "description": "General or unclassified industry. Used as fallback when specific NAICS code is not provided.",
+    "category": "general",
+    "is_active": true
+  },
+  {
+    "code": "11",
+    "title": "Agriculture, Forestry, Fishing and Hunting",
+    "description": "Establishments primarily engaged in growing crops, raising animals, harvesting timber, and harvesting fish and other animals.",
+    "category": "agriculture",
+    "is_active": true
+  },
+  {
+    "code": "23",
+    "title": "Construction",
+    "description": "Establishments primarily engaged in the construction of buildings or engineering projects.",
+    "category": "construction",
+    "is_active": true
+  },
+  {
+    "code": "31",
+    "title": "Manufacturing",
+    "description": "Establishments engaged in the mechanical, physical, or chemical transformation of materials, substances, or components into new products.",
+    "category": "manufacturing",
+    "is_active": true
+  },
+  {
+    "code": "42",
+    "title": "Wholesale Trade",
+    "description": "Establishments engaged in wholesaling merchandise and rendering services incidental to the sale of merchandise.",
+    "category": "retail",
+    "is_active": true
+  },
+  {
+    "code": "44",
+    "title": "Retail Trade",
+    "description": "Establishments engaged in retailing merchandise and rendering services incidental to the sale of merchandise.",
+    "category": "retail",
+    "is_active": true
+  },
+  {
+    "code": "51",
+    "title": "Information",
+    "description": "Establishments engaged in producing and distributing information and cultural products.",
+    "category": "technology",
+    "is_active": true
+  },
+  {
+    "code": "52",
+    "title": "Finance and Insurance",
+    "description": "Establishments primarily engaged in financial transactions and facilitating financial transactions.",
+    "category": "finance",
+    "is_active": true
+  },
+  {
+    "code": "54",
+    "title": "Professional, Scientific, and Technical Services",
+    "description": "Establishments that specialize in performing professional, scientific, and technical activities for others.",
+    "category": "professional_services",
+    "is_active": true
+  },
+  {
+    "code": "61",
+    "title": "Educational Services",
+    "description": "Establishments that provide instruction and training in a wide variety of subjects.",
+    "category": "education",
+    "is_active": true
+  },
+  {
+    "code": "62",
+    "title": "Health Care and Social Assistance",
+    "description": "Establishments providing health care and social assistance for individuals.",
+    "category": "healthcare",
+    "is_active": true
+  },
+  {
+    "code": "71",
+    "title": "Arts, Entertainment, and Recreation",
+    "description": "Establishments that operate facilities or provide services to meet varied cultural, entertainment, and recreational interests.",
+    "category": "arts_entertainment",
+    "is_active": true
+  },
+  {
+    "code": "72",
+    "title": "Accommodation and Food Services",
+    "description": "Establishments providing customers with lodging and/or preparing meals, snacks, and beverages for immediate consumption.",
+    "category": "hospitality",
+    "is_active": true
+  },
+  {
+    "code": "92",
+    "title": "Public Administration",
+    "description": "Establishments of federal, state, and local government agencies that administer, oversee, and manage public programs.",
+    "category": "public_administration",
+    "is_active": true
+  },
+  {
+    "code": "511",
+    "title": "Publishing Industries",
+    "description": "Establishments engaged in the publishing of newspapers, magazines, other periodicals, and books, as well as directory and mailing list and software publishing.",
+    "category": "technology",
+    "is_active": true
+  },
+  {
+    "code": "517",
+    "title": "Telecommunications",
+    "description": "Establishments primarily engaged in providing point-to-point communications and mass distribution of audio and video programming.",
+    "category": "technology",
+    "is_active": true
+  },
+  {
+    "code": "518",
+    "title": "Data Processing, Hosting, and Related Services",
+    "description": "Establishments primarily engaged in providing infrastructure for hosting or data processing services.",
+    "category": "technology",
+    "is_active": true
+  },
+  {
+    "code": "519",
+    "title": "Other Information Services",
+    "description": "Establishments primarily engaged in providing other information services, such as news syndicates, libraries, archives, and web search portals.",
+    "category": "technology",
+    "is_active": true
+  },
+  {
+    "code": "5221",
+    "title": "Depository Credit Intermediation",
+    "description": "Establishments primarily engaged in accepting deposits and extending credit.",
+    "category": "finance",
+    "is_active": true
+  },
+  {
+    "code": "5231",
+    "title": "Securities and Commodity Contracts Intermediation and Brokerage",
+    "description": "Establishments primarily engaged in putting buyers and sellers of securities and commodity contracts in touch with each other.",
+    "category": "finance",
+    "is_active": true
+  },
+  {
+    "code": "5241",
+    "title": "Insurance Carriers",
+    "description": "Establishments primarily engaged in underwriting insurance and annuities.",
+    "category": "finance",
+    "is_active": true
+  },
+  {
+    "code": "541",
+    "title": "Professional, Scientific, and Technical Services",
+    "description": "Establishments that specialize in performing professional, scientific, and technical activities for others.",
+    "category": "professional_services",
+    "is_active": true
+  },
+  {
+    "code": "5415",
+    "title": "Computer Systems Design and Related Services",
+    "description": "Establishments primarily engaged in providing expertise in the field of information technologies.",
+    "category": "technology",
+    "is_active": true
+  },
+  {
+    "code": "541511",
+    "title": "Custom Computer Programming Services",
+    "description": "Establishments primarily engaged in writing, modifying, testing, and supporting software to meet the needs of a particular customer.",
+    "category": "technology",
+    "is_active": true
+  },
+  {
+    "code": "541512",
+    "title": "Computer Systems Design Services",
+    "description": "Establishments primarily engaged in planning and designing computer systems that integrate computer hardware, software, and communication technologies.",
+    "category": "technology",
+    "is_active": true
+  },
+  {
+    "code": "541513",
+    "title": "Computer Facilities Management Services",
+    "description": "Establishments primarily engaged in providing on-site management and operation of clients' computer systems and/or data processing facilities.",
+    "category": "technology",
+    "is_active": true
+  },
+  {
+    "code": "541519",
+    "title": "Other Computer Related Services",
+    "description": "Establishments primarily engaged in providing computer-related services (except custom programming, systems integration design, and facilities management services).",
+    "category": "technology",
+    "is_active": true
+  },
+  {
+    "code": "5416",
+    "title": "Management, Scientific, and Technical Consulting Services",
+    "description": "Establishments primarily engaged in providing advice and assistance to businesses and other organizations on management, scientific, and technical issues.",
+    "category": "professional_services",
+    "is_active": true
+  },
+  {
+    "code": "541611",
+    "title": "Administrative Management and General Management Consulting Services",
+    "description": "Establishments primarily engaged in providing operating advice and assistance to businesses and other organizations on administrative management issues.",
+    "category": "professional_services",
+    "is_active": true
+  },
+  {
+    "code": "541612",
+    "title": "Human Resources Consulting Services",
+    "description": "Establishments primarily engaged in providing advice and assistance to businesses and other organizations in one or more of the following areas: human resource and personnel policies, practices, and procedures.",
+    "category": "professional_services",
+    "is_active": true
+  },
+  {
+    "code": "541613",
+    "title": "Marketing Consulting Services",
+    "description": "Establishments primarily engaged in providing operating advice and assistance to businesses and other organizations on marketing issues.",
+    "category": "professional_services",
+    "is_active": true
+  },
+  {
+    "code": "541614",
+    "title": "Process, Physical Distribution, and Logistics Consulting Services",
+    "description": "Establishments primarily engaged in providing operating advice and assistance to businesses and other organizations on manufacturing operations, productivity, production planning and control, quality assurance, inventory management, distribution networks, warehouse use, transportation and shipment of goods and materials, materials management and handling.",
+    "category": "professional_services",
+    "is_active": true
+  },
+  {
+    "code": "541618",
+    "title": "Other Management Consulting Services",
+    "description": "Establishments primarily engaged in providing management consulting services (except administrative and general management consulting; human resources consulting; marketing consulting; or process, physical distribution, and logistics consulting).",
+    "category": "professional_services",
+    "is_active": true
+  },
+  {
+    "code": "5417",
+    "title": "Scientific Research and Development Services",
+    "description": "Establishments engaged in conducting original investigation undertaken on a systematic basis to gain new knowledge (research) and/or the application of research findings or other scientific knowledge for the creation of new or significantly improved products or processes (experimental development).",
+    "category": "professional_services",
+    "is_active": true
+  },
+  {
+    "code": "6111",
+    "title": "Elementary and Secondary Schools",
+    "description": "Establishments that provide academic courses and associated course work that comprise a basic preparatory education.",
+    "category": "education",
+    "is_active": true
+  },
+  {
+    "code": "6113",
+    "title": "Colleges, Universities, and Professional Schools",
+    "description": "Establishments that furnish academic courses and grant degrees at baccalaureate or graduate levels.",
+    "category": "education",
+    "is_active": true
+  },
+  {
+    "code": "611310",
+    "title": "Colleges, Universities, and Professional Schools",
+    "description": "Establishments that furnish academic courses and grant degrees at baccalaureate or graduate levels.",
+    "category": "education",
+    "is_active": true
+  },
+  {
+    "code": "6114",
+    "title": "Business Schools and Computer and Management Training",
+    "description": "Establishments primarily engaged in offering courses in office procedures and secretarial, business management, marketing, and computer training.",
+    "category": "education",
+    "is_active": true
+  },
+  {
+    "code": "611420",
+    "title": "Computer Training",
+    "description": "Establishments primarily engaged in offering computer training (except computer repair).",
+    "category": "education",
+    "is_active": true
+  },
+  {
+    "code": "611430",
+    "title": "Professional and Management Development Training",
+    "description": "Establishments primarily engaged in offering professional and management development training.",
+    "category": "education",
+    "is_active": true
+  },
+  {
+    "code": "6115",
+    "title": "Technical and Trade Schools",
+    "description": "Establishments primarily engaged in offering vocational and technical training in a variety of fields.",
+    "category": "education",
+    "is_active": true
+  },
+  {
+    "code": "6117",
+    "title": "Educational Support Services",
+    "description": "Establishments primarily engaged in providing non-instructional services that support educational processes or systems.",
+    "category": "education",
+    "is_active": true
+  },
+  {
+    "code": "611710",
+    "title": "Educational Support Services",
+    "description": "Establishments primarily engaged in providing non-instructional services that support educational processes or systems.",
+    "category": "education",
+    "is_active": true
+  },
+  {
+    "code": "6211",
+    "title": "Offices of Physicians",
+    "description": "Establishments of health practitioners having the degree of M.D. (Doctor of Medicine) or D.O. (Doctor of Osteopathy) primarily engaged in the independent practice of general or specialized medicine.",
+    "category": "healthcare",
+    "is_active": true
+  },
+  {
+    "code": "6212",
+    "title": "Offices of Dentists",
+    "description": "Establishments of health practitioners having the degree of D.M.D. (Doctor of Dental Medicine), D.D.S. (Doctor of Dental Surgery), or D.D.Sc. (Doctor of Dental Science) primarily engaged in the independent practice of general or specialized dentistry.",
+    "category": "healthcare",
+    "is_active": true
+  },
+  {
+    "code": "6213",
+    "title": "Offices of Other Health Practitioners",
+    "description": "Establishments of independent health practitioners (except physicians, dentists, and chiropractors).",
+    "category": "healthcare",
+    "is_active": true
+  },
+  {
+    "code": "6214",
+    "title": "Outpatient Care Centers",
+    "description": "Establishments primarily engaged in providing diagnostic services, treatment, or rehabilitation on an outpatient basis.",
+    "category": "healthcare",
+    "is_active": true
+  },
+  {
+    "code": "6215",
+    "title": "Medical and Diagnostic Laboratories",
+    "description": "Establishments known as medical laboratories primarily engaged in providing analytic or diagnostic services.",
+    "category": "healthcare",
+    "is_active": true
+  },
+  {
+    "code": "6216",
+    "title": "Home Health Care Services",
+    "description": "Establishments primarily engaged in providing skilled nursing services in the home, along with a range of the following: personal care services; homemaker and companion services; physical therapy; medical social services; medications; medical equipment and supplies; counseling; 24-hour home care; occupation and vocational therapy; dietary and nutritional services; speech therapy; audiology; and high-tech care, such as intravenous therapy.",
+    "category": "healthcare",
+    "is_active": true
+  },
+  {
+    "code": "6221",
+    "title": "General Medical and Surgical Hospitals",
+    "description": "Establishments known and licensed as general medical and surgical hospitals primarily engaged in providing diagnostic and medical treatment services.",
+    "category": "healthcare",
+    "is_active": true
+  },
+  {
+    "code": "6222",
+    "title": "Psychiatric and Substance Abuse Hospitals",
+    "description": "Establishments known and licensed as psychiatric and substance abuse hospitals primarily engaged in providing diagnostic, medical treatment, and monitoring services.",
+    "category": "healthcare",
+    "is_active": true
+  },
+  {
+    "code": "6231",
+    "title": "Nursing Care Facilities (Skilled Nursing Facilities)",
+    "description": "Establishments primarily engaged in providing inpatient nursing and rehabilitative services.",
+    "category": "healthcare",
+    "is_active": true
+  },
+  {
+    "code": "7111",
+    "title": "Performing Arts Companies",
+    "description": "Establishments primarily engaged in producing live presentations involving the performances of actors and actresses, singers, dancers, musical groups, and other performing artists.",
+    "category": "arts_entertainment",
+    "is_active": true
+  },
+  {
+    "code": "7112",
+    "title": "Spectator Sports",
+    "description": "Establishments primarily engaged in organizing, promoting, and/or conducting spectator sports events.",
+    "category": "arts_entertainment",
+    "is_active": true
+  },
+  {
+    "code": "7113",
+    "title": "Promoters of Performing Arts, Sports, and Similar Events",
+    "description": "Establishments primarily engaged in organizing, promoting, and/or managing live performing arts productions, sports events, and similar events.",
+    "category": "arts_entertainment",
+    "is_active": true
+  },
+  {
+    "code": "7211",
+    "title": "Traveler Accommodation",
+    "description": "Establishments primarily engaged in providing short-term lodging in facilities known as hotels, motor hotels, resort hotels, and motels.",
+    "category": "hospitality",
+    "is_active": true
+  },
+  {
+    "code": "7223",
+    "title": "Special Food Services",
+    "description": "Establishments primarily engaged in providing food services at institutional, governmental, commercial, or industrial locations of others based on contractual arrangements with these types of organizations for a specified period of time.",
+    "category": "hospitality",
+    "is_active": true
+  },
+  {
+    "code": "7224",
+    "title": "Drinking Places (Alcoholic Beverages)",
+    "description": "Establishments known as bars, taverns, nightclubs, or drinking places primarily engaged in preparing and serving alcoholic beverages for immediate consumption.",
+    "category": "hospitality",
+    "is_active": true
+  },
+  {
+    "code": "7225",
+    "title": "Restaurants and Other Eating Places",
+    "description": "Establishments primarily engaged in providing food services to patrons who order and are served while seated and pay after eating.",
+    "category": "hospitality",
+    "is_active": true
+  }
+]

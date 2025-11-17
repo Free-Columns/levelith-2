@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-11-17T07:37:48.266201",
+  "project": "levelith-2",
+  "test_run_id": "20251117_073748",
+  "environment": {
+    "python_version": "Python 3.11.14",
+    "pytest_version": "pytest 9.0.1",
+    "platform": null
+  },
+  "summary": {
+    "total_tests": 17,
+    "passed": 17,
+    "failed": 0,
+    "skipped": 0,
+    "errors": 0,
+    "duration_seconds": 0.13
+  },
+  "test_results": [],
+  "coverage": null,
+  "status": "PASS",
+  "issues": [],
+  "raw_output": "============================= test session starts ==============================\nplatform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /root/.local/share/uv/tools/pytest/bin/python\ncachedir: .pytest_cache\nrootdir: /home/user/levelith-2\nconfigfile: pytest.ini\ncollecting ... collected 17 items\n\ntests/test_test_system.py::TestTestRequirement::test_validate_test_exists_returns_true_when_test_file_exists PASSED [  5%]\ntests/test_test_system.py::TestTestRequirement::test_validate_test_exists_returns_false_when_test_file_missing PASSED [ 11%]\ntests/test_test_system.py::TestTestRequirement::test_minimum_coverage_constant_is_80_percent PASSED [ 17%]\ntests/test_test_system.py::TestTestRequirement::test_require_unit_tests_is_true PASSED [ 23%]\ntests/test_test_system.py::TestTestRequirement::test_require_integration_tests_is_true PASSED [ 29%]\ntests/test_test_system.py::TestTestGenerator::test_generate_unit_test_template_creates_valid_python PASSED [ 35%]\ntests/test_test_system.py::TestTestGenerator::test_generate_integration_test_template_creates_valid_python PASSED [ 41%]\ntests/test_test_system.py::TestTestGenerator::test_generated_template_includes_test_class PASSED [ 47%]\ntests/test_test_system.py::TestTestGenerator::test_generated_template_includes_setup_method PASSED [ 52%]\ntests/test_test_system.py::TestTestValidator::test_validate_test_file_returns_valid_for_good_test PASSED [ 58%]\ntests/test_test_system.py::TestTestValidator::test_validate_test_file_returns_invalid_for_no_tests PASSED [ 64%]\ntests/test_test_system.py::TestTestValidator::test_validate_test_file_warns_about_too_many_skips PASSED [ 70%]\ntests/test_test_system.py::TestTestSystemIntegration::test_test_system_module_imports_successfully PASSED [ 76%]\ntests/test_test_system.py::TestTestSystemIntegration::test_all_required_classes_exist PASSED [ 82%]\ntests/test_test_system.py::TestTestSystemIntegration::test_test_requirement_class_has_required_methods PASSED [ 88%]\ntests/test_test_system.py::TestTestSystemIntegration::test_test_generator_class_has_required_methods PASSED [ 94%]\ntests/test_test_system.py::TestTestSystemIntegration::test_test_validator_class_has_required_methods PASSED [100%]\n\n=============================== warnings summary ===============================\ntests/test_test_system.py:238\n  /home/user/levelith-2/tests/test_test_system.py:238: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html\n    pytestmark = pytest.mark.unit\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n======================== 17 passed, 1 warning in 0.13s =========================\n"
+}

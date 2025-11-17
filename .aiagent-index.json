@@ -47,6 +47,31 @@
     ],
     "complexity_score": 10
   },
+  "dev/test_report_generator.py": {
+    "path": "/home/user/levelith-2/dev/test_report_generator.py",
+    "docstring": "Levelith-2 Test Report Generator\n\nGenerates comprehensive test execution reports with pass/fail status and reasons.",
+    "classes": [],
+    "functions": [
+      "run_tests",
+      "parse_pytest_output",
+      "generate_markdown_report",
+      "main"
+    ],
+    "imports": [
+      "subprocess",
+      "json",
+      "datetime",
+      "pathlib",
+      "typing"
+    ],
+    "exports": [
+      "run_tests",
+      "parse_pytest_output",
+      "generate_markdown_report",
+      "main"
+    ],
+    "complexity_score": 13
+  },
   "tests/test_system.py": {
     "path": "/home/user/levelith-2/tests/test_system.py",
     "docstring": "Levelith-2 Internal Test System\n\nThis module provides a comprehensive testing framework for all code changes.\nEvery AI-assisted change MUST include corresponding tests.\n\nGolden Rule: No code ships without tests.",
@@ -77,6 +102,33 @@
       "main"
     ],
     "complexity_score": 21
+  },
+  "tests/test_test_system.py": {
+    "path": "/home/user/levelith-2/tests/test_test_system.py",
+    "docstring": "Unit tests for the test system itself.\n\nThis demonstrates the test framework in action and validates\nthe test enforcement and generation tools.",
+    "classes": [
+      "TestTestRequirement",
+      "TestTestGenerator",
+      "TestTestValidator",
+      "TestTestSystemIntegration"
+    ],
+    "functions": [],
+    "imports": [
+      "pytest",
+      "pathlib",
+      "sys",
+      "os",
+      "test_system",
+      "test_system",
+      "test_system"
+    ],
+    "exports": [
+      "TestTestRequirement",
+      "TestTestGenerator",
+      "TestTestValidator",
+      "TestTestSystemIntegration"
+    ],
+    "complexity_score": 19
   },
   "tests/__init__.py": {
     "path": "/home/user/levelith-2/tests/__init__.py",

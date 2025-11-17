@@ -4,9 +4,17 @@
 
 ## Entry Points
 
-- `/home/user/levelith-2/dev/cn-create.py`
+- `/home/user/levelith-2/dev/aiagent_navigator.py`
+- `/home/user/levelith-2/tests/test_system.py`
 
 ## Key Modules
+
+### `tests/test_system.py`
+- **Reason**: 5 exports, complexity: 21
+- **Exports**: TestRequirement, TestGenerator, TestValidator, enforce_test_requirements, main
+- **Description**: Levelith-2 Internal Test System
+
+This module provides a comprehensive testing framework for all code
 
 ### `dev/aiagent_navigator.py`
 - **Reason**: 3 exports, complexity: 16
@@ -18,3 +26,4 @@ This tool helps AI agents explore codebases efficiently by:
 
 ## Complexity Hotspots
 
+- `tests/test_system.py` (complexity: 21)

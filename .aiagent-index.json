@@ -1,25 +1,4 @@
 {
-  "dev/example_ai_agent_usage.py": {
-    "path": "/home/user/levelith-2/dev/example_ai_agent_usage.py",
-    "docstring": "Example: How an AI Agent Would Use the Intelligent Navigator\n\nThis demonstrates a simulated AI agent exploring a codebase using\nthe intelligent tooling instead of pre-generated context nodes.",
-    "classes": [
-      "SimulatedAIAgent",
-      "AIAgentQueryInterface"
-    ],
-    "functions": [
-      "demo_ai_exploration"
-    ],
-    "imports": [
-      "aiagent_navigator",
-      "json"
-    ],
-    "exports": [
-      "SimulatedAIAgent",
-      "AIAgentQueryInterface",
-      "demo_ai_exploration"
-    ],
-    "complexity_score": 10
-  },
   "dev/aiagent_navigator.py": {
     "path": "/home/user/levelith-2/dev/aiagent_navigator.py",
     "docstring": "AI Agent Intelligent Navigator\n\nThis tool helps AI agents explore codebases efficiently by:\n- Reading configuration from .aiagent.json\n- Analyzing code structure automatically\n- Providing smart navigation suggestions\n- Generating runtime context without pre-documentation",
@@ -47,50 +26,65 @@
     ],
     "complexity_score": 16
   },
-  "dev/cn-create.py": {
-    "path": "/home/user/levelith-2/dev/cn-create.py",
-    "docstring": "Context Node Generator\nCreates context-node.md files for every file and directory in the repository\nto provide structured documentation for AI agents.",
+  "dev/example_ai_agent_usage.py": {
+    "path": "/home/user/levelith-2/dev/example_ai_agent_usage.py",
+    "docstring": "Example: How an AI Agent Would Use the Intelligent Navigator\n\nThis demonstrates a simulated AI agent exploring a codebase using\nthe intelligent tooling instead of pre-generated context nodes.",
     "classes": [
-      "ContextNodeGenerator"
+      "SimulatedAIAgent",
+      "AIAgentQueryInterface"
     ],
     "functions": [
-      "main"
+      "demo_ai_exploration"
     ],
     "imports": [
-      "os",
-      "sys",
-      "pathlib",
-      "datetime",
-      "typing"
+      "aiagent_navigator",
+      "json"
     ],
     "exports": [
-      "ContextNodeGenerator",
-      "main"
+      "SimulatedAIAgent",
+      "AIAgentQueryInterface",
+      "demo_ai_exploration"
     ],
     "complexity_score": 10
   },
-  "dev/cn-validate.py": {
-    "path": "/home/user/levelith-2/dev/cn-validate.py",
-    "docstring": "Context Node Validator\nValidates that context nodes are complete and properly formatted.\nUsed in CI/CD pipeline to ensure documentation quality.",
+  "tests/test_system.py": {
+    "path": "/home/user/levelith-2/tests/test_system.py",
+    "docstring": "Levelith-2 Internal Test System\n\nThis module provides a comprehensive testing framework for all code changes.\nEvery AI-assisted change MUST include corresponding tests.\n\nGolden Rule: No code ships without tests.",
     "classes": [
-      "ContextNodeValidator"
+      "TestRequirement",
+      "TestGenerator",
+      "TestValidator"
     ],
     "functions": [
+      "enforce_test_requirements",
       "main"
     ],
     "imports": [
-      "json",
-      "re",
-      "sys",
-      "pathlib",
+      "pytest",
+      "unittest",
       "typing",
-      "argparse",
-      "os"
+      "pathlib",
+      "json",
+      "ast",
+      "subprocess",
+      "sys"
     ],
     "exports": [
-      "ContextNodeValidator",
+      "TestRequirement",
+      "TestGenerator",
+      "TestValidator",
+      "enforce_test_requirements",
       "main"
     ],
-    "complexity_score": 12
+    "complexity_score": 21
+  },
+  "tests/__init__.py": {
+    "path": "/home/user/levelith-2/tests/__init__.py",
+    "docstring": "Levelith-2 Test Suite\n\nThis package contains all tests for the Levelith-2 project.\n\nTest Organization:\n- unit/: Unit tests for individual components\n- integration/: Integration tests for component interactions\n- e2e/: End-to-end tests for complete workflows\n- fixtures/: Shared test fixtures and data\n\nGolden Rule: Every code change must include tests.\nMinimum coverage: 80%",
+    "classes": [],
+    "functions": [],
+    "imports": [],
+    "exports": [],
+    "complexity_score": 0
   }
 }

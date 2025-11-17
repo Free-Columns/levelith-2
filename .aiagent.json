@@ -1,18 +1,21 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "project": {
     "name": "levelith-2",
     "type": "python",
-    "description": "Context node based repository navigation system"
+    "description": "AI-first development with intelligent tooling and test-driven architecture"
   },
 
   "navigation": {
     "entry_points": [
-      "dev/cn-create.py"
+      "dev/aiagent_navigator.py",
+      "tests/test_system.py"
     ],
     "key_directories": {
-      "dev/": "Development tools and utilities",
+      "dev/": "Development tools and AI agent navigation",
+      "tests/": "Comprehensive test suite (unit, integration, e2e)",
       "docs/": "Documentation files",
+      ".github/workflows/": "CI/CD pipelines enforcing golden rules",
       ".": "Project root with core configuration"
     },
     "ignore_patterns": [
@@ -22,18 +25,23 @@
       "**/node_modules/**",
       "**/.venv/**",
       "**/dist/**",
-      "**/build/**"
+      "**/build/**",
+      "**/htmlcov/**",
+      "**/.pytest_cache/**"
     ]
   },
 
   "exploration_hints": {
     "start_here": [
       "README.md",
-      "claude.md",
-      "context-node.md"
+      "AI_AGENT_GOLDEN_RULES.md",
+      "AI_AGENT_GUIDE.md",
+      "claude.md"
     ],
     "architecture_docs": [
-      "claude.md"
+      "claude.md",
+      "AI_AGENT_GOLDEN_RULES.md",
+      "dev/AI_AGENT_TOOLING.md"
     ],
     "dependency_strategy": "follow_imports",
     "max_depth": 3
@@ -44,7 +52,10 @@
       "python": {
         "docstring_style": "google",
         "type_hints": true,
-        "important_modules": ["dev/cn-create.py"]
+        "important_modules": [
+          "dev/aiagent_navigator.py",
+          "tests/test_system.py"
+        ]
       },
       "javascript": {
         "docstring_style": "jsdoc",
@@ -53,9 +64,9 @@
     },
     "documentation_priority": [
       "docstrings",
+      "type_annotations",
       "inline_comments",
-      "README.md",
-      "type_annotations"
+      "README.md"
     ]
   },
 
@@ -67,15 +78,49 @@
       "exports",
       "classes",
       "functions",
-      "docstrings"
+      "docstrings",
+      "type_hints"
     ]
+  },
+
+  "test_requirements": {
+    "minimum_coverage": 80,
+    "require_tests_for_changes": true,
+    "test_types": ["unit", "integration", "e2e"],
+    "enforcement": "pre-commit and CI/CD"
+  },
+
+  "golden_rules": {
+    "test_first_development": true,
+    "documentation_required": true,
+    "security_scanning": true,
+    "ai_index_update": true,
+    "code_quality_standards": true
   },
 
   "agent_instructions": {
     "preferred_approach": "Start with entry_points, follow imports, prioritize docstrings",
     "special_notes": [
-      "This project uses context-node.md files for navigation documentation",
-      "Run 'python dev/cn-create.py' to generate context nodes"
+      "⚠️  CRITICAL: Read AI_AGENT_GOLDEN_RULES.md BEFORE making any changes",
+      "✓ This project uses intelligent AI agent tooling (no context nodes)",
+      "✓ Every code change MUST include tests (minimum 80% coverage)",
+      "✓ Always update AI index after changes: python dev/aiagent_navigator.py index",
+      "✓ Test-first development is mandatory - no exceptions",
+      "✓ Security scanning is automated - avoid vulnerabilities",
+      "✓ Code quality standards enforced via CI/CD",
+      "✓ Run 'python tests/test_system.py generate <file>' to create test templates",
+      "✓ Run 'python tests/test_system.py enforce' before committing"
+    ],
+    "workflow": [
+      "1. Read AI_AGENT_GOLDEN_RULES.md",
+      "2. Generate test template: python tests/test_system.py generate <file>",
+      "3. Write tests FIRST",
+      "4. Implement feature",
+      "5. Run tests: pytest",
+      "6. Update AI index: python dev/aiagent_navigator.py index",
+      "7. Format code: black .",
+      "8. Enforce rules: python tests/test_system.py enforce",
+      "9. Commit with clear message"
     ]
   }
 }

@@ -6,32 +6,47 @@ This repository is designed with AI agents as first-class citizens, providing in
 
 ## Overview
 
-Levelith-2 implements advanced AI agent tooling for automated codebase exploration, analysis, and documentation. The project offers two complementary approaches for AI navigation:
+Levelith-2 implements advanced AI agent tooling for automated codebase exploration, analysis, and test-driven development. The project is built on three core pillars:
 
-1. **Intelligent AI Agent Tooling** (Recommended) - Dynamic, automated code analysis
-2. **Context Node System** (Legacy) - Static documentation files
+1. **Intelligent AI Agent Tooling** - Dynamic, automated code analysis and navigation
+2. **Comprehensive Test System** - Enforced test-first development with 80% minimum coverage
+3. **Golden Rules Framework** - Automated quality, security, and scalability enforcement
 
 ## Quick Start
 
 ### For AI Agents
 
-**Recommended: Use Intelligent Tooling**
+**⚠️  CRITICAL: Read [AI_AGENT_GOLDEN_RULES.md](AI_AGENT_GOLDEN_RULES.md) BEFORE making ANY changes!**
 
 ```bash
-# Build codebase index
+# 1. Read the golden rules (MANDATORY)
+cat AI_AGENT_GOLDEN_RULES.md
+
+# 2. Build codebase index
 python dev/aiagent_navigator.py index
 
-# Get exploration plan
+# 3. Get exploration plan
 python dev/aiagent_navigator.py plan
 
-# Generate navigation guide
-python dev/aiagent_navigator.py guide
+# 4. Before making changes - generate test template
+python tests/test_system.py generate <module_path>
 
-# Analyze specific file
-python dev/aiagent_navigator.py analyze dev/cn-create.py
+# 5. Write tests FIRST, then implement
+
+# 6. Run tests (must pass with 80%+ coverage)
+pytest
+
+# 7. Update AI index after changes
+python dev/aiagent_navigator.py index
+
+# 8. Enforce golden rules before commit
+python tests/test_system.py enforce
 ```
 
-**See**: [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md) for complete operating instructions.
+**Essential Reading:**
+- [AI_AGENT_GOLDEN_RULES.md](AI_AGENT_GOLDEN_RULES.md) - **MANDATORY** before ANY changes
+- [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md) - Complete operating guide
+- [claude.md](claude.md) - Navigation system overview
 
 ### For Developers
 
@@ -40,13 +55,26 @@ python dev/aiagent_navigator.py analyze dev/cn-create.py
 git clone <repository-url>
 cd levelith-2
 
-# Install dependencies (if any)
-# pip install -r requirements.txt
+# Install dependencies
+pip install -r requirements.txt  # Production dependencies
+pip install -r requirements-dev.txt  # Dev and test dependencies
+
+# Set up pre-commit hooks (enforces golden rules)
+pip install pre-commit
+pre-commit install
 
 # Explore the codebase
 python dev/aiagent_navigator.py index
 python dev/aiagent_navigator.py guide
 cat NAVIGATION.md
+
+# Run tests
+pytest
+
+# Check code quality
+black .
+flake8 .
+mypy .
 ```
 
 ## Architecture
@@ -70,57 +98,111 @@ The primary navigation system uses **dynamic code analysis** rather than static 
 **Documentation:**
 - [dev/AI_AGENT_TOOLING.md](dev/AI_AGENT_TOOLING.md) - Complete technical documentation
 - [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md) - Learning and operating guide for AI agents
-- [COMPARISON.md](COMPARISON.md) - Comparison with context nodes
+- [COMPARISON.md](COMPARISON.md) - Comparison with alternative approaches
 
-### Context Node System (Legacy)
+### Comprehensive Test System
 
-An alternative static documentation approach:
+**Test-First Development is MANDATORY** - Every code change must include tests.
 
-- **`dev/cn-create.py`** - Generates context node files
-- **`dev/cn-validate.py`** - Validates context node completeness
+- **`tests/test_system.py`** - Test requirement enforcement and template generation
+- **`pytest.ini`** - Test configuration with 80% minimum coverage
+- **`.github/workflows/enforce-golden-rules.yml`** - Automated test enforcement
 
-Each file/directory gets a corresponding `.context-node.md` file with metadata.
+**Key Features:**
+- Auto-generate test templates for new modules
+- Validate test quality and coverage
+- Pre-commit hooks enforce test requirements
+- CI/CD blocks merges without tests
 
-**See**: [claude.md](claude.md) for context node documentation.
+```bash
+# Generate test template
+python tests/test_system.py generate <module_path>
+
+# Validate test file
+python tests/test_system.py validate <test_path>
+
+# Enforce requirements before commit
+python tests/test_system.py enforce
+```
+
+### Golden Rules Framework
+
+**AI agents MUST follow these rules for every action.**
+
+- **`AI_AGENT_GOLDEN_RULES.md`** - Complete golden rules documentation
+- **`.github/workflows/enforce-golden-rules.yml`** - Automated enforcement
+
+**The 10 Golden Rules:**
+1. Test-First Development (MANDATORY)
+2. Documentation is Non-Negotiable
+3. Security First
+4. Maintain the AI Agent Index
+5. Code Quality Standards
+6. Dependency Management
+7. Performance Awareness
+8. Scalability by Design
+9. Error Handling and Logging
+10. Version Control Hygiene
+
+**See**: [AI_AGENT_GOLDEN_RULES.md](AI_AGENT_GOLDEN_RULES.md) for complete details.
 
 ## Key Features
 
 ### For AI Agents
 
 1. **Dynamic Code Analysis** - Extract structure on-demand from actual code
-2. **Exploration Planning** - Smart suggestions for where to start
-3. **Dependency Mapping** - Automatic relationship detection
-4. **Complexity Analysis** - Identify hotspots and key modules
-5. **Query Interface** - Ask specific questions about the codebase
-6. **Related File Detection** - Find connected modules automatically
+2. **Golden Rules Enforcement** - Automated quality, security, and scalability checks
+3. **Test-First Development** - Auto-generate test templates, enforce coverage
+4. **Exploration Planning** - Smart suggestions for where to start
+5. **Dependency Mapping** - Automatic relationship detection
+6. **Complexity Analysis** - Identify hotspots and key modules
+7. **Query Interface** - Ask specific questions about the codebase
+8. **Related File Detection** - Find connected modules automatically
 
 ### For Developers
 
-1. **Automated Documentation** - No manual maintenance required
-2. **CI/CD Integration** - Auto-update in pipelines
-3. **Codebase Insights** - Complexity metrics and patterns
-4. **Navigation Guides** - Human-readable overviews
-5. **Extensible** - Add support for other languages
+1. **Automated Testing** - Test templates, coverage enforcement, CI/CD integration
+2. **Code Quality Automation** - Black, Flake8, MyPy, Pylint in CI/CD
+3. **Security Scanning** - Bandit, Safety, Pip-audit, secret detection
+4. **Automated Documentation** - No manual maintenance required
+5. **CI/CD Integration** - Golden rules enforced in every pipeline
+6. **Codebase Insights** - Complexity metrics and patterns
+7. **Navigation Guides** - Human-readable overviews
+8. **Extensible** - Add support for other languages
 
 ## Project Structure
 
 ```
 levelith-2/
 ├── README.md                       # This file
+├── AI_AGENT_GOLDEN_RULES.md       # ⚠️  MANDATORY reading for AI agents
+├── AI_AGENT_GUIDE.md              # Complete AI agent operating guide
 ├── claude.md                       # AI agent navigation guide
-├── AI_AGENT_GUIDE.md              # Learning resource for AI agents
-├── COMPARISON.md                   # Context nodes vs AI tooling
+├── COMPARISON.md                   # Approach comparisons
 ├── NAVIGATION.md                   # Auto-generated navigation guide
 │
 ├── .aiagent.json                   # AI agent configuration
 ├── .aiagent-index.json             # Auto-generated codebase index
+├── pytest.ini                      # Test configuration
+├── .commitlintrc.json              # Commit message standards
+│
+├── tests/                          # Comprehensive test suite
+│   ├── __init__.py                 # Test package initialization
+│   ├── test_system.py              # Test enforcement and generation
+│   ├── unit/                       # Unit tests
+│   ├── integration/                # Integration tests
+│   └── e2e/                        # End-to-end tests
 │
 ├── dev/                            # Development tools
 │   ├── aiagent_navigator.py        # Intelligent navigation system
 │   ├── example_ai_agent_usage.py   # Demo and examples
-│   ├── AI_AGENT_TOOLING.md        # Technical documentation
-│   ├── cn-create.py                # Context node generator (legacy)
-│   └── cn-validate.py              # Context node validator (legacy)
+│   └── AI_AGENT_TOOLING.md        # Technical documentation
+│
+├── .github/workflows/              # CI/CD pipelines
+│   ├── enforce-golden-rules.yml    # Golden rules enforcement
+│   ├── main-ci.yml                 # Main CI/CD pipeline
+│   ├── frontend-ci.yml             # Frontend tests and builds
+│   └── backend-ci.yml              # Backend tests and builds
 │
 └── docs/                           # Additional documentation
 ```

@@ -12,8 +12,6 @@ services:
     startCommand: "uvicorn backend.main:app --host 0.0.0.0 --port $PORT"
     healthCheckPath: /health
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
       - key: ENVIRONMENT
         value: production
       - key: DEBUG
@@ -25,7 +23,7 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: CORS_ORIGINS
-        value: "https://levelith-frontend.onrender.com,https://levelith.com"
+        value: "https://levelith-frontend.onrender.com,https://levelith.online"
       - key: LOG_LEVEL
         value: INFO
       - key: API_V1_PREFIX

@@ -33,12 +33,15 @@
 
   "exploration_hints": {
     "start_here": [
-      "README.md",
+      "MANIFEST.md",
       "AI_AGENT_GOLDEN_RULES.md",
+      "README.md",
       "AI_AGENT_GUIDE.md",
       "claude.md"
     ],
+    "manifest_file": "MANIFEST.md",
     "architecture_docs": [
+      "MANIFEST.md",
       "claude.md",
       "AI_AGENT_GOLDEN_RULES.md",
       "dev/AI_AGENT_TOOLING.md"
@@ -99,9 +102,11 @@
   },
 
   "agent_instructions": {
-    "preferred_approach": "Start with entry_points, follow imports, prioritize docstrings",
+    "preferred_approach": "Start with MANIFEST.md for broad context, then entry_points, follow imports, prioritize docstrings",
     "special_notes": [
+      "⚠️  CRITICAL: Read MANIFEST.md FIRST for project context and goals",
       "⚠️  CRITICAL: Read AI_AGENT_GOLDEN_RULES.md BEFORE making any changes",
+      "✓ MANIFEST.md is human-curated - provides 'why' and 'what' context code cannot",
       "✓ This project uses intelligent AI agent tooling (no context nodes)",
       "✓ Every code change MUST include tests (minimum 80% coverage)",
       "✓ Always update AI index after changes: python dev/aiagent_navigator.py index",
@@ -112,15 +117,16 @@
       "✓ Run 'python tests/test_system.py enforce' before committing"
     ],
     "workflow": [
-      "1. Read AI_AGENT_GOLDEN_RULES.md",
-      "2. Generate test template: python tests/test_system.py generate <file>",
-      "3. Write tests FIRST",
-      "4. Implement feature",
-      "5. Run tests: pytest",
-      "6. Update AI index: python dev/aiagent_navigator.py index",
-      "7. Format code: black .",
-      "8. Enforce rules: python tests/test_system.py enforce",
-      "9. Commit with clear message"
+      "1. Read MANIFEST.md for project context (first time or significant changes)",
+      "2. Read AI_AGENT_GOLDEN_RULES.md",
+      "3. Generate test template: python tests/test_system.py generate <file>",
+      "4. Write tests FIRST",
+      "5. Implement feature",
+      "6. Run tests: pytest",
+      "7. Update AI index: python dev/aiagent_navigator.py index",
+      "8. Format code: black .",
+      "9. Enforce rules: python tests/test_system.py enforce",
+      "10. Commit with clear message"
     ]
   }
 }

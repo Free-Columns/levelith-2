@@ -16,37 +16,44 @@ Levelith-2 implements advanced AI agent tooling for automated codebase explorati
 
 ### For AI Agents
 
-**⚠️  CRITICAL: Read [AI_AGENT_GOLDEN_RULES.md](AI_AGENT_GOLDEN_RULES.md) BEFORE making ANY changes!**
+**⚠️  CRITICAL: Read these files FIRST before making ANY changes!**
+
+1. **[MANIFEST.md](MANIFEST.md)** - Project vision, goals, architecture, conventions (Human-curated context)
+2. **[AI_AGENT_GOLDEN_RULES.md](AI_AGENT_GOLDEN_RULES.md)** - 10 mandatory rules for all AI agents
 
 ```bash
-# 1. Read the golden rules (MANDATORY)
+# 1. Read project manifest for broad context (FIRST TIME)
+cat MANIFEST.md
+
+# 2. Read the golden rules (MANDATORY)
 cat AI_AGENT_GOLDEN_RULES.md
 
-# 2. Build codebase index
+# 3. Build codebase index
 python dev/aiagent_navigator.py index
 
-# 3. Get exploration plan
+# 4. Get exploration plan
 python dev/aiagent_navigator.py plan
 
-# 4. Before making changes - generate test template
+# 5. Before making changes - generate test template
 python tests/test_system.py generate <module_path>
 
-# 5. Write tests FIRST, then implement
+# 6. Write tests FIRST, then implement
 
-# 6. Run tests (must pass with 80%+ coverage)
+# 7. Run tests (must pass with 80%+ coverage)
 pytest
 
-# 7. Update AI index after changes
+# 8. Update AI index after changes
 python dev/aiagent_navigator.py index
 
-# 8. Enforce golden rules before commit
+# 9. Enforce golden rules before commit
 python tests/test_system.py enforce
 ```
 
-**Essential Reading:**
-- [AI_AGENT_GOLDEN_RULES.md](AI_AGENT_GOLDEN_RULES.md) - **MANDATORY** before ANY changes
-- [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md) - Complete operating guide
-- [claude.md](claude.md) - Navigation system overview
+**Essential Reading (in order):**
+1. [MANIFEST.md](MANIFEST.md) - **START HERE** - Project context and goals
+2. [AI_AGENT_GOLDEN_RULES.md](AI_AGENT_GOLDEN_RULES.md) - **MANDATORY** rules
+3. [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md) - Complete operating guide
+4. [claude.md](claude.md) - Navigation system overview
 
 ### For Developers
 
@@ -174,8 +181,9 @@ python tests/test_system.py enforce
 
 ```
 levelith-2/
-├── README.md                       # This file
-├── AI_AGENT_GOLDEN_RULES.md       # ⚠️  MANDATORY reading for AI agents
+├── README.md                       # This file - Entry point for humans
+├── MANIFEST.md                     # ⚠️  Project manifest - Entry point for AI agents
+├── AI_AGENT_GOLDEN_RULES.md       # ⚠️  MANDATORY rules for AI agents
 ├── AI_AGENT_GUIDE.md              # Complete AI agent operating guide
 ├── claude.md                       # AI agent navigation guide
 ├── COMPARISON.md                   # Approach comparisons

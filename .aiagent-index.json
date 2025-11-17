@@ -47,6 +47,15 @@
     ],
     "complexity_score": 10
   },
+  "tests/__init__.py": {
+    "path": "/home/user/levelith-2/tests/__init__.py",
+    "docstring": "Levelith-2 Test Suite\n\nThis package contains all tests for the Levelith-2 project.\n\nTest Organization:\n- unit/: Unit tests for individual components\n- integration/: Integration tests for component interactions\n- e2e/: End-to-end tests for complete workflows\n- fixtures/: Shared test fixtures and data\n\nGolden Rule: Every code change must include tests.\nMinimum coverage: 80%",
+    "classes": [],
+    "functions": [],
+    "imports": [],
+    "exports": [],
+    "complexity_score": 0
+  },
   "tests/test_system.py": {
     "path": "/home/user/levelith-2/tests/test_system.py",
     "docstring": "Levelith-2 Internal Test System\n\nThis module provides a comprehensive testing framework for all code changes.\nEvery AI-assisted change MUST include corresponding tests.\n\nGolden Rule: No code ships without tests.",
@@ -77,14 +86,5 @@
       "main"
     ],
     "complexity_score": 21
-  },
-  "tests/__init__.py": {
-    "path": "/home/user/levelith-2/tests/__init__.py",
-    "docstring": "Levelith-2 Test Suite\n\nThis package contains all tests for the Levelith-2 project.\n\nTest Organization:\n- unit/: Unit tests for individual components\n- integration/: Integration tests for component interactions\n- e2e/: End-to-end tests for complete workflows\n- fixtures/: Shared test fixtures and data\n\nGolden Rule: Every code change must include tests.\nMinimum coverage: 80%",
-    "classes": [],
-    "functions": [],
-    "imports": [],
-    "exports": [],
-    "complexity_score": 0
   }
 }

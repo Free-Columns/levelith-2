@@ -83,9 +83,9 @@ class ExperienceDB(Base):
     # Type-specific data stored as JSON
     type_specific_data = Column(JSON, default=dict, nullable=False)
 
-    # Metadata
+    # Metadata (renamed from 'metadata' to avoid SQLAlchemy reserved name)
     tags = Column(JSON, default=list, nullable=False)
-    metadata = Column(JSON, default=dict, nullable=False)
+    experience_metadata = Column(JSON, default=dict, nullable=False)
 
     # Timestamps
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)

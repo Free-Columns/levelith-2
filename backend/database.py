@@ -8,7 +8,7 @@ Supports both sync and async database operations.
 from contextlib import contextmanager
 from typing import Generator
 
-from sqlalchemy import create_engine, event, Engine
+from sqlalchemy import create_engine, event, Engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.pool import QueuePool
@@ -136,7 +136,7 @@ class DatabaseHealthCheck:
         """
         try:
             with get_db_context() as db:
-                db.execute("SELECT 1")
+                db.execute(text("SELECT 1"))
             return True
         except Exception:
             return False
@@ -151,8 +151,16 @@ class DatabaseHealthCheck:
         """
         try:
             with get_db_context() as db:
-                result = db.execute("SELECT version()")
-                version = result.scalar()
+                # Use database-agnostic query for version info
+                # PostgreSQL: version(), SQLite: sqlite_version()
+                if "postgresql" in settings.database_url:
+                    result = db.execute(text("SELECT version()"))
+                    version = result.scalar()
+                elif "sqlite" in settings.database_url:
+                    result = db.execute(text("SELECT sqlite_version()"))
+                    version = f"SQLite {result.scalar()}"
+                else:
+                    version = "unknown"
 
                 return {
                     "status": "healthy",

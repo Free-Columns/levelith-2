@@ -80,19 +80,44 @@ uvicorn main:app --reload
 
 ### Deployment to Render
 
-See **[DEPLOYMENT.md](DEPLOYMENT.md)** for comprehensive deployment guide.
+✅ **Production-Ready for Render Web Service Deployment**
+
+The backend is fully configured for deployment to Render as a Web Service (no blueprints required).
 
 **Quick Deploy:**
 
-1. Push code to GitHub
-2. Connect repository to Render
-3. Use Blueprint deployment with `render.yaml`
-4. Render automatically creates:
-   - PostgreSQL database
-   - Web service
-   - Environment variables
+1. **Create PostgreSQL Database** in Render Dashboard
+   - Database name: `levelith`
+   - Region: Oregon (US West)
+   - Copy Internal Database URL
+
+2. **Create Web Service** in Render Dashboard
+   - Connect GitHub repository: `Free-Columns/levelith-2`
+   - Build Command: `pip install -r backend/requirements.txt`
+   - Start Command: (leave blank - uses Procfile)
+   - Health Check Path: `/health`
+
+3. **Set Environment Variables** (Required)
+   - `DATABASE_URL` - Your PostgreSQL Internal URL
+   - `SECRET_KEY` - Generate strong key (use Render's "Generate Value")
+   - `ENVIRONMENT=production`
+   - `DEBUG=false`
+   - `CORS_ORIGINS` - Your frontend URL
+
+4. **Deploy!**
+   - Click "Create Web Service"
+   - Wait ~3-5 minutes for deployment
+   - Test: `https://your-service.onrender.com/health`
+
+**Complete Guide:** See **[RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md)** for detailed step-by-step instructions.
 
 **Service URL:** `https://levelith-backend.onrender.com`
+
+**Deployment Files:**
+- `Procfile` - Start command configuration
+- `.env.render.example` - Environment variables template
+- `RENDER_DEPLOYMENT.md` - Complete deployment guide
+- `render.yaml` - Optional blueprint for infrastructure-as-code deployment
 
 ## Quick Start
 

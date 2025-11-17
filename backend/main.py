@@ -5,6 +5,7 @@ Main application entry point for the Levelith backend API.
 Provides RESTful endpoints for user management and experience tracking.
 """
 
+import logging
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
@@ -17,6 +18,13 @@ from backend.config import settings
 from backend.database import init_db
 from backend.api.routes import health, users, experiences
 
+# Configure logging
+logging.basicConfig(
+    level=getattr(logging, settings.log_level.upper()),
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator:
@@ -26,18 +34,18 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
     Handles startup and shutdown events.
     """
     # Startup
-    print(f"🚀 Starting {settings.app_name} v{settings.app_version}")
-    print(f"📊 Environment: {settings.environment}")
-    print(f"🔧 Debug mode: {settings.debug}")
+    logger.info(f"Starting {settings.app_name} v{settings.app_version}")
+    logger.info(f"Environment: {settings.environment}")
+    logger.info(f"Debug mode: {settings.debug}")
 
     # Initialize database
     init_db()
-    print("✅ Database initialized")
+    logger.info("Database initialized successfully")
 
     yield
 
     # Shutdown
-    print("👋 Shutting down application")
+    logger.info("Shutting down application")
 
 
 # Create FastAPI application

@@ -12,7 +12,7 @@ According to MANIFEST.md:
 - Testability: Easy to mock for unit testing
 
 Architecture:
-    Controllers/API ’ Services ’ Repositories ’ Data Store
+    Controllers/API -> Services -> Repositories -> Data Store
 
 Repositories:
     - UserRepository: CRUD operations for User entities

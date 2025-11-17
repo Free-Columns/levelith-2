@@ -33,11 +33,19 @@ When running locally, access:
 - **Health Check**: http://localhost:8000/health
 
 ### Deployment to Render
-See `DEPLOYMENT.md` for complete guide. Quick deploy:
-1. Push code to GitHub
-2. Connect to Render
-3. Use Blueprint deployment with `render.yaml`
-4. Render auto-creates PostgreSQL database and web service
+✅ **Production-ready for Render Web Service deployment (no blueprints required)**
+
+See `RENDER_DEPLOYMENT.md` for complete step-by-step guide. Quick deploy:
+1. Create PostgreSQL database in Render Dashboard
+2. Create Web Service (build: `pip install -r backend/requirements.txt`)
+3. Configure environment variables (DATABASE_URL, SECRET_KEY, etc.)
+4. Deploy and test health endpoint
+
+**Deployment Files:**
+- `Procfile` - Web service start command
+- `.env.render.example` - Environment variables reference
+- `RENDER_DEPLOYMENT.md` - Complete deployment guide with troubleshooting
+- `render.yaml` - Optional blueprint for infrastructure-as-code
 
 **Quick Start:** Jump to [Intelligent AI Agent Tooling](#intelligent-ai-agent-tooling-recommended) (Recommended)
 

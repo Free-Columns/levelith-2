@@ -83,7 +83,9 @@ class TestGenerator:
             tree = ast.parse(f.read())
 
         # Extract classes and functions
-        classes = [node.name for node in ast.walk(tree) if isinstance(node, ast.ClassDef)]
+        classes = [
+            node.name for node in ast.walk(tree) if isinstance(node, ast.ClassDef)
+        ]
         functions = [
             node.name
             for node in tree.body
@@ -254,10 +256,14 @@ class TestValidator:
 
             # Check for setup/teardown
             all_functions = [
-                node.name for node in ast.walk(tree) if isinstance(node, ast.FunctionDef)
+                node.name
+                for node in ast.walk(tree)
+                if isinstance(node, ast.FunctionDef)
             ]
             results["has_setup"] = any("setup" in f.lower() for f in all_functions)
-            results["has_teardown"] = any("teardown" in f.lower() for f in all_functions)
+            results["has_teardown"] = any(
+                "teardown" in f.lower() for f in all_functions
+            )
 
             # Check for pytest.skip usage (should be minimal)
             skip_count = sum(
@@ -358,9 +364,15 @@ def main():
 
     if len(sys.argv) < 2:
         print("Usage:")
-        print("  python tests/test_system.py generate <module_path>  # Generate test template")
-        print("  python tests/test_system.py validate <test_path>     # Validate test file")
-        print("  python tests/test_system.py enforce                  # Enforce test requirements")
+        print(
+            "  python tests/test_system.py generate <module_path>  # Generate test template"
+        )
+        print(
+            "  python tests/test_system.py validate <test_path>     # Validate test file"
+        )
+        print(
+            "  python tests/test_system.py enforce                  # Enforce test requirements"
+        )
         return
 
     command = sys.argv[1]
@@ -375,7 +387,9 @@ def main():
         else:
             feature_name = Path(module_path).stem
             template = TestGenerator.generate_integration_test_template(feature_name)
-            output_path = Path("tests/integration") / f"test_{feature_name}_integration.py"
+            output_path = (
+                Path("tests/integration") / f"test_{feature_name}_integration.py"
+            )
 
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w") as f:

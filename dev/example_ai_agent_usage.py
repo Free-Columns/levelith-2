@@ -42,13 +42,13 @@ class SimulatedAIAgent:
 
         # Step 2: Examine key modules
         self.log("\n=== Step 2: Analyzing Key Modules ===")
-        for module in plan['key_modules'][:3]:  # Top 3
-            self._examine_module(module['path'])
+        for module in plan["key_modules"][:3]:  # Top 3
+            self._examine_module(module["path"])
 
         # Step 3: Follow dependencies
         self.log("\n=== Step 3: Following Dependencies ===")
-        if plan['entry_points']:
-            entry = plan['entry_points'][0]
+        if plan["entry_points"]:
+            entry = plan["entry_points"][0]
             self._explore_dependencies(entry)
 
         # Step 4: Identify patterns
@@ -69,18 +69,18 @@ class SimulatedAIAgent:
         self.knowledge[filepath] = context
 
         # Log what we learned
-        if context.get('docstring'):
+        if context.get("docstring"):
             self.log(f"  Purpose: {context['docstring'][:100]}...")
 
-        if context.get('classes'):
+        if context.get("classes"):
             self.log(f"  Classes: {', '.join(context['classes'])}")
 
-        if context.get('functions'):
+        if context.get("functions"):
             self.log(f"  Functions: {', '.join(context['functions'][:5])}")
-            if len(context['functions']) > 5:
+            if len(context["functions"]) > 5:
                 self.log(f"    ... and {len(context['functions']) - 5} more")
 
-        if context.get('imports'):
+        if context.get("imports"):
             self.log(f"  Dependencies: {len(context['imports'])} imports")
 
         self.log(f"  Complexity: {context.get('complexity_score', 0)}")
@@ -105,7 +105,7 @@ class SimulatedAIAgent:
         self.log("\nIdentifying patterns...")
 
         # Check for common patterns
-        dependency_graph = plan.get('dependency_graph', {})
+        dependency_graph = plan.get("dependency_graph", {})
 
         # Count files with many dependencies
         high_dependency_files = [
@@ -116,11 +116,13 @@ class SimulatedAIAgent:
 
         if high_dependency_files:
             self.log("  Found files with many dependencies:")
-            for path, count in sorted(high_dependency_files, key=lambda x: x[1], reverse=True)[:3]:
+            for path, count in sorted(
+                high_dependency_files, key=lambda x: x[1], reverse=True
+            )[:3]:
                 self.log(f"    {path}: {count} dependencies")
 
         # Check for complexity hotspots
-        hotspots = plan.get('complexity_hotspots', [])
+        hotspots = plan.get("complexity_hotspots", [])
         if hotspots:
             self.log("  Complexity hotspots identified:")
             for hs in hotspots[:3]:
@@ -131,18 +133,16 @@ class SimulatedAIAgent:
         summary = {
             "files_examined": len(self.knowledge),
             "total_classes": sum(
-                len(info.get('classes', []))
-                for info in self.knowledge.values()
+                len(info.get("classes", [])) for info in self.knowledge.values()
             ),
             "total_functions": sum(
-                len(info.get('functions', []))
-                for info in self.knowledge.values()
+                len(info.get("functions", [])) for info in self.knowledge.values()
             ),
             "average_complexity": sum(
-                info.get('complexity_score', 0)
-                for info in self.knowledge.values()
-            ) / max(len(self.knowledge), 1),
-            "exploration_steps": len(self.exploration_log)
+                info.get("complexity_score", 0) for info in self.knowledge.values()
+            )
+            / max(len(self.knowledge), 1),
+            "exploration_steps": len(self.exploration_log),
         }
 
         self.log(f"\nSummary:")
@@ -171,12 +171,14 @@ class AIAgentQueryInterface:
         results = []
 
         for filepath, info in self.navigator.index.items():
-            if function_name in info.get('functions', []):
-                results.append({
-                    'file': filepath,
-                    'context': info.get('docstring', 'No documentation'),
-                    'complexity': info.get('complexity_score', 0)
-                })
+            if function_name in info.get("functions", []):
+                results.append(
+                    {
+                        "file": filepath,
+                        "context": info.get("docstring", "No documentation"),
+                        "complexity": info.get("complexity_score", 0),
+                    }
+                )
 
         return results
 
@@ -185,12 +187,14 @@ class AIAgentQueryInterface:
         results = []
 
         for filepath, info in self.navigator.index.items():
-            if class_name in info.get('classes', []):
-                results.append({
-                    'file': filepath,
-                    'context': info.get('docstring', 'No documentation'),
-                    'other_classes': info.get('classes', [])
-                })
+            if class_name in info.get("classes", []):
+                results.append(
+                    {
+                        "file": filepath,
+                        "context": info.get("docstring", "No documentation"),
+                        "other_classes": info.get("classes", []),
+                    }
+                )
 
         return results
 
@@ -199,12 +203,9 @@ class AIAgentQueryInterface:
         results = []
 
         for filepath, info in self.navigator.index.items():
-            imports = info.get('imports', [])
+            imports = info.get("imports", [])
             if module_name in imports or any(module_name in imp for imp in imports):
-                results.append({
-                    'file': filepath,
-                    'all_imports': imports
-                })
+                results.append({"file": filepath, "all_imports": imports})
 
         return results
 
@@ -212,10 +213,10 @@ class AIAgentQueryInterface:
         """Get all exports from a file"""
         context = self.navigator.get_module_context(filepath)
         return {
-            'exports': context.get('exports', []),
-            'classes': context.get('classes', []),
-            'functions': context.get('functions', []),
-            'description': context.get('docstring', 'No documentation')
+            "exports": context.get("exports", []),
+            "classes": context.get("classes", []),
+            "functions": context.get("functions", []),
+            "description": context.get("docstring", "No documentation"),
         }
 
     def get_complexity_overview(self) -> dict:
@@ -225,15 +226,14 @@ class AIAgentQueryInterface:
 
         total_files = len(self.navigator.index)
         total_complexity = sum(
-            info.get('complexity_score', 0)
-            for info in self.navigator.index.values()
+            info.get("complexity_score", 0) for info in self.navigator.index.values()
         )
 
         return {
-            'total_files': total_files,
-            'total_complexity': total_complexity,
-            'average_complexity': total_complexity / max(total_files, 1),
-            'hotspots': self.navigator._find_complexity_hotspots()[:5]
+            "total_files": total_files,
+            "total_complexity": total_complexity,
+            "average_complexity": total_complexity / max(total_files, 1),
+            "hotspots": self.navigator._find_complexity_hotspots()[:5],
         }
 
 
@@ -255,7 +255,7 @@ def demo_ai_exploration():
     # Example queries
     print("\n[Query 1] What does 'dev/cn-create.py' export?")
     try:
-        exports = query.what_does_file_export('dev/cn-create.py')
+        exports = query.what_does_file_export("dev/cn-create.py")
         print(json.dumps(exports, indent=2))
     except Exception as e:
         print(f"  File not in index yet: {e}")
@@ -265,7 +265,7 @@ def demo_ai_exploration():
         overview = query.get_complexity_overview()
         print(f"  Total files: {overview['total_files']}")
         print(f"  Average complexity: {overview['average_complexity']:.1f}")
-        if overview['hotspots']:
+        if overview["hotspots"]:
             print(f"  Top hotspot: {overview['hotspots'][0]['path']}")
     except Exception as e:
         print(f"  Error: {e}")
@@ -273,7 +273,8 @@ def demo_ai_exploration():
     print("\n" + "=" * 60)
     print("BENEFITS OVER STATIC CONTEXT NODES")
     print("=" * 60)
-    print("""
+    print(
+        """
 1. ✓ No duplicate files to maintain
 2. ✓ Always in sync with actual code
 3. ✓ On-demand analysis (only analyze what's needed)
@@ -282,7 +283,8 @@ def demo_ai_exploration():
 6. ✓ Dependency graph generation
 7. ✓ Can be cached and refreshed easily
 8. ✓ Works with any codebase without setup
-    """)
+    """
+    )
 
 
 if __name__ == "__main__":

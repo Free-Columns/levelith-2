@@ -13,11 +13,7 @@ import os
 # Add parent directory to path to import test_system
 sys.path.insert(0, str(Path(__file__).parent))
 
-from test_system import (
-    TestRequirement,
-    TestGenerator,
-    TestValidator
-)
+from test_system import TestRequirement, TestGenerator, TestValidator
 
 
 class TestTestRequirement:
@@ -76,14 +72,16 @@ class TestTestGenerator:
         """Test that generated unit test template is valid Python"""
         # Create a simple module
         module_file = tmp_path / "example.py"
-        module_file.write_text("""
+        module_file.write_text(
+            """
 def add(a, b):
     return a + b
 
 class Calculator:
     def multiply(self, a, b):
         return a * b
-""")
+"""
+        )
 
         template = TestGenerator.generate_unit_test_template(str(module_file))
 
@@ -144,7 +142,8 @@ class TestTestValidator:
     def test_validate_test_file_returns_valid_for_good_test(self, tmp_path):
         """Test that validator returns valid for properly structured test"""
         test_file = tmp_path / "test_example.py"
-        test_file.write_text("""
+        test_file.write_text(
+            """
 import pytest
 
 class TestExample:
@@ -156,7 +155,8 @@ class TestExample:
 
     def test_another_thing(self):
         assert 1 + 1 == 2
-""")
+"""
+        )
 
         results = TestValidator.validate_test_file(str(test_file))
 
@@ -167,12 +167,14 @@ class TestExample:
     def test_validate_test_file_returns_invalid_for_no_tests(self, tmp_path):
         """Test that validator returns invalid for file with no tests"""
         test_file = tmp_path / "test_example.py"
-        test_file.write_text("""
+        test_file.write_text(
+            """
 import pytest
 
 def helper_function():
     pass
-""")
+"""
+        )
 
         results = TestValidator.validate_test_file(str(test_file))
 
@@ -183,7 +185,8 @@ def helper_function():
     def test_validate_test_file_warns_about_too_many_skips(self, tmp_path):
         """Test that validator warns when too many tests are skipped"""
         test_file = tmp_path / "test_example.py"
-        test_file.write_text("""
+        test_file.write_text(
+            """
 import pytest
 
 def test_one():
@@ -194,7 +197,8 @@ def test_two():
 
 def test_three():
     assert True
-""")
+"""
+        )
 
         results = TestValidator.validate_test_file(str(test_file))
 
@@ -208,30 +212,31 @@ class TestTestSystemIntegration:
     def test_test_system_module_imports_successfully(self):
         """Test that test_system module can be imported"""
         import test_system
+
         assert test_system is not None
 
     def test_all_required_classes_exist(self):
         """Test that all required classes are defined"""
         import test_system
 
-        assert hasattr(test_system, 'TestRequirement')
-        assert hasattr(test_system, 'TestGenerator')
-        assert hasattr(test_system, 'TestValidator')
+        assert hasattr(test_system, "TestRequirement")
+        assert hasattr(test_system, "TestGenerator")
+        assert hasattr(test_system, "TestValidator")
 
     def test_test_requirement_class_has_required_methods(self):
         """Test that TestRequirement has required methods"""
-        assert hasattr(TestRequirement, 'validate_test_exists')
-        assert hasattr(TestRequirement, 'validate_coverage')
+        assert hasattr(TestRequirement, "validate_test_exists")
+        assert hasattr(TestRequirement, "validate_coverage")
 
     def test_test_generator_class_has_required_methods(self):
         """Test that TestGenerator has required methods"""
-        assert hasattr(TestGenerator, 'generate_unit_test_template')
-        assert hasattr(TestGenerator, 'generate_integration_test_template')
+        assert hasattr(TestGenerator, "generate_unit_test_template")
+        assert hasattr(TestGenerator, "generate_integration_test_template")
 
     def test_test_validator_class_has_required_methods(self):
         """Test that TestValidator has required methods"""
-        assert hasattr(TestValidator, 'validate_test_file')
-        assert hasattr(TestValidator, 'validate_test_coverage')
+        assert hasattr(TestValidator, "validate_test_file")
+        assert hasattr(TestValidator, "validate_test_coverage")
 
 
 # Mark all tests in this file as unit tests

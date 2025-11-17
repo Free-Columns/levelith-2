@@ -25,7 +25,7 @@ def run_tests() -> Dict[str, Any]:
         "environment": {
             "python_version": None,
             "pytest_version": None,
-            "platform": None
+            "platform": None,
         },
         "summary": {
             "total_tests": 0,
@@ -33,20 +33,18 @@ def run_tests() -> Dict[str, Any]:
             "failed": 0,
             "skipped": 0,
             "errors": 0,
-            "duration_seconds": 0.0
+            "duration_seconds": 0.0,
         },
         "test_results": [],
         "coverage": None,
         "status": "UNKNOWN",
-        "issues": []
+        "issues": [],
     }
 
     # Get environment info
     try:
         python_version = subprocess.run(
-            ["python", "--version"],
-            capture_output=True,
-            text=True
+            ["python", "--version"], capture_output=True, text=True
         )
         report["environment"]["python_version"] = python_version.stdout.strip()
     except Exception as e:
@@ -54,11 +52,11 @@ def run_tests() -> Dict[str, Any]:
 
     try:
         pytest_version = subprocess.run(
-            ["pytest", "--version"],
-            capture_output=True,
-            text=True
+            ["pytest", "--version"], capture_output=True, text=True
         )
-        report["environment"]["pytest_version"] = pytest_version.stdout.strip().split('\n')[0]
+        report["environment"]["pytest_version"] = pytest_version.stdout.strip().split(
+            "\n"
+        )[0]
     except Exception as e:
         report["issues"].append(f"Could not get pytest version: {e}")
 
@@ -69,7 +67,7 @@ def run_tests() -> Dict[str, Any]:
             ["pytest", "tests/", "-v", "--tb=short", "--override-ini=addopts="],
             capture_output=True,
             text=True,
-            timeout=300
+            timeout=300,
         )
 
         output = result.stdout + result.stderr
@@ -99,19 +97,31 @@ def run_tests() -> Dict[str, Any]:
     # Try to get coverage if pytest-cov is available
     try:
         coverage_result = subprocess.run(
-            ["pytest", "tests/", "--cov=.", "--cov-report=json", "--override-ini=addopts="],
+            [
+                "pytest",
+                "tests/",
+                "--cov=.",
+                "--cov-report=json",
+                "--override-ini=addopts=",
+            ],
             capture_output=True,
             text=True,
-            timeout=300
+            timeout=300,
         )
 
         if Path("coverage.json").exists():
             with open("coverage.json") as f:
                 coverage_data = json.load(f)
                 report["coverage"] = {
-                    "total_coverage": coverage_data.get("totals", {}).get("percent_covered", 0),
-                    "total_statements": coverage_data.get("totals", {}).get("num_statements", 0),
-                    "covered_statements": coverage_data.get("totals", {}).get("covered_lines", 0)
+                    "total_coverage": coverage_data.get("totals", {}).get(
+                        "percent_covered", 0
+                    ),
+                    "total_statements": coverage_data.get("totals", {}).get(
+                        "num_statements", 0
+                    ),
+                    "covered_statements": coverage_data.get("totals", {}).get(
+                        "covered_lines", 0
+                    ),
                 }
     except Exception as e:
         report["issues"].append(f"Coverage data not available: {e}")
@@ -121,15 +131,15 @@ def run_tests() -> Dict[str, Any]:
 
 def parse_pytest_output(output: str, report: Dict) -> None:
     """Parse pytest output and extract test information"""
-    lines = output.split('\n')
+    lines = output.split("\n")
 
     for line in lines:
         # Look for summary line like: "5 passed, 2 failed in 1.23s"
         if " passed" in line or " failed" in line or " error" in line:
             parts = line.split()
             for i, part in enumerate(parts):
-                if i > 0 and parts[i-1].isdigit():
-                    count = int(parts[i-1])
+                if i > 0 and parts[i - 1].isdigit():
+                    count = int(parts[i - 1])
                     if "passed" in part:
                         report["summary"]["passed"] = count
                     elif "failed" in part:
@@ -148,10 +158,10 @@ def parse_pytest_output(output: str, report: Dict) -> None:
                 pass
 
     report["summary"]["total_tests"] = (
-        report["summary"]["passed"] +
-        report["summary"]["failed"] +
-        report["summary"]["skipped"] +
-        report["summary"]["errors"]
+        report["summary"]["passed"]
+        + report["summary"]["failed"]
+        + report["summary"]["skipped"]
+        + report["summary"]["errors"]
     )
 
 
@@ -164,7 +174,7 @@ def generate_markdown_report(report: Dict) -> str:
         "NO_TESTS": "⚠️",
         "ERROR": "💥",
         "TIMEOUT": "⏱️",
-        "UNKNOWN": "❓"
+        "UNKNOWN": "❓",
     }
 
     emoji = status_emoji.get(report["status"], "❓")
@@ -380,9 +390,9 @@ def main():
     print(f"✓ JSON report generated: {json_path}")
 
     # Print summary
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("TEST EXECUTION SUMMARY")
-    print("="*60)
+    print("=" * 60)
     print(f"Status: {report['status']}")
     print(f"Total Tests: {report['summary']['total_tests']}")
     print(f"Passed: {report['summary']['passed']}")
@@ -394,7 +404,7 @@ def main():
     if report["coverage"]:
         print(f"Coverage: {report['coverage']['total_coverage']:.1f}%")
 
-    print("="*60)
+    print("=" * 60)
 
     # Exit with appropriate code
     if report["status"] == "FAIL":

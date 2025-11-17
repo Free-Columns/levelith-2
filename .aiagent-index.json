@@ -1,4 +1,25 @@
 {
+  "dev/example_ai_agent_usage.py": {
+    "path": "/home/user/levelith-2/dev/example_ai_agent_usage.py",
+    "docstring": "Example: How an AI Agent Would Use the Intelligent Navigator\n\nThis demonstrates a simulated AI agent exploring a codebase using\nthe intelligent tooling instead of pre-generated context nodes.",
+    "classes": [
+      "SimulatedAIAgent",
+      "AIAgentQueryInterface"
+    ],
+    "functions": [
+      "demo_ai_exploration"
+    ],
+    "imports": [
+      "aiagent_navigator",
+      "json"
+    ],
+    "exports": [
+      "SimulatedAIAgent",
+      "AIAgentQueryInterface",
+      "demo_ai_exploration"
+    ],
+    "complexity_score": 10
+  },
   "dev/aiagent_navigator.py": {
     "path": "/home/user/levelith-2/dev/aiagent_navigator.py",
     "docstring": "AI Agent Intelligent Navigator\n\nThis tool helps AI agents explore codebases efficiently by:\n- Reading configuration from .aiagent.json\n- Analyzing code structure automatically\n- Providing smart navigation suggestions\n- Generating runtime context without pre-documentation",
@@ -26,26 +47,30 @@
     ],
     "complexity_score": 16
   },
-  "dev/example_ai_agent_usage.py": {
-    "path": "/home/user/levelith-2/dev/example_ai_agent_usage.py",
-    "docstring": "Example: How an AI Agent Would Use the Intelligent Navigator\n\nThis demonstrates a simulated AI agent exploring a codebase using\nthe intelligent tooling instead of pre-generated context nodes.",
+  "dev/test_debugger.py": {
+    "path": "/home/user/levelith-2/dev/test_debugger.py",
+    "docstring": "Test System Debugger\n\nDebugging utilities for the Levelith test system.\nProvides detailed diagnostics, failure analysis, and troubleshooting tools.\n\nUsage:\n    python dev/test_debugger.py diagnose               # Full system diagnostic\n    python dev/test_debugger.py analyze-failure <test> # Analyze specific test failure\n    python dev/test_debugger.py coverage-gaps          # Find coverage gaps\n    python dev/test_debugger.py validate-all           # Validate all test files",
     "classes": [
-      "SimulatedAIAgent",
-      "AIAgentQueryInterface"
+      "TestDebugger"
     ],
     "functions": [
-      "demo_ai_exploration"
+      "main"
     ],
     "imports": [
-      "aiagent_navigator",
-      "json"
+      "json",
+      "subprocess",
+      "sys",
+      "pathlib",
+      "typing",
+      "ast",
+      "re",
+      "test_system"
     ],
     "exports": [
-      "SimulatedAIAgent",
-      "AIAgentQueryInterface",
-      "demo_ai_exploration"
+      "TestDebugger",
+      "main"
     ],
-    "complexity_score": 10
+    "complexity_score": 13
   },
   "dev/test_report_generator.py": {
     "path": "/home/user/levelith-2/dev/test_report_generator.py",
@@ -71,6 +96,15 @@
       "main"
     ],
     "complexity_score": 13
+  },
+  "tests/__init__.py": {
+    "path": "/home/user/levelith-2/tests/__init__.py",
+    "docstring": "Levelith-2 Test Suite\n\nThis package contains all tests for the Levelith-2 project.\n\nTest Organization:\n- unit/: Unit tests for individual components\n- integration/: Integration tests for component interactions\n- e2e/: End-to-end tests for complete workflows\n- fixtures/: Shared test fixtures and data\n\nGolden Rule: Every code change must include tests.\nMinimum coverage: 80%",
+    "classes": [],
+    "functions": [],
+    "imports": [],
+    "exports": [],
+    "complexity_score": 0
   },
   "tests/test_system.py": {
     "path": "/home/user/levelith-2/tests/test_system.py",
@@ -129,14 +163,5 @@
       "TestTestSystemIntegration"
     ],
     "complexity_score": 19
-  },
-  "tests/__init__.py": {
-    "path": "/home/user/levelith-2/tests/__init__.py",
-    "docstring": "Levelith-2 Test Suite\n\nThis package contains all tests for the Levelith-2 project.\n\nTest Organization:\n- unit/: Unit tests for individual components\n- integration/: Integration tests for component interactions\n- e2e/: End-to-end tests for complete workflows\n- fixtures/: Shared test fixtures and data\n\nGolden Rule: Every code change must include tests.\nMinimum coverage: 80%",
-    "classes": [],
-    "functions": [],
-    "imports": [],
-    "exports": [],
-    "complexity_score": 0
   }
 }

@@ -21,6 +21,7 @@ import fnmatch
 @dataclass
 class ModuleInfo:
     """Information extracted from a Python module"""
+
     path: str
     docstring: Optional[str]
     classes: List[str]
@@ -55,12 +56,12 @@ class AIAgentNavigator:
         return {
             "navigation": {
                 "entry_points": ["main.py", "app.py", "cli.py"],
-                "ignore_patterns": ["**/__pycache__/**", "**/*.pyc"]
+                "ignore_patterns": ["**/__pycache__/**", "**/*.pyc"],
             },
             "exploration_hints": {
                 "start_here": ["README.md"],
-                "dependency_strategy": "follow_imports"
-            }
+                "dependency_strategy": "follow_imports",
+            },
         }
 
     def get_entry_points(self) -> List[str]:
@@ -103,7 +104,7 @@ class AIAgentNavigator:
                     functions=[],
                     imports=[],
                     exports=[],
-                    complexity_score=0
+                    complexity_score=0,
                 )
 
         # Extract module docstring
@@ -111,14 +112,12 @@ class AIAgentNavigator:
 
         # Extract classes
         classes = [
-            node.name for node in ast.walk(tree)
-            if isinstance(node, ast.ClassDef)
+            node.name for node in ast.walk(tree) if isinstance(node, ast.ClassDef)
         ]
 
         # Extract functions (excluding methods)
         functions = [
-            node.name for node in tree.body
-            if isinstance(node, ast.FunctionDef)
+            node.name for node in tree.body if isinstance(node, ast.FunctionDef)
         ]
 
         # Extract imports
@@ -143,7 +142,7 @@ class AIAgentNavigator:
             functions=functions,
             imports=imports,
             exports=exports,
-            complexity_score=complexity
+            complexity_score=complexity,
         )
 
     def build_index(self) -> Dict[str, ModuleInfo]:
@@ -171,7 +170,7 @@ class AIAgentNavigator:
 
     def save_index(self, output_path: str = ".aiagent-index.json"):
         """Save index for quick loading"""
-        with open(self.root / output_path, 'w') as f:
+        with open(self.root / output_path, "w") as f:
             json.dump(self.index, f, indent=2)
 
     def load_index(self, index_path: str = ".aiagent-index.json"):
@@ -194,12 +193,16 @@ class AIAgentNavigator:
             self.build_index()
 
         plan = {
-            "suggested_start": self.config.get("exploration_hints", {}).get("start_here", []),
+            "suggested_start": self.config.get("exploration_hints", {}).get(
+                "start_here", []
+            ),
             "entry_points": self.get_entry_points(),
             "key_modules": self._identify_key_modules(),
             "dependency_graph": self._build_dependency_graph(),
             "complexity_hotspots": self._find_complexity_hotspots(),
-            "exploration_strategy": self.config.get("exploration_hints", {}).get("preferred_approach", "breadth_first")
+            "exploration_strategy": self.config.get("exploration_hints", {}).get(
+                "preferred_approach", "breadth_first"
+            ),
         }
 
         return plan
@@ -213,15 +216,19 @@ class AIAgentNavigator:
             export_count = len(info.get("exports", []))
 
             if export_count > 3 or info.get("complexity_score", 0) > 15:
-                key_modules.append({
-                    "path": path,
-                    "reason": f"{export_count} exports, complexity: {info.get('complexity_score')}",
-                    "exports": info.get("exports", []),
-                    "docstring": info.get("docstring", "No documentation")[:100]
-                })
+                key_modules.append(
+                    {
+                        "path": path,
+                        "reason": f"{export_count} exports, complexity: {info.get('complexity_score')}",
+                        "exports": info.get("exports", []),
+                        "docstring": info.get("docstring", "No documentation")[:100],
+                    }
+                )
 
         # Sort by complexity score
-        key_modules.sort(key=lambda x: self.index[x["path"]].get("complexity_score", 0), reverse=True)
+        key_modules.sort(
+            key=lambda x: self.index[x["path"]].get("complexity_score", 0), reverse=True
+        )
 
         return key_modules[:10]  # Top 10
 
@@ -233,8 +240,7 @@ class AIAgentNavigator:
             imports = info.get("imports", [])
             # Only track internal imports (not external packages)
             internal_imports = [
-                imp for imp in imports
-                if not self._is_external_package(imp)
+                imp for imp in imports if not self._is_external_package(imp)
             ]
             graph[path] = internal_imports
 
@@ -243,8 +249,16 @@ class AIAgentNavigator:
     def _is_external_package(self, module_name: str) -> bool:
         """Check if import is external package"""
         # Simple heuristic: if it's not in our codebase, it's external
-        common_external = ['os', 'sys', 'json', 'ast', 'pathlib', 'typing', 'dataclasses']
-        return module_name.split('.')[0] in common_external
+        common_external = [
+            "os",
+            "sys",
+            "json",
+            "ast",
+            "pathlib",
+            "typing",
+            "dataclasses",
+        ]
+        return module_name.split(".")[0] in common_external
 
     def _find_complexity_hotspots(self) -> List[Dict[str, Any]]:
         """Find files with high complexity that might need attention"""
@@ -253,13 +267,15 @@ class AIAgentNavigator:
         for path, info in self.index.items():
             score = info.get("complexity_score", 0)
             if score > 20:
-                hotspots.append({
-                    "path": path,
-                    "complexity": score,
-                    "classes": len(info.get("classes", [])),
-                    "functions": len(info.get("functions", [])),
-                    "imports": len(info.get("imports", []))
-                })
+                hotspots.append(
+                    {
+                        "path": path,
+                        "complexity": score,
+                        "classes": len(info.get("classes", [])),
+                        "functions": len(info.get("functions", [])),
+                        "imports": len(info.get("imports", [])),
+                    }
+                )
 
         hotspots.sort(key=lambda x: x["complexity"], reverse=True)
         return hotspots
@@ -277,7 +293,9 @@ class AIAgentNavigator:
 
         return self.index[filepath]
 
-    def suggest_related_files(self, filepath: str, max_suggestions: int = 5) -> List[str]:
+    def suggest_related_files(
+        self, filepath: str, max_suggestions: int = 5
+    ) -> List[str]:
         """
         Suggest related files based on imports and exports.
 
@@ -308,17 +326,23 @@ class AIAgentNavigator:
             score = import_overlap + (export_usage * 2) + (import_usage * 2)
 
             if score > 0:
-                related.append({
-                    "path": path,
-                    "score": score,
-                    "reason": self._explain_relation(export_usage, import_usage, import_overlap)
-                })
+                related.append(
+                    {
+                        "path": path,
+                        "score": score,
+                        "reason": self._explain_relation(
+                            export_usage, import_usage, import_overlap
+                        ),
+                    }
+                )
 
         # Sort by score and return top suggestions
         related.sort(key=lambda x: x["score"], reverse=True)
         return related[:max_suggestions]
 
-    def _explain_relation(self, export_usage: int, import_usage: int, import_overlap: int) -> str:
+    def _explain_relation(
+        self, export_usage: int, import_usage: int, import_overlap: int
+    ) -> str:
         """Explain why files are related"""
         reasons = []
         if export_usage > 0:
@@ -350,9 +374,9 @@ class AIAgentNavigator:
         for module in plan["key_modules"]:
             guide.append(f"### `{module['path']}`")
             guide.append(f"- **Reason**: {module['reason']}")
-            if module['exports']:
+            if module["exports"]:
                 guide.append(f"- **Exports**: {', '.join(module['exports'])}")
-            if module['docstring']:
+            if module["docstring"]:
                 guide.append(f"- **Description**: {module['docstring']}")
             guide.append("")
 
@@ -364,7 +388,7 @@ class AIAgentNavigator:
         guide.append("")
 
         # Write to file
-        with open(self.root / output_path, 'w') as f:
+        with open(self.root / output_path, "w") as f:
             f.write("\n".join(guide))
 
         return output_path
@@ -379,8 +403,12 @@ def main():
     if len(sys.argv) < 2:
         print("Usage:")
         print("  python aiagent_navigator.py index          # Build codebase index")
-        print("  python aiagent_navigator.py plan           # Generate exploration plan")
-        print("  python aiagent_navigator.py guide          # Generate navigation guide")
+        print(
+            "  python aiagent_navigator.py plan           # Generate exploration plan"
+        )
+        print(
+            "  python aiagent_navigator.py guide          # Generate navigation guide"
+        )
         print("  python aiagent_navigator.py analyze <file> # Analyze specific file")
         print("  python aiagent_navigator.py related <file> # Find related files")
         return

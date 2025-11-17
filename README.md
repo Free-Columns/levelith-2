@@ -21,7 +21,7 @@ The Levelith backend is a modern REST API built with FastAPI, SQLAlchemy, and Po
 - ✅ **FastAPI** - Modern, fast Python web framework
 - ✅ **SQLAlchemy ORM** - Powerful database ORM
 - ✅ **PostgreSQL** - Production-ready database
-- ✅ **Pydantic Validation** - Request/response validation
+- ✅ **Pydantic 2.10 Validation** - Request/response validation with Python 3.13 support
 - ✅ **Health Checks** - Monitoring endpoints for Render
 - ✅ **Auto-generated API Docs** - OpenAPI/Swagger UI
 - ✅ **User Management** - CRUD operations for users
@@ -115,9 +115,15 @@ The backend is fully configured for deployment to Render as a Web Service (no bl
 
 **Deployment Files:**
 - `Procfile` - Start command configuration
+- `backend/runtime.txt` - Python version specification (3.11.0)
 - `.env.render.example` - Environment variables template
 - `RENDER_DEPLOYMENT.md` - Complete deployment guide
 - `render.yaml` - Optional blueprint for infrastructure-as-code deployment
+
+**Python & Dependencies:**
+- Python 3.11.0 (specified in `backend/runtime.txt`)
+- Pydantic 2.10.4 (upgraded for Python 3.13 compatibility with pre-built wheels)
+- All dependencies have pre-built wheels for fast deployment
 
 ## Quick Start
 

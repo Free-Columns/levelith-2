@@ -13,7 +13,7 @@ The Levelith backend is a **production-ready FastAPI application** configured fo
 - **Database**: PostgreSQL (Render Managed)
 - **ORM**: SQLAlchemy 2.0.25
 - **Validation**: Pydantic 2.10.4 (upgraded for Python 3.13 compatibility)
-- **Python**: 3.11.0 (specified in `backend/runtime.txt`)
+- **Python**: 3.11.0 (specified in `runtime.txt` at repository root)
 - **Server**: Uvicorn + Gunicorn
 - **Deployment**: Render Web Service (Infrastructure as Code via `render.yaml`)
 
@@ -43,11 +43,10 @@ See `RENDER_DEPLOYMENT.md` for complete step-by-step guide. Quick deploy:
 4. Deploy and test health endpoint
 
 **Deployment Files:**
-- `Procfile` - Web service start command
-- `backend/runtime.txt` - Python version specification (3.11.0)
+- `runtime.txt` - Python version specification (3.11.0, located at repository root)
+- `render.yaml` - Render infrastructure configuration
 - `.env.render.example` - Environment variables reference
 - `RENDER_DEPLOYMENT.md` - Complete deployment guide with troubleshooting
-- `render.yaml` - Optional blueprint for infrastructure-as-code
 
 **Quick Start:** Jump to [Intelligent AI Agent Tooling](#intelligent-ai-agent-tooling-recommended) (Recommended)
 

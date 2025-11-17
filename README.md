@@ -94,7 +94,7 @@ The backend is fully configured for deployment to Render as a Web Service (no bl
 2. **Create Web Service** in Render Dashboard
    - Connect GitHub repository: `Free-Columns/levelith-2`
    - Build Command: `pip install -r backend/requirements.txt`
-   - Start Command: (leave blank - uses Procfile)
+   - Start Command: `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
    - Health Check Path: `/health`
 
 3. **Set Environment Variables** (Required)
@@ -114,14 +114,13 @@ The backend is fully configured for deployment to Render as a Web Service (no bl
 **Service URL:** `https://levelith-backend.onrender.com`
 
 **Deployment Files:**
-- `Procfile` - Start command configuration
-- `backend/runtime.txt` - Python version specification (3.11.0)
+- `runtime.txt` - Python version specification (3.11.0, located in root)
+- `render.yaml` - Render infrastructure configuration
 - `.env.render.example` - Environment variables template
 - `RENDER_DEPLOYMENT.md` - Complete deployment guide
-- `render.yaml` - Optional blueprint for infrastructure-as-code deployment
 
 **Python & Dependencies:**
-- Python 3.11.0 (specified in `backend/runtime.txt`)
+- Python 3.11.0 (specified in `runtime.txt` at repository root)
 - Pydantic 2.10.4 (upgraded for Python 3.13 compatibility with pre-built wheels)
 - All dependencies have pre-built wheels for fast deployment
 

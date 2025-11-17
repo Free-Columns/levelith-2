@@ -22,10 +22,16 @@ The Levelith backend is a **production-ready FastAPI application** configured fo
 - `backend/config.py` - Environment configuration with Pydantic Settings (backend/config.py:1)
 - `backend/database.py` - SQLAlchemy database session management (backend/database.py:1)
 - `backend/models/db_models.py` - SQLAlchemy ORM models for User and Experience (backend/models/db_models.py:1)
+- `backend/models/naics.py` - NAICS code domain model with validation and hierarchy (backend/models/naics.py:1)
+- `backend/repositories/naics_repository.py` - In-memory NAICS data repository with indexing (backend/repositories/naics_repository.py:1)
+- `backend/services/naics_service.py` - NAICS business logic and experience suggestions (backend/services/naics_service.py:1)
+- `backend/api/routes/naics.py` - 12 NAICS REST API endpoints (backend/api/routes/naics.py:1)
+- `backend/data/naics_codes_2022.json` - Official NAICS 2022 codes dataset (60+ codes)
 - `backend/schemas/` - Pydantic request/response validation schemas
-- `backend/api/routes/` - API endpoint handlers (health, users, experiences)
+- `backend/api/routes/` - API endpoint handlers (health, users, experiences, naics)
 - `render.yaml` - Render deployment configuration (Infrastructure as Code)
 - `DEPLOYMENT.md` - Complete deployment guide with step-by-step instructions
+- `NAICS_EXPANSION_SUMMARY.md` - Complete NAICS implementation documentation
 
 ### API Documentation (Local Development)
 When running locally, access:

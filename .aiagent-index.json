@@ -1,0 +1,96 @@
+{
+  "dev/example_ai_agent_usage.py": {
+    "path": "/home/user/levelith-2/dev/example_ai_agent_usage.py",
+    "docstring": "Example: How an AI Agent Would Use the Intelligent Navigator\n\nThis demonstrates a simulated AI agent exploring a codebase using\nthe intelligent tooling instead of pre-generated context nodes.",
+    "classes": [
+      "SimulatedAIAgent",
+      "AIAgentQueryInterface"
+    ],
+    "functions": [
+      "demo_ai_exploration"
+    ],
+    "imports": [
+      "aiagent_navigator",
+      "json"
+    ],
+    "exports": [
+      "SimulatedAIAgent",
+      "AIAgentQueryInterface",
+      "demo_ai_exploration"
+    ],
+    "complexity_score": 10
+  },
+  "dev/aiagent_navigator.py": {
+    "path": "/home/user/levelith-2/dev/aiagent_navigator.py",
+    "docstring": "AI Agent Intelligent Navigator\n\nThis tool helps AI agents explore codebases efficiently by:\n- Reading configuration from .aiagent.json\n- Analyzing code structure automatically\n- Providing smart navigation suggestions\n- Generating runtime context without pre-documentation",
+    "classes": [
+      "ModuleInfo",
+      "AIAgentNavigator"
+    ],
+    "functions": [
+      "main"
+    ],
+    "imports": [
+      "json",
+      "ast",
+      "os",
+      "pathlib",
+      "typing",
+      "dataclasses",
+      "fnmatch",
+      "sys"
+    ],
+    "exports": [
+      "ModuleInfo",
+      "AIAgentNavigator",
+      "main"
+    ],
+    "complexity_score": 16
+  },
+  "dev/cn-create.py": {
+    "path": "/home/user/levelith-2/dev/cn-create.py",
+    "docstring": "Context Node Generator\nCreates context-node.md files for every file and directory in the repository\nto provide structured documentation for AI agents.",
+    "classes": [
+      "ContextNodeGenerator"
+    ],
+    "functions": [
+      "main"
+    ],
+    "imports": [
+      "os",
+      "sys",
+      "pathlib",
+      "datetime",
+      "typing"
+    ],
+    "exports": [
+      "ContextNodeGenerator",
+      "main"
+    ],
+    "complexity_score": 10
+  },
+  "dev/cn-validate.py": {
+    "path": "/home/user/levelith-2/dev/cn-validate.py",
+    "docstring": "Context Node Validator\nValidates that context nodes are complete and properly formatted.\nUsed in CI/CD pipeline to ensure documentation quality.",
+    "classes": [
+      "ContextNodeValidator"
+    ],
+    "functions": [
+      "main"
+    ],
+    "imports": [
+      "json",
+      "re",
+      "sys",
+      "pathlib",
+      "typing",
+      "argparse",
+      "os"
+    ],
+    "exports": [
+      "ContextNodeValidator",
+      "main"
+    ],
+    "complexity_score": 12
+  }
+}

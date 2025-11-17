@@ -1,0 +1,81 @@
+{
+  "version": "1.0",
+  "project": {
+    "name": "levelith-2",
+    "type": "python",
+    "description": "Context node based repository navigation system"
+  },
+
+  "navigation": {
+    "entry_points": [
+      "dev/cn-create.py"
+    ],
+    "key_directories": {
+      "dev/": "Development tools and utilities",
+      "docs/": "Documentation files",
+      ".": "Project root with core configuration"
+    },
+    "ignore_patterns": [
+      "**/__pycache__/**",
+      "**/*.pyc",
+      "**/.git/**",
+      "**/node_modules/**",
+      "**/.venv/**",
+      "**/dist/**",
+      "**/build/**"
+    ]
+  },
+
+  "exploration_hints": {
+    "start_here": [
+      "README.md",
+      "claude.md",
+      "context-node.md"
+    ],
+    "architecture_docs": [
+      "claude.md"
+    ],
+    "dependency_strategy": "follow_imports",
+    "max_depth": 3
+  },
+
+  "code_intelligence": {
+    "language_specific": {
+      "python": {
+        "docstring_style": "google",
+        "type_hints": true,
+        "important_modules": ["dev/cn-create.py"]
+      },
+      "javascript": {
+        "docstring_style": "jsdoc",
+        "type_hints": "typescript"
+      }
+    },
+    "documentation_priority": [
+      "docstrings",
+      "inline_comments",
+      "README.md",
+      "type_annotations"
+    ]
+  },
+
+  "context_extraction": {
+    "auto_index": true,
+    "index_file": ".aiagent-index.json",
+    "extract_on_read": [
+      "imports",
+      "exports",
+      "classes",
+      "functions",
+      "docstrings"
+    ]
+  },
+
+  "agent_instructions": {
+    "preferred_approach": "Start with entry_points, follow imports, prioritize docstrings",
+    "special_notes": [
+      "This project uses context-node.md files for navigation documentation",
+      "Run 'python dev/cn-create.py' to generate context nodes"
+    ]
+  }
+}

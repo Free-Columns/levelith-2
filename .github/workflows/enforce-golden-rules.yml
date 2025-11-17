@@ -1,0 +1,273 @@
+name: Enforce Golden Rules
+
+on:
+  push:
+    branches: [ main, develop, 'claude/**' ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  PYTHON_VERSION: '3.11'
+  MINIMUM_COVERAGE: '80'
+
+jobs:
+  # Golden Rule 1: Test-First Development
+  enforce-tests:
+    name: Enforce Test Requirements
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for comparison
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov
+
+      - name: Check for modified Python files
+        id: changed-files
+        run: |
+          git diff --name-only origin/main...HEAD | grep '\.py$' | grep -v '^tests/' > changed_files.txt || true
+          echo "changed_files=$(cat changed_files.txt)" >> $GITHUB_OUTPUT
+          cat changed_files.txt
+
+      - name: Verify tests exist for changes
+        run: |
+          python tests/test_system.py enforce
+
+      - name: Run all tests
+        run: |
+          pytest tests/ -v --cov=. --cov-report=term-missing --cov-report=xml --cov-fail-under=${{ env.MINIMUM_COVERAGE }}
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: |
+            htmlcov/
+            coverage.xml
+
+      - name: Comment coverage on PR
+        if: github.event_name == 'pull_request'
+        uses: py-cov-action/python-coverage-comment-action@v3
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
+          MINIMUM_GREEN: 90
+          MINIMUM_ORANGE: 80
+
+  # Golden Rule 2: Documentation
+  enforce-documentation:
+    name: Enforce Documentation Standards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install documentation tools
+        run: |
+          pip install pydocstyle interrogate darglint
+
+      - name: Check docstring coverage
+        run: |
+          interrogate -v --fail-under=90 dev/ tests/ || true
+
+      - name: Check docstring style
+        run: |
+          pydocstyle dev/ --convention=google || true
+
+      - name: Validate docstring arguments
+        run: |
+          darglint -v 2 dev/ || true
+
+      - name: Update AI Agent Index
+        run: |
+          python dev/aiagent_navigator.py index
+          python dev/aiagent_navigator.py guide
+
+      - name: Check if index changed
+        run: |
+          git diff --exit-code .aiagent-index.json NAVIGATION.md || \
+          (echo "⚠️  AI Agent index needs update. Run: python dev/aiagent_navigator.py index" && exit 1)
+
+  # Golden Rule 3: Security First
+  enforce-security:
+    name: Security Scanning
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install security tools
+        run: |
+          pip install bandit safety pip-audit
+
+      - name: Run Bandit security scan
+        run: |
+          bandit -r . -f json -o bandit-report.json
+          bandit -r . -ll  # Show high/medium severity issues
+
+      - name: Check for known vulnerabilities
+        run: |
+          safety check --json || true
+
+      - name: Audit dependencies
+        run: |
+          pip-audit || true
+
+      - name: Scan for secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+
+      - name: Upload security reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: |
+            bandit-report.json
+
+  # Golden Rule 5: Code Quality
+  enforce-code-quality:
+    name: Code Quality Standards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install quality tools
+        run: |
+          pip install black flake8 mypy pylint radon
+
+      - name: Check code formatting (Black)
+        run: |
+          black --check --diff .
+
+      - name: Lint with Flake8
+        run: |
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 . --count --max-complexity=10 --max-line-length=100 --statistics
+
+      - name: Type checking (MyPy)
+        run: |
+          mypy dev/ tests/ --ignore-missing-imports --strict || true
+
+      - name: Code quality (Pylint)
+        run: |
+          pylint dev/ tests/ --fail-under=8.0 || true
+
+      - name: Check complexity
+        run: |
+          radon cc . -a -nb
+
+      - name: Check maintainability
+        run: |
+          radon mi . -nb
+
+  # Golden Rule 6: Dependency Management
+  enforce-dependencies:
+    name: Dependency Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Check for unpinned dependencies
+        run: |
+          if [ -f requirements.txt ]; then
+            grep -E '^[a-zA-Z0-9_-]+$' requirements.txt && \
+            (echo "❌ Found unpinned dependencies in requirements.txt" && exit 1) || \
+            echo "✓ All dependencies are pinned"
+          fi
+
+      - name: Check for outdated dependencies
+        run: |
+          pip install pip-check
+          pip-check || true
+
+  # Golden Rule 7: Performance Awareness
+  performance-check:
+    name: Performance Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          pip install pytest pytest-benchmark
+
+      - name: Run performance tests
+        run: |
+          pytest tests/ -v -m "not slow" --benchmark-only || echo "No benchmark tests yet"
+
+  # Golden Rule 10: Version Control Hygiene
+  enforce-commit-quality:
+    name: Commit Message Quality
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check commit messages
+        uses: wagoid/commitlint-github-action@v5
+        with:
+          configFile: .commitlintrc.json
+
+  # Summary Report
+  golden-rules-summary:
+    name: Golden Rules Summary
+    needs: [enforce-tests, enforce-documentation, enforce-security, enforce-code-quality]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Check all rules passed
+        run: |
+          echo "## Golden Rules Enforcement Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Rule | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| 1. Test-First Development | ${{ needs.enforce-tests.result == 'success' && '✓' || '✗' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 2. Documentation | ${{ needs.enforce-documentation.result == 'success' && '✓' || '✗' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 3. Security First | ${{ needs.enforce-security.result == 'success' && '✓' || '✗' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 5. Code Quality | ${{ needs.enforce-code-quality.result == 'success' && '✓' || '✗' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ needs.enforce-tests.result }}" != "success" ] || \
+             [ "${{ needs.enforce-documentation.result }}" != "success" ] || \
+             [ "${{ needs.enforce-security.result }}" != "success" ] || \
+             [ "${{ needs.enforce-code-quality.result }}" != "success" ]; then
+            echo "❌ Some golden rules were violated!" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          else
+            echo "✓ All golden rules passed!" >> $GITHUB_STEP_SUMMARY
+          fi

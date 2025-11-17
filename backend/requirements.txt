@@ -32,6 +32,3 @@ gunicorn==21.2.0
 
 # Monitoring & Logging
 python-json-logger==2.0.7
-
-# CORS
-fastapi-cors==0.0.6

@@ -65,7 +65,7 @@ async def create_experience(
         location=experience_data.location,
         type_specific_data=experience_data.type_specific_data,
         tags=experience_data.tags,
-        metadata=experience_data.metadata
+        experience_metadata=experience_data.metadata  # Map API 'metadata' to DB 'experience_metadata'
     )
 
     db.add(db_experience)
@@ -183,7 +183,11 @@ async def update_experience(
     # Update fields
     update_data = experience_data.model_dump(exclude_unset=True)
     for field, value in update_data.items():
-        setattr(experience, field, value)
+        # Map 'metadata' from API to 'experience_metadata' in DB
+        if field == 'metadata':
+            setattr(experience, 'experience_metadata', value)
+        else:
+            setattr(experience, field, value)
 
     db.commit()
     db.refresh(experience)

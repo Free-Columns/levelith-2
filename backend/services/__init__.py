@@ -12,7 +12,7 @@ According to MANIFEST.md:
 - Orchestration: Coordinates operations across multiple repositories
 
 Architecture:
-    Controllers/API ’ Services ’ Repositories ’ Data Store
+    Controllers/API -> Services -> Repositories -> Data Store
 
 Services:
     - UserService: User management, authentication, profile operations

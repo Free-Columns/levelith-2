@@ -31,7 +31,8 @@ class ExperienceBase(BaseModel):
 
     type_specific_data: Dict = Field(default_factory=dict, description="Type-specific additional data")
     tags: List[str] = Field(default_factory=list, description="Tags for categorization")
-    metadata: Dict = Field(default_factory=dict, description="Additional metadata")
+    # Use 'experience_metadata' from DB, expose as 'metadata' in API
+    metadata: Dict = Field(default_factory=dict, description="Additional metadata", serialization_alias="metadata", validation_alias="metadata")
 
     @field_validator("naics_code")
     @classmethod
@@ -83,6 +84,35 @@ class ExperienceResponse(ExperienceBase):
 
     class Config:
         from_attributes = True
+        # Map DB field 'experience_metadata' to API field 'metadata'
+        populate_by_name = True
+
+    @classmethod
+    def model_validate(cls, obj):
+        """Custom validation to map experience_metadata to metadata."""
+        if hasattr(obj, 'experience_metadata'):
+            # Map the DB field to the expected schema field
+            data = {
+                'id': obj.id,
+                'user_id': obj.user_id,
+                'title': obj.title,
+                'description': obj.description,
+                'naics_code': obj.naics_code,
+                'category': obj.category,
+                'experience_type': obj.experience_type,
+                'start_date': obj.start_date,
+                'end_date': obj.end_date,
+                'is_current': obj.is_current,
+                'organization': obj.organization,
+                'location': obj.location,
+                'type_specific_data': obj.type_specific_data,
+                'tags': obj.tags,
+                'metadata': obj.experience_metadata,  # Map DB field to API field
+                'created_at': obj.created_at,
+                'updated_at': obj.updated_at,
+            }
+            return super(ExperienceResponse, cls).model_validate(data)
+        return super(ExperienceResponse, cls).model_validate(obj)
 
 
 class ExperienceList(BaseModel):

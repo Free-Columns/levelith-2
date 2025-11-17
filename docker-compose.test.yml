@@ -1,0 +1,130 @@
+version: '3.9'
+
+services:
+  # Test backend
+  backend-test:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.test
+      target: test
+    container_name: levelith-backend-test
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db-test:5432/levelith_test
+      - REDIS_URL=redis://redis-test:6379
+      - TESTING=true
+      - ENVIRONMENT=test
+    volumes:
+      - ./backend:/app
+      - ./backend/coverage:/app/coverage
+    depends_on:
+      db-test:
+        condition: service_healthy
+      redis-test:
+        condition: service_healthy
+    networks:
+      - levelith-test-network
+    command: |
+      sh -c "
+        pytest tests/ -v --cov=. --cov-report=html --cov-report=xml --cov-report=term
+      "
+
+  # Test frontend
+  frontend-test:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.test
+      target: test
+    container_name: levelith-frontend-test
+    environment:
+      - REACT_APP_API_URL=http://backend-test:8000
+      - NODE_ENV=test
+      - CI=true
+    volumes:
+      - ./frontend:/app
+      - ./frontend/coverage:/app/coverage
+      - /app/node_modules
+    networks:
+      - levelith-test-network
+    command: npm run test:ci
+
+  # E2E tests
+  e2e-test:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.test
+      target: e2e
+    container_name: levelith-e2e-test
+    environment:
+      - BASE_URL=http://frontend-test:3000
+      - API_URL=http://backend-test:8000
+      - HEADLESS=true
+    volumes:
+      - ./frontend/e2e:/app/e2e
+      - ./frontend/test-results:/app/test-results
+      - ./frontend/playwright-report:/app/playwright-report
+    depends_on:
+      - backend-test
+      - frontend-test
+    networks:
+      - levelith-test-network
+    command: npx playwright test
+
+  # Test database
+  db-test:
+    image: postgres:15-alpine
+    container_name: levelith-db-test
+    environment:
+      - POSTGRES_DB=levelith_test
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - levelith-test-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # Test Redis
+  redis-test:
+    image: redis:7-alpine
+    container_name: levelith-redis-test
+    networks:
+      - levelith-test-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # Integration test runner
+  integration-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.integration
+    container_name: levelith-integration-test
+    environment:
+      - BACKEND_URL=http://backend-test:8000
+      - FRONTEND_URL=http://frontend-test:3000
+      - DATABASE_URL=postgresql://postgres:postgres@db-test:5432/levelith_test
+      - REDIS_URL=redis://redis-test:6379
+    volumes:
+      - ./tests/integration:/app/tests
+      - ./test-reports:/app/test-reports
+    depends_on:
+      - backend-test
+      - frontend-test
+      - db-test
+      - redis-test
+    networks:
+      - levelith-test-network
+    command: |
+      sh -c "
+        echo 'Waiting for services to be ready...' &&
+        sleep 10 &&
+        python -m pytest tests/ -v --junit-xml=/app/test-reports/integration.xml
+      "
+
+networks:
+  levelith-test-network:
+    driver: bridge

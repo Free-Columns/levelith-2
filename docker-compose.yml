@@ -1,0 +1,143 @@
+version: '3.9'
+
+services:
+  # Backend service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: levelith-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/levelith
+      - REDIS_URL=redis://redis:6379
+      - ENVIRONMENT=development
+      - DEBUG=true
+      - SECRET_KEY=${SECRET_KEY:-dev-secret-key-change-in-production}
+    volumes:
+      - ./backend:/app
+      - backend-static:/app/static
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - levelith-network
+    restart: unless-stopped
+    command: python app.py
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: development
+    container_name: levelith-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://backend:8000
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - levelith-network
+    restart: unless-stopped
+    command: npm run dev
+
+  # PostgreSQL database
+  db:
+    image: postgres:15-alpine
+    container_name: levelith-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=levelith
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./backend/migrations/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - levelith-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Redis cache
+  redis:
+    image: redis:7-alpine
+    container_name: levelith-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - levelith-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+
+  # Nginx reverse proxy
+  nginx:
+    image: nginx:alpine
+    container_name: levelith-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites-enabled:/etc/nginx/sites-enabled
+      - ./nginx/ssl:/etc/nginx/ssl
+      - backend-static:/var/www/static
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - levelith-network
+    restart: unless-stopped
+
+  # Development tools
+  adminer:
+    image: adminer
+    container_name: levelith-adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - levelith-network
+    profiles:
+      - dev
+    restart: unless-stopped
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: levelith-mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - levelith-network
+    profiles:
+      - dev
+    restart: unless-stopped
+
+networks:
+  levelith-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:
+  backend-static:

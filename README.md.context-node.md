@@ -7,7 +7,7 @@
 **Created**: 2025-11-16
 
 ## Description
-[Describe what this file does and its role in the project]
+[ THIS FILE IS TO BE TREATED AS A PUBLIC DOCUMENT, THE READ ME IS THE FACE OF THIS PROJECT. BE VERY STRICT WITH BRANDING VOICE TONE AND COLORS ECT ]
 
 ## Key Functions/Components
 - [List main functions, classes, or components]

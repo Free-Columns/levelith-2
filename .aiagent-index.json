@@ -1,4 +1,137 @@
 {
+  "backend/api/__init__.py": {
+    "path": "/home/user/levelith-2/backend/api/__init__.py",
+    "docstring": null,
+    "classes": [],
+    "functions": [],
+    "imports": [],
+    "exports": [],
+    "complexity_score": 0
+  },
+  "backend/services/__init__.py": {
+    "path": "/home/user/levelith-2/backend/services/__init__.py",
+    "docstring": null,
+    "classes": [],
+    "functions": [],
+    "imports": [],
+    "exports": [],
+    "complexity_score": 0
+  },
+  "backend/models/__init__.py": {
+    "path": "/home/user/levelith-2/backend/models/__init__.py",
+    "docstring": "Levelith Domain Models\n\nThis module contains the core domain models for the Levelith application.\nAll models follow the architecture defined in MANIFEST.md.\n\nModels:\n    - User: User account and profile\n    - Experience: Base class for all experience types\n    - Education experiences: Certificate, Degree, Course\n    - Workplace experiences: Gig, PartTime, FullTime\n    - Skills experiences: SoftSkill, HardSkill, NativeSkill",
+    "classes": [],
+    "functions": [],
+    "imports": [
+      "backend.models.user",
+      "backend.models.experience"
+    ],
+    "exports": [],
+    "complexity_score": 2
+  },
+  "backend/models/experience.py": {
+    "path": "/home/user/levelith-2/backend/models/experience.py",
+    "docstring": "Experience Domain Models\n\nThis module defines the core Experience model and all its subtypes.\nAccording to MANIFEST.md, there are 9 experience subtypes across 3 categories:\n\n1. Education: Certificate, Degree, Course\n2. Workplace: Gig, PartTime, FullTime\n3. Skills: SoftSkill, HardSkill, NativeSkill\n\nEvery Experience MUST have a NAICS code. Fallback code: 123456 (GENERAL)",
+    "classes": [
+      "ExperienceCategory",
+      "ExperienceType",
+      "Experience",
+      "Certificate",
+      "Degree",
+      "Course",
+      "Gig",
+      "PartTime",
+      "FullTime",
+      "SoftSkill",
+      "HardSkill",
+      "NativeSkill"
+    ],
+    "functions": [
+      "validate_naics_code"
+    ],
+    "imports": [
+      "dataclasses",
+      "datetime",
+      "typing",
+      "enum"
+    ],
+    "exports": [
+      "ExperienceCategory",
+      "ExperienceType",
+      "Experience",
+      "Certificate",
+      "Degree",
+      "Course",
+      "Gig",
+      "PartTime",
+      "FullTime",
+      "SoftSkill",
+      "HardSkill",
+      "NativeSkill",
+      "validate_naics_code"
+    ],
+    "complexity_score": 42
+  },
+  "backend/models/user.py": {
+    "path": "/home/user/levelith-2/backend/models/user.py",
+    "docstring": "User Domain Model\n\nThis module defines the User model for the Levelith application.\nUsers have username/password authentication and maintain an array of experiences.\n\nAccording to MANIFEST.md:\n- Authentication: Username + password (traditional authentication)\n- JWT tokens for session management\n- Secure password hashing (bcrypt)\n- Each user has an array of Experience objects",
+    "classes": [
+      "User"
+    ],
+    "functions": [
+      "hash_password",
+      "verify_password",
+      "create_user"
+    ],
+    "imports": [
+      "dataclasses",
+      "datetime",
+      "typing",
+      "hashlib",
+      "secrets"
+    ],
+    "exports": [
+      "User",
+      "hash_password",
+      "verify_password",
+      "create_user"
+    ],
+    "complexity_score": 14
+  },
+  "backend/repositories/__init__.py": {
+    "path": "/home/user/levelith-2/backend/repositories/__init__.py",
+    "docstring": null,
+    "classes": [],
+    "functions": [],
+    "imports": [],
+    "exports": [],
+    "complexity_score": 0
+  },
+  "dev/test_debugger.py": {
+    "path": "/home/user/levelith-2/dev/test_debugger.py",
+    "docstring": "Test System Debugger\n\nDebugging utilities for the Levelith test system.\nProvides detailed diagnostics, failure analysis, and troubleshooting tools.\n\nUsage:\n    python dev/test_debugger.py diagnose               # Full system diagnostic\n    python dev/test_debugger.py analyze-failure <test> # Analyze specific test failure\n    python dev/test_debugger.py coverage-gaps          # Find coverage gaps\n    python dev/test_debugger.py validate-all           # Validate all test files",
+    "classes": [
+      "TestDebugger"
+    ],
+    "functions": [
+      "main"
+    ],
+    "imports": [
+      "json",
+      "subprocess",
+      "sys",
+      "pathlib",
+      "typing",
+      "ast",
+      "re",
+      "test_system"
+    ],
+    "exports": [
+      "TestDebugger",
+      "main"
+    ],
+    "complexity_score": 13
+  },
   "dev/example_ai_agent_usage.py": {
     "path": "/home/user/levelith-2/dev/example_ai_agent_usage.py",
     "docstring": "Example: How an AI Agent Would Use the Intelligent Navigator\n\nThis demonstrates a simulated AI agent exploring a codebase using\nthe intelligent tooling instead of pre-generated context nodes.",
@@ -19,6 +152,31 @@
       "demo_ai_exploration"
     ],
     "complexity_score": 10
+  },
+  "dev/test_report_generator.py": {
+    "path": "/home/user/levelith-2/dev/test_report_generator.py",
+    "docstring": "Levelith-2 Test Report Generator\n\nGenerates comprehensive test execution reports with pass/fail status and reasons.",
+    "classes": [],
+    "functions": [
+      "run_tests",
+      "parse_pytest_output",
+      "generate_markdown_report",
+      "main"
+    ],
+    "imports": [
+      "subprocess",
+      "json",
+      "datetime",
+      "pathlib",
+      "typing"
+    ],
+    "exports": [
+      "run_tests",
+      "parse_pytest_output",
+      "generate_markdown_report",
+      "main"
+    ],
+    "complexity_score": 13
   },
   "dev/aiagent_navigator.py": {
     "path": "/home/user/levelith-2/dev/aiagent_navigator.py",
@@ -47,55 +205,67 @@
     ],
     "complexity_score": 16
   },
-  "dev/test_debugger.py": {
-    "path": "/home/user/levelith-2/dev/test_debugger.py",
-    "docstring": "Test System Debugger\n\nDebugging utilities for the Levelith test system.\nProvides detailed diagnostics, failure analysis, and troubleshooting tools.\n\nUsage:\n    python dev/test_debugger.py diagnose               # Full system diagnostic\n    python dev/test_debugger.py analyze-failure <test> # Analyze specific test failure\n    python dev/test_debugger.py coverage-gaps          # Find coverage gaps\n    python dev/test_debugger.py validate-all           # Validate all test files",
+  "tests/test_experience.py": {
+    "path": "/home/user/levelith-2/tests/test_experience.py",
+    "docstring": "Unit tests for experience.py\n\nComprehensive tests for Experience model, all 9 experience subtypes, and NAICS validation.\nTests follow the 80% minimum coverage requirement from AI_AGENT_GOLDEN_RULES.md",
     "classes": [
-      "TestDebugger"
+      "TestNAICSValidation",
+      "TestExperience",
+      "TestCertificate",
+      "TestDegree",
+      "TestCourse",
+      "TestGig",
+      "TestPartTime",
+      "TestFullTime",
+      "TestSoftSkill",
+      "TestHardSkill",
+      "TestNativeSkill",
+      "TestExperienceIntegration"
     ],
-    "functions": [
-      "main"
-    ],
+    "functions": [],
     "imports": [
-      "json",
-      "subprocess",
-      "sys",
-      "pathlib",
-      "typing",
-      "ast",
-      "re",
-      "test_system"
-    ],
-    "exports": [
-      "TestDebugger",
-      "main"
-    ],
-    "complexity_score": 13
-  },
-  "dev/test_report_generator.py": {
-    "path": "/home/user/levelith-2/dev/test_report_generator.py",
-    "docstring": "Levelith-2 Test Report Generator\n\nGenerates comprehensive test execution reports with pass/fail status and reasons.",
-    "classes": [],
-    "functions": [
-      "run_tests",
-      "parse_pytest_output",
-      "generate_markdown_report",
-      "main"
-    ],
-    "imports": [
-      "subprocess",
-      "json",
+      "pytest",
       "datetime",
-      "pathlib",
-      "typing"
+      "backend.models.experience"
     ],
     "exports": [
-      "run_tests",
-      "parse_pytest_output",
-      "generate_markdown_report",
-      "main"
+      "TestNAICSValidation",
+      "TestExperience",
+      "TestCertificate",
+      "TestDegree",
+      "TestCourse",
+      "TestGig",
+      "TestPartTime",
+      "TestFullTime",
+      "TestSoftSkill",
+      "TestHardSkill",
+      "TestNativeSkill",
+      "TestExperienceIntegration"
     ],
-    "complexity_score": 13
+    "complexity_score": 39
+  },
+  "tests/test_user.py": {
+    "path": "/home/user/levelith-2/tests/test_user.py",
+    "docstring": "Unit tests for user.py\n\nComprehensive tests for User model and authentication functions.\nTests follow the 80% minimum coverage requirement from AI_AGENT_GOLDEN_RULES.md",
+    "classes": [
+      "TestUser",
+      "TestPasswordFunctions",
+      "TestCreateUser",
+      "TestUserEdgeCases"
+    ],
+    "functions": [],
+    "imports": [
+      "pytest",
+      "datetime",
+      "backend.models.user"
+    ],
+    "exports": [
+      "TestUser",
+      "TestPasswordFunctions",
+      "TestCreateUser",
+      "TestUserEdgeCases"
+    ],
+    "complexity_score": 15
   },
   "tests/__init__.py": {
     "path": "/home/user/levelith-2/tests/__init__.py",

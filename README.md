@@ -301,6 +301,24 @@ levelith-2/
 │   ├── services/                   # Business logic layer
 │   └── repositories/               # Data access layer
 │
+├── backend/                        # ✅ Backend application (Python)
+│   ├── API_DOCUMENTATION.md        # ✅ Comprehensive API design document
+│   ├── models/                     # ✅ Domain models (User, Experience + 9 subtypes)
+│   │   ├── __init__.py             # Model exports
+│   │   ├── user.py                 # User model with authentication
+│   │   └── experience.py           # Experience base + 9 subtypes
+│   ├── repositories/               # ✅ Data access layer (Repository pattern)
+│   │   ├── __init__.py             # Repository exports
+│   │   ├── user_repository.py      # User data access operations
+│   │   └── experience_repository.py # Experience data access operations
+│   ├── services/                   # ✅ Business logic layer (Service pattern)
+│   │   ├── __init__.py             # Service exports
+│   │   ├── user_service.py         # User business logic
+│   │   └── experience_service.py   # Experience business logic
+│   ├── api/                        # 🚧 API endpoints (to be implemented)
+│   ├── Dockerfile                  # Docker configuration
+│   └── Makefile                    # Build and development commands
+│
 ├── tests/                          # Comprehensive test suite
 │   ├── __init__.py                 # Test package initialization
 │   ├── test_system.py              # Test enforcement and generation
@@ -310,6 +328,13 @@ levelith-2/
 │   ├── test_user.py                # User domain model tests
 │   ├── test_experience.py          # Experience domain model tests
 │   └── test_test_system.py         # Test system tests
+│   ├── test_user.py                # ✅ User model tests
+│   ├── test_experience.py          # ✅ Experience model tests
+│   ├── test_user_repository.py     # ✅ UserRepository tests
+│   ├── test_experience_repository.py # ✅ ExperienceRepository tests
+│   ├── unit/                       # Unit tests
+│   ├── integration/                # Integration tests
+│   └── e2e/                        # End-to-end tests
 │
 ├── dev/                            # Development tools
 │   ├── aiagent_navigator.py        # Intelligent navigation system
@@ -324,6 +349,38 @@ levelith-2/
 │
 └── docs/                           # Additional documentation
 ```
+
+### Backend Architecture
+
+The backend follows a layered architecture pattern:
+
+**Domain Layer** (`backend/models/`)
+- `User`: User authentication and profile management
+- `Experience`: Base class for all experience types
+- 9 Experience subtypes: Certificate, Degree, Course, Gig, PartTime, FullTime, SoftSkill, HardSkill, NativeSkill
+
+**Repository Layer** (`backend/repositories/`)
+- `UserRepository`: User data access (CRUD, search, filtering)
+- `ExperienceRepository`: Experience data access with NAICS indexing
+
+**Service Layer** (`backend/services/`)
+- `UserService`: User registration, authentication, profile management
+- `ExperienceService`: Experience creation/management for all 9 types
+
+**API Layer** (`backend/api/`) - *To be implemented*
+- RESTful endpoints for all operations
+- JWT authentication
+- Request/response schemas
+- See `backend/API_DOCUMENTATION.md` for complete API design
+
+**Key Features:**
+- ✅ Complete domain models with comprehensive docstrings
+- ✅ Repository pattern for data access abstraction
+- ✅ Service layer for business logic encapsulation
+- ✅ NAICS code validation and fallback (123456 for GENERAL)
+- ✅ Comprehensive test coverage for all layers
+- 🚧 API endpoints (FastAPI) - to be implemented
+- 🚧 Database integration (PostgreSQL) - to be implemented
 
 ## Usage Examples
 

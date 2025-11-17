@@ -381,6 +381,134 @@ The intelligent tooling uses `.aiagent.json` for project-specific configuration:
 
 ---
 
+## Backend Navigation Guide
+
+### Backend Architecture Overview
+
+The Levelith backend follows a **layered architecture** pattern with comprehensive documentation at all levels:
+
+```
+backend/
+├── API_DOCUMENTATION.md        # Complete API design specification
+├── models/                     # Domain Layer
+│   ├── user.py                 # User model with authentication
+│   └── experience.py           # Experience + 9 subtypes
+├── repositories/               # Data Access Layer
+│   ├── user_repository.py      # User CRUD operations
+│   └── experience_repository.py # Experience CRUD operations
+├── services/                   # Business Logic Layer
+│   ├── user_service.py         # User business logic
+│   └── experience_service.py   # Experience business logic
+└── api/                        # API Layer (to be implemented)
+```
+
+### Exploring the Backend
+
+**Step 1: Understand the Domain Models**
+
+```bash
+# Analyze User model
+python dev/aiagent_navigator.py analyze backend/models/user.py
+
+# Analyze Experience model (includes 9 subtypes)
+python dev/aiagent_navigator.py analyze backend/models/experience.py
+```
+
+Key concepts:
+- **User**: Authentication, profile management, experience array
+- **Experience**: 9 subtypes across 3 categories (Education, Workplace, Skills)
+- **NAICS codes**: Every experience has a NAICS code (fallback: 123456)
+
+**Step 2: Review Repository Layer**
+
+```bash
+# UserRepository - data access for users
+python dev/aiagent_navigator.py analyze backend/repositories/user_repository.py
+
+# ExperienceRepository - data access with NAICS indexing
+python dev/aiagent_navigator.py analyze backend/repositories/experience_repository.py
+```
+
+Repository pattern provides:
+- Data persistence abstraction
+- Indexing for fast queries
+- Search and filtering capabilities
+- Clean separation from business logic
+
+**Step 3: Understand Service Layer**
+
+```bash
+# UserService - registration, authentication, profiles
+python dev/aiagent_navigator.py analyze backend/services/user_service.py
+
+# ExperienceService - all 9 experience types
+python dev/aiagent_navigator.py analyze backend/services/experience_service.py
+```
+
+Services handle:
+- Business logic and validation
+- NAICS code validation and fallback
+- User-experience relationship management
+- Orchestration across repositories
+
+**Step 4: Read API Documentation**
+
+```bash
+# Complete API design (endpoints, auth, errors, etc.)
+cat backend/API_DOCUMENTATION.md
+```
+
+API documentation includes:
+- All REST endpoints (design phase)
+- JWT authentication flow
+- Request/response schemas
+- Error handling patterns
+- NAICS code reference
+- Pagination and filtering
+- Rate limiting rules
+
+### Backend Quick Reference
+
+**Key Files:**
+- `backend/API_DOCUMENTATION.md` - Complete API design
+- `backend/models/user.py` - User domain model (lines: 1-321)
+- `backend/models/experience.py` - Experience models (lines: 1-413)
+- `backend/repositories/user_repository.py` - User data access
+- `backend/repositories/experience_repository.py` - Experience data access
+- `backend/services/user_service.py` - User business logic
+- `backend/services/experience_service.py` - Experience business logic
+
+**Experience Types (9 total):**
+- Education: Certificate, Degree, Course
+- Workplace: Gig, PartTime, FullTime
+- Skills: SoftSkill, HardSkill, NativeSkill
+
+**Architecture Pattern:**
+```
+API Endpoints → Services → Repositories → Data Store
+```
+
+**Test Coverage:**
+- `tests/test_user.py` - User model tests
+- `tests/test_experience.py` - Experience model tests
+- `tests/test_user_repository.py` - UserRepository tests
+- `tests/test_experience_repository.py` - ExperienceRepository tests
+
+### Backend Development Workflow
+
+When working on backend code:
+
+1. **Read the domain models** to understand data structures
+2. **Check repositories** for available data operations
+3. **Review services** for business logic patterns
+4. **Consult API docs** for endpoint design
+5. **Run tests** to verify functionality:
+   ```bash
+   pytest tests/test_user*.py tests/test_experience*.py -v
+   ```
+
+---
+
 ## Learning Path for AI Agents
 
 ### Level 1: Quick Start (5 minutes)

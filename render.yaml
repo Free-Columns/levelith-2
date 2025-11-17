@@ -7,17 +7,15 @@ services:
     name: levelith-backend
     env: python
     region: oregon
-    plan: starter
-    buildCommand: "cd backend && pip install -r requirements.txt"
-    startCommand: "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
+    plan: free
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "uvicorn backend.main:app --host 0.0.0.0 --port $PORT"
     healthCheckPath: /health
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
       - key: ENVIRONMENT
         value: production
       - key: DEBUG
-        value: false
+        value: true
       - key: DATABASE_URL
         fromDatabase:
           name: levelith-db
@@ -25,7 +23,7 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: CORS_ORIGINS
-        value: "https://levelith-frontend.onrender.com,https://levelith.com"
+        value: "https://levelith-frontend.onrender.com,https://levelith.online"
       - key: LOG_LEVEL
         value: INFO
       - key: API_V1_PREFIX
@@ -37,6 +35,6 @@ databases:
   - name: levelith-db
     databaseName: levelith
     user: levelith_user
-    plan: starter
+    plan: free
     region: oregon
     postgresMajorVersion: 15

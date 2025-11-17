@@ -17,12 +17,55 @@
 This module defines the core Experience model and all its subtypes.
 Accord
 
+### `backend/models/db_models.py`
+- **Reason**: 11 exports, complexity: 40
+- **Exports**: UserDB, ExperienceDB, CertificateDB, DegreeDB, CourseDB, GigDB, PartTimeDB, FullTimeDB, SoftSkillDB, HardSkillDB, NativeSkillDB
+- **Description**: SQLAlchemy ORM Models
+
+Database models for User and Experience using SQLAlchemy ORM.
+These models ma
+
 ### `tests/test_experience.py`
 - **Reason**: 12 exports, complexity: 39
 - **Exports**: TestNAICSValidation, TestExperience, TestCertificate, TestDegree, TestCourse, TestGig, TestPartTime, TestFullTime, TestSoftSkill, TestHardSkill, TestNativeSkill, TestExperienceIntegration
 - **Description**: Unit tests for experience.py
 
 Comprehensive tests for Experience model, all 9 experience subtypes, a
+
+### `tests/test_api_experiences.py`
+- **Reason**: 10 exports, complexity: 32
+- **Exports**: TestExperienceCreation, TestExperienceRetrieval, TestExperienceUpdate, TestExperienceDeletion, TestExperienceSummary, override_get_db, setup_database, client, test_user, sample_experience_data
+- **Description**: Unit tests for experience API endpoints
+
+Comprehensive tests for experience CRUD operations via REST
+
+### `tests/test_api_users.py`
+- **Reason**: 9 exports, complexity: 29
+- **Exports**: TestUserCreation, TestUserRetrieval, TestUserUpdate, TestUserDeletion, TestUserLogin, override_get_db, setup_database, client, sample_user_data
+- **Description**: Unit tests for user API endpoints
+
+Comprehensive tests for user CRUD operations via REST API.
+
+### `backend/schemas/user.py`
+- **Reason**: 8 exports, complexity: 27
+- **Exports**: UserBase, UserCreate, UserUpdate, UserLogin, UserResponse, TokenResponse, UserWithExperiences, Config
+- **Description**: User API Schemas
+
+Pydantic models for user-related API requests and responses.
+
+### `backend/database.py`
+- **Reason**: 7 exports, complexity: 23
+- **Exports**: DatabaseHealthCheck, set_sqlite_pragma, get_db, get_db_context, init_db, drop_db, reset_db
+- **Description**: Database Configuration and Session Management
+
+Provides SQLAlchemy engine, session management, and b
+
+### `backend/schemas/experience.py`
+- **Reason**: 6 exports, complexity: 22
+- **Exports**: ExperienceBase, ExperienceCreate, ExperienceUpdate, ExperienceResponse, ExperienceList, Config
+- **Description**: Experience API Schemas
+
+Pydantic models for experience-related API requests and responses.
 
 ### `tests/test_system.py`
 - **Reason**: 5 exports, complexity: 21
@@ -38,39 +81,14 @@ This module provides a comprehensive testing framework for all code
 
 This demonstrates the test framework in action and validates
 
-### `dev/aiagent_navigator.py`
-- **Reason**: 3 exports, complexity: 16
-- **Exports**: ModuleInfo, AIAgentNavigator, main
-- **Description**: AI Agent Intelligent Navigator
-
-This tool helps AI agents explore codebases efficiently by:
-- Readin
-
-### `tests/test_user.py`
-- **Reason**: 4 exports, complexity: 15
-- **Exports**: TestUser, TestPasswordFunctions, TestCreateUser, TestUserEdgeCases
-- **Description**: Unit tests for user.py
-
-Comprehensive tests for User model and authentication functions.
-Tests follo
-
-### `backend/models/user.py`
-- **Reason**: 4 exports, complexity: 14
-- **Exports**: User, hash_password, verify_password, create_user
-- **Description**: User Domain Model
-
-This module defines the User model for the Levelith application.
-Users have usern
-
-### `dev/test_report_generator.py`
-- **Reason**: 4 exports, complexity: 13
-- **Exports**: run_tests, parse_pytest_output, generate_markdown_report, main
-- **Description**: Levelith-2 Test Report Generator
-
-Generates comprehensive test execution reports with pass/fail stat
-
 ## Complexity Hotspots
 
 - `backend/models/experience.py` (complexity: 42)
+- `backend/models/db_models.py` (complexity: 40)
 - `tests/test_experience.py` (complexity: 39)
+- `tests/test_api_experiences.py` (complexity: 32)
+- `tests/test_api_users.py` (complexity: 29)
+- `backend/schemas/user.py` (complexity: 27)
+- `backend/database.py` (complexity: 23)
+- `backend/schemas/experience.py` (complexity: 22)
 - `tests/test_system.py` (complexity: 21)

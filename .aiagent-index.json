@@ -1,137 +1,4 @@
 {
-  "backend/api/__init__.py": {
-    "path": "/home/user/levelith-2/backend/api/__init__.py",
-    "docstring": null,
-    "classes": [],
-    "functions": [],
-    "imports": [],
-    "exports": [],
-    "complexity_score": 0
-  },
-  "backend/services/__init__.py": {
-    "path": "/home/user/levelith-2/backend/services/__init__.py",
-    "docstring": null,
-    "classes": [],
-    "functions": [],
-    "imports": [],
-    "exports": [],
-    "complexity_score": 0
-  },
-  "backend/models/__init__.py": {
-    "path": "/home/user/levelith-2/backend/models/__init__.py",
-    "docstring": "Levelith Domain Models\n\nThis module contains the core domain models for the Levelith application.\nAll models follow the architecture defined in MANIFEST.md.\n\nModels:\n    - User: User account and profile\n    - Experience: Base class for all experience types\n    - Education experiences: Certificate, Degree, Course\n    - Workplace experiences: Gig, PartTime, FullTime\n    - Skills experiences: SoftSkill, HardSkill, NativeSkill",
-    "classes": [],
-    "functions": [],
-    "imports": [
-      "backend.models.user",
-      "backend.models.experience"
-    ],
-    "exports": [],
-    "complexity_score": 2
-  },
-  "backend/models/experience.py": {
-    "path": "/home/user/levelith-2/backend/models/experience.py",
-    "docstring": "Experience Domain Models\n\nThis module defines the core Experience model and all its subtypes.\nAccording to MANIFEST.md, there are 9 experience subtypes across 3 categories:\n\n1. Education: Certificate, Degree, Course\n2. Workplace: Gig, PartTime, FullTime\n3. Skills: SoftSkill, HardSkill, NativeSkill\n\nEvery Experience MUST have a NAICS code. Fallback code: 123456 (GENERAL)",
-    "classes": [
-      "ExperienceCategory",
-      "ExperienceType",
-      "Experience",
-      "Certificate",
-      "Degree",
-      "Course",
-      "Gig",
-      "PartTime",
-      "FullTime",
-      "SoftSkill",
-      "HardSkill",
-      "NativeSkill"
-    ],
-    "functions": [
-      "validate_naics_code"
-    ],
-    "imports": [
-      "dataclasses",
-      "datetime",
-      "typing",
-      "enum"
-    ],
-    "exports": [
-      "ExperienceCategory",
-      "ExperienceType",
-      "Experience",
-      "Certificate",
-      "Degree",
-      "Course",
-      "Gig",
-      "PartTime",
-      "FullTime",
-      "SoftSkill",
-      "HardSkill",
-      "NativeSkill",
-      "validate_naics_code"
-    ],
-    "complexity_score": 42
-  },
-  "backend/models/user.py": {
-    "path": "/home/user/levelith-2/backend/models/user.py",
-    "docstring": "User Domain Model\n\nThis module defines the User model for the Levelith application.\nUsers have username/password authentication and maintain an array of experiences.\n\nAccording to MANIFEST.md:\n- Authentication: Username + password (traditional authentication)\n- JWT tokens for session management\n- Secure password hashing (bcrypt)\n- Each user has an array of Experience objects",
-    "classes": [
-      "User"
-    ],
-    "functions": [
-      "hash_password",
-      "verify_password",
-      "create_user"
-    ],
-    "imports": [
-      "dataclasses",
-      "datetime",
-      "typing",
-      "hashlib",
-      "secrets"
-    ],
-    "exports": [
-      "User",
-      "hash_password",
-      "verify_password",
-      "create_user"
-    ],
-    "complexity_score": 14
-  },
-  "backend/repositories/__init__.py": {
-    "path": "/home/user/levelith-2/backend/repositories/__init__.py",
-    "docstring": null,
-    "classes": [],
-    "functions": [],
-    "imports": [],
-    "exports": [],
-    "complexity_score": 0
-  },
-  "dev/test_debugger.py": {
-    "path": "/home/user/levelith-2/dev/test_debugger.py",
-    "docstring": "Test System Debugger\n\nDebugging utilities for the Levelith test system.\nProvides detailed diagnostics, failure analysis, and troubleshooting tools.\n\nUsage:\n    python dev/test_debugger.py diagnose               # Full system diagnostic\n    python dev/test_debugger.py analyze-failure <test> # Analyze specific test failure\n    python dev/test_debugger.py coverage-gaps          # Find coverage gaps\n    python dev/test_debugger.py validate-all           # Validate all test files",
-    "classes": [
-      "TestDebugger"
-    ],
-    "functions": [
-      "main"
-    ],
-    "imports": [
-      "json",
-      "subprocess",
-      "sys",
-      "pathlib",
-      "typing",
-      "ast",
-      "re",
-      "test_system"
-    ],
-    "exports": [
-      "TestDebugger",
-      "main"
-    ],
-    "complexity_score": 13
-  },
   "dev/example_ai_agent_usage.py": {
     "path": "/home/user/levelith-2/dev/example_ai_agent_usage.py",
     "docstring": "Example: How an AI Agent Would Use the Intelligent Navigator\n\nThis demonstrates a simulated AI agent exploring a codebase using\nthe intelligent tooling instead of pre-generated context nodes.",
@@ -178,6 +45,31 @@
     ],
     "complexity_score": 13
   },
+  "dev/test_debugger.py": {
+    "path": "/home/user/levelith-2/dev/test_debugger.py",
+    "docstring": "Test System Debugger\n\nDebugging utilities for the Levelith test system.\nProvides detailed diagnostics, failure analysis, and troubleshooting tools.\n\nUsage:\n    python dev/test_debugger.py diagnose               # Full system diagnostic\n    python dev/test_debugger.py analyze-failure <test> # Analyze specific test failure\n    python dev/test_debugger.py coverage-gaps          # Find coverage gaps\n    python dev/test_debugger.py validate-all           # Validate all test files",
+    "classes": [
+      "TestDebugger"
+    ],
+    "functions": [
+      "main"
+    ],
+    "imports": [
+      "json",
+      "subprocess",
+      "sys",
+      "pathlib",
+      "typing",
+      "ast",
+      "re",
+      "test_system"
+    ],
+    "exports": [
+      "TestDebugger",
+      "main"
+    ],
+    "complexity_score": 13
+  },
   "dev/aiagent_navigator.py": {
     "path": "/home/user/levelith-2/dev/aiagent_navigator.py",
     "docstring": "AI Agent Intelligent Navigator\n\nThis tool helps AI agents explore codebases efficiently by:\n- Reading configuration from .aiagent.json\n- Analyzing code structure automatically\n- Providing smart navigation suggestions\n- Generating runtime context without pre-documentation",
@@ -204,6 +96,386 @@
       "main"
     ],
     "complexity_score": 16
+  },
+  "backend/database.py": {
+    "path": "/home/user/levelith-2/backend/database.py",
+    "docstring": "Database Configuration and Session Management\n\nProvides SQLAlchemy engine, session management, and base model.\nSupports both sync and async database operations.",
+    "classes": [
+      "DatabaseHealthCheck"
+    ],
+    "functions": [
+      "set_sqlite_pragma",
+      "get_db",
+      "get_db_context",
+      "init_db",
+      "drop_db",
+      "reset_db"
+    ],
+    "imports": [
+      "contextlib",
+      "typing",
+      "sqlalchemy",
+      "sqlalchemy.ext.declarative",
+      "sqlalchemy.orm",
+      "sqlalchemy.pool",
+      "backend.config",
+      "backend.models"
+    ],
+    "exports": [
+      "DatabaseHealthCheck",
+      "set_sqlite_pragma",
+      "get_db",
+      "get_db_context",
+      "init_db",
+      "drop_db",
+      "reset_db"
+    ],
+    "complexity_score": 23
+  },
+  "backend/config.py": {
+    "path": "/home/user/levelith-2/backend/config.py",
+    "docstring": "Configuration Settings for Levelith Backend\n\nManages environment variables and application settings using Pydantic Settings.\nSupports multiple environments (development, staging, production).",
+    "classes": [
+      "Settings"
+    ],
+    "functions": [
+      "get_settings"
+    ],
+    "imports": [
+      "functools",
+      "typing",
+      "pydantic",
+      "pydantic_settings"
+    ],
+    "exports": [
+      "Settings",
+      "get_settings"
+    ],
+    "complexity_score": 9
+  },
+  "backend/main.py": {
+    "path": "/home/user/levelith-2/backend/main.py",
+    "docstring": "Levelith Backend - FastAPI Application\n\nMain application entry point for the Levelith backend API.\nProvides RESTful endpoints for user management and experience tracking.",
+    "classes": [],
+    "functions": [],
+    "imports": [
+      "contextlib",
+      "typing",
+      "fastapi",
+      "fastapi.middleware.cors",
+      "fastapi.middleware.gzip",
+      "fastapi.responses",
+      "backend.config",
+      "backend.database",
+      "backend.api.routes",
+      "uvicorn"
+    ],
+    "exports": [],
+    "complexity_score": 10
+  },
+  "backend/api/__init__.py": {
+    "path": "/home/user/levelith-2/backend/api/__init__.py",
+    "docstring": null,
+    "classes": [],
+    "functions": [],
+    "imports": [],
+    "exports": [],
+    "complexity_score": 0
+  },
+  "backend/api/routes/experiences.py": {
+    "path": "/home/user/levelith-2/backend/api/routes/experiences.py",
+    "docstring": "Experience Management API Endpoints\n\nProvides REST API for experience CRUD operations.",
+    "classes": [],
+    "functions": [],
+    "imports": [
+      "typing",
+      "fastapi",
+      "sqlalchemy.orm",
+      "backend.database",
+      "backend.models.db_models",
+      "backend.models.experience",
+      "backend.schemas.experience"
+    ],
+    "exports": [],
+    "complexity_score": 7
+  },
+  "backend/api/routes/health.py": {
+    "path": "/home/user/levelith-2/backend/api/routes/health.py",
+    "docstring": "Health Check and Monitoring Endpoints\n\nProvides endpoints for health checks, readiness, and system status.\nCritical for Render deployment monitoring.",
+    "classes": [],
+    "functions": [],
+    "imports": [
+      "datetime",
+      "typing",
+      "fastapi",
+      "fastapi.responses",
+      "backend.config",
+      "backend.database"
+    ],
+    "exports": [],
+    "complexity_score": 6
+  },
+  "backend/api/routes/__init__.py": {
+    "path": "/home/user/levelith-2/backend/api/routes/__init__.py",
+    "docstring": "API Routes",
+    "classes": [],
+    "functions": [],
+    "imports": [],
+    "exports": [],
+    "complexity_score": 0
+  },
+  "backend/api/routes/users.py": {
+    "path": "/home/user/levelith-2/backend/api/routes/users.py",
+    "docstring": "User Management API Endpoints\n\nProvides REST API for user CRUD operations and authentication.",
+    "classes": [],
+    "functions": [],
+    "imports": [
+      "typing",
+      "fastapi",
+      "sqlalchemy.orm",
+      "backend.database",
+      "backend.models.db_models",
+      "backend.models.user",
+      "backend.schemas.user"
+    ],
+    "exports": [],
+    "complexity_score": 7
+  },
+  "backend/services/__init__.py": {
+    "path": "/home/user/levelith-2/backend/services/__init__.py",
+    "docstring": null,
+    "classes": [],
+    "functions": [],
+    "imports": [],
+    "exports": [],
+    "complexity_score": 0
+  },
+  "backend/repositories/__init__.py": {
+    "path": "/home/user/levelith-2/backend/repositories/__init__.py",
+    "docstring": null,
+    "classes": [],
+    "functions": [],
+    "imports": [],
+    "exports": [],
+    "complexity_score": 0
+  },
+  "backend/schemas/experience.py": {
+    "path": "/home/user/levelith-2/backend/schemas/experience.py",
+    "docstring": "Experience API Schemas\n\nPydantic models for experience-related API requests and responses.",
+    "classes": [
+      "ExperienceBase",
+      "ExperienceCreate",
+      "ExperienceUpdate",
+      "ExperienceResponse",
+      "ExperienceList",
+      "Config"
+    ],
+    "functions": [],
+    "imports": [
+      "datetime",
+      "typing",
+      "pydantic",
+      "backend.models.experience"
+    ],
+    "exports": [
+      "ExperienceBase",
+      "ExperienceCreate",
+      "ExperienceUpdate",
+      "ExperienceResponse",
+      "ExperienceList",
+      "Config"
+    ],
+    "complexity_score": 22
+  },
+  "backend/schemas/__init__.py": {
+    "path": "/home/user/levelith-2/backend/schemas/__init__.py",
+    "docstring": "API Schemas\n\nPydantic models for request/response validation.",
+    "classes": [],
+    "functions": [],
+    "imports": [
+      "backend.schemas.user",
+      "backend.schemas.experience"
+    ],
+    "exports": [],
+    "complexity_score": 2
+  },
+  "backend/schemas/user.py": {
+    "path": "/home/user/levelith-2/backend/schemas/user.py",
+    "docstring": "User API Schemas\n\nPydantic models for user-related API requests and responses.",
+    "classes": [
+      "UserBase",
+      "UserCreate",
+      "UserUpdate",
+      "UserLogin",
+      "UserResponse",
+      "TokenResponse",
+      "UserWithExperiences",
+      "Config"
+    ],
+    "functions": [],
+    "imports": [
+      "datetime",
+      "typing",
+      "pydantic"
+    ],
+    "exports": [
+      "UserBase",
+      "UserCreate",
+      "UserUpdate",
+      "UserLogin",
+      "UserResponse",
+      "TokenResponse",
+      "UserWithExperiences",
+      "Config"
+    ],
+    "complexity_score": 27
+  },
+  "backend/models/db_models.py": {
+    "path": "/home/user/levelith-2/backend/models/db_models.py",
+    "docstring": "SQLAlchemy ORM Models\n\nDatabase models for User and Experience using SQLAlchemy ORM.\nThese models map to PostgreSQL tables and handle persistence.",
+    "classes": [
+      "UserDB",
+      "ExperienceDB",
+      "CertificateDB",
+      "DegreeDB",
+      "CourseDB",
+      "GigDB",
+      "PartTimeDB",
+      "FullTimeDB",
+      "SoftSkillDB",
+      "HardSkillDB",
+      "NativeSkillDB"
+    ],
+    "functions": [],
+    "imports": [
+      "secrets",
+      "datetime",
+      "typing",
+      "sqlalchemy",
+      "sqlalchemy.orm",
+      "backend.database",
+      "backend.models.experience"
+    ],
+    "exports": [
+      "UserDB",
+      "ExperienceDB",
+      "CertificateDB",
+      "DegreeDB",
+      "CourseDB",
+      "GigDB",
+      "PartTimeDB",
+      "FullTimeDB",
+      "SoftSkillDB",
+      "HardSkillDB",
+      "NativeSkillDB"
+    ],
+    "complexity_score": 40
+  },
+  "backend/models/experience.py": {
+    "path": "/home/user/levelith-2/backend/models/experience.py",
+    "docstring": "Experience Domain Models\n\nThis module defines the core Experience model and all its subtypes.\nAccording to MANIFEST.md, there are 9 experience subtypes across 3 categories:\n\n1. Education: Certificate, Degree, Course\n2. Workplace: Gig, PartTime, FullTime\n3. Skills: SoftSkill, HardSkill, NativeSkill\n\nEvery Experience MUST have a NAICS code. Fallback code: 123456 (GENERAL)",
+    "classes": [
+      "ExperienceCategory",
+      "ExperienceType",
+      "Experience",
+      "Certificate",
+      "Degree",
+      "Course",
+      "Gig",
+      "PartTime",
+      "FullTime",
+      "SoftSkill",
+      "HardSkill",
+      "NativeSkill"
+    ],
+    "functions": [
+      "validate_naics_code"
+    ],
+    "imports": [
+      "dataclasses",
+      "datetime",
+      "typing",
+      "enum"
+    ],
+    "exports": [
+      "ExperienceCategory",
+      "ExperienceType",
+      "Experience",
+      "Certificate",
+      "Degree",
+      "Course",
+      "Gig",
+      "PartTime",
+      "FullTime",
+      "SoftSkill",
+      "HardSkill",
+      "NativeSkill",
+      "validate_naics_code"
+    ],
+    "complexity_score": 42
+  },
+  "backend/models/__init__.py": {
+    "path": "/home/user/levelith-2/backend/models/__init__.py",
+    "docstring": "Levelith Domain Models\n\nThis module contains the core domain models for the Levelith application.\nAll models follow the architecture defined in MANIFEST.md.\n\nModels:\n    - User: User account and profile\n    - Experience: Base class for all experience types\n    - Education experiences: Certificate, Degree, Course\n    - Workplace experiences: Gig, PartTime, FullTime\n    - Skills experiences: SoftSkill, HardSkill, NativeSkill",
+    "classes": [],
+    "functions": [],
+    "imports": [
+      "backend.models.user",
+      "backend.models.experience"
+    ],
+    "exports": [],
+    "complexity_score": 2
+  },
+  "backend/models/user.py": {
+    "path": "/home/user/levelith-2/backend/models/user.py",
+    "docstring": "User Domain Model\n\nThis module defines the User model for the Levelith application.\nUsers have username/password authentication and maintain an array of experiences.\n\nAccording to MANIFEST.md:\n- Authentication: Username + password (traditional authentication)\n- JWT tokens for session management\n- Secure password hashing (bcrypt)\n- Each user has an array of Experience objects",
+    "classes": [
+      "User"
+    ],
+    "functions": [
+      "hash_password",
+      "verify_password",
+      "create_user"
+    ],
+    "imports": [
+      "dataclasses",
+      "datetime",
+      "typing",
+      "hashlib",
+      "secrets"
+    ],
+    "exports": [
+      "User",
+      "hash_password",
+      "verify_password",
+      "create_user"
+    ],
+    "complexity_score": 14
+  },
+  "tests/test_api_health.py": {
+    "path": "/home/user/levelith-2/tests/test_api_health.py",
+    "docstring": "Unit tests for health check endpoints\n\nTests the health, readiness, and liveness endpoints.\nCritical for Render deployment verification.",
+    "classes": [
+      "TestHealthEndpoints",
+      "TestRootEndpoint",
+      "TestHealthIntegration"
+    ],
+    "functions": [
+      "client"
+    ],
+    "imports": [
+      "pytest",
+      "fastapi.testclient",
+      "backend.main",
+      "time"
+    ],
+    "exports": [
+      "TestHealthEndpoints",
+      "TestRootEndpoint",
+      "TestHealthIntegration",
+      "client"
+    ],
+    "complexity_score": 15
   },
   "tests/test_experience.py": {
     "path": "/home/user/levelith-2/tests/test_experience.py",
@@ -244,6 +516,37 @@
     ],
     "complexity_score": 39
   },
+  "tests/test_system.py": {
+    "path": "/home/user/levelith-2/tests/test_system.py",
+    "docstring": "Levelith-2 Internal Test System\n\nThis module provides a comprehensive testing framework for all code changes.\nEvery AI-assisted change MUST include corresponding tests.\n\nGolden Rule: No code ships without tests.",
+    "classes": [
+      "TestRequirement",
+      "TestGenerator",
+      "TestValidator"
+    ],
+    "functions": [
+      "enforce_test_requirements",
+      "main"
+    ],
+    "imports": [
+      "pytest",
+      "unittest",
+      "typing",
+      "pathlib",
+      "json",
+      "ast",
+      "subprocess",
+      "sys"
+    ],
+    "exports": [
+      "TestRequirement",
+      "TestGenerator",
+      "TestValidator",
+      "enforce_test_requirements",
+      "main"
+    ],
+    "complexity_score": 21
+  },
   "tests/test_user.py": {
     "path": "/home/user/levelith-2/tests/test_user.py",
     "docstring": "Unit tests for user.py\n\nComprehensive tests for User model and authentication functions.\nTests follow the 80% minimum coverage requirement from AI_AGENT_GOLDEN_RULES.md",
@@ -276,36 +579,45 @@
     "exports": [],
     "complexity_score": 0
   },
-  "tests/test_system.py": {
-    "path": "/home/user/levelith-2/tests/test_system.py",
-    "docstring": "Levelith-2 Internal Test System\n\nThis module provides a comprehensive testing framework for all code changes.\nEvery AI-assisted change MUST include corresponding tests.\n\nGolden Rule: No code ships without tests.",
+  "tests/test_api_experiences.py": {
+    "path": "/home/user/levelith-2/tests/test_api_experiences.py",
+    "docstring": "Unit tests for experience API endpoints\n\nComprehensive tests for experience CRUD operations via REST API.",
     "classes": [
-      "TestRequirement",
-      "TestGenerator",
-      "TestValidator"
+      "TestExperienceCreation",
+      "TestExperienceRetrieval",
+      "TestExperienceUpdate",
+      "TestExperienceDeletion",
+      "TestExperienceSummary"
     ],
     "functions": [
-      "enforce_test_requirements",
-      "main"
+      "override_get_db",
+      "setup_database",
+      "client",
+      "test_user",
+      "sample_experience_data"
     ],
     "imports": [
       "pytest",
-      "unittest",
-      "typing",
-      "pathlib",
-      "json",
-      "ast",
-      "subprocess",
-      "sys"
+      "fastapi.testclient",
+      "sqlalchemy",
+      "sqlalchemy.orm",
+      "backend.database",
+      "backend.main",
+      "backend.models.experience"
     ],
     "exports": [
-      "TestRequirement",
-      "TestGenerator",
-      "TestValidator",
-      "enforce_test_requirements",
-      "main"
+      "TestExperienceCreation",
+      "TestExperienceRetrieval",
+      "TestExperienceUpdate",
+      "TestExperienceDeletion",
+      "TestExperienceSummary",
+      "override_get_db",
+      "setup_database",
+      "client",
+      "test_user",
+      "sample_experience_data"
     ],
-    "complexity_score": 21
+    "complexity_score": 32
   },
   "tests/test_test_system.py": {
     "path": "/home/user/levelith-2/tests/test_test_system.py",
@@ -333,5 +645,42 @@
       "TestTestSystemIntegration"
     ],
     "complexity_score": 19
+  },
+  "tests/test_api_users.py": {
+    "path": "/home/user/levelith-2/tests/test_api_users.py",
+    "docstring": "Unit tests for user API endpoints\n\nComprehensive tests for user CRUD operations via REST API.",
+    "classes": [
+      "TestUserCreation",
+      "TestUserRetrieval",
+      "TestUserUpdate",
+      "TestUserDeletion",
+      "TestUserLogin"
+    ],
+    "functions": [
+      "override_get_db",
+      "setup_database",
+      "client",
+      "sample_user_data"
+    ],
+    "imports": [
+      "pytest",
+      "fastapi.testclient",
+      "sqlalchemy",
+      "sqlalchemy.orm",
+      "backend.database",
+      "backend.main"
+    ],
+    "exports": [
+      "TestUserCreation",
+      "TestUserRetrieval",
+      "TestUserUpdate",
+      "TestUserDeletion",
+      "TestUserLogin",
+      "override_get_db",
+      "setup_database",
+      "client",
+      "sample_user_data"
+    ],
+    "complexity_score": 29
   }
 }

@@ -4,6 +4,41 @@
 
 This repository is designed with **you** as a first-class citizen. We provide two complementary navigation systems to help you efficiently explore and understand the codebase.
 
+## 🚀 Backend Status: READY FOR RENDER DEPLOYMENT
+
+The Levelith backend is a **production-ready FastAPI application** configured for Render Web Service deployment.
+
+### Backend Stack
+- **Framework**: FastAPI 0.109.0
+- **Database**: PostgreSQL (Render Managed)
+- **ORM**: SQLAlchemy 2.0.25
+- **Validation**: Pydantic 2.5.3
+- **Server**: Uvicorn + Gunicorn
+- **Deployment**: Render Web Service (Infrastructure as Code via `render.yaml`)
+
+### Key Backend Files to Understand
+- `backend/main.py` - FastAPI application entry point (backend/main.py:1)
+- `backend/config.py` - Environment configuration with Pydantic Settings (backend/config.py:1)
+- `backend/database.py` - SQLAlchemy database session management (backend/database.py:1)
+- `backend/models/db_models.py` - SQLAlchemy ORM models for User and Experience (backend/models/db_models.py:1)
+- `backend/schemas/` - Pydantic request/response validation schemas
+- `backend/api/routes/` - API endpoint handlers (health, users, experiences)
+- `render.yaml` - Render deployment configuration (Infrastructure as Code)
+- `DEPLOYMENT.md` - Complete deployment guide with step-by-step instructions
+
+### API Documentation (Local Development)
+When running locally, access:
+- **Swagger UI**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
+- **Health Check**: http://localhost:8000/health
+
+### Deployment to Render
+See `DEPLOYMENT.md` for complete guide. Quick deploy:
+1. Push code to GitHub
+2. Connect to Render
+3. Use Blueprint deployment with `render.yaml`
+4. Render auto-creates PostgreSQL database and web service
+
 **Quick Start:** Jump to [Intelligent AI Agent Tooling](#intelligent-ai-agent-tooling-recommended) (Recommended)
 
 ## Navigation Systems Overview

@@ -12,6 +12,88 @@ Levelith-2 implements advanced AI agent tooling for automated codebase explorati
 2. **Comprehensive Test System** - Enforced test-first development with 80% minimum coverage
 3. **Golden Rules Framework** - Automated quality, security, and scalability enforcement
 
+## Backend API (FastAPI)
+
+The Levelith backend is a modern REST API built with FastAPI, SQLAlchemy, and PostgreSQL.
+
+### Features
+
+- ✅ **FastAPI** - Modern, fast Python web framework
+- ✅ **SQLAlchemy ORM** - Powerful database ORM
+- ✅ **PostgreSQL** - Production-ready database
+- ✅ **Pydantic Validation** - Request/response validation
+- ✅ **Health Checks** - Monitoring endpoints for Render
+- ✅ **Auto-generated API Docs** - OpenAPI/Swagger UI
+- ✅ **User Management** - CRUD operations for users
+- ✅ **Experience Tracking** - All 9 experience types
+- ✅ **Comprehensive Tests** - 80%+ test coverage
+
+### Quick Start (Local Development)
+
+```bash
+# Navigate to backend
+cd backend
+
+# Install dependencies
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+
+# Set up environment
+cp .env.example .env
+# Edit .env with your configuration
+
+# Run database migrations (auto-initialized on startup)
+python main.py  # This will create tables
+
+# Run development server
+uvicorn main:app --reload
+
+# API will be available at:
+# - Main API: http://localhost:8000
+# - Interactive docs: http://localhost:8000/docs
+# - Health check: http://localhost:8000/health
+```
+
+### API Endpoints
+
+#### Health & Monitoring
+- `GET /health` - Basic health check
+- `GET /health/ready` - Readiness probe (checks database)
+- `GET /health/live` - Liveness probe
+- `GET /health/details` - Detailed health information
+
+#### Users
+- `POST /api/v1/users/` - Create new user
+- `GET /api/v1/users/{id}` - Get user by ID
+- `GET /api/v1/users/` - List users (paginated)
+- `PATCH /api/v1/users/{id}` - Update user
+- `DELETE /api/v1/users/{id}` - Delete user
+- `POST /api/v1/users/login` - User authentication
+
+#### Experiences
+- `POST /api/v1/experiences/` - Create experience
+- `GET /api/v1/experiences/{id}` - Get experience by ID
+- `GET /api/v1/experiences/` - List experiences (filtered, paginated)
+- `PATCH /api/v1/experiences/{id}` - Update experience
+- `DELETE /api/v1/experiences/{id}` - Delete experience
+- `GET /api/v1/experiences/user/{user_id}/summary` - Get user's experience summary
+
+### Deployment to Render
+
+See **[DEPLOYMENT.md](DEPLOYMENT.md)** for comprehensive deployment guide.
+
+**Quick Deploy:**
+
+1. Push code to GitHub
+2. Connect repository to Render
+3. Use Blueprint deployment with `render.yaml`
+4. Render automatically creates:
+   - PostgreSQL database
+   - Web service
+   - Environment variables
+
+**Service URL:** `https://levelith-backend.onrender.com`
+
 ## Quick Start
 
 ### For AI Agents
@@ -188,18 +270,46 @@ levelith-2/
 ├── claude.md                       # AI agent navigation guide
 ├── COMPARISON.md                   # Approach comparisons
 ├── NAVIGATION.md                   # Auto-generated navigation guide
+├── DEPLOYMENT.md                   # 📦 Render deployment guide
 │
 ├── .aiagent.json                   # AI agent configuration
 ├── .aiagent-index.json             # Auto-generated codebase index
 ├── pytest.ini                      # Test configuration
 ├── .commitlintrc.json              # Commit message standards
+├── render.yaml                     # 🚀 Render deployment configuration
+│
+├── backend/                        # 🔧 FastAPI Backend
+│   ├── main.py                     # FastAPI application entry point
+│   ├── config.py                   # Environment configuration
+│   ├── database.py                 # Database setup and session management
+│   ├── requirements.txt            # Production dependencies
+│   ├── requirements-dev.txt        # Development dependencies
+│   ├── Procfile                    # Render start command
+│   ├── .env.example                # Environment variables template
+│   ├── models/                     # Domain and ORM models
+│   │   ├── user.py                 # User domain model
+│   │   ├── experience.py           # Experience domain models
+│   │   └── db_models.py            # SQLAlchemy ORM models
+│   ├── schemas/                    # Pydantic API schemas
+│   │   ├── user.py                 # User request/response schemas
+│   │   └── experience.py           # Experience request/response schemas
+│   ├── api/                        # API routes
+│   │   └── routes/                 # Route handlers
+│   │       ├── health.py           # Health check endpoints
+│   │       ├── users.py            # User management API
+│   │       └── experiences.py      # Experience management API
+│   ├── services/                   # Business logic layer
+│   └── repositories/               # Data access layer
 │
 ├── tests/                          # Comprehensive test suite
 │   ├── __init__.py                 # Test package initialization
 │   ├── test_system.py              # Test enforcement and generation
-│   ├── unit/                       # Unit tests
-│   ├── integration/                # Integration tests
-│   └── e2e/                        # End-to-end tests
+│   ├── test_api_health.py          # Health endpoint tests
+│   ├── test_api_users.py           # User API tests
+│   ├── test_api_experiences.py     # Experience API tests
+│   ├── test_user.py                # User domain model tests
+│   ├── test_experience.py          # Experience domain model tests
+│   └── test_test_system.py         # Test system tests
 │
 ├── dev/                            # Development tools
 │   ├── aiagent_navigator.py        # Intelligent navigation system

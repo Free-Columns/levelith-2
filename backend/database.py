@@ -1,0 +1,167 @@
+"""
+Database Configuration and Session Management
+
+Provides SQLAlchemy engine, session management, and base model.
+Supports both sync and async database operations.
+"""
+
+from contextlib import contextmanager
+from typing import Generator
+
+from sqlalchemy import create_engine, event, Engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.pool import QueuePool
+
+from backend.config import settings
+
+# Create SQLAlchemy engine
+engine = create_engine(
+    settings.database_url,
+    poolclass=QueuePool,
+    pool_size=settings.database_pool_size,
+    max_overflow=settings.database_max_overflow,
+    pool_pre_ping=True,  # Verify connections before using
+    echo=settings.debug,  # Log SQL in debug mode
+)
+
+# Create session factory
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
+
+# Base class for all models
+Base = declarative_base()
+
+
+@event.listens_for(Engine, "connect")
+def set_sqlite_pragma(dbapi_conn, connection_record):
+    """Set SQLite pragmas if using SQLite (for local development)."""
+    if "sqlite" in settings.database_url:
+        cursor = dbapi_conn.cursor()
+        cursor.execute("PRAGMA foreign_keys=ON")
+        cursor.close()
+
+
+def get_db() -> Generator[Session, None, None]:
+    """
+    Dependency for getting database session.
+
+    Usage:
+        @app.get("/users")
+        def get_users(db: Session = Depends(get_db)):
+            return db.query(User).all()
+
+    Yields:
+        Database session that is automatically closed after use.
+    """
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+@contextmanager
+def get_db_context() -> Generator[Session, None, None]:
+    """
+    Context manager for database session.
+
+    Usage:
+        with get_db_context() as db:
+            user = db.query(User).first()
+
+    Yields:
+        Database session that is automatically closed.
+    """
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+def init_db() -> None:
+    """
+    Initialize database by creating all tables.
+
+    Should be called on application startup.
+    Creates all tables defined in models that inherit from Base.
+    """
+    # Import all models here to ensure they are registered with Base
+    from backend.models import user, experience  # noqa: F401
+
+    Base.metadata.create_all(bind=engine)
+
+
+def drop_db() -> None:
+    """
+    Drop all database tables.
+
+    WARNING: This will destroy all data!
+    Should only be used in development/testing.
+    """
+    if settings.is_production:
+        raise RuntimeError("Cannot drop database in production!")
+
+    Base.metadata.drop_all(bind=engine)
+
+
+def reset_db() -> None:
+    """
+    Reset database by dropping and recreating all tables.
+
+    WARNING: This will destroy all data!
+    Should only be used in development/testing.
+    """
+    if settings.is_production:
+        raise RuntimeError("Cannot reset database in production!")
+
+    drop_db()
+    init_db()
+
+
+class DatabaseHealthCheck:
+    """Database health check utility."""
+
+    @staticmethod
+    def check() -> bool:
+        """
+        Check if database connection is healthy.
+
+        Returns:
+            True if database is accessible, False otherwise.
+        """
+        try:
+            with get_db_context() as db:
+                db.execute("SELECT 1")
+            return True
+        except Exception:
+            return False
+
+    @staticmethod
+    def get_info() -> dict:
+        """
+        Get database connection information.
+
+        Returns:
+            Dictionary with database status information.
+        """
+        try:
+            with get_db_context() as db:
+                result = db.execute("SELECT version()")
+                version = result.scalar()
+
+                return {
+                    "status": "healthy",
+                    "database": settings.database_url.split("@")[-1] if "@" in settings.database_url else "unknown",
+                    "version": version,
+                    "pool_size": settings.database_pool_size,
+                }
+        except Exception as e:
+            return {
+                "status": "unhealthy",
+                "error": str(e)
+            }

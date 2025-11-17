@@ -1,7 +1,7 @@
 # MANIFEST.md - Repository Manifestation File
 
 **Last Updated:** 2025-01-17
-**Version:** 1.0
+**Version:** 2.0
 **Maintained By:** Project Team (Human-curated)
 
 ---
@@ -16,30 +16,57 @@ This manifestation file provides **human-curated, broad-scope context** that AI 
 
 ## Project Vision & Goals
 
-### What is Levelith-2?
+### What is Levelith?
 
-Levelith-2 is a reimagining of software development with **AI agents as first-class citizens**. The project demonstrates how to build a scalable, maintainable codebase where AI and human developers collaborate seamlessly through:
+**Levelith** is a **social-resume gamification web application** that transforms professional experience tracking into an engaging, interactive platform. Built with AI agents as first-class development citizens, Levelith demonstrates how modern development practices can create scalable, maintainable applications.
 
-1. **Intelligent tooling** that AI agents can query and understand
-2. **Test-driven development** enforced at every level
-3. **Golden rules** that ensure quality, security, and scalability
-4. **Self-documenting architecture** through docstrings and type hints
+**Core Product:**
+- Social resume platform with gamification elements
+- Experience tracking across Education, Workplace, and Skills
+- NAICS-based professional categorization
+- Mobile-first responsive design
+- Real-time social interactions
+
+**Technical Innovation:**
+- AI-first development methodology
+- Test-driven architecture with 80% minimum coverage
+- Automated quality and security enforcement
+- Self-documenting codebase
+- Intelligent navigation for AI agents
+
+### Application Overview
+
+**Deployment:**
+- **Hosting:** Render.com
+- **Domain:** levlith.online
+- **Environment:** Production-ready cloud infrastructure
+
+**Platforms:**
+- ✅ Desktop web browsers (Chrome, Firefox, Safari, Edge)
+- ✅ Mobile web browsers (responsive design)
+- ✅ Mobile app (iOS and Android)
+
+**Access:**
+- Public website: https://levlith.online
+- Mobile app: Available via app stores (future)
 
 ### Primary Goals
 
-1. **Prove AI-first development is viable** - Show that AI agents can work effectively with proper guardrails
-2. **Establish best practices** - Create patterns others can follow
+1. **Create engaging user experience** - Gamify professional development and experience tracking
+2. **Enable social professional networking** - Connect users based on experiences and skills
 3. **Maintain high quality** - Never sacrifice quality for speed
-4. **Enable scalability** - Design decisions that support growth
-5. **Foster collaboration** - AI and humans working together, not competing
+4. **Enable scalability** - Support growing user base and feature set
+5. **Demonstrate AI-first development** - Show effective AI-human collaboration
+6. **Foster professional growth** - Help users track and showcase their journey
 
 ### Non-Goals
 
-- ❌ Replace human developers
+- ❌ Replace LinkedIn or traditional resume platforms
 - ❌ Generate code without tests
 - ❌ Sacrifice security for convenience
 - ❌ Create technical debt
 - ❌ Build features without clear requirements
+- ❌ Ignore accessibility standards
 
 ---
 
@@ -97,6 +124,21 @@ Levelith-2 is a reimagining of software development with **AI agents as first-cl
 **Trade-offs:** Larger repository size, potential for coupling
 **Status:** 🚧 In Progress
 
+**Decision:** NAICS code required for all experiences
+**Rationale:** Standardized industry classification enables professional categorization, filtering, and analytics
+**Trade-offs:** Requires NAICS lookup/validation, uses 123456 as fallback "GENERAL" code
+**Status:** 🚧 In Progress
+
+**Decision:** Single ONETRUTH branding configuration
+**Rationale:** Centralized branding ensures consistency across all components, simplifies theme updates
+**Trade-offs:** All components must reference ONETRUTH, potential single point of failure
+**Status:** 🚧 In Progress
+
+**Decision:** Deploy on Render.com
+**Rationale:** Simple deployment, auto-scaling, integrated CI/CD, cost-effective for MVP
+**Trade-offs:** Vendor lock-in potential, migration complexity if needed later
+**Status:** 🚧 In Progress
+
 ---
 
 ## Technology Stack
@@ -107,16 +149,27 @@ Levelith-2 is a reimagining of software development with **AI agents as first-cl
 |-----------|-----------|---------|-----------|
 | **Backend** | Python | 3.11+ | AI agent familiarity, rich ecosystem |
 | **Frontend** | React + TypeScript | 18.x / 5.x | Type safety, component model |
+| **Hosting** | Render.com | N/A | Simple deployment, auto-scaling, integrated |
+| **Domain** | levlith.online | N/A | Production domain |
 | **Testing** | Pytest | Latest | Powerful, flexible, good AI support |
 | **CI/CD** | GitHub Actions | N/A | Integrated, free for public repos |
 | **Documentation** | Markdown | N/A | Simple, version-controlled |
+| **Branding** | ONETRUTH config | Custom | Single source of truth for all branding |
+
+### Planned/In Progress
+
+- **Database:** PostgreSQL - ACID compliance, relational model for users/experiences
+- **Caching:** Redis - Session management, performance optimization
+- **API:** FastAPI - Modern Python API framework with auto-docs
+- **Authentication:** JWT tokens - Stateless auth for scalability
+- **Mobile App:** React Native - Code sharing with web frontend
 
 ### Future Considerations
 
-- **Database:** PostgreSQL (when needed) - ACID compliance, rich features
-- **Caching:** Redis (when needed) - Fast, simple, proven
-- **API:** FastAPI (when needed) - Modern, async, auto-docs
-- **Deployment:** Docker + Kubernetes (when scaling) - Industry standard
+- **Search:** Elasticsearch - Fast experience/skill search
+- **Analytics:** Custom dashboard - User engagement metrics
+- **Deployment:** Docker + Kubernetes (when scaling beyond Render)
+- **CDN:** Cloudflare - Global content delivery
 
 ---
 
@@ -295,31 +348,248 @@ class TestUserAuthentication:
 
 ### Key Concepts
 
-**Context Node (Legacy):** Static markdown files providing metadata. **Deprecated** in favor of intelligent tooling.
+**Experience:** The core data model - represents any trackable professional/educational activity (Education, Workplace, Skills)
 
-**AI Agent Navigator:** Dynamic code analysis tool that extracts structure from actual code.
+**NAICS Code:** North American Industry Classification System code required for all experiences. Fallback: 123456 for "GENERAL"
 
-**Golden Rules:** 10 mandatory rules all AI agents must follow. Non-negotiable.
+**ONETRUTH:** Single authoritative branding configuration file that all components must reference for consistent theming
 
-**Test System:** Comprehensive testing framework with auto-generation and enforcement.
+**Gamification:** Point systems, achievements, levels based on experience tracking and social engagement
+
+**Social Resume:** Public-facing profile showcasing user's experiences in an interactive, gamified format
+
+### User System
+
+**Authentication:**
+- Username + password login (traditional authentication)
+- JWT tokens for session management
+- Secure password hashing (bcrypt)
+
+**User Model:**
+```python
+class User:
+    """
+    User object stored in database.
+
+    Attributes:
+        id: Unique user identifier
+        username: User's chosen username
+        password_hash: Hashed password (never store plain text)
+        email: User's email address
+        experiences: Array of Experience objects
+        created_at: Account creation timestamp
+        profile_data: Additional profile information
+    """
+    id: str
+    username: str
+    password_hash: str
+    email: str
+    experiences: List[Experience]  # Array of experience objects
+    created_at: datetime
+    profile_data: dict
+```
+
+### Experience Model
+
+**Every user has an array of Experience elements.** Experiences come in **three main variants**, each with **three subtypes**:
+
+#### 1. Education Experiences
+
+**Certificate:**
+- Short-term certifications
+- Professional credentials
+- Industry-specific training
+- Example: AWS Certified Developer, Google Analytics Certification
+
+**Degree:**
+- Formal academic degrees
+- University/college programs
+- Example: Bachelor of Science, Master of Business Administration
+
+**Course:**
+- Individual courses or workshops
+- Online learning programs
+- Skill-specific training
+- Example: Introduction to Machine Learning, Advanced SQL
+
+#### 2. Workplace Experiences
+
+**Gig:**
+- Short-term contract work
+- Freelance projects
+- One-off engagements
+- Example: Website redesign project, consulting engagement
+
+**Part-Time:**
+- Regular part-time employment
+- Flexible schedules
+- Secondary employment
+- Example: Retail associate, teaching assistant
+
+**Full-Time:**
+- Primary career positions
+- Standard employment
+- Long-term roles
+- Example: Software Engineer, Marketing Manager
+
+#### 3. Skills Experiences
+
+**Soft Skills:**
+- Interpersonal abilities
+- Communication skills
+- Leadership qualities
+- Example: Public speaking, team collaboration, conflict resolution
+
+**Hard Skills:**
+- Technical abilities
+- Measurable competencies
+- Industry-specific knowledge
+- Example: Python programming, data analysis, graphic design
+
+**Native Skills:**
+- Natural talents
+- Innate abilities
+- Cultural knowledge
+- Language fluencies
+- Example: Bilingual (English/Spanish), artistic ability, musical talent
+
+### NAICS Integration
+
+**CRITICAL REQUIREMENT:** Every Experience entry MUST include a NAICS code.
+
+**What is NAICS?**
+- North American Industry Classification System
+- Standardized industry categorization
+- 6-digit numerical codes
+- Enables professional categorization and filtering
+
+**Implementation Rules:**
+
+```python
+class Experience:
+    """Base experience model"""
+    naics_code: str  # REQUIRED field
+
+    def validate_naics(self):
+        """Validate NAICS code"""
+        if not self.naics_code:
+            self.naics_code = "123456"  # Fallback to GENERAL
+
+        # If valid NAICS not available, use 123456
+        if not is_valid_naics(self.naics_code):
+            self.naics_code = "123456"
+```
+
+**NAICS Code: 123456**
+- Special fallback code
+- Represents "GENERAL" classification
+- Used when specific industry code not available
+- Ensures all experiences have valid NAICS
+
+**Examples:**
+- Software Development: 541511
+- Elementary Schools: 611110
+- Graphic Design: 541430
+- Unknown/General: 123456
+
+### ONETRUTH Branding System
+
+**CRITICAL REQUIREMENT:** All components, logic, and presentation must adhere to ONETRUTH branding configuration.
+
+**What is ONETRUTH?**
+- Single authoritative branding configuration file
+- Contains all theme variables (colors, fonts, spacing)
+- Ensures consistency across entire application
+- Centralized source of truth for design
+
+**Implementation:**
+
+```typescript
+// ONETRUTH.ts - Single source of truth
+export const ONETRUTH = {
+  colors: {
+    primary: "#3498db",
+    secondary: "#2ecc71",
+    accent: "#e74c3c",
+    background: "#ecf0f1",
+    text: "#2c3e50"
+  },
+  fonts: {
+    heading: "Montserrat, sans-serif",
+    body: "Open Sans, sans-serif"
+  },
+  spacing: {
+    small: "8px",
+    medium: "16px",
+    large: "24px"
+  },
+  // ... all branding variables
+};
+
+// All components must import and use ONETRUTH
+import { ONETRUTH } from './ONETRUTH';
+
+function Header() {
+  return (
+    <header style={{ backgroundColor: ONETRUTH.colors.primary }}>
+      <h1 style={{ fontFamily: ONETRUTH.fonts.heading }}>Levelith</h1>
+    </header>
+  );
+}
+```
+
+**Rules:**
+- ✅ Always import branding from ONETRUTH
+- ✅ Never hardcode colors, fonts, or spacing
+- ✅ All UI components reference ONETRUTH
+- ❌ No inline styles with hardcoded values
+- ❌ No CSS variables outside ONETRUTH
+- ❌ No component-specific theme overrides
 
 ### Business Logic Areas
 
-*Note: As project grows, document key business domains here*
+**User Management:**
+- Username/password authentication
+- User profile management
+- Experience CRUD operations
+- Social connections and networking
 
-**Example:**
-- **User Management:** Authentication, authorization, profile management
-- **Data Processing:** ETL pipelines, validation, transformation
-- **API Layer:** REST endpoints, rate limiting, versioning
+**Experience Tracking:**
+- Create/edit experiences (9 types)
+- NAICS code validation and assignment
+- Experience categorization and filtering
+- Timeline visualization
+
+**Gamification:**
+- Points system based on activity
+- Achievements and badges
+- User levels and progression
+- Leaderboards and rankings
+
+**Social Features:**
+- View other users' profiles
+- Connect with professionals
+- Share experiences
+- Comment and engage
+
+**API Layer:**
+- RESTful endpoints for all operations
+- JWT authentication
+- Rate limiting (prevent abuse)
+- Versioning (future compatibility)
 
 ### External Dependencies
 
-*Note: Document critical external services/APIs*
+**Current:**
+- **Render.com:** Application hosting and deployment
+- **NAICS Database:** Industry classification lookup
 
-**Example:**
-- **Authentication:** JWT tokens, bcrypt for hashing
-- **Database:** PostgreSQL (when implemented)
-- **Caching:** Redis (when implemented)
+**Planned:**
+- **JWT Library:** Token-based authentication
+- **PostgreSQL:** User and experience data storage
+- **Redis:** Session caching, performance
+- **Email Service:** User notifications (SendGrid/AWS SES)
+- **File Storage:** User profile images (S3/Cloudinary)
 
 ---
 

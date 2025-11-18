@@ -92,6 +92,7 @@ def init_db() -> None:
     """
     # Import all models here to ensure they are registered with Base
     from backend.models import user, experience  # noqa: F401
+    from backend.models.db_models import NAICSCodeDB  # noqa: F401
 
     Base.metadata.create_all(bind=engine)
 

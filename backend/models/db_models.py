@@ -16,6 +16,7 @@ from sqlalchemy.orm import relationship
 
 from backend.database import Base
 from backend.models.experience import ExperienceCategory, ExperienceType
+from backend.models.naics import NAICSCategory
 
 
 class UserDB(Base):
@@ -96,6 +97,44 @@ class ExperienceDB(Base):
 
     def __repr__(self) -> str:
         return f"<Experience(id={self.id}, type={self.experience_type.value}, title={self.title})>"
+
+
+class NAICSCodeDB(Base):
+    """
+    NAICS Code ORM model for database persistence.
+
+    Maps to 'naics_codes' table in PostgreSQL.
+    Stores the complete NAICS 2022 classification system.
+    """
+
+    __tablename__ = "naics_codes"
+
+    # Primary key - NAICS code (2, 3, 4, or 6 digits)
+    code = Column(String(6), primary_key=True)
+
+    # Core fields
+    title = Column(String(500), nullable=False)
+    description = Column(Text, nullable=True)
+
+    # Hierarchy level (2=sector, 3=subsector, 4=industry_group, 6=national_industry)
+    level = Column(Integer, nullable=False, index=True)
+
+    # Category for filtering
+    category = Column(SQLEnum(NAICSCategory), nullable=False, index=True)
+
+    # Hierarchical relationship
+    parent_code = Column(String(6), nullable=True, index=True)
+
+    # Metadata
+    is_active = Column(Boolean, default=True, nullable=False)
+    year = Column(Integer, default=2022, nullable=False)
+
+    # Timestamps
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
+
+    def __repr__(self) -> str:
+        return f"<NAICSCode(code={self.code}, title={self.title})>"
 
 
 class CertificateDB(ExperienceDB):

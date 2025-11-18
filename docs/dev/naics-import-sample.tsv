@@ -1,0 +1,9 @@
+code	title	description	category	parent_code	is_active	year
+11	Agriculture, Forestry, Fishing and Hunting	Establishments primarily engaged in growing crops, raising animals, harvesting timber	agriculture		TRUE	2022
+111	Crop Production	Establishments engaged in growing crops	agriculture	11	TRUE	2022
+1111	Oilseed and Grain Farming	Establishments engaged in growing oilseed and grain crops	agriculture	111	TRUE	2022
+111110	Soybean Farming	Establishments primarily engaged in growing soybeans	agriculture	1111	TRUE	2022
+54	Professional, Scientific, and Technical Services	Establishments that specialize in performing professional, scientific, and technical activities	professional_services		TRUE	2022
+541	Professional, Scientific, and Technical Services	Establishments that specialize in performing professional, scientific, and technical activities	professional_services	54	TRUE	2022
+5415	Computer Systems Design and Related Services	Establishments providing expertise in the field of information technologies	technology	541	TRUE	2022
+541511	Custom Computer Programming Services	Establishments primarily engaged in writing, modifying, testing software	technology	5415	TRUE	2022

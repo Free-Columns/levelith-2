@@ -149,6 +149,38 @@ The backend is fully configured for deployment to Render as a Web Service (no bl
 - Pydantic 2.10.4 (upgraded for Python 3.13 compatibility with pre-built wheels)
 - All dependencies have pre-built wheels for fast deployment
 
+## Development Tools
+
+### 🎨 Color Visualizer
+
+An interactive standalone HTML tool for visualizing and editing the ONETRUTH color configuration.
+
+**Location:** `tools/color-visualizer.html`
+
+**Features:**
+- ✅ **48 Color Swatches** - View all ONETRUTH colors organized by category
+- ✅ **Triple Control System** - RGB sliders, HSL sliders, and Hex input (all synchronized)
+- ✅ **Real-time Updates** - See color changes instantly as you adjust values
+- ✅ **Export Options** - Download .ts file or copy to clipboard
+- ✅ **Zero Dependencies** - Standalone HTML file, no installation required
+
+**Quick Start:**
+```bash
+# Open the tool (from project root)
+open tools/color-visualizer.html
+
+# Or double-click the file in your file browser
+```
+
+**Color Categories:**
+- Main Colors (26): Primary, secondary, accent, backgrounds, text, status, borders
+- Gamification Levels (6): Beginner through legend progression
+- Gamification Achievements (5): Bronze, silver, gold, platinum, diamond
+- Gamification Progress (3): Low, medium, high progress states
+- NAICS Industries (8): Industry-specific color coding
+
+**Documentation:** See `tools/README.md` for complete usage guide and testing checklist.
+
 ## Quick Start
 
 ### For AI Agents
@@ -411,6 +443,10 @@ levelith-2/
 │   ├── aiagent_navigator.py        # Intelligent navigation system
 │   ├── example_ai_agent_usage.py   # Demo and examples
 │   └── AI_AGENT_TOOLING.md        # Technical documentation
+│
+├── tools/                          # 🎨 Standalone development tools
+│   ├── color-visualizer.html       # Interactive ONETRUTH color editor
+│   └── README.md                   # Tools documentation and usage
 │
 ├── .github/workflows/              # CI/CD pipelines
 │   ├── enforce-golden-rules.yml    # Golden rules enforcement

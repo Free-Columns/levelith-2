@@ -56,6 +56,38 @@ See `RENDER_DEPLOYMENT.md` for complete step-by-step guide. Quick deploy:
 
 **Quick Start:** Jump to [Intelligent AI Agent Tooling](#intelligent-ai-agent-tooling-recommended) (Recommended)
 
+## 🎨 Development Tools
+
+### Color Visualizer
+
+**Location:** `tools/color-visualizer.html`
+
+An interactive standalone HTML tool for visualizing and editing the ONETRUTH color configuration (frontend/src/config/ONETRUTH.ts).
+
+**Features:**
+- **48 Color Swatches** - All ONETRUTH colors organized by category
+- **Triple Control System** - RGB sliders, HSL sliders, and Hex input (all synchronized)
+- **Real-time Updates** - See changes instantly
+- **Export Options** - Download .ts file or copy to clipboard
+- **Zero Dependencies** - Standalone HTML file
+
+**Quick Start:**
+```bash
+# Open the tool
+open tools/color-visualizer.html
+
+# Or double-click in file browser
+```
+
+**Color Categories:**
+- Main Colors (26): Primary, secondary, accent, backgrounds, text, status, borders
+- Gamification Levels (6): Beginner through legend
+- Gamification Achievements (5): Bronze through diamond
+- Gamification Progress (3): Low, medium, high
+- NAICS Industries (8): Industry-specific colors
+
+**Documentation:** See `tools/README.md` for complete usage guide.
+
 ## Navigation Systems Overview
 
 | System | Type | Best For | Maintenance |

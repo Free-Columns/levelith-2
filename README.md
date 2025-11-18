@@ -134,7 +134,7 @@ The backend is fully configured for deployment to Render as a Web Service (no bl
    - Wait ~3-5 minutes for deployment
    - Test: `https://your-service.onrender.com/health`
 
-**Complete Guide:** See **[RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md)** for detailed step-by-step instructions.
+**Complete Guide:** See **[RENDER_DEPLOYMENT.md](docs/deployment/RENDER_DEPLOYMENT.md)** for detailed step-by-step instructions.
 
 **Service URL:** `https://levelith-backend.onrender.com`
 
@@ -187,15 +187,15 @@ open tools/color-visualizer.html
 
 **⚠️  CRITICAL: Read these files FIRST before making ANY changes!**
 
-1. **[MANIFEST.md](MANIFEST.md)** - Project vision, goals, architecture, conventions (Human-curated context)
-2. **[AI_AGENT_GOLDEN_RULES.md](AI_AGENT_GOLDEN_RULES.md)** - 10 mandatory rules for all AI agents
+1. **[MANIFEST.md](docs/core/MANIFEST.md)** - Project vision, goals, architecture, conventions (Human-curated context)
+2. **[AI_AGENT_GOLDEN_RULES.md](docs/core/AI_AGENT_GOLDEN_RULES.md)** - 10 mandatory rules for all AI agents
 
 ```bash
 # 1. Read project manifest for broad context (FIRST TIME)
-cat MANIFEST.md
+cat docs/core/MANIFEST.md
 
 # 2. Read the golden rules (MANDATORY)
-cat AI_AGENT_GOLDEN_RULES.md
+cat docs/core/AI_AGENT_GOLDEN_RULES.md
 
 # 3. Get 30-second quickstart overview (NEW v2.0!)
 python dev/aiagent_navigator.py quickstart
@@ -225,10 +225,11 @@ python tests/test_system.py enforce
 ```
 
 **Essential Reading (in order):**
-1. [MANIFEST.md](MANIFEST.md) - **START HERE** - Project context and goals
-2. [AI_AGENT_GOLDEN_RULES.md](AI_AGENT_GOLDEN_RULES.md) - **MANDATORY** rules
-3. [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md) - **v2.0** Complete operating guide with interactive learning
-4. [claude.md](claude.md) - Navigation system overview
+1. [MANIFEST.md](docs/core/MANIFEST.md) - **START HERE** - Project context and goals
+2. [AI_AGENT_GOLDEN_RULES.md](docs/core/AI_AGENT_GOLDEN_RULES.md) - **MANDATORY** rules
+3. [AI_AGENT_GUIDE.md](docs/core/AI_AGENT_GUIDE.md) - **v2.0** Complete operating guide with interactive learning
+4. [claude_navigation.md](docs/core/claude_navigation.md) - Navigation system overview
+5. [Documentation Index](docs/README.md) - **Complete documentation map**
 
 ### For Developers
 
@@ -278,9 +279,9 @@ The primary navigation system uses **dynamic code analysis** rather than static 
 - CI/CD ready
 
 **Documentation:**
-- [dev/AI_AGENT_TOOLING.md](dev/AI_AGENT_TOOLING.md) - Complete technical documentation
-- [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md) - Learning and operating guide for AI agents
-- [COMPARISON.md](COMPARISON.md) - Comparison with alternative approaches
+- [AI_AGENT_TOOLING.md](docs/dev/AI_AGENT_TOOLING.md) - Complete technical documentation
+- [AI_AGENT_GUIDE.md](docs/core/AI_AGENT_GUIDE.md) - Learning and operating guide for AI agents
+- [COMPARISON.md](docs/architecture/COMPARISON.md) - Comparison with alternative approaches
 
 ### Comprehensive Test System
 
@@ -326,7 +327,7 @@ python tests/test_system.py enforce
 9. Error Handling and Logging
 10. Version Control Hygiene
 
-**See**: [AI_AGENT_GOLDEN_RULES.md](AI_AGENT_GOLDEN_RULES.md) for complete details.
+**See**: [AI_AGENT_GOLDEN_RULES.md](docs/core/AI_AGENT_GOLDEN_RULES.md) for complete details.
 
 ## Key Features
 
@@ -367,13 +368,29 @@ python tests/test_system.py enforce
 ```
 levelith-2/
 ├── README.md                       # This file - Entry point for humans
-├── MANIFEST.md                     # ⚠️  Project manifest - Entry point for AI agents
-├── AI_AGENT_GOLDEN_RULES.md       # ⚠️  MANDATORY rules for AI agents
-├── AI_AGENT_GUIDE.md              # Complete AI agent operating guide
-├── claude.md                       # AI agent navigation guide
-├── COMPARISON.md                   # Approach comparisons
-├── NAVIGATION.md                   # Auto-generated navigation guide
-├── DEPLOYMENT.md                   # 📦 Render deployment guide
+│
+├── docs/                           # 📚 All documentation (organized by category)
+│   ├── README.md                   # Documentation index
+│   ├── core/                       # Core project documentation
+│   │   ├── MANIFEST.md             # ⚠️  Project manifest - START HERE for AI agents
+│   │   ├── AI_AGENT_GOLDEN_RULES.md # ⚠️  MANDATORY rules for all AI agents
+│   │   ├── AI_AGENT_GUIDE.md       # Complete AI agent operating guide v2.0
+│   │   └── claude_navigation.md    # Navigation system overview
+│   ├── api/                        # API documentation
+│   │   └── API_DOCUMENTATION.md    # Complete API reference
+│   ├── backend/                    # Backend documentation
+│   │   └── NAICS_EXPANSION_SUMMARY.md # NAICS implementation details
+│   ├── frontend/                   # Frontend documentation (planned)
+│   ├── dev/                        # Development tools documentation
+│   │   ├── AI_AGENT_TOOLING.md     # AI navigation technical docs
+│   │   ├── NAVIGATION.md           # Auto-generated codebase map
+│   │   ├── TEST_REPORT.md          # Test coverage reports
+│   │   └── COMPREHENSIVE_TODO_REPORT.md # Complete TODO analysis
+│   ├── deployment/                 # Deployment documentation
+│   │   ├── RENDER_DEPLOYMENT.md    # Render.com deployment guide
+│   │   └── DEPLOYMENT.md           # General deployment docs
+│   └── architecture/               # Architecture documentation
+│       └── COMPARISON.md           # Approach comparisons
 │
 ├── .aiagent.json                   # AI agent configuration
 ├── .aiagent-index.json             # Auto-generated codebase index
@@ -405,7 +422,6 @@ levelith-2/
 │   └── repositories/               # Data access layer
 │
 ├── backend/                        # ✅ Backend application (Python)
-│   ├── API_DOCUMENTATION.md        # ✅ Comprehensive API design document
 │   ├── models/                     # ✅ Domain models (User, Experience + 9 subtypes)
 │   │   ├── __init__.py             # Model exports
 │   │   ├── user.py                 # User model with authentication
@@ -442,19 +458,17 @@ levelith-2/
 ├── dev/                            # Development tools
 │   ├── aiagent_navigator.py        # Intelligent navigation system
 │   ├── example_ai_agent_usage.py   # Demo and examples
-│   └── AI_AGENT_TOOLING.md        # Technical documentation
+│   └── dev-frontend/               # Admin dashboard (development)
 │
 ├── tools/                          # 🎨 Standalone development tools
 │   ├── color-visualizer.html       # Interactive ONETRUTH color editor
 │   └── README.md                   # Tools documentation and usage
 │
-├── .github/workflows/              # CI/CD pipelines
-│   ├── enforce-golden-rules.yml    # Golden rules enforcement
-│   ├── main-ci.yml                 # Main CI/CD pipeline
-│   ├── frontend-ci.yml             # Frontend tests and builds
-│   └── backend-ci.yml              # Backend tests and builds
-│
-└── docs/                           # Additional documentation
+└── .github/workflows/              # CI/CD pipelines
+    ├── enforce-golden-rules.yml    # Golden rules enforcement
+    ├── main-ci.yml                 # Main CI/CD pipeline
+    ├── frontend-ci.yml             # Frontend tests and builds
+    └── backend-ci.yml              # Backend tests and builds
 ```
 
 ### Backend Architecture
@@ -486,8 +500,10 @@ The backend follows a layered architecture pattern:
 - ✅ Service layer for business logic encapsulation
 - ✅ NAICS code validation and fallback (123456 for GENERAL)
 - ✅ Comprehensive test coverage for all layers
-- 🚧 API endpoints (FastAPI) - to be implemented
-- 🚧 Database integration (PostgreSQL) - to be implemented
+- ✅ API endpoints (FastAPI) - implemented, needs JWT tokens
+- 🚧 Database integration (PostgreSQL) - configured but using in-memory storage
+
+**See:** [COMPREHENSIVE_TODO_REPORT.md](docs/dev/COMPREHENSIVE_TODO_REPORT.md) for complete analysis and action plan
 
 ## Usage Examples
 
@@ -541,14 +557,17 @@ python dev/example_ai_agent_usage.py
 
 ### For AI Agents
 
-- **[AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md)** - Start here! Complete learning and operating guide
-- **[claude.md](claude.md)** - Navigation system overview
-- **[NAVIGATION.md](NAVIGATION.md)** - Auto-generated codebase map
+- **[Documentation Index](docs/README.md)** - Complete documentation map
+- **[AI_AGENT_GUIDE.md](docs/core/AI_AGENT_GUIDE.md)** - Start here! Complete learning and operating guide
+- **[claude_navigation.md](docs/core/claude_navigation.md)** - Navigation system overview
+- **[NAVIGATION.md](docs/dev/NAVIGATION.md)** - Auto-generated codebase map
+- **[COMPREHENSIVE_TODO_REPORT.md](docs/dev/COMPREHENSIVE_TODO_REPORT.md)** - Complete analysis and action plan
 
 ### For Developers
 
-- **[dev/AI_AGENT_TOOLING.md](dev/AI_AGENT_TOOLING.md)** - Technical documentation
-- **[COMPARISON.md](COMPARISON.md)** - Approach comparison and migration guide
+- **[AI_AGENT_TOOLING.md](docs/dev/AI_AGENT_TOOLING.md)** - Technical documentation
+- **[COMPARISON.md](docs/architecture/COMPARISON.md)** - Approach comparison and migration guide
+- **[API_DOCUMENTATION.md](docs/api/API_DOCUMENTATION.md)** - Complete API reference
 - **[dev/example_ai_agent_usage.py](dev/example_ai_agent_usage.py)** - Working code examples
 
 ## CI/CD Integration
@@ -591,7 +610,7 @@ jobs:
 | **CI/CD** | Requires discipline | Auto-generate |
 | **Accuracy** | Depends on humans | Extracted from code |
 
-**See [COMPARISON.md](COMPARISON.md) for detailed analysis.**
+**See [COMPARISON.md](docs/architecture/COMPARISON.md) for detailed analysis.**
 
 ## Extending to Other Languages
 
@@ -636,6 +655,8 @@ Created as part of the Levelith project, reimagining software development with A
 
 ---
 
-**For AI Agents**: Start with [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md) for complete operating instructions.
+**For AI Agents**: Start with [AI_AGENT_GUIDE.md](docs/core/AI_AGENT_GUIDE.md) for complete operating instructions.
 
 **For Developers**: Run `python dev/aiagent_navigator.py guide` to generate a fresh navigation guide.
+
+**Documentation**: See [docs/README.md](docs/README.md) for the complete documentation index.

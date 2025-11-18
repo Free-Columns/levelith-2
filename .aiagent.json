@@ -39,18 +39,20 @@
 
   "exploration_hints": {
     "start_here": [
-      "MANIFEST.md",
-      "AI_AGENT_GOLDEN_RULES.md",
+      "docs/core/MANIFEST.md",
+      "docs/core/AI_AGENT_GOLDEN_RULES.md",
       "README.md",
-      "AI_AGENT_GUIDE.md",
-      "claude.md"
+      "docs/core/AI_AGENT_GUIDE.md",
+      "docs/core/claude_navigation.md",
+      "docs/README.md"
     ],
-    "manifest_file": "MANIFEST.md",
+    "manifest_file": "docs/core/MANIFEST.md",
     "architecture_docs": [
-      "MANIFEST.md",
-      "claude.md",
-      "AI_AGENT_GOLDEN_RULES.md",
-      "dev/AI_AGENT_TOOLING.md"
+      "docs/core/MANIFEST.md",
+      "docs/core/claude_navigation.md",
+      "docs/core/AI_AGENT_GOLDEN_RULES.md",
+      "docs/dev/AI_AGENT_TOOLING.md",
+      "docs/architecture/COMPARISON.md"
     ],
     "dependency_strategy": "follow_imports",
     "max_depth": 3
@@ -112,10 +114,11 @@
   },
 
   "agent_instructions": {
-    "preferred_approach": "Start with MANIFEST.md for broad context, then entry_points, follow imports, prioritize docstrings",
+    "preferred_approach": "Start with docs/core/MANIFEST.md for broad context, then entry_points, follow imports, prioritize docstrings",
     "special_notes": [
-      "⚠️  CRITICAL: Read MANIFEST.md FIRST for project context and goals",
-      "⚠️  CRITICAL: Read AI_AGENT_GOLDEN_RULES.md BEFORE making any changes",
+      "⚠️  CRITICAL: Read docs/core/MANIFEST.md FIRST for project context and goals",
+      "⚠️  CRITICAL: Read docs/core/AI_AGENT_GOLDEN_RULES.md BEFORE making any changes",
+      "📚 Documentation Index: See docs/README.md for complete documentation map",
       "✓ MANIFEST.md is human-curated - provides 'why' and 'what' context code cannot",
       "✓ This project uses intelligent AI agent tooling (no context nodes)",
       "✓ Every code change MUST include tests (minimum 80% coverage)",
@@ -131,8 +134,8 @@
       "📊 NAICS Route Order: Static paths → Specific params → Generic /{code} → Compound paths"
     ],
     "workflow": [
-      "1. Read MANIFEST.md for project context (first time or significant changes)",
-      "2. Read AI_AGENT_GOLDEN_RULES.md",
+      "1. Read docs/core/MANIFEST.md for project context (first time or significant changes)",
+      "2. Read docs/core/AI_AGENT_GOLDEN_RULES.md",
       "3. Generate test template: python tests/test_system.py generate <file>",
       "4. Write tests FIRST",
       "5. Implement feature",

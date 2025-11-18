@@ -39,22 +39,26 @@ export default function Dashboard() {
   }
 
   // Prepare chart data
-  const categoryData = Object.entries(stats.experiences.byCategory).map(([category, count]) => ({
-    name: category.charAt(0).toUpperCase() + category.slice(1),
-    value: count,
-    color: getCategoryColor(category),
-  }));
+    const categoryData = Object.entries(stats?.experiences?.byCategory ?? {}).map(([category, count]) => ({
+      name: category.charAt(0).toUpperCase() + category.slice(1),
+      value: count,
+      color: getCategoryColor(category),
+    }));
 
-  const industryData = Object.entries(stats.experiences.byIndustry).map(([industry, count]) => ({
-    name: industry.charAt(0).toUpperCase() + industry.slice(1),
-    value: count,
-    color: getNAICSColor(industry),
-  }));
 
-  const typeData = Object.entries(stats.experiences.byType).map(([type, count]) => ({
-    name: type.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
-    count,
-  }));
+  // WEIRD ERROR HERE ALOT FROM
+    const industryData = Object.entries(stats?.experiences?.byIndustry ?? {}).map(([industry, count]) => ({
+      name: industry.charAt(0).toUpperCase() + industry.slice(1),
+      value: count,
+      color: getNAICSColor(industry),
+    }));
+
+
+    const typeData = Object.entries(stats?.experiences?.byType ?? {}).map(([type, count]) => ({
+      name: type.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
+      count,
+    }));
+
 
   return (
     <div className="space-y-6">

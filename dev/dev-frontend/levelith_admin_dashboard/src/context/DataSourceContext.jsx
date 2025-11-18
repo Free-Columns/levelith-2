@@ -14,6 +14,7 @@ import {
   generateMockExperiences,
   getStatistics,
 } from "../data/mockData";
+import apiService from "../services/apiService";
 
 const DataSourceContext = createContext();
 
@@ -65,8 +66,8 @@ export const DataSourceProvider = ({ children }) => {
           results: filtered.slice(offset, offset + limit),
         };
       } else {
-        // TODO: Implement server API call
-        throw new Error("Server data source not yet implemented");
+        // Server API call
+        return await apiService.getUsers(filters);
       }
     },
     [dataSource, localUsers]
@@ -81,8 +82,8 @@ export const DataSourceProvider = ({ children }) => {
         }
         return user;
       } else {
-        // TODO: Implement server API call
-        throw new Error("Server data source not yet implemented");
+        // Server API call
+        return await apiService.getUserById(userId);
       }
     },
     [dataSource, localUsers]
@@ -103,8 +104,8 @@ export const DataSourceProvider = ({ children }) => {
         setLocalUsers((prev) => [...prev, newUser]);
         return newUser;
       } else {
-        // TODO: Implement server API call
-        throw new Error("Server data source not yet implemented");
+        // Server API call
+        return await apiService.createUser(userData);
       }
     },
     [dataSource]
@@ -123,8 +124,8 @@ export const DataSourceProvider = ({ children }) => {
         const updatedUser = localUsers.find((u) => u.id === userId);
         return { ...updatedUser, ...updates };
       } else {
-        // TODO: Implement server API call
-        throw new Error("Server data source not yet implemented");
+        // Server API call
+        return await apiService.updateUser(userId, updates);
       }
     },
     [dataSource, localUsers]
@@ -140,8 +141,8 @@ export const DataSourceProvider = ({ children }) => {
         );
         return { message: "User deleted successfully" };
       } else {
-        // TODO: Implement server API call
-        throw new Error("Server data source not yet implemented");
+        // Server API call
+        return await apiService.deleteUser(userId);
       }
     },
     [dataSource]
@@ -190,8 +191,8 @@ export const DataSourceProvider = ({ children }) => {
           results: filtered.slice(offset, offset + limit),
         };
       } else {
-        // TODO: Implement server API call
-        throw new Error("Server data source not yet implemented");
+        // Server API call
+        return await apiService.getExperiences(filters);
       }
     },
     [dataSource, localExperiences]
@@ -206,8 +207,8 @@ export const DataSourceProvider = ({ children }) => {
         }
         return exp;
       } else {
-        // TODO: Implement server API call
-        throw new Error("Server data source not yet implemented");
+        // Server API call
+        return await apiService.getExperienceById(expId);
       }
     },
     [dataSource, localExperiences]
@@ -235,8 +236,8 @@ export const DataSourceProvider = ({ children }) => {
 
         return newExp;
       } else {
-        // TODO: Implement server API call
-        throw new Error("Server data source not yet implemented");
+        // Server API call
+        return await apiService.createExperience(expData);
       }
     },
     [dataSource]
@@ -255,8 +256,8 @@ export const DataSourceProvider = ({ children }) => {
         const updatedExp = localExperiences.find((e) => e.id === expId);
         return { ...updatedExp, ...updates };
       } else {
-        // TODO: Implement server API call
-        throw new Error("Server data source not yet implemented");
+        // Server API call
+        return await apiService.updateExperience(expId, updates);
       }
     },
     [dataSource, localExperiences]
@@ -282,8 +283,8 @@ export const DataSourceProvider = ({ children }) => {
         setLocalExperiences((prev) => prev.filter((exp) => exp.id !== expId));
         return { message: "Experience deleted successfully" };
       } else {
-        // TODO: Implement server API call
-        throw new Error("Server data source not yet implemented");
+        // Server API call
+        return await apiService.deleteExperience(expId);
       }
     },
     [dataSource, localExperiences]
@@ -324,12 +325,12 @@ export const DataSourceProvider = ({ children }) => {
 
   // ==================== STATISTICS ====================
 
-  const getStats = useCallback(() => {
+  const getStats = useCallback(async () => {
     if (dataSource === DATA_SOURCES.LOCAL) {
       return getStatistics();
     } else {
-      // TODO: Implement server API call
-      throw new Error("Server data source not yet implemented");
+      // Server API call
+      return await apiService.getStats();
     }
   }, [dataSource]);
 

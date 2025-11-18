@@ -207,9 +207,9 @@ useEffect(() => {
 ## 📚 Full Documentation
 
 For complete details, see:
-- **ADMIN_PANEL_GUIDE.md** - Comprehensive guide
-- **DATABASE_SETUP_NOTES.md** - Database setup
-- **docs/api/API_DOCUMENTATION.md** - API reference
+- **[ADMIN_PANEL_GUIDE.md](../../../docs/dev/ADMIN_PANEL_GUIDE.md)** - Comprehensive guide
+- **[DATABASE_SETUP_NOTES.md](../../../docs/deployment/DATABASE_SETUP_NOTES.md)** - Database setup
+- **[API_DOCUMENTATION.md](../../../docs/api/API_DOCUMENTATION.md)** - API reference
 
 ---
 

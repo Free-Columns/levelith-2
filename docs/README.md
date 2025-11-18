@@ -97,7 +97,8 @@ Location: `docs/dev/`
 | [TEST_REPORT.md](dev/TEST_REPORT.md) | Test system reports and coverage |
 | [NAICS_IMPORT_GUIDE.md](dev/NAICS_IMPORT_GUIDE.md) | Complete guide for importing NAICS codes from TSV files |
 | [NAICS_QUICK_REFERENCE.md](dev/NAICS_QUICK_REFERENCE.md) | Quick reference for NAICS database import commands |
-| [AI Agent Learning and Operating Guide v2.0.md](dev/AI%20Agent%20Learning%20and%20Operating%20Guide%20v2.0.md) | Extended AI agent operating guide |
+| [ADMIN_PANEL_GUIDE.md](dev/ADMIN_PANEL_GUIDE.md) | Complete admin dashboard integration and usage guide |
+| [COMPREHENSIVE_TODO_REPORT.md](dev/COMPREHENSIVE_TODO_REPORT.md) | Complete TODO analysis and action plan |
 
 ---
 
@@ -118,6 +119,12 @@ Location: `docs/deployment/`
   - Docker configuration
   - CI/CD pipelines
   - Production checklist
+
+- **[DATABASE_SETUP_NOTES.md](deployment/DATABASE_SETUP_NOTES.md)** - Database initialization and configuration
+  - PostgreSQL setup
+  - Database initialization script
+  - Connection troubleshooting
+  - Environment configuration
 
 ---
 
@@ -294,11 +301,11 @@ python dev/test_report_generator.py
 | API | 1 | ✅ Complete | 100% |
 | Backend | 1 | ✅ Complete | 100% |
 | Frontend | 0 | ⚠️ Needs docs | 0% |
-| Dev Tools | 4 | ✅ Complete | 100% |
-| Deployment | 2 | ✅ Complete | 100% |
+| Dev Tools | 6 | ✅ Complete | 100% |
+| Deployment | 3 | ✅ Complete | 100% |
 | Architecture | 1 | ✅ Complete | 100% |
 
-**Total:** 13 documentation files
+**Total:** 16 documentation files
 
 ---
 

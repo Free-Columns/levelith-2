@@ -579,7 +579,7 @@ cd dev/dev-frontend/levelith_admin_dashboard && npm run dev
 ## 📚 Additional Resources
 
 - **API Documentation:** [docs/api/API_DOCUMENTATION.md](docs/api/API_DOCUMENTATION.md)
-- **Database Setup:** [DATABASE_SETUP_NOTES.md](DATABASE_SETUP_NOTES.md)
+- **Database Setup:** [DATABASE_SETUP_NOTES.md](../deployment/DATABASE_SETUP_NOTES.md)
 - **Project Manifest:** [docs/core/MANIFEST.md](docs/core/MANIFEST.md)
 - **Deployment Guide:** [docs/deployment/RENDER_DEPLOYMENT.md](docs/deployment/RENDER_DEPLOYMENT.md)
 

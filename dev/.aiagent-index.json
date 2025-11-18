@@ -1,0 +1,137 @@
+{
+  "example_ai_agent_usage.py": {
+    "path": "/home/user/levelith-2/dev/example_ai_agent_usage.py",
+    "docstring": "Example: How an AI Agent Would Use the Intelligent Navigator\n\nThis demonstrates a simulated AI agent exploring a codebase using\nthe intelligent tooling instead of pre-generated context nodes.",
+    "classes": [
+      "SimulatedAIAgent",
+      "AIAgentQueryInterface"
+    ],
+    "functions": [
+      "demo_ai_exploration"
+    ],
+    "imports": [
+      "aiagent_navigator",
+      "json"
+    ],
+    "exports": [
+      "SimulatedAIAgent",
+      "AIAgentQueryInterface",
+      "demo_ai_exploration"
+    ],
+    "complexity_score": 10
+  },
+  "test_debugger.py": {
+    "path": "/home/user/levelith-2/dev/test_debugger.py",
+    "docstring": "Test System Debugger\n\nDebugging utilities for the Levelith test system.\nProvides detailed diagnostics, failure analysis, and troubleshooting tools.\n\nUsage:\n    python dev/test_debugger.py diagnose               # Full system diagnostic\n    python dev/test_debugger.py analyze-failure <test> # Analyze specific test failure\n    python dev/test_debugger.py coverage-gaps          # Find coverage gaps\n    python dev/test_debugger.py validate-all           # Validate all test files",
+    "classes": [
+      "TestDebugger"
+    ],
+    "functions": [
+      "main"
+    ],
+    "imports": [
+      "json",
+      "subprocess",
+      "sys",
+      "pathlib",
+      "typing",
+      "ast",
+      "re",
+      "test_system"
+    ],
+    "exports": [
+      "TestDebugger",
+      "main"
+    ],
+    "complexity_score": 13
+  },
+  "aiagent_navigator.py": {
+    "path": "/home/user/levelith-2/dev/aiagent_navigator.py",
+    "docstring": "AI Agent Intelligent Navigator v2.0\n\nThis tool helps AI agents explore codebases efficiently by:\n- Reading configuration from .aiagent.json\n- Analyzing code structure automatically\n- Providing smart navigation suggestions\n- Generating runtime context without pre-documentation\n- v2.0: Interactive learning, cognitive load management, NL queries, and more",
+    "classes": [
+      "ModuleInfo",
+      "Understanding",
+      "ExplorationMetrics",
+      "AIAgentNavigator",
+      "GoalOrientedExplorer",
+      "NaturalLanguageQuery",
+      "PerformanceNavigator",
+      "CognitiveLoadManager",
+      "MetricsCollector",
+      "InteractiveLearning",
+      "CollaborativeSession",
+      "KnowledgeExporter",
+      "KnowledgeImporter",
+      "BugInvestigator",
+      "FeaturePlanner",
+      "ReviewAssistant",
+      "UnderstandingValidator",
+      "AnalyticsDashboard",
+      "ContextOptimizer"
+    ],
+    "functions": [
+      "main"
+    ],
+    "imports": [
+      "json",
+      "ast",
+      "os",
+      "re",
+      "time",
+      "pathlib",
+      "typing",
+      "dataclasses",
+      "datetime",
+      "fnmatch",
+      "sys"
+    ],
+    "exports": [
+      "ModuleInfo",
+      "Understanding",
+      "ExplorationMetrics",
+      "AIAgentNavigator",
+      "GoalOrientedExplorer",
+      "NaturalLanguageQuery",
+      "PerformanceNavigator",
+      "CognitiveLoadManager",
+      "MetricsCollector",
+      "InteractiveLearning",
+      "CollaborativeSession",
+      "KnowledgeExporter",
+      "KnowledgeImporter",
+      "BugInvestigator",
+      "FeaturePlanner",
+      "ReviewAssistant",
+      "UnderstandingValidator",
+      "AnalyticsDashboard",
+      "ContextOptimizer",
+      "main"
+    ],
+    "complexity_score": 70
+  },
+  "test_report_generator.py": {
+    "path": "/home/user/levelith-2/dev/test_report_generator.py",
+    "docstring": "Levelith-2 Test Report Generator\n\nGenerates comprehensive test execution reports with pass/fail status and reasons.",
+    "classes": [],
+    "functions": [
+      "run_tests",
+      "parse_pytest_output",
+      "generate_markdown_report",
+      "main"
+    ],
+    "imports": [
+      "subprocess",
+      "json",
+      "datetime",
+      "pathlib",
+      "typing"
+    ],
+    "exports": [
+      "run_tests",
+      "parse_pytest_output",
+      "generate_markdown_report",
+      "main"
+    ],
+    "complexity_score": 13
+  }
+}

@@ -219,11 +219,24 @@ class NAICSImporter:
                     db.commit()
                     logger.info(f"✅ Deleted {deleted_count} existing codes")
 
-                # Import rows
+                # Track codes we've already processed in this import to avoid duplicates
+                processed_codes = set()
+
+                # Import rows one by one to handle duplicates
                 for row_data in validated_rows:
                     try:
-                        # Check if code already exists
-                        existing = db.query(NAICSCodeDB).filter_by(code=row_data['code']).first()
+                        code = row_data['code']
+
+                        # Skip if we've already processed this code in this import
+                        if code in processed_codes:
+                            logger.warning(f"Skipping duplicate code in TSV: {code} - {row_data['title']}")
+                            self.stats['skipped'] += 1
+                            continue
+
+                        processed_codes.add(code)
+
+                        # Check if code already exists in database
+                        existing = db.query(NAICSCodeDB).filter_by(code=code).first()
 
                         if existing:
                             # Update existing
@@ -243,12 +256,19 @@ class NAICSImporter:
                             if self.verbose:
                                 logger.debug(f"Imported: {row_data['code']} - {row_data['title']}")
 
+                        # Commit every 100 rows to avoid memory issues
+                        if (self.stats['imported'] + self.stats['updated']) % 100 == 0:
+                            db.commit()
+                            if self.verbose:
+                                logger.debug(f"Committed batch at {self.stats['imported'] + self.stats['updated']} rows")
+
                     except Exception as e:
                         logger.error(f"Failed to import code {row_data['code']}: {e}")
                         self.stats['errors'] += 1
+                        db.rollback()  # Rollback failed transaction
                         continue
 
-                # Commit all changes
+                # Commit remaining changes
                 db.commit()
 
                 logger.info("=" * 70)

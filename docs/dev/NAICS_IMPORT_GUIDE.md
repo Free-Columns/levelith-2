@@ -80,8 +80,10 @@ The import script:
 3. ✅ Validates TSV format and data
 4. ✅ Normalizes NAICS codes
 5. ✅ Determines hierarchy levels automatically
-6. ✅ Inserts new codes or updates existing ones
-7. ✅ Provides detailed statistics
+6. ✅ Handles duplicate codes (skips duplicates within TSV file)
+7. ✅ Inserts new codes or updates existing ones
+8. ✅ Commits in batches of 100 rows for large imports
+9. ✅ Provides detailed statistics
 
 ## Validation Rules
 
@@ -92,6 +94,7 @@ The import script validates:
 - **Category**: Must be a valid category enum value
 - **Parent codes**: Automatically normalized
 - **Hierarchy**: Level determined by code length
+- **Duplicate handling**: If the same code appears multiple times in the TSV file, only the first occurrence is imported/updated, subsequent duplicates are skipped
 
 ## Error Handling
 
@@ -136,6 +139,14 @@ Check that your TSV file has at least `code` and `title` columns in the header r
 NAICS codes must be:
 - Numeric only (no letters or special characters)
 - 2, 3, 4, or 6 digits long (5-digit codes are not valid in NAICS)
+
+### Duplicate Codes Warning
+
+If you see warnings like "Skipping duplicate code in TSV":
+- This means the same NAICS code appears multiple times in your TSV file
+- Only the first occurrence will be imported
+- This is normal if your data source uses placeholder codes (like 123456)
+- To avoid this, clean your TSV file to have unique codes only
 
 ### Database Connection Error
 

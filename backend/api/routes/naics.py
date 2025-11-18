@@ -3,22 +3,29 @@ NAICS Code API Endpoints
 
 Provides endpoints for NAICS code lookups, search, validation, and suggestions.
 Supports the experience tracking system with industry classification.
+
+All endpoints require authentication.
 """
 
 from typing import Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query, Path, status
+from fastapi import APIRouter, HTTPException, Query, Path, status, Depends
 from pydantic import BaseModel, Field
 
 from backend.services.naics_service import NAICSService
 from backend.repositories.naics_repository import NAICSRepository
 from backend.models.naics import NAICSCode
+from backend.auth import get_current_user_db
 
 
 # Initialize service (in production, this would use dependency injection)
 naics_repo = NAICSRepository()
 naics_service = NAICSService(naics_repo=naics_repo)
 
-router = APIRouter(prefix="/naics", tags=["naics"])
+router = APIRouter(
+    prefix="/naics",
+    tags=["naics"],
+    dependencies=[Depends(get_current_user_db)]  # Require authentication for all NAICS endpoints
+)
 
 
 # Pydantic schemas for API responses

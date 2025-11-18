@@ -77,7 +77,7 @@ class Settings(BaseSettings):
             raise ValueError(f"Environment must be one of {allowed}")
         return v.lower()
 
-    #@field_validator("cors_origins", mode="before")
+    @field_validator("cors_origins", mode="before")
     @classmethod
     def parse_cors_origins(cls, v) -> list[str]:
         """Parse CORS origins from string or list."""

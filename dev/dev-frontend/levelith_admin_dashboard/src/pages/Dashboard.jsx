@@ -28,33 +28,72 @@ import ONETRUTH, { getCategoryColor, getNAICSColor } from "../config/theme";
 export default function Dashboard() {
   const { getStats } = useDataSource();
   const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const data = getStats();
-    setStats(data);
-  }, []);
+    const loadStats = async () => {
+      try {
+        setLoading(true);
+        const data = await getStats();
+        setStats(data);
+        setError(null);
+      } catch (err) {
+        console.error("Error loading stats:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadStats();
+  }, [getStats]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-xl text-gray-600">Loading dashboard...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-xl text-red-600">Error: {error}</div>
+      </div>
+    );
+  }
 
   if (!stats) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-xl text-gray-600">No data available</div>
+      </div>
+    );
   }
 
   // Prepare chart data
-  const categoryData = Object.entries(stats.experiences.byCategory).map(([category, count]) => ({
-    name: category.charAt(0).toUpperCase() + category.slice(1),
-    value: count,
-    color: getCategoryColor(category),
-  }));
+    const categoryData = Object.entries(stats?.experiences?.byCategory ?? {}).map(([category, count]) => ({
+      name: category.charAt(0).toUpperCase() + category.slice(1),
+      value: count,
+      color: getCategoryColor(category),
+    }));
 
-  const industryData = Object.entries(stats.experiences.byIndustry).map(([industry, count]) => ({
-    name: industry.charAt(0).toUpperCase() + industry.slice(1),
-    value: count,
-    color: getNAICSColor(industry),
-  }));
 
-  const typeData = Object.entries(stats.experiences.byType).map(([type, count]) => ({
-    name: type.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
-    count,
-  }));
+  // WEIRD ERROR HERE ALOT FROM
+    const industryData = Object.entries(stats?.experiences?.byIndustry ?? {}).map(([industry, count]) => ({
+      name: industry.charAt(0).toUpperCase() + industry.slice(1),
+      value: count,
+      color: getNAICSColor(industry),
+    }));
+
+
+    const typeData = Object.entries(stats?.experiences?.byType ?? {}).map(([type, count]) => ({
+      name: type.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
+      count,
+    }));
+
 
   return (
     <div className="space-y-6">

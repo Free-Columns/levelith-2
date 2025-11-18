@@ -96,6 +96,7 @@ Location: `docs/dev/`
 | [NAVIGATION.md](dev/NAVIGATION.md) | Auto-generated codebase navigation guide |
 | [TEST_REPORT.md](dev/TEST_REPORT.md) | Test system reports and coverage |
 | [NAICS_IMPORT_GUIDE.md](dev/NAICS_IMPORT_GUIDE.md) | Complete guide for importing NAICS codes from TSV files |
+| [NAICS_QUICK_REFERENCE.md](dev/NAICS_QUICK_REFERENCE.md) | Quick reference for NAICS database import commands |
 | [AI Agent Learning and Operating Guide v2.0.md](dev/AI%20Agent%20Learning%20and%20Operating%20Guide%20v2.0.md) | Extended AI agent operating guide |
 
 ---

@@ -165,31 +165,37 @@ cat MANIFEST.md
 # 2. Read the golden rules (MANDATORY)
 cat AI_AGENT_GOLDEN_RULES.md
 
-# 3. Build codebase index
+# 3. Get 30-second quickstart overview (NEW v2.0!)
+python dev/aiagent_navigator.py quickstart
+
+# 4. Build codebase index
 python dev/aiagent_navigator.py index
 
-# 4. Get exploration plan
+# 5. Get exploration plan
 python dev/aiagent_navigator.py plan
 
-# 5. Before making changes - generate test template
+# 6. Ask natural language questions (NEW v2.0!)
+python dev/aiagent_navigator.py ask "How does authentication work?"
+
+# 7. Before making changes - generate test template
 python tests/test_system.py generate <module_path>
 
-# 6. Write tests FIRST, then implement
+# 8. Write tests FIRST, then implement
 
-# 7. Run tests (must pass with 80%+ coverage)
+# 9. Run tests (must pass with 80%+ coverage)
 pytest
 
-# 8. Update AI index after changes
+# 10. Update AI index after changes
 python dev/aiagent_navigator.py index
 
-# 9. Enforce golden rules before commit
+# 11. Enforce golden rules before commit
 python tests/test_system.py enforce
 ```
 
 **Essential Reading (in order):**
 1. [MANIFEST.md](MANIFEST.md) - **START HERE** - Project context and goals
 2. [AI_AGENT_GOLDEN_RULES.md](AI_AGENT_GOLDEN_RULES.md) - **MANDATORY** rules
-3. [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md) - Complete operating guide
+3. [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md) - **v2.0** Complete operating guide with interactive learning
 4. [claude.md](claude.md) - Navigation system overview
 
 ### For Developers
@@ -294,6 +300,16 @@ python tests/test_system.py enforce
 
 ### For AI Agents
 
+**v2.0 Features:**
+1. **QuickStart Analysis** - Get 30-second overview of entire codebase
+2. **Goal-Oriented Exploration** - Create optimized exploration paths for specific goals
+3. **Natural Language Queries** - Ask questions in plain English with AI/heuristic hybrid
+4. **Cognitive Load Management** - Optimize context window usage automatically
+5. **Interactive Learning** - Guided tutorials and exercises for AI agents
+6. **Performance Navigator** - Progressive loading and incremental indexing for large codebases
+7. **Exploration Metrics** - Track efficiency and get improvement suggestions
+
+**v1.0 Core Features:**
 1. **Dynamic Code Analysis** - Extract structure on-demand from actual code
 2. **Golden Rules Enforcement** - Automated quality, security, and scalability checks
 3. **Test-First Development** - Auto-generate test templates, enforce coverage

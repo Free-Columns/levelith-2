@@ -9,6 +9,23 @@
 
 ## Key Modules
 
+### `dev/aiagent_navigator.py`
+- **Reason**: 20 exports, complexity: 70
+- **Exports**: ModuleInfo, Understanding, ExplorationMetrics, AIAgentNavigator, GoalOrientedExplorer, NaturalLanguageQuery, PerformanceNavigator, CognitiveLoadManager, MetricsCollector, InteractiveLearning, CollaborativeSession, KnowledgeExporter, KnowledgeImporter, BugInvestigator, FeaturePlanner, ReviewAssistant, UnderstandingValidator, AnalyticsDashboard, ContextOptimizer, main
+- **Description**: AI Agent Intelligent Navigator v2.0
+
+This tool helps AI agents explore codebases efficiently by:
+- R
+
+### `tests/test_aiagent_navigator_v2.py`
+- **Reason**: 14 exports, complexity: 49
+- **Exports**: TestAIAgentNavigatorQuickstart, TestGoalOrientedExplorer, TestNaturalLanguageQuery, TestPerformanceNavigator, TestCognitiveLoadManager, TestMetricsCollector, TestInteractiveLearning, TestStubClasses, TestV2Integration, TestV2ErrorHandling, TestV2CLICommands, TestV2Performance, temp_codebase, navigator
+- **Description**: Test suite for AI Agent Navigator v2.0 features.
+
+Tests cover:
+- QuickStart functionality
+- GoalOrie
+
 ### `backend/models/experience.py`
 - **Reason**: 13 exports, complexity: 42
 - **Exports**: ExperienceCategory, ExperienceType, Experience, Certificate, Degree, Course, Gig, PartTime, FullTime, SoftSkill, HardSkill, NativeSkill, validate_naics_code
@@ -73,22 +90,10 @@ Comprehensive tests for experience CRUD operations via REST
 
 Provides endpoints for NAICS code lookups, search, validation, and suggest
 
-### `tests/test_api_users.py`
-- **Reason**: 9 exports, complexity: 29
-- **Exports**: TestUserCreation, TestUserRetrieval, TestUserUpdate, TestUserDeletion, TestUserLogin, override_get_db, setup_database, client, sample_user_data
-- **Description**: Unit tests for user API endpoints
-
-Comprehensive tests for user CRUD operations via REST API.
-
-### `backend/schemas/user.py`
-- **Reason**: 8 exports, complexity: 27
-- **Exports**: UserBase, UserCreate, UserUpdate, UserLogin, UserResponse, TokenResponse, UserWithExperiences, Config
-- **Description**: User API Schemas
-
-Pydantic models for user-related API requests and responses.
-
 ## Complexity Hotspots
 
+- `dev/aiagent_navigator.py` (complexity: 70)
+- `tests/test_aiagent_navigator_v2.py` (complexity: 49)
 - `backend/models/experience.py` (complexity: 42)
 - `tests/test_api_naics.py` (complexity: 42)
 - `tests/test_naics_service.py` (complexity: 41)

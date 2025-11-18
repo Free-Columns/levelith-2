@@ -65,12 +65,22 @@ See `RENDER_DEPLOYMENT.md` for complete step-by-step guide. Quick deploy:
 
 ---
 
-## Intelligent AI Agent Tooling (Recommended)
+## Intelligent AI Agent Tooling v2.0 (Recommended)
 
 ### What It Is
 
-A **dynamic code analysis system** that extracts structure and relationships directly from code, providing you with:
+A **next-generation dynamic code analysis system** that extracts structure and relationships directly from code, with v2.0 enhancements:
 
+**v2.0 New Features:**
+- **30-Second Quickstart** - Instant codebase overview
+- **Goal-Oriented Exploration** - AI-powered exploration paths
+- **Natural Language Queries** - Ask questions in plain English
+- **Cognitive Load Management** - Context window optimization
+- **Interactive Learning** - Guided tutorials for AI agents
+- **Performance Navigator** - Progressive loading for large codebases
+- **Exploration Metrics** - Track efficiency and improve
+
+**v1.0 Core Features:**
 - **Always Current Information** - Generated from actual code, never stale
 - **On-Demand Analysis** - Query what you need, when you need it
 - **Relationship Mapping** - Automatic dependency detection
@@ -79,17 +89,26 @@ A **dynamic code analysis system** that extracts structure and relationships dir
 ### Quick Start
 
 ```bash
+# NEW v2.0: Get 30-second overview
+python dev/aiagent_navigator.py quickstart
+
 # Get exploration plan
 python dev/aiagent_navigator.py plan
 
 # Build codebase index
 python dev/aiagent_navigator.py index
 
+# NEW v2.0: Ask questions in natural language
+python dev/aiagent_navigator.py ask "How does NAICS classification work?"
+
 # Generate navigation guide
 python dev/aiagent_navigator.py guide
 
 # Analyze specific file
-python dev/aiagent_navigator.py analyze dev/cn-create.py
+python dev/aiagent_navigator.py analyze dev/aiagent_navigator.py
+
+# NEW v2.0: Interactive tutorial
+python dev/aiagent_navigator.py tutorial
 ```
 
 ### How It Works

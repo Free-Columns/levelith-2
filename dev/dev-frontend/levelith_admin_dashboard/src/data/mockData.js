@@ -442,18 +442,85 @@ export const getStatistics = () => {
     return acc;
   }, {});
 
+  // User growth over time (last 12 months)
+  const now = new Date();
+  const userGrowth = [];
+  for (let i = 11; i >= 0; i--) {
+    const monthDate = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const monthName = monthDate.toLocaleDateString("en-US", { month: "short" });
+    const count = mockUsers.filter((u) => {
+      const createdDate = new Date(u.created_at);
+      return createdDate <= monthDate;
+    }).length;
+    userGrowth.push({
+      month: monthName,
+      users: Math.max(1, Math.floor(count + (Math.random() * 5 - 2))),
+    });
+  }
+
+  // User activity (recent logins by day - last 30 days)
+  const userActivity = [];
+  for (let i = 29; i >= 0; i--) {
+    const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
+    const dateStr = date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    const activityCount = Math.floor(Math.random() * activeUsers * 0.4) + 1;
+    userActivity.push({
+      date: dateStr,
+      logins: activityCount,
+    });
+  }
+
+  // Top skills (from all experiences)
+  const skillCounts = {};
+  mockExperiences.forEach((exp) => {
+    if (exp.skills_gained && Array.isArray(exp.skills_gained)) {
+      exp.skills_gained.forEach((skill) => {
+        skillCounts[skill] = (skillCounts[skill] || 0) + 1;
+      });
+    }
+  });
+
+  const topSkills = Object.entries(skillCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10)
+    .map(([skill, count]) => ({ skill, count }));
+
+  // Geographic distribution (from user locations)
+  const locationCounts = {};
+  mockUsers.forEach((user) => {
+    if (user.profile_data.location) {
+      // Extract state/city from location string
+      const location = user.profile_data.location;
+      locationCounts[location] = (locationCounts[location] || 0) + 1;
+    }
+  });
+
+  const topLocations = Object.entries(locationCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 8)
+    .map(([location, count]) => ({ location, count }));
+
   return {
     users: {
       total: totalUsers,
       active: activeUsers,
       verified: verifiedUsers,
       inactive: totalUsers - activeUsers,
+      growth: userGrowth,
+      activity: userActivity,
     },
     experiences: {
       total: totalExperiences,
       byType: experiencesByType,
       byCategory: experiencesByCategory,
       byIndustry: experiencesByNAICS,
+    },
+    skills: {
+      top: topSkills,
+      total: Object.keys(skillCounts).length,
+    },
+    geography: {
+      locations: topLocations,
     },
   };
 };

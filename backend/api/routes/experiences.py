@@ -18,6 +18,7 @@ from backend.schemas.experience import (
     ExperienceUpdate,
     ExperienceList
 )
+from backend.auth import get_current_user_db, TokenData
 
 router = APIRouter()
 
@@ -26,22 +27,33 @@ router = APIRouter()
 async def create_experience(
     experience_data: ExperienceCreate,
     user_id: str = Query(..., description="User ID who owns this experience"),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: TokenData = Depends(get_current_user_db)
 ):
     """
-    Create a new experience for a user.
+    Create a new experience for a user (requires authentication).
+
+    Users can only create experiences for themselves.
 
     Args:
         experience_data: Experience creation data
         user_id: ID of the user who owns this experience
         db: Database session
+        current_user: Current authenticated user from token
 
     Returns:
         Created experience information
 
     Raises:
-        HTTPException: If user not found
+        HTTPException: If user not found or not authorized
     """
+    # Verify user can only create experiences for themselves
+    if current_user.user_id != user_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You can only create experiences for yourself"
+        )
+
     # Verify user exists
     user = db.query(UserDB).filter(UserDB.id == user_id).first()
     if not user:
@@ -76,19 +88,24 @@ async def create_experience(
 
 
 @router.get("/{experience_id}", response_model=ExperienceResponse)
-async def get_experience(experience_id: str, db: Session = Depends(get_db)):
+async def get_experience(
+    experience_id: str,
+    db: Session = Depends(get_db),
+    current_user: TokenData = Depends(get_current_user_db)
+):
     """
-    Get experience by ID.
+    Get experience by ID (requires authentication).
 
     Args:
         experience_id: Experience ID
         db: Database session
+        current_user: Current authenticated user from token
 
     Returns:
         Experience information
 
     Raises:
-        HTTPException: If experience not found
+        HTTPException: If experience not found or not authenticated
     """
     experience = db.query(ExperienceDB).filter(ExperienceDB.id == experience_id).first()
     if not experience:
@@ -107,10 +124,11 @@ async def list_experiences(
     experience_type: Optional[ExperienceType] = Query(None, description="Filter by type"),
     page: int = Query(1, ge=1, description="Page number"),
     page_size: int = Query(20, ge=1, le=100, description="Items per page"),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: TokenData = Depends(get_current_user_db)
 ):
     """
-    List experiences with filtering and pagination.
+    List experiences with filtering and pagination (requires authentication).
 
     Args:
         user_id: Filter by user ID
@@ -119,9 +137,13 @@ async def list_experiences(
         page: Page number (1-indexed)
         page_size: Number of items per page
         db: Database session
+        current_user: Current authenticated user from token
 
     Returns:
         Paginated list of experiences
+
+    Raises:
+        HTTPException: If not authenticated
     """
     # Build query
     query = db.query(ExperienceDB)
@@ -157,27 +179,38 @@ async def list_experiences(
 async def update_experience(
     experience_id: str,
     experience_data: ExperienceUpdate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: TokenData = Depends(get_current_user_db)
 ):
     """
-    Update experience information.
+    Update experience information (requires authentication).
+
+    Users can only update their own experiences.
 
     Args:
         experience_id: Experience ID
         experience_data: Updated experience data
         db: Database session
+        current_user: Current authenticated user from token
 
     Returns:
         Updated experience information
 
     Raises:
-        HTTPException: If experience not found
+        HTTPException: If experience not found or not authorized
     """
     experience = db.query(ExperienceDB).filter(ExperienceDB.id == experience_id).first()
     if not experience:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Experience not found"
+        )
+
+    # Verify user can only update their own experiences
+    if experience.user_id != current_user.user_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You can only update your own experiences"
         )
 
     # Update fields
@@ -196,16 +229,23 @@ async def update_experience(
 
 
 @router.delete("/{experience_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_experience(experience_id: str, db: Session = Depends(get_db)):
+async def delete_experience(
+    experience_id: str,
+    db: Session = Depends(get_db),
+    current_user: TokenData = Depends(get_current_user_db)
+):
     """
-    Delete an experience.
+    Delete an experience (requires authentication).
+
+    Users can only delete their own experiences.
 
     Args:
         experience_id: Experience ID
         db: Database session
+        current_user: Current authenticated user from token
 
     Raises:
-        HTTPException: If experience not found
+        HTTPException: If experience not found or not authorized
     """
     experience = db.query(ExperienceDB).filter(ExperienceDB.id == experience_id).first()
     if not experience:
@@ -214,24 +254,36 @@ async def delete_experience(experience_id: str, db: Session = Depends(get_db)):
             detail="Experience not found"
         )
 
+    # Verify user can only delete their own experiences
+    if experience.user_id != current_user.user_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You can only delete your own experiences"
+        )
+
     db.delete(experience)
     db.commit()
 
 
 @router.get("/user/{user_id}/summary")
-async def get_user_experience_summary(user_id: str, db: Session = Depends(get_db)):
+async def get_user_experience_summary(
+    user_id: str,
+    db: Session = Depends(get_db),
+    current_user: TokenData = Depends(get_current_user_db)
+):
     """
-    Get summary statistics of user's experiences.
+    Get summary statistics of user's experiences (requires authentication).
 
     Args:
         user_id: User ID
         db: Database session
+        current_user: Current authenticated user from token
 
     Returns:
         Summary statistics by category and type
 
     Raises:
-        HTTPException: If user not found
+        HTTPException: If user not found or not authenticated
     """
     # Verify user exists
     user = db.query(UserDB).filter(UserDB.id == user_id).first()

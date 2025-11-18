@@ -5,14 +5,16 @@ Provides REST API for user CRUD operations and authentication.
 """
 
 from typing import List
+from datetime import datetime
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from backend.database import get_db
 from backend.models.db_models import UserDB
-from backend.models.user import hash_password, verify_password
+from backend.models.user import hash_password, verify_password, User
 from backend.schemas.user import UserCreate, UserResponse, UserUpdate, UserLogin, UserWithExperiences
+from backend.auth import create_token_pair, TokenResponse, verify_token, get_current_user_db, TokenData
 
 router = APIRouter()
 
@@ -79,19 +81,24 @@ async def create_user(user_data: UserCreate, db: Session = Depends(get_db)):
 
 
 @router.get("/{user_id}", response_model=UserWithExperiences)
-async def get_user(user_id: str, db: Session = Depends(get_db)):
+async def get_user(
+    user_id: str,
+    db: Session = Depends(get_db),
+    current_user: TokenData = Depends(get_current_user_db)
+):
     """
-    Get user by ID.
+    Get user by ID (requires authentication).
 
     Args:
         user_id: User ID
         db: Database session
+        current_user: Current authenticated user from token
 
     Returns:
         User information with experiences
 
     Raises:
-        HTTPException: If user not found
+        HTTPException: If user not found or not authenticated
     """
     user = db.query(UserDB).filter(UserDB.id == user_id).first()
     if not user:
@@ -116,17 +123,26 @@ async def get_user(user_id: str, db: Session = Depends(get_db)):
 
 
 @router.get("/", response_model=List[UserResponse])
-async def list_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+async def list_users(
+    skip: int = 0,
+    limit: int = 100,
+    db: Session = Depends(get_db),
+    current_user: TokenData = Depends(get_current_user_db)
+):
     """
-    List all users with pagination.
+    List all users with pagination (requires authentication).
 
     Args:
         skip: Number of records to skip
         limit: Maximum number of records to return
         db: Database session
+        current_user: Current authenticated user from token
 
     Returns:
         List of users
+
+    Raises:
+        HTTPException: If not authenticated
     """
     users = db.query(UserDB).offset(skip).limit(limit).all()
 
@@ -148,21 +164,36 @@ async def list_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_
 
 
 @router.patch("/{user_id}", response_model=UserResponse)
-async def update_user(user_id: str, user_data: UserUpdate, db: Session = Depends(get_db)):
+async def update_user(
+    user_id: str,
+    user_data: UserUpdate,
+    db: Session = Depends(get_db),
+    current_user: TokenData = Depends(get_current_user_db)
+):
     """
-    Update user information.
+    Update user information (requires authentication).
+
+    Users can only update their own profile.
 
     Args:
         user_id: User ID
         user_data: Updated user data
         db: Database session
+        current_user: Current authenticated user from token
 
     Returns:
         Updated user information
 
     Raises:
-        HTTPException: If user not found
+        HTTPException: If user not found or not authorized
     """
+    # Verify user can only update their own profile
+    if current_user.user_id != user_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You can only update your own profile"
+        )
+
     user = db.query(UserDB).filter(UserDB.id == user_id).first()
     if not user:
         raise HTTPException(
@@ -190,6 +221,7 @@ async def update_user(user_id: str, user_data: UserUpdate, db: Session = Depends
     if user_data.is_active is not None:
         user.is_active = user_data.is_active
 
+    user.updated_at = datetime.utcnow()
     db.commit()
     db.refresh(user)
 
@@ -208,17 +240,31 @@ async def update_user(user_id: str, user_data: UserUpdate, db: Session = Depends
 
 
 @router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_user(user_id: str, db: Session = Depends(get_db)):
+async def delete_user(
+    user_id: str,
+    db: Session = Depends(get_db),
+    current_user: TokenData = Depends(get_current_user_db)
+):
     """
-    Delete a user.
+    Delete a user (requires authentication).
+
+    Users can only delete their own account.
 
     Args:
         user_id: User ID
         db: Database session
+        current_user: Current authenticated user from token
 
     Raises:
-        HTTPException: If user not found
+        HTTPException: If user not found or not authorized
     """
+    # Verify user can only delete their own account
+    if current_user.user_id != user_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You can only delete your own account"
+        )
+
     user = db.query(UserDB).filter(UserDB.id == user_id).first()
     if not user:
         raise HTTPException(
@@ -230,20 +276,36 @@ async def delete_user(user_id: str, db: Session = Depends(get_db)):
     db.commit()
 
 
-@router.post("/login")
+@router.post("/login", response_model=TokenResponse)
 async def login(credentials: UserLogin, db: Session = Depends(get_db)):
     """
-    Authenticate user and return access token.
+    Authenticate user and return JWT access and refresh tokens.
 
     Args:
-        credentials: Login credentials
+        credentials: Login credentials (username and password)
         db: Database session
 
     Returns:
-        Authentication token information
+        TokenResponse: JWT access token, refresh token, and metadata
 
     Raises:
-        HTTPException: If credentials are invalid
+        HTTPException: If credentials are invalid or user is inactive
+
+    Example:
+        Request:
+            POST /api/v1/users/login
+            {
+                "username": "johndoe",
+                "password": "SecurePassword123!"
+            }
+
+        Response:
+            {
+                "access_token": "eyJhbGci...",
+                "refresh_token": "eyJhbGci...",
+                "token_type": "bearer",
+                "expires_in": 1800
+            }
     """
     # Find user by username
     user = db.query(UserDB).filter(UserDB.username == credentials.username).first()
@@ -251,7 +313,8 @@ async def login(credentials: UserLogin, db: Session = Depends(get_db)):
     if not user or not verify_password(credentials.password, user.password_hash):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid username or password"
+            detail="Invalid username or password",
+            headers={"WWW-Authenticate": "Bearer"},
         )
 
     if not user.is_active:
@@ -260,11 +323,64 @@ async def login(credentials: UserLogin, db: Session = Depends(get_db)):
             detail="User account is inactive"
         )
 
-    # TODO: Implement JWT token generation
-    # For now, return basic user info
-    return {
-        "message": "Login successful",
-        "user_id": user.id,
-        "username": user.username,
-        "note": "JWT token generation to be implemented"
-    }
+    # Update last login timestamp
+    user.last_login = datetime.utcnow()
+    db.commit()
+
+    # Generate JWT token pair
+    tokens = create_token_pair(user_id=str(user.id), username=user.username)
+
+    return tokens
+
+
+@router.post("/refresh", response_model=TokenResponse)
+async def refresh_token(refresh_token: str, db: Session = Depends(get_db)):
+    """
+    Refresh access token using a valid refresh token.
+
+    Args:
+        refresh_token: Valid JWT refresh token
+        db: Database session
+
+    Returns:
+        TokenResponse: New JWT access token, refresh token, and metadata
+
+    Raises:
+        HTTPException: If refresh token is invalid or user is inactive
+
+    Example:
+        Request:
+            POST /api/v1/users/refresh
+            {
+                "refresh_token": "eyJhbGci..."
+            }
+
+        Response:
+            {
+                "access_token": "eyJhbGci...",
+                "refresh_token": "eyJhbGci...",
+                "token_type": "bearer",
+                "expires_in": 1800
+            }
+    """
+    # Verify refresh token
+    token_data = verify_token(refresh_token, expected_type="refresh")
+
+    # Verify user still exists and is active
+    user = db.query(UserDB).filter(UserDB.id == token_data.user_id).first()
+    if user is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="User not found",
+        )
+
+    if not user.is_active:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User account is inactive",
+        )
+
+    # Create new token pair
+    new_tokens = create_token_pair(user_id=str(user.id), username=user.username)
+
+    return new_tokens

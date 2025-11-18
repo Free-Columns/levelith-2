@@ -35,7 +35,7 @@ class Settings(BaseSettings):
     redis_cache_ttl: int = 300  # 5 minutes default
 
     # Security
-    secret_key: str = "change-this-secret-key-in-production"
+    secret_key: str = None  # Must be set via environment variable
     access_token_expire_minutes: int = 30
     refresh_token_expire_days: int = 7
     algorithm: str = "HS256"
@@ -76,6 +76,18 @@ class Settings(BaseSettings):
         if v.lower() not in allowed:
             raise ValueError(f"Environment must be one of {allowed}")
         return v.lower()
+
+    @field_validator("secret_key")
+    @classmethod
+    def validate_secret_key(cls, v: str) -> str:
+        """Validate secret key for security."""
+        if not v:
+            raise ValueError("SECRET_KEY environment variable must be set")
+        if len(v) < 32:
+            raise ValueError("Secret key must be at least 32 characters")
+        if v == "change-this-secret-key-in-production":
+            raise ValueError("Default secret key cannot be used")
+        return v
 
     #@field_validator("cors_origins", mode="before")
     @classmethod

@@ -28,14 +28,37 @@ import ONETRUTH, { getCategoryColor, getNAICSColor } from "../config/theme";
 export default function Dashboard() {
   const { getStats } = useDataSource();
   const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const data = getStats();
-    setStats(data);
-  }, []);
+    const fetchStats = async () => {
+      try {
+        setLoading(true);
+        const data = await getStats();
+        setStats(data);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching stats:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, [getStats]);
+
+  if (loading) {
+    return <div className="flex items-center justify-center h-64">Loading dashboard...</div>;
+  }
+
+  if (error) {
+    return <div className="text-red-500 p-4">Error loading dashboard: {error}</div>;
+  }
 
   if (!stats) {
-    return <div>Loading...</div>;
+    return <div>No data available</div>;
   }
 
   // Prepare chart data

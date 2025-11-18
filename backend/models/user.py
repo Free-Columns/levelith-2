@@ -14,8 +14,11 @@ According to MANIFEST.md:
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import List, Optional, Dict
-import hashlib
 import secrets
+from passlib.context import CryptContext
+
+# Password hashing context using bcrypt
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 @dataclass
@@ -223,23 +226,20 @@ class User:
 
 def hash_password(password: str) -> str:
     """
-    Hash a password securely.
-
-    SECURITY NOTE: This is a SIMPLIFIED implementation for the initial framework.
-    In production, use bcrypt, argon2, or scrypt for proper password hashing.
+    Hash a password securely using bcrypt.
 
     Args:
         password: Plain text password
 
     Returns:
-        str: Hashed password
+        str: Bcrypt hashed password
 
     Raises:
         ValueError: If password is too weak
 
     Example:
         >>> hash_password("MySecurePassword123!")
-        '5f4dcc3b5aa765d61d8327deb882cf99...'
+        '$2b$12$...'
     """
     if not password:
         raise ValueError("Password is required")
@@ -247,20 +247,16 @@ def hash_password(password: str) -> str:
     if len(password) < 8:
         raise ValueError("Password must be at least 8 characters")
 
-    # SIMPLIFIED: In production, use bcrypt or argon2
-    # This is just for the initial framework
-    salt = secrets.token_hex(16)
-    hashed = hashlib.pbkdf2_hmac("sha256", password.encode(), salt.encode(), 100000)
-    return f"{salt}${hashed.hex()}"
+    return pwd_context.hash(password)
 
 
 def verify_password(password: str, password_hash: str) -> bool:
     """
-    Verify a password against its hash.
+    Verify a password against its bcrypt hash.
 
     Args:
         password: Plain text password to verify
-        password_hash: Stored hash to compare against
+        password_hash: Stored bcrypt hash to compare against
 
     Returns:
         bool: True if password matches, False otherwise
@@ -276,10 +272,8 @@ def verify_password(password: str, password_hash: str) -> bool:
         return False
 
     try:
-        salt, stored_hash = password_hash.split("$")
-        hashed = hashlib.pbkdf2_hmac("sha256", password.encode(), salt.encode(), 100000)
-        return hashed.hex() == stored_hash
-    except (ValueError, AttributeError):
+        return pwd_context.verify(password, password_hash)
+    except Exception:
         return False
 
 

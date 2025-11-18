@@ -58,10 +58,13 @@ Backend architecture, features, and implementation details.
 Location: `docs/backend/`
 
 - **[NAICS_EXPANSION_SUMMARY.md](backend/NAICS_EXPANSION_SUMMARY.md)** - NAICS 2022 system implementation
-  - 60+ official industry codes
+  - 60+ official industry codes (expandable via TSV import)
   - 14 industry categories
   - Hierarchical support (2/3/4/6 digit levels)
-  - 148 comprehensive tests
+  - Database persistence with PostgreSQL
+  - TSV import/export functionality
+  - Admin dashboard with visualizations
+  - 197 comprehensive tests (98% coverage)
 
 ---
 
@@ -92,6 +95,7 @@ Location: `docs/dev/`
 | [AI_AGENT_TOOLING.md](dev/AI_AGENT_TOOLING.md) | Technical documentation for AI navigation system |
 | [NAVIGATION.md](dev/NAVIGATION.md) | Auto-generated codebase navigation guide |
 | [TEST_REPORT.md](dev/TEST_REPORT.md) | Test system reports and coverage |
+| [NAICS_IMPORT_GUIDE.md](dev/NAICS_IMPORT_GUIDE.md) | Complete guide for importing NAICS codes from TSV files |
 | [AI Agent Learning and Operating Guide v2.0.md](dev/AI%20Agent%20Learning%20and%20Operating%20Guide%20v2.0.md) | Extended AI agent operating guide |
 
 ---

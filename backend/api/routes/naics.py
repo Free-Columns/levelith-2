@@ -33,6 +33,9 @@ class NAICSCodeResponse(BaseModel):
     parent_code: Optional[str] = Field(None, description="Parent NAICS code")
     is_active: bool = Field(..., description="Whether code is active in NAICS 2022")
     year: int = Field(2022, description="NAICS version year")
+    tags: List[str] = Field(default_factory=list, description="Admin custom tags")
+    custom_category: Optional[str] = Field(None, description="Admin custom category")
+    admin_notes: Optional[str] = Field(None, description="Admin internal notes")
     hierarchy: List[str] = Field(..., description="Full hierarchical path")
 
     class Config:
@@ -100,6 +103,31 @@ class NAICSCategorySummary(BaseModel):
     """Response schema for category summary."""
     category: str
     count: int
+
+
+class NAICSUpdateRequest(BaseModel):
+    """Request schema for updating NAICS admin fields."""
+    tags: Optional[List[str]] = Field(None, description="Custom tags for organization")
+    custom_category: Optional[str] = Field(None, description="Custom category for internal use")
+    admin_notes: Optional[str] = Field(None, description="Internal notes")
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "tags": ["high-demand", "tech-sector"],
+                "custom_category": "Priority Industries",
+                "admin_notes": "Requires additional documentation for certification"
+            }
+        }
+
+
+class NAICSPaginatedResponse(BaseModel):
+    """Response schema for paginated NAICS code results."""
+    items: List[NAICSCodeResponse] = Field(..., description="NAICS codes for current page")
+    total: int = Field(..., description="Total number of matching records")
+    page: int = Field(..., description="Current page number")
+    page_size: int = Field(..., description="Number of items per page")
+    total_pages: int = Field(..., description="Total number of pages")
 
 
 def _naics_to_response(naics: NAICSCode) -> NAICSCodeResponse:
@@ -449,3 +477,132 @@ async def list_categories() -> List[str]:
         List of category names
     """
     return naics_service.get_all_categories()
+
+
+@router.get(
+    "/paginated",
+    response_model=NAICSPaginatedResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Search NAICS codes with pagination",
+    description="Search and filter NAICS codes with server-side pagination. Optimized for large datasets (1000s+ codes)."
+)
+async def search_naics_paginated(
+    q: str = Query("", description="Search query for code/title/description"),
+    category: Optional[str] = Query(None, description="Filter by category"),
+    level: Optional[int] = Query(None, description="Filter by level (2, 3, 4, or 6)"),
+    page: int = Query(1, ge=1, description="Page number (1-indexed)"),
+    page_size: int = Query(50, ge=1, le=200, description="Items per page (max 200)")
+) -> NAICSPaginatedResponse:
+    """
+    Search NAICS codes with server-side pagination and filtering.
+
+    Supports:
+    - Full-text search across code, title, and description
+    - Category filtering
+    - Level filtering (sector, subsector, industry group, national industry)
+    - Pagination for efficient browsing of large datasets
+
+    Args:
+        q: Search query string
+        category: Optional category filter
+        level: Optional level filter (2, 3, 4, or 6 digits)
+        page: Page number (1-indexed)
+        page_size: Number of results per page (1-200)
+
+    Returns:
+        Paginated results with items, total count, and pagination metadata
+    """
+    results = naics_service.search_with_pagination(
+        query=q,
+        category=category,
+        level=level,
+        page=page,
+        page_size=page_size
+    )
+
+    return NAICSPaginatedResponse(
+        items=[_naics_to_response(item) for item in results["items"]],
+        total=results["total"],
+        page=results["page"],
+        page_size=results["page_size"],
+        total_pages=results["total_pages"]
+    )
+
+
+@router.patch(
+    "/{code}",
+    response_model=NAICSCodeResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Update NAICS admin fields",
+    description="Update admin-specific fields (tags, custom_category, admin_notes) for a NAICS code. Official NAICS data cannot be modified."
+)
+async def update_naics_code(
+    code: str = Path(..., description="NAICS code to update"),
+    updates: NAICSUpdateRequest = None
+) -> NAICSCodeResponse:
+    """
+    Update admin-specific fields for a NAICS code.
+
+    Only admin fields can be updated:
+    - tags: Custom tags for organization and filtering
+    - custom_category: Internal categorization
+    - admin_notes: Internal notes and comments
+
+    Official NAICS fields (title, description, category, etc.) cannot be modified.
+
+    Args:
+        code: NAICS code to update
+        updates: Fields to update
+
+    Returns:
+        Updated NAICS code
+
+    Raises:
+        HTTPException: 404 if code not found
+    """
+    # Convert Pydantic model to dict, excluding None values
+    update_data = updates.dict(exclude_none=True) if updates else {}
+
+    updated_code = naics_service.update_code(code, update_data)
+
+    if not updated_code:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"NAICS code '{code}' not found"
+        )
+
+    return _naics_to_response(updated_code)
+
+
+@router.delete(
+    "/{code}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    summary="Delete NAICS code",
+    description="Delete a NAICS code from the database. WARNING: This is permanent and should only be used for test/invalid codes."
+)
+async def delete_naics_code(
+    code: str = Path(..., description="NAICS code to delete")
+):
+    """
+    Delete a NAICS code from the database.
+
+    WARNING: This permanently removes the code and should only be used for:
+    - Removing test/dummy codes
+    - Cleaning up invalid imports
+    - NOT for official NAICS codes
+
+    Args:
+        code: NAICS code to delete
+
+    Raises:
+        HTTPException: 404 if code not found
+    """
+    deleted = naics_service.delete_code(code)
+
+    if not deleted:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"NAICS code '{code}' not found"
+        )
+
+    return None  # 204 No Content

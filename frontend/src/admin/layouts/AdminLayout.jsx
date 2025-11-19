@@ -21,49 +21,69 @@ export default function AdminLayout() {
   ];
 
   return (
-    <div className="flex h-screen" style={{ backgroundColor: ONETRUTH.colors.background }}>
+    <div style={{ display: 'flex', height: '100vh', backgroundColor: ONETRUTH.colors.background }}>
       {/* Sidebar */}
       <aside
-        className="w-64 p-6 shadow-lg"
-        style={{ backgroundColor: ONETRUTH.colors.surfaceDark }}
+        style={{
+          width: '16rem',
+          padding: '1.5rem',
+          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+          backgroundColor: ONETRUTH.colors.surfaceDark
+        }}
       >
         {/* Logo/Title */}
-        <div className="mb-8">
+        <div style={{ marginBottom: '2rem' }}>
           <h2
-            className="text-2xl font-bold"
             style={{
+              fontSize: '1.5rem',
+              fontWeight: 700,
               color: ONETRUTH.colors.textInverse,
-              fontFamily: ONETRUTH.fonts.heading,
+              fontFamily: ONETRUTH.fonts.heading
             }}
           >
             Levelith Admin
           </h2>
           <p
-            className="text-sm mt-1"
-            style={{ color: ONETRUTH.colors.textLight }}
+            style={{
+              fontSize: '0.875rem',
+              marginTop: '0.25rem',
+              color: ONETRUTH.colors.textLight
+            }}
           >
             Development Dashboard
           </p>
         </div>
 
         {/* Navigation */}
-        <nav className="space-y-2">
+        <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           {navItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}
-              className="flex items-center gap-3 px-4 py-3 rounded-lg transition-all"
               style={{
-                backgroundColor: isActive(item.path)
-                  ? ONETRUTH.colors.primary
-                  : "transparent",
-                color: isActive(item.path)
-                  ? ONETRUTH.colors.textInverse
-                  : ONETRUTH.colors.textLight,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                padding: '0.75rem 1rem',
+                borderRadius: '0.5rem',
+                transition: 'all 0.2s',
+                backgroundColor: isActive(item.path) ? ONETRUTH.colors.primary : "transparent",
+                color: isActive(item.path) ? ONETRUTH.colors.textInverse : ONETRUTH.colors.textLight,
+                textDecoration: 'none'
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive(item.path)) {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive(item.path)) {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                }
               }}
             >
               <svg
-                className="w-5 h-5"
+                style={{ width: '1.25rem', height: '1.25rem' }}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -75,27 +95,32 @@ export default function AdminLayout() {
                   d={item.icon}
                 />
               </svg>
-              <span className="font-medium">{item.label}</span>
+              <span style={{ fontWeight: 500 }}>{item.label}</span>
             </Link>
           ))}
         </nav>
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
         {/* Header */}
         <header
-          className="px-6 py-4 shadow-sm border-b flex items-center justify-between"
           style={{
-            backgroundColor: ONETRUTH.colors.surface,
-            borderColor: ONETRUTH.colors.border,
+            padding: '1rem 1.5rem',
+            boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+            borderBottom: `1px solid ${ONETRUTH.colors.border}`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            backgroundColor: ONETRUTH.colors.surface
           }}
         >
           <h1
-            className="text-2xl font-semibold"
             style={{
+              fontSize: '1.5rem',
+              fontWeight: 600,
               color: ONETRUTH.colors.textDark,
-              fontFamily: ONETRUTH.fonts.heading,
+              fontFamily: ONETRUTH.fonts.heading
             }}
           >
             {navItems.find((item) => isActive(item.path))?.label || "Dashboard"}
@@ -104,7 +129,7 @@ export default function AdminLayout() {
         </header>
 
         {/* Main Content */}
-        <main className="flex-1 p-6 overflow-auto">
+        <main style={{ flex: 1, padding: '1.5rem', overflowY: 'auto' }}>
           <Outlet />
         </main>
       </div>

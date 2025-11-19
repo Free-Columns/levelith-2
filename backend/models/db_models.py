@@ -105,6 +105,11 @@ class NAICSCodeDB(Base):
 
     Maps to 'naics_codes' table in PostgreSQL.
     Stores the complete NAICS 2022 classification system.
+
+    Admin Additional Fields:
+        tags: JSON array of custom tags for filtering and organization
+        custom_category: Admin-defined category for internal classification
+        admin_notes: Internal notes and comments for admin use only
     """
 
     __tablename__ = "naics_codes"
@@ -128,6 +133,11 @@ class NAICSCodeDB(Base):
     # Metadata
     is_active = Column(Boolean, default=True, nullable=False)
     year = Column(Integer, default=2022, nullable=False)
+
+    # Admin-specific fields for internal management
+    tags = Column(JSON, default=list, nullable=False)
+    custom_category = Column(String(100), nullable=True)
+    admin_notes = Column(Text, nullable=True)
 
     # Timestamps
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)

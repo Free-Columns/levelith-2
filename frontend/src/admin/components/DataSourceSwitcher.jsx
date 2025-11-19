@@ -15,24 +15,33 @@ export default function DataSourceSwitcher() {
   const isLocal = dataSource === DATA_SOURCES.LOCAL;
 
   return (
-    <div className="flex items-center gap-3">
-      <span className="text-sm font-medium text-gray-700">Data Source:</span>
-      <div className="inline-flex rounded-lg border border-gray-300 bg-white p-1">
+    <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
+      <span style={{fontSize: '14px', fontWeight: 500, color: ONETRUTH.colors.textDark}}>Data Source:</span>
+      <div style={{
+        display: 'inline-flex',
+        borderRadius: '8px',
+        border: `1px solid ${ONETRUTH.colors.border}`,
+        backgroundColor: ONETRUTH.colors.surface,
+        padding: '4px'
+      }}>
         <button
           onClick={() => switchDataSource(DATA_SOURCES.LOCAL)}
-          className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${
-            isLocal
-              ? "bg-blue-500 text-white shadow-sm"
-              : "text-gray-600 hover:text-gray-800"
-          }`}
           style={{
+            padding: '6px 16px',
+            fontSize: '14px',
+            fontWeight: 500,
+            borderRadius: '6px',
+            transition: 'all 0.2s',
             backgroundColor: isLocal ? ONETRUTH.colors.primary : "transparent",
             color: isLocal ? ONETRUTH.colors.textInverse : ONETRUTH.colors.text,
+            border: 'none',
+            cursor: 'pointer',
+            boxShadow: isLocal ? '0 1px 2px rgba(0,0,0,0.1)' : 'none'
           }}
         >
-          <span className="flex items-center gap-2">
+          <span style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
             <svg
-              className="w-4 h-4"
+              style={{width: '16px', height: '16px'}}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -49,21 +58,22 @@ export default function DataSourceSwitcher() {
         </button>
         <button
           onClick={() => switchDataSource(DATA_SOURCES.SERVER)}
-          className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${
-            !isLocal
-              ? "bg-blue-500 text-white shadow-sm"
-              : "text-gray-600 hover:text-gray-800"
-          }`}
           style={{
+            padding: '6px 16px',
+            fontSize: '14px',
+            fontWeight: 500,
+            borderRadius: '6px',
+            transition: 'all 0.2s',
             backgroundColor: !isLocal ? ONETRUTH.colors.primary : "transparent",
-            color: !isLocal
-              ? ONETRUTH.colors.textInverse
-              : ONETRUTH.colors.text,
+            color: !isLocal ? ONETRUTH.colors.textInverse : ONETRUTH.colors.text,
+            border: 'none',
+            cursor: 'pointer',
+            boxShadow: !isLocal ? '0 1px 2px rgba(0,0,0,0.1)' : 'none'
           }}
         >
-          <span className="flex items-center gap-2">
+          <span style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
             <svg
-              className="w-4 h-4"
+              style={{width: '16px', height: '16px'}}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -76,7 +86,6 @@ export default function DataSourceSwitcher() {
               />
             </svg>
             Server API
-            {!isLocal && <span className="text-xs">(Coming Soon)</span>}
           </span>
         </button>
       </div>

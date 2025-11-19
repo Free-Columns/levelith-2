@@ -1316,6 +1316,8 @@ npm run dev
 - Use environment variables for API URLs
 - Keep components small and focused (<300 lines)
 - Document complex logic with comments
+- **Use inline styles with ONETRUTH for admin dashboard components**
+- Prefer server-side pagination for large datasets
 
 ### DON'T ❌
 
@@ -1327,6 +1329,134 @@ npm run dev
 - Duplicate ONETRUTH values locally
 - Commit `.env.local` to git
 - Use inline event handlers for complex logic
+- **Use className with Tailwind for admin dashboard (use inline styles + ONETRUTH instead)**
+
+---
+
+## Admin Dashboard Styling Guidelines
+
+### NO HARDCODED CSS RULE
+
+**CRITICAL:** The admin dashboard enforces strict ONETRUTH styling with NO hardcoded CSS classes or values.
+
+#### Why This Matters
+
+1. **Dynamic Theming**: Allows site-wide theme changes from one config file
+2. **Consistency**: Ensures all components follow the same design system
+3. **Maintainability**: Changes to theme propagate automatically
+4. **Future Dark Mode**: Prepared for theme switching features
+
+#### The Problem with className
+
+**❌ BAD - Using Tailwind className:**
+```jsx
+// This was causing blank screens in modals!
+<div className="bg-white p-6 rounded-lg shadow-md">
+  <h2 className="text-2xl font-semibold">Title</h2>
+</div>
+```
+
+**Why this is bad:**
+- Tailwind classes may not be compiled/available
+- No dynamic theme switching capability
+- Hardcoded values scattered throughout codebase
+- Caused blank screen bugs in Modal components
+
+#### The Solution: Inline Styles + ONETRUTH
+
+**✅ GOOD - Using inline styles with ONETRUTH:**
+```jsx
+import ONETRUTH from '../config/theme';
+
+<div style={{
+  backgroundColor: ONETRUTH.colors.surface,
+  padding: ONETRUTH.spacing.lg,
+  borderRadius: ONETRUTH.borderRadius.md,
+  boxShadow: ONETRUTH.shadows.md
+}}>
+  <h2 style={{
+    fontSize: ONETRUTH.fonts.sizes['2xl'],
+    fontWeight: ONETRUTH.fonts.weights.semibold,
+    color: ONETRUTH.colors.textDark,
+    fontFamily: ONETRUTH.fonts.heading
+  }}>
+    Title
+  </h2>
+</div>
+```
+
+**Why this is good:**
+- All values come from centralized theme
+- Dynamic theme switching works
+- No dependency on Tailwind compilation
+- Consistent across all components
+
+#### Real-World Example: Modal Component
+
+**Before (Broken):**
+```jsx
+// This caused blank screens!
+export default function Modal({ children }) {
+  return (
+    <div className="fixed inset-0 flex items-center justify-center">
+      <div className="bg-black/50" onClick={onClose} />
+      <div className="bg-white rounded-lg shadow-xl">
+        {children}
+      </div>
+    </div>
+  );
+}
+```
+
+**After (Fixed):**
+```jsx
+import ONETRUTH from '../config/theme';
+
+export default function Modal({ children }) {
+  return (
+    <div style={{
+      position: 'fixed',
+      inset: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: ONETRUTH.zIndex.modal
+    }}>
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        zIndex: ONETRUTH.zIndex.modalBackdrop
+      }} onClick={onClose} />
+      <div style={{
+        backgroundColor: ONETRUTH.colors.surface,
+        borderRadius: ONETRUTH.borderRadius.md,
+        boxShadow: ONETRUTH.shadows['2xl'],
+        zIndex: ONETRUTH.zIndex.modal
+      }}>
+        {children}
+      </div>
+    </div>
+  );
+}
+```
+
+#### Component Checklist
+
+Before committing any admin dashboard component, verify:
+
+- [ ] NO `className` attributes (except for markdown rendering)
+- [ ] All colors use `ONETRUTH.colors.*`
+- [ ] All spacing uses `ONETRUTH.spacing.*`
+- [ ] All fonts use `ONETRUTH.fonts.*`
+- [ ] All borders/shadows use ONETRUTH values
+- [ ] Component imports ONETRUTH theme
+- [ ] No hardcoded hex colors (#ffffff, etc.)
+- [ ] No hardcoded pixel values (24px, etc.)
+
+#### Exception: Main Application
+
+**Note:** The main Levelith application (Landing page, Docs) can use Tailwind CSS classes. This rule applies specifically to the **admin dashboard** (`/admin` routes).
 
 ---
 

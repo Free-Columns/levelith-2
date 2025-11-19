@@ -44,6 +44,7 @@ export default function Experiences() {
   const [naicsCodes, setNaicsCodes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [categoryFilter, setCategoryFilter] = useState("all");
+  const [typeFilter, setTypeFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
   // Modal states
@@ -76,6 +77,7 @@ export default function Experiences() {
     try {
       const filters = {
         category: categoryFilter !== "all" ? categoryFilter : undefined,
+        experience_type: typeFilter !== "all" ? typeFilter : undefined,
         search: searchTerm || undefined,
         limit: 100,
       };
@@ -100,7 +102,7 @@ export default function Experiences() {
 
   useEffect(() => {
     loadExperiences();
-  }, [categoryFilter, searchTerm]);
+  }, [categoryFilter, typeFilter, searchTerm]);
 
   useEffect(() => {
     loadNAICSCodes();
@@ -491,7 +493,7 @@ export default function Experiences() {
 
       {/* Controls */}
       <div className="p-4 rounded-lg shadow" style={{ backgroundColor: ONETRUTH.colors.surface }}>
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+        <div className="flex flex-col md:flex-row gap-4 items-center">
           <div className="flex-1 w-full md:w-auto">
             <input
               type="text"
@@ -504,6 +506,65 @@ export default function Experiences() {
                 fontFamily: ONETRUTH.fonts.body,
               }}
             />
+          </div>
+
+          <div>
+            <select
+              value={categoryFilter}
+              onChange={(e) => {
+                setCategoryFilter(e.target.value);
+                setTypeFilter("all"); // Reset type filter when category changes
+              }}
+              className="px-4 py-2 border rounded-lg"
+              style={{
+                borderColor: ONETRUTH.colors.border,
+                fontFamily: ONETRUTH.fonts.body,
+                minWidth: '150px'
+              }}
+            >
+              <option value="all">All Categories</option>
+              <option value="education">Education</option>
+              <option value="workplace">Workplace</option>
+              <option value="skills">Skills</option>
+            </select>
+          </div>
+
+          <div>
+            <select
+              value={typeFilter}
+              onChange={(e) => setTypeFilter(e.target.value)}
+              className="px-4 py-2 border rounded-lg"
+              style={{
+                borderColor: ONETRUTH.colors.border,
+                fontFamily: ONETRUTH.fonts.body,
+                minWidth: '150px'
+              }}
+            >
+              <option value="all">All Types</option>
+              {categoryFilter === "all" ? (
+                <>
+                  <optgroup label="Education">
+                    {EXPERIENCE_TYPES.education.map(type => (
+                      <option key={type.value} value={type.value}>{type.label}</option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="Workplace">
+                    {EXPERIENCE_TYPES.workplace.map(type => (
+                      <option key={type.value} value={type.value}>{type.label}</option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="Skills">
+                    {EXPERIENCE_TYPES.skills.map(type => (
+                      <option key={type.value} value={type.value}>{type.label}</option>
+                    ))}
+                  </optgroup>
+                </>
+              ) : (
+                EXPERIENCE_TYPES[categoryFilter]?.map(type => (
+                  <option key={type.value} value={type.value}>{type.label}</option>
+                ))
+              )}
+            </select>
           </div>
 
           <Button

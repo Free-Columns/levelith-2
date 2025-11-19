@@ -30,42 +30,64 @@ export default function Modal({
   if (!isOpen) return null;
 
   const sizes = {
-    sm: "max-w-md",
-    md: "max-w-2xl",
-    lg: "max-w-4xl",
-    xl: "max-w-6xl",
+    sm: {maxWidth: '28rem'}, // 448px
+    md: {maxWidth: '42rem'}, // 672px
+    lg: {maxWidth: '56rem'}, // 896px
+    xl: {maxWidth: '72rem'}, // 1152px
   };
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center z-50"
-      style={{ zIndex: ONETRUTH.zIndex.modal }}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: ONETRUTH.zIndex.modal
+      }}
     >
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black opacity-50"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          zIndex: ONETRUTH.zIndex.modalBackdrop
+        }}
         onClick={onClose}
-        style={{ zIndex: ONETRUTH.zIndex.modalBackdrop }}
       />
 
       {/* Modal Content */}
       <div
-        className={`relative ${sizes[size]} w-full mx-4 rounded-lg shadow-xl overflow-hidden`}
         style={{
+          position: 'relative',
+          ...sizes[size],
+          width: '100%',
+          margin: '0 16px',
+          borderRadius: '8px',
+          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+          overflow: 'hidden',
           backgroundColor: ONETRUTH.colors.surface,
-          zIndex: ONETRUTH.zIndex.modal,
+          zIndex: ONETRUTH.zIndex.modal
         }}
       >
         {/* Header */}
         <div
-          className="px-6 py-4 border-b flex items-center justify-between"
-          style={{ borderColor: ONETRUTH.colors.border }}
+          style={{
+            padding: '1.5rem',
+            borderBottom: `1px solid ${ONETRUTH.colors.border}`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}
         >
           <h2
-            className="text-xl font-semibold"
             style={{
+              fontSize: '1.25rem',
+              fontWeight: 600,
               color: ONETRUTH.colors.textDark,
-              fontFamily: ONETRUTH.fonts.heading,
+              fontFamily: ONETRUTH.fonts.heading
             }}
           >
             {title}
@@ -73,10 +95,19 @@ export default function Modal({
           {showCloseButton && (
             <button
               onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 transition-colors"
+              style={{
+                color: ONETRUTH.colors.textLight,
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '4px',
+                transition: 'color 0.2s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.color = ONETRUTH.colors.textDark}
+              onMouseLeave={(e) => e.currentTarget.style.color = ONETRUTH.colors.textLight}
             >
               <svg
-                className="w-6 h-6"
+                style={{width: '24px', height: '24px'}}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -93,7 +124,11 @@ export default function Modal({
         </div>
 
         {/* Body */}
-        <div className="px-6 py-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+        <div style={{
+          padding: '1.5rem',
+          maxHeight: 'calc(100vh - 200px)',
+          overflowY: 'auto'
+        }}>
           {children}
         </div>
       </div>

@@ -106,7 +106,7 @@ async def list_experiences(
     category: Optional[ExperienceCategory] = Query(None, description="Filter by category"),
     experience_type: Optional[ExperienceType] = Query(None, description="Filter by type"),
     page: int = Query(1, ge=1, description="Page number"),
-    page_size: int = Query(20, ge=1, le=100, description="Items per page"),
+    page_size: int = Query(50, ge=1, le=200, description="Items per page (default: 50, max: 200)"),
     db: Session = Depends(get_db)
 ):
     """

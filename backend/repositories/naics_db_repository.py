@@ -82,14 +82,21 @@ class NAICSDBRepository:
         Returns:
             NAICSCode domain object
         """
-        return create_naics_code(
+        naics_code = create_naics_code(
             code=db_code.code,
             title=db_code.title,
             description=db_code.description or "",
             category=db_code.category,
             is_active=db_code.is_active,
-            year=db_code.year,
         )
+        # Add admin-specific fields
+        naics_code.tags = db_code.tags if db_code.tags else []
+        naics_code.custom_category = db_code.custom_category
+        naics_code.admin_notes = db_code.admin_notes
+        naics_code.year = db_code.year
+        naics_code.created_at = db_code.created_at
+        naics_code.updated_at = db_code.updated_at
+        return naics_code
 
     def find_by_code(self, code: str) -> Optional[NAICSCode]:
         """
@@ -445,3 +452,153 @@ class NAICSDBRepository:
 
             db.commit()
             return inserted
+
+    def update_code(self, code: str, updates: Dict) -> Optional[NAICSCode]:
+        """
+        Update a NAICS code with admin-specific fields.
+
+        Only updates admin fields: tags, custom_category, admin_notes.
+        Official NAICS fields (title, description, category, etc.) are not updated.
+
+        Args:
+            code: NAICS code to update
+            updates: Dictionary of fields to update
+
+        Returns:
+            Updated NAICSCode if found, None otherwise
+
+        Examples:
+            >>> repo = NAICSDBRepository()
+            >>> updated = repo.update_code("541511", {
+            ...     "tags": ["programming", "software"],
+            ...     "custom_category": "Tech Services",
+            ...     "admin_notes": "High demand industry"
+            ... })
+            >>> updated.tags
+            ['programming', 'software']
+        """
+        normalized = normalize_naics_code(code)
+        if not normalized:
+            return None
+
+        with get_db_context() as db:
+            db_code = db.query(NAICSCodeDB).filter_by(code=normalized).first()
+
+            if not db_code:
+                return None
+
+            # Only update admin-specific fields
+            if "tags" in updates:
+                db_code.tags = updates["tags"] if isinstance(updates["tags"], list) else []
+
+            if "custom_category" in updates:
+                db_code.custom_category = updates["custom_category"]
+
+            if "admin_notes" in updates:
+                db_code.admin_notes = updates["admin_notes"]
+
+            # Update timestamp
+            from datetime import datetime
+            db_code.updated_at = datetime.utcnow()
+
+            db.commit()
+            db.refresh(db_code)
+
+            return self._db_to_domain(db_code)
+
+    def delete_code(self, code: str) -> bool:
+        """
+        Delete a NAICS code from the database.
+
+        WARNING: This permanently removes the NAICS code. Use with caution.
+
+        Args:
+            code: NAICS code to delete
+
+        Returns:
+            True if deleted, False if not found
+
+        Examples:
+            >>> repo = NAICSDBRepository()
+            >>> repo.delete_code("999999")
+            True
+        """
+        normalized = normalize_naics_code(code)
+        if not normalized:
+            return False
+
+        with get_db_context() as db:
+            db_code = db.query(NAICSCodeDB).filter_by(code=normalized).first()
+
+            if not db_code:
+                return False
+
+            db.delete(db_code)
+            db.commit()
+            return True
+
+    def search_with_pagination(
+        self,
+        query: str = "",
+        category: Optional[NAICSCategory] = None,
+        level: Optional[NAICSLevel] = None,
+        page: int = 1,
+        page_size: int = 50
+    ) -> Dict:
+        """
+        Search NAICS codes with pagination support.
+
+        Args:
+            query: Search query for title/description/code
+            category: Optional category filter
+            level: Optional level filter
+            page: Page number (1-indexed)
+            page_size: Number of results per page
+
+        Returns:
+            Dictionary with: items, total, page, page_size, total_pages
+
+        Examples:
+            >>> repo = NAICSDBRepository()
+            >>> results = repo.search_with_pagination("computer", page=1, page_size=10)
+            >>> results["total"] >= 0
+            True
+            >>> len(results["items"]) <= 10
+            True
+        """
+        with get_db_context() as db:
+            # Build query
+            db_query = db.query(NAICSCodeDB)
+
+            # Apply filters
+            if query:
+                query_lower = query.lower()
+                db_query = db_query.filter(
+                    (NAICSCodeDB.title.ilike(f"%{query_lower}%")) |
+                    (NAICSCodeDB.description.ilike(f"%{query_lower}%")) |
+                    (NAICSCodeDB.code.ilike(f"%{query_lower}%"))
+                )
+
+            if category:
+                db_query = db_query.filter_by(category=category)
+
+            if level:
+                db_query = db_query.filter_by(level=level.value)
+
+            # Get total count
+            total = db_query.count()
+
+            # Calculate pagination
+            offset = (page - 1) * page_size
+            total_pages = (total + page_size - 1) // page_size  # Ceiling division
+
+            # Get paginated results
+            db_codes = db_query.order_by(NAICSCodeDB.code).offset(offset).limit(page_size).all()
+
+            return {
+                "items": [self._db_to_domain(db_code) for db_code in db_codes],
+                "total": total,
+                "page": page,
+                "page_size": page_size,
+                "total_pages": total_pages
+            }

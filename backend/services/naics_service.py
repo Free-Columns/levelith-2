@@ -428,3 +428,137 @@ class NAICSService:
             True
         """
         return [category.value for category in NAICSCategory]
+
+    def update_code(self, code: str, updates: Dict) -> Optional[NAICSCode]:
+        """
+        Update admin-specific fields for a NAICS code.
+
+        Only updates admin fields (tags, custom_category, admin_notes).
+        Official NAICS data cannot be modified.
+
+        Args:
+            code: NAICS code to update
+            updates: Dictionary with fields to update
+
+        Returns:
+            Updated NAICSCode if successful, None if code not found
+
+        Examples:
+            >>> service = NAICSService(NAICSDBRepository())
+            >>> updated = service.update_code("541511", {
+            ...     "tags": ["software", "programming"],
+            ...     "custom_category": "Tech Services",
+            ...     "admin_notes": "High demand sector"
+            ... })
+            >>> updated.tags
+            ['software', 'programming']
+        """
+        # Validate code exists
+        if not self.naics_repo.is_valid_code(code):
+            return None
+
+        # Only allow updating admin fields
+        allowed_fields = {"tags", "custom_category", "admin_notes"}
+        filtered_updates = {
+            k: v for k, v in updates.items()
+            if k in allowed_fields
+        }
+
+        if not filtered_updates:
+            return self.lookup_code(code)  # No valid updates, return existing
+
+        return self.naics_repo.update_code(code, filtered_updates)
+
+    def delete_code(self, code: str) -> bool:
+        """
+        Delete a NAICS code from the database.
+
+        WARNING: This permanently removes the code. Use with extreme caution.
+        This should only be used for:
+        - Removing test/dummy codes
+        - Cleaning up invalid imports
+        - NOT for official NAICS codes
+
+        Args:
+            code: NAICS code to delete
+
+        Returns:
+            True if deleted, False if not found or deletion failed
+
+        Examples:
+            >>> service = NAICSService(NAICSDBRepository())
+            >>> service.delete_code("999999")
+            True
+        """
+        # Validate code exists
+        if not self.naics_repo.is_valid_code(code):
+            return False
+
+        return self.naics_repo.delete_code(code)
+
+    def search_with_pagination(
+        self,
+        query: str = "",
+        category: Optional[str] = None,
+        level: Optional[int] = None,
+        page: int = 1,
+        page_size: int = 50
+    ) -> Dict:
+        """
+        Search NAICS codes with server-side pagination.
+
+        Optimized for large datasets (1000s+ codes) with filtering and pagination.
+
+        Args:
+            query: Search term for code/title/description
+            category: Optional category filter
+            level: Optional level filter (2, 3, 4, or 6)
+            page: Page number (1-indexed)
+            page_size: Results per page (default: 50)
+
+        Returns:
+            Dictionary with:
+                - items: List of NAICSCode objects
+                - total: Total matching records
+                - page: Current page number
+                - page_size: Items per page
+                - total_pages: Total number of pages
+
+        Examples:
+            >>> service = NAICSService(NAICSDBRepository())
+            >>> results = service.search_with_pagination("computer", page=1, page_size=10)
+            >>> results["page"]
+            1
+            >>> len(results["items"]) <= 10
+            True
+        """
+        # Convert category string to enum
+        category_enum = None
+        if category:
+            try:
+                category_enum = NAICSCategory(category)
+            except ValueError:
+                pass  # Invalid category, ignore filter
+
+        # Convert level int to enum
+        level_enum = None
+        if level:
+            try:
+                if level == 2:
+                    level_enum = NAICSLevel.SECTOR
+                elif level == 3:
+                    level_enum = NAICSLevel.SUBSECTOR
+                elif level == 4:
+                    level_enum = NAICSLevel.INDUSTRY_GROUP
+                elif level == 6:
+                    level_enum = NAICSLevel.NATIONAL_INDUSTRY
+            except ValueError:
+                pass  # Invalid level, ignore filter
+
+        return self.naics_repo.search_with_pagination(
+            query=query,
+            category=category_enum,
+            level=level_enum,
+            page=page,
+            page_size=page_size
+        )

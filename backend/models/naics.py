@@ -199,6 +199,9 @@ class NAICSCode:
         parent_code: Parent code in the hierarchy (None for 2-digit sectors)
         is_active: Whether this code is currently active in NAICS 2022
         year: NAICS version year (default: 2022)
+        tags: Custom tags for admin organization and filtering
+        custom_category: Admin-defined category for internal classification
+        admin_notes: Internal notes and comments for admin use only
         created_at: When this code record was created
         updated_at: When this code record was last updated
     """
@@ -211,6 +214,9 @@ class NAICSCode:
     parent_code: Optional[str] = None
     is_active: bool = True
     year: int = 2022
+    tags: List[str] = field(default_factory=list)
+    custom_category: Optional[str] = None
+    admin_notes: Optional[str] = None
     created_at: datetime = field(default_factory=datetime.now)
     updated_at: datetime = field(default_factory=datetime.now)
 
@@ -301,6 +307,9 @@ class NAICSCode:
             "parent_code": self.parent_code,
             "is_active": self.is_active,
             "year": self.year,
+            "tags": self.tags,
+            "custom_category": self.custom_category,
+            "admin_notes": self.admin_notes,
             "hierarchy": self.get_hierarchy(),
             "created_at": self.created_at.isoformat(),
             "updated_at": self.updated_at.isoformat(),

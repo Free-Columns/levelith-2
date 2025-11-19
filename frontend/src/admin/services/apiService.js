@@ -320,6 +320,60 @@ class APIService {
     return response.data;
   }
 
+  /**
+   * Get paginated NAICS codes with server-side filtering
+   * @param {Object} options - Query options
+   * @param {string} options.query - Search query for code/title/description
+   * @param {string} options.category - Filter by category
+   * @param {number} options.level - Filter by level (2, 3, 4, or 6)
+   * @param {number} options.page - Page number (1-indexed)
+   * @param {number} options.page_size - Items per page (default: 50, max: 200)
+   * @returns {Promise<Object>} Paginated response with items, total, page, page_size, total_pages
+   */
+  async getNAICSCodesPaginated({
+    query = "",
+    category = null,
+    level = null,
+    page = 1,
+    page_size = 50,
+  } = {}) {
+    const params = {
+      q: query,
+      page: page.toString(),
+      page_size: page_size.toString(),
+    };
+
+    if (category) params.category = category;
+    if (level) params.level = level.toString();
+
+    const response = await apiClient.get("/naics/paginated", { params });
+    return response.data;
+  }
+
+  /**
+   * Update NAICS code admin fields
+   * @param {string} code - NAICS code to update
+   * @param {Object} updates - Fields to update
+   * @param {Array<string>} updates.tags - Custom tags
+   * @param {string} updates.custom_category - Custom category
+   * @param {string} updates.admin_notes - Admin notes
+   * @returns {Promise<Object>} Updated NAICS code object
+   */
+  async updateNAICSCode(code, updates) {
+    const response = await apiClient.patch(`/naics/${code}`, updates);
+    return response.data;
+  }
+
+  /**
+   * Delete NAICS code
+   * @param {string} code - NAICS code to delete
+   * @returns {Promise<boolean>} True if deleted successfully
+   */
+  async deleteNAICSCode(code) {
+    await apiClient.delete(`/naics/${code}`);
+    return true;
+  }
+
   // ==================== STATISTICS ====================
 
   /**

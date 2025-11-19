@@ -335,6 +335,7 @@ const Docs: React.FC = () => {
 
     .markdown-content pre {
       background-color: ${ONETRUTH.colors.surfaceDark};
+      color: ${ONETRUTH.colors.textInverse};
       padding: ${ONETRUTH.spacing.lg};
       border-radius: ${ONETRUTH.borderRadius.md};
       overflow-x: auto;
@@ -347,6 +348,39 @@ const Docs: React.FC = () => {
       padding: 0;
       color: inherit;
       font-size: ${ONETRUTH.fonts.sizes.sm};
+    }
+
+    /* Ensure syntax highlighting from highlight.js is visible */
+    .markdown-content pre code .hljs {
+      color: inherit;
+    }
+
+    /* Override any conflicting highlight.js colors for better visibility */
+    .markdown-content pre .hljs-comment,
+    .markdown-content pre .hljs-quote {
+      color: #95a5a6;
+    }
+
+    .markdown-content pre .hljs-keyword,
+    .markdown-content pre .hljs-selector-tag,
+    .markdown-content pre .hljs-tag {
+      color: #3498db;
+    }
+
+    .markdown-content pre .hljs-string,
+    .markdown-content pre .hljs-attr,
+    .markdown-content pre .hljs-attribute {
+      color: #2ecc71;
+    }
+
+    .markdown-content pre .hljs-number,
+    .markdown-content pre .hljs-literal {
+      color: #e67e22;
+    }
+
+    .markdown-content pre .hljs-built_in,
+    .markdown-content pre .hljs-builtin-name {
+      color: #9b59b6;
     }
 
     .markdown-content ul, .markdown-content ol {

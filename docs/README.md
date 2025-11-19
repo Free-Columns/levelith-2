@@ -94,6 +94,8 @@ Location: `docs/dev/`
 |----------|---------|
 | [AI_AGENT_TOOLING.md](dev/AI_AGENT_TOOLING.md) | Technical documentation for AI navigation system |
 | [NAVIGATION.md](dev/NAVIGATION.md) | Auto-generated codebase navigation guide |
+| [CODEBASE_ANALYSIS.md](dev/CODEBASE_ANALYSIS.md) | **NEW:** Comprehensive codebase analysis report (architecture, coverage, quality) |
+| [DEVELOPMENT_PRIORITIES.md](dev/DEVELOPMENT_PRIORITIES.md) | **NEW:** Development roadmap and priorities (60-100 hour plan) |
 | [TEST_REPORT.md](dev/TEST_REPORT.md) | Test system reports and coverage |
 | [NAICS_IMPORT_GUIDE.md](dev/NAICS_IMPORT_GUIDE.md) | Complete guide for importing NAICS codes from TSV files |
 | [NAICS_QUICK_REFERENCE.md](dev/NAICS_QUICK_REFERENCE.md) | Quick reference for NAICS database import commands |
@@ -211,6 +213,9 @@ cd backend && uvicorn main:app --reload
 - [MANIFEST.md](core/MANIFEST.md) - START HERE
 - [AI_AGENT_GOLDEN_RULES.md](core/AI_AGENT_GOLDEN_RULES.md) - MANDATORY
 - [AI_AGENT_GUIDE.md](core/AI_AGENT_GUIDE.md)
+- [KNOWN_ISSUES.md](core/KNOWN_ISSUES.md) - **NEW:** Critical issues to be aware of
+- [CODEBASE_ANALYSIS.md](dev/CODEBASE_ANALYSIS.md) - **NEW:** Complete analysis report
+- [DEVELOPMENT_PRIORITIES.md](dev/DEVELOPMENT_PRIORITIES.md) - **NEW:** Development roadmap
 - [AI_AGENT_TOOLING.md](dev/AI_AGENT_TOOLING.md)
 
 ---
@@ -297,15 +302,15 @@ python dev/test_report_generator.py
 
 | Category | Files | Status | Coverage |
 |----------|-------|--------|----------|
-| Core | 4 | ✅ Complete | 100% |
+| Core | 5 | ✅ Complete | 100% |
 | API | 1 | ✅ Complete | 100% |
 | Backend | 1 | ✅ Complete | 100% |
 | Frontend | 0 | ⚠️ Needs docs | 0% |
-| Dev Tools | 6 | ✅ Complete | 100% |
+| Dev Tools | 8 | ✅ Complete | 100% |
 | Deployment | 3 | ✅ Complete | 100% |
 | Architecture | 1 | ✅ Complete | 100% |
 
-**Total:** 16 documentation files
+**Total:** 19 documentation files
 
 ---
 
@@ -314,8 +319,11 @@ python dev/test_report_generator.py
 ### Most Important Documents
 1. [MANIFEST.md](core/MANIFEST.md) - Project context
 2. [AI_AGENT_GOLDEN_RULES.md](core/AI_AGENT_GOLDEN_RULES.md) - Development rules
-3. [API_DOCUMENTATION.md](api/API_DOCUMENTATION.md) - API reference
-4. [RENDER_DEPLOYMENT.md](deployment/RENDER_DEPLOYMENT.md) - Deployment guide
+3. [KNOWN_ISSUES.md](core/KNOWN_ISSUES.md) - **NEW:** Critical issues and gaps
+4. [CODEBASE_ANALYSIS.md](dev/CODEBASE_ANALYSIS.md) - **NEW:** Complete analysis report
+5. [DEVELOPMENT_PRIORITIES.md](dev/DEVELOPMENT_PRIORITIES.md) - **NEW:** Roadmap to production
+6. [API_DOCUMENTATION.md](api/API_DOCUMENTATION.md) - API reference
+7. [RENDER_DEPLOYMENT.md](deployment/RENDER_DEPLOYMENT.md) - Deployment guide
 
 ### Frequently Accessed
 - [AI Agent Guide](core/AI_AGENT_GUIDE.md)

@@ -1,0 +1,593 @@
+name: 🏆 Golden Rules Enforcement
+
+on:
+  push:
+    branches: [main, develop, 'claude/**']
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: '3.11'
+  MIN_COVERAGE: 80
+  MIN_DOCSTRING_COVERAGE: 90
+
+# Cancel in-progress runs for the same PR/branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ============================================================================
+  # RULE 1: TEST-FIRST DEVELOPMENT (MANDATORY)
+  # ============================================================================
+
+  rule-1-tests:
+    name: '📋 Rule 1: Test Coverage ≥ 80%'
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpass
+          POSTGRES_DB: testdb
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+      redis:
+        image: redis:7-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f backend/requirements.txt ]; then
+            pip install -r backend/requirements.txt
+          fi
+          if [ -f backend/requirements-dev.txt ]; then
+            pip install -r backend/requirements-dev.txt
+          fi
+          pip install pytest pytest-cov pytest-asyncio
+
+      - name: Check for modified files requiring tests
+        id: check-files
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            git diff --name-only origin/${{ github.base_ref }}...HEAD | \
+              grep -E '\.(py)$' | \
+              grep -v '^tests/' | \
+              grep -v '__pycache__' | \
+              tee changed_files.txt || true
+
+            if [ -s changed_files.txt ]; then
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+              echo "📝 Python files modified:"
+              cat changed_files.txt
+            else
+              echo "has_changes=false" >> $GITHUB_OUTPUT
+              echo "No Python files modified outside tests/"
+            fi
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Verify tests exist for all modified code
+        if: steps.check-files.outputs.has_changes == 'true'
+        run: |
+          if [ -f tests/test_system.py ]; then
+            python tests/test_system.py enforce
+          else
+            echo "⚠️  Test enforcement system not found"
+            echo "Skipping test existence check"
+          fi
+
+      - name: Run tests with STRICT coverage requirement
+        env:
+          DATABASE_URL: postgresql://testuser:testpass@localhost:5432/testdb
+          REDIS_URL: redis://localhost:6379
+          TESTING: true
+        run: |
+          echo "🧪 Running tests with minimum ${{ env.MIN_COVERAGE }}% coverage..."
+          pytest tests/ \
+            -v \
+            --cov=backend \
+            --cov=dev \
+            --cov-report=term-missing:skip-covered \
+            --cov-report=xml \
+            --cov-report=html \
+            --cov-fail-under=${{ env.MIN_COVERAGE }}
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: golden-rules-coverage
+          path: |
+            htmlcov/
+            coverage.xml
+          retention-days: 30
+
+      - name: Generate coverage badge
+        if: github.ref == 'refs/heads/main'
+        run: |
+          COVERAGE=$(python -c "import xml.etree.ElementTree as ET; tree = ET.parse('coverage.xml'); print(int(float(tree.getroot().attrib['line-rate']) * 100))")
+          echo "Coverage: ${COVERAGE}%"
+
+          if [ $COVERAGE -ge 90 ]; then
+            COLOR="brightgreen"
+          elif [ $COVERAGE -ge 80 ]; then
+            COLOR="green"
+          elif [ $COVERAGE -ge 70 ]; then
+            COLOR="yellow"
+          else
+            COLOR="red"
+          fi
+
+          echo "Badge color: $COLOR"
+
+  # ============================================================================
+  # RULE 2: DOCUMENTATION IS NON-NEGOTIABLE
+  # ============================================================================
+
+  rule-2-documentation:
+    name: '📚 Rule 2: Documentation ≥ 90%'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install documentation tools
+        run: |
+          pip install interrogate pydocstyle darglint
+
+      - name: Check docstring coverage (STRICT)
+        run: |
+          echo "📖 Checking docstring coverage..."
+          interrogate \
+            -v \
+            --fail-under=${{ env.MIN_DOCSTRING_COVERAGE }} \
+            --ignore-init-module \
+            --ignore-init-method \
+            --ignore-private \
+            --ignore-magic \
+            --exclude tests \
+            backend/ dev/
+
+      - name: Check docstring style (Google format)
+        run: |
+          echo "✍️  Checking docstring style..."
+          pydocstyle backend/ dev/ \
+            --convention=google \
+            --add-ignore=D100,D104
+        continue-on-error: true
+
+      - name: Validate docstring arguments match function signatures
+        run: |
+          echo "🔍 Validating docstring arguments..."
+          darglint -v 2 backend/ dev/
+        continue-on-error: true
+
+  # ============================================================================
+  # RULE 3: SECURITY FIRST
+  # ============================================================================
+
+  rule-3-security:
+    name: '🔒 Rule 3: Security Scan'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install security tools
+        run: |
+          pip install bandit safety pip-audit
+
+      - name: Run Bandit security scan (STRICT on high severity)
+        run: |
+          echo "🛡️  Running Bandit security scan..."
+          bandit -r backend/ dev/ \
+            -f json \
+            -o bandit-report.json \
+            --severity-level medium
+
+          echo ""
+          echo "📊 Security Report Summary:"
+          bandit -r backend/ dev/ \
+            -ll \
+            --severity-level high
+
+      - name: Check for known vulnerabilities in dependencies
+        run: |
+          echo "🔍 Checking for known vulnerabilities..."
+          if [ -f backend/requirements.txt ]; then
+            pip install -r backend/requirements.txt
+            safety check --json || true
+          fi
+
+      - name: Audit Python dependencies
+        run: |
+          echo "🔎 Auditing dependencies..."
+          if [ -f backend/requirements.txt ]; then
+            pip-audit || true
+          fi
+
+      - name: Scan for secrets and credentials
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --only-verified
+
+      - name: Upload security reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-reports
+          path: bandit-report.json
+          retention-days: 30
+
+  # ============================================================================
+  # RULE 4: MAINTAIN THE AI AGENT INDEX
+  # ============================================================================
+
+  rule-4-ai-index:
+    name: '🤖 Rule 4: AI Agent Index'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Rebuild AI Agent Index
+        run: |
+          echo "🔨 Rebuilding AI agent index..."
+          python dev/aiagent_navigator.py index
+
+      - name: Check if index is up to date (STRICT)
+        run: |
+          if [ -f .aiagent-index.json ]; then
+            git diff --exit-code .aiagent-index.json || \
+            (echo "" && \
+             echo "❌ AI Agent index is OUT OF DATE!" && \
+             echo "" && \
+             echo "To fix this, run:" && \
+             echo "  python dev/aiagent_navigator.py index" && \
+             echo "  git add .aiagent-index.json" && \
+             echo "  git commit -m 'chore: Update AI agent index'" && \
+             echo "" && \
+             exit 1)
+          else
+            echo "✅ AI agent index does not exist yet - skipping"
+          fi
+
+      - name: Generate navigation guide
+        run: |
+          echo "📖 Generating navigation guide..."
+          python dev/aiagent_navigator.py guide || true
+
+  # ============================================================================
+  # RULE 5: CODE QUALITY STANDARDS
+  # ============================================================================
+
+  rule-5-code-quality:
+    name: '✨ Rule 5: Code Quality'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install quality tools
+        run: |
+          pip install black flake8 mypy pylint radon
+
+      - name: Check code formatting (Black)
+        run: |
+          echo "🎨 Checking code formatting..."
+          black --check --diff backend/ dev/ tests/
+
+      - name: Check code complexity
+        run: |
+          echo "📊 Checking code complexity..."
+          radon cc backend/ dev/ \
+            -a \
+            --min C \
+            --show-complexity
+
+      - name: Check maintainability index
+        run: |
+          echo "🔧 Checking maintainability..."
+          radon mi backend/ dev/ \
+            --min B \
+            --show
+
+      - name: Run Pylint (code quality)
+        run: |
+          echo "🔍 Running Pylint..."
+          pylint backend/ dev/ \
+            --fail-under=7.0 \
+            --disable=C0114,C0115,C0116
+        continue-on-error: true
+
+  # ============================================================================
+  # RULE 6: DEPENDENCY MANAGEMENT
+  # ============================================================================
+
+  rule-6-dependencies:
+    name: '📦 Rule 6: Dependencies'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Check for unpinned dependencies
+        run: |
+          echo "📌 Checking for unpinned dependencies..."
+
+          if [ -f backend/requirements.txt ]; then
+            if grep -E '^[a-zA-Z0-9_-]+$' backend/requirements.txt; then
+              echo ""
+              echo "❌ Found unpinned dependencies!"
+              echo "All dependencies must specify exact versions (e.g., package==1.2.3)"
+              exit 1
+            else
+              echo "✅ All dependencies are pinned"
+            fi
+          else
+            echo "⚠️  No requirements.txt found"
+          fi
+
+      - name: Check for outdated dependencies
+        run: |
+          echo "🔄 Checking for outdated dependencies..."
+          pip install pip-check-reqs
+          if [ -f backend/requirements.txt ]; then
+            pip install -r backend/requirements.txt
+            pip list --outdated
+          fi
+        continue-on-error: true
+
+  # ============================================================================
+  # RULE 7: PERFORMANCE AWARENESS
+  # ============================================================================
+
+  rule-7-performance:
+    name: '⚡ Rule 7: Performance'
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpass
+          POSTGRES_DB: testdb
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-benchmark
+          if [ -f backend/requirements.txt ]; then
+            pip install -r backend/requirements.txt
+          fi
+
+      - name: Run performance benchmarks
+        env:
+          DATABASE_URL: postgresql://testuser:testpass@localhost:5432/testdb
+          TESTING: true
+        run: |
+          echo "⚡ Running performance benchmarks..."
+          pytest tests/ \
+            -v \
+            -m "benchmark" \
+            --benchmark-only \
+            --benchmark-autosave || echo "No benchmark tests found"
+        continue-on-error: true
+
+  # ============================================================================
+  # RULE 10: VERSION CONTROL HYGIENE
+  # ============================================================================
+
+  rule-10-commits:
+    name: '📝 Rule 10: Commit Quality'
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check commit message format
+        uses: wagoid/commitlint-github-action@v6
+        with:
+          configFile: .commitlintrc.json
+        continue-on-error: true
+
+      - name: Validate commit messages manually
+        run: |
+          echo "📝 Checking commit messages..."
+
+          COMMITS=$(git log --format=%B origin/${{ github.base_ref }}..HEAD)
+
+          echo "$COMMITS" | while read -r line; do
+            if [ -n "$line" ]; then
+              if echo "$line" | grep -qE '^(feat|fix|docs|test|refactor|perf|chore|style|ci|build):'; then
+                echo "✅ $line"
+              else
+                echo "⚠️  Non-conventional: $line"
+              fi
+            fi
+          done
+        continue-on-error: true
+
+  # ============================================================================
+  # GOLDEN RULES SUMMARY
+  # ============================================================================
+
+  golden-rules-summary:
+    name: '🏆 Golden Rules Summary'
+    needs:
+      - rule-1-tests
+      - rule-2-documentation
+      - rule-3-security
+      - rule-4-ai-index
+      - rule-5-code-quality
+      - rule-6-dependencies
+      - rule-7-performance
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: Generate summary report
+        run: |
+          echo "# 🏆 Golden Rules Enforcement Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Rule | Status | Description |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|--------|-------------|" >> $GITHUB_STEP_SUMMARY
+          echo "| 1️⃣ Tests | ${{ needs.rule-1-tests.result == 'success' && '✅ PASS' || '❌ FAIL' }} | Test coverage ≥ 80% |" >> $GITHUB_STEP_SUMMARY
+          echo "| 2️⃣ Docs | ${{ needs.rule-2-documentation.result == 'success' && '✅ PASS' || '❌ FAIL' }} | Documentation coverage ≥ 90% |" >> $GITHUB_STEP_SUMMARY
+          echo "| 3️⃣ Security | ${{ needs.rule-3-security.result == 'success' && '✅ PASS' || '❌ FAIL' }} | No security vulnerabilities |" >> $GITHUB_STEP_SUMMARY
+          echo "| 4️⃣ AI Index | ${{ needs.rule-4-ai-index.result == 'success' && '✅ PASS' || '❌ FAIL' }} | AI agent index up to date |" >> $GITHUB_STEP_SUMMARY
+          echo "| 5️⃣ Quality | ${{ needs.rule-5-code-quality.result == 'success' && '✅ PASS' || '❌ FAIL' }} | Code quality standards met |" >> $GITHUB_STEP_SUMMARY
+          echo "| 6️⃣ Dependencies | ${{ needs.rule-6-dependencies.result == 'success' && '✅ PASS' || '❌ FAIL' }} | All dependencies pinned |" >> $GITHUB_STEP_SUMMARY
+          echo "| 7️⃣ Performance | ${{ needs.rule-7-performance.result == 'success' && '✅ PASS' || '⚠️ SKIP' }} | Performance benchmarks |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+      - name: Check critical rules passed
+        run: |
+          FAILED_CRITICAL=false
+
+          # Critical rules that MUST pass
+          if [ "${{ needs.rule-1-tests.result }}" != "success" ]; then
+            echo "❌ CRITICAL: Rule 1 (Tests) failed - Coverage below 80%"
+            FAILED_CRITICAL=true
+          fi
+
+          if [ "${{ needs.rule-3-security.result }}" != "success" ]; then
+            echo "❌ CRITICAL: Rule 3 (Security) failed - Security issues found"
+            FAILED_CRITICAL=true
+          fi
+
+          if [ "${{ needs.rule-4-ai-index.result }}" != "success" ]; then
+            echo "❌ CRITICAL: Rule 4 (AI Index) failed - Index out of date"
+            FAILED_CRITICAL=true
+          fi
+
+          if [ "${{ needs.rule-6-dependencies.result }}" != "success" ]; then
+            echo "❌ CRITICAL: Rule 6 (Dependencies) failed - Unpinned dependencies"
+            FAILED_CRITICAL=true
+          fi
+
+          if [ "$FAILED_CRITICAL" = "true" ]; then
+            echo ""
+            echo "🚫 Golden Rules enforcement FAILED!"
+            echo "Please fix the critical issues above before merging."
+            exit 1
+          else
+            echo "✅ All critical Golden Rules passed!"
+          fi
+
+      - name: Add PR comment with results
+        if: github.event_name == 'pull_request' && failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = `## 🏆 Golden Rules Enforcement
+
+❌ **Some Golden Rules checks failed**
+
+Please review the failed checks above and address the issues:
+
+- **Rule 1 (Tests)**: Ensure test coverage ≥ 80%
+- **Rule 2 (Documentation)**: Add docstrings to all functions/classes
+- **Rule 3 (Security)**: Fix security vulnerabilities
+- **Rule 4 (AI Index)**: Run \`python dev/aiagent_navigator.py index\`
+- **Rule 5 (Code Quality)**: Format code with \`black .\`
+- **Rule 6 (Dependencies)**: Pin all dependency versions
+
+See the [Golden Rules documentation](docs/core/AI_AGENT_GOLDEN_RULES.md) for details.`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });

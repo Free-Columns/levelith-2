@@ -2,6 +2,10 @@
 
 **A social-resume gamification platform built with AI-first development methodology**
 
+[![CI Pipeline](https://github.com/Free-Columns/levelith-2/workflows/CI%20Pipeline/badge.svg)](https://github.com/Free-Columns/levelith-2/actions/workflows/ci.yml)
+[![Golden Rules](https://github.com/Free-Columns/levelith-2/workflows/🏆%20Golden%20Rules%20Enforcement/badge.svg)](https://github.com/Free-Columns/levelith-2/actions/workflows/golden-rules.yml)
+[![Deploy](https://github.com/Free-Columns/levelith-2/workflows/🚀%20Deploy%20to%20Production/badge.svg)](https://github.com/Free-Columns/levelith-2/actions/workflows/deploy.yml)
+
 Levelith transforms professional experience tracking into an engaging, interactive platform. Track education, workplace experiences, and skills with NAICS-based industry classification, all backed by comprehensive testing and AI-powered development tools.
 
 ---
@@ -162,6 +166,31 @@ GET  /api/v1/naics/suggest/experience/{type}   # Get suggestions
 **Complete Guide:** [docs/deployment/RENDER_DEPLOYMENT.md](docs/deployment/RENDER_DEPLOYMENT.md)
 
 **Production:** https://levelith-backend.onrender.com
+
+---
+
+## 🔄 CI/CD Pipeline
+
+### Continuous Integration
+- ✅ **Automated Testing** - Every PR requires ≥80% test coverage
+- ✅ **Code Quality** - Black formatting, Flake8 linting, MyPy type checking
+- ✅ **Security Scanning** - Bandit, Safety, TruffleHog secret detection
+- ✅ **Golden Rules Enforcement** - 7 automated quality gates
+- ✅ **AI Agent Index** - Automatic validation on every commit
+
+### Continuous Deployment
+- ✅ **Automatic Deployment** - To Render.com on main branch
+- ✅ **Health Checks** - Automated post-deployment verification
+- ✅ **Smoke Tests** - Critical endpoint validation
+- ✅ **Rollback Support** - Automatic issue creation on failure
+
+**See:** [docs/dev/CI_CD_GUIDE.md](docs/dev/CI_CD_GUIDE.md) for complete CI/CD documentation
+
+### Branch Protection
+All PRs to `main` or `develop` must pass:
+- ✅ CI Pipeline (lint, typecheck, tests, build)
+- ✅ Golden Rules (coverage, security, AI index)
+- ✅ Code review (1 approval minimum)
 
 ---
 

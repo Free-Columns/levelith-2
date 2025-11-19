@@ -30,6 +30,31 @@ services:
         value: /api/v1
     autoDeploy: true
 
+  # Frontend Static Site
+  - type: web
+    name: levelith-frontend
+    env: static
+    region: oregon
+    plan: free
+    buildCommand: "cd frontend && npm install && npm run build"
+    staticPublishPath: frontend/dist
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=3600
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: "https://levelith-backend.onrender.com/api/v1"
+      - key: VITE_APP_NAME
+        value: "Levelith"
+      - key: VITE_ENVIRONMENT
+        value: "production"
+    autoDeploy: true
+
   # PostgreSQL Database
 databases:
   - name: levelith-db

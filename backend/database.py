@@ -89,12 +89,40 @@ def init_db() -> None:
 
     Should be called on application startup.
     Creates all tables defined in models that inherit from Base.
+
+    Retries connection with exponential backoff if database is temporarily unavailable.
     """
+    import logging
+    import time
+
+    logger = logging.getLogger(__name__)
+
     # Import all models here to ensure they are registered with Base
     from backend.models import user, experience  # noqa: F401
     from backend.models.db_models import NAICSCodeDB  # noqa: F401
 
-    Base.metadata.create_all(bind=engine)
+    max_retries = 5
+    retry_delay = 2  # seconds
+
+    for attempt in range(max_retries):
+        try:
+            logger.info(f"Attempting to initialize database (attempt {attempt + 1}/{max_retries})...")
+            Base.metadata.create_all(bind=engine)
+            logger.info("Database initialized successfully")
+            return
+        except Exception as e:
+            logger.warning(f"Database initialization attempt {attempt + 1} failed: {e}")
+
+            if attempt < max_retries - 1:
+                logger.info(f"Retrying in {retry_delay} seconds...")
+                time.sleep(retry_delay)
+                retry_delay *= 2  # Exponential backoff
+            else:
+                logger.error("Failed to initialize database after all retries")
+                # Don't crash the app - just log the error
+                # The health check endpoint will show database is unhealthy
+                logger.warning("Application will start without database connection")
+                logger.warning("Database endpoints will fail until connection is established")
 
 
 def drop_db() -> None:

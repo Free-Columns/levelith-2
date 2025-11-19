@@ -4,8 +4,8 @@
  * Uses ONETRUTH configuration for all styling
  */
 
-import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -20,44 +20,67 @@ interface DocItem {
 }
 
 const Docs: React.FC = () => {
-  const { docPath } = useParams<{ docPath?: string }>();
+  const location = useLocation();
   const navigate = useNavigate();
+
+  // Extract the doc path from URL - everything after /docs/
+  // e.g., /docs/core/MANIFEST -> core/MANIFEST
+  const docPath = location.pathname.startsWith('/docs/')
+    ? location.pathname.slice(6) // Remove '/docs/' prefix
+    : undefined;
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
   const [docContent, setDocContent] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
+  const [documentation, setDocumentation] = useState<DocItem[]>([]);
 
-  // Documentation structure - maps to /docs folder
-  const documentation: DocItem[] = [
-    // Core Documentation
-    { path: 'README', title: 'Documentation Index', category: 'Core' },
-    { path: 'core/MANIFEST', title: 'Project Manifest', category: 'Core' },
-    { path: 'core/AI_AGENT_GOLDEN_RULES', title: 'AI Agent Golden Rules', category: 'Core' },
-    { path: 'core/KNOWN_ISSUES', title: 'Known Issues', category: 'Core' },
-    { path: 'core/AI_AGENT_GUIDE', title: 'AI Agent Guide', category: 'Core' },
+  // Fetch documentation list from backend
+  useEffect(() => {
+    const fetchDocList = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || 'https://levelith-backend.onrender.com/api/v1';
+        const response = await fetch(`${apiUrl}/docs/list`);
 
-    // Development
-    { path: 'dev/DEVELOPMENT_PRIORITIES', title: 'Development Priorities', category: 'Development' },
-    { path: 'dev/CODEBASE_ANALYSIS', title: 'Codebase Analysis', category: 'Development' },
-    { path: 'dev/AI_AGENT_TOOLING', title: 'AI Agent Tooling', category: 'Development' },
-    { path: 'dev/ADMIN_PANEL_GUIDE', title: 'Admin Panel Guide', category: 'Development' },
-    { path: 'dev/NAICS_IMPORT_GUIDE', title: 'NAICS Import Guide', category: 'Development' },
-    { path: 'dev/NAICS_QUICK_REFERENCE', title: 'NAICS Quick Reference', category: 'Development' },
-    { path: 'dev/NAVIGATION', title: 'Navigation Guide', category: 'Development' },
-    { path: 'dev/TEST_REPORT', title: 'Test Report', category: 'Development' },
-    { path: 'dev/COMPREHENSIVE_TODO_REPORT', title: 'Todo Report', category: 'Development' },
+        if (!response.ok) {
+          throw new Error('Failed to fetch documentation list');
+        }
 
-    // API Documentation
-    { path: 'api/API_DOCUMENTATION', title: 'API Documentation', category: 'API' },
+        const docStructure = await response.json();
 
-    // Backend
-    { path: 'backend/NAICS_EXPANSION_SUMMARY', title: 'NAICS Expansion Summary', category: 'Backend' },
+        // Convert backend structure to DocItem[]
+        const docList: DocItem[] = [];
+        const categoryMap: Record<string, string> = {
+          core: 'Core',
+          dev: 'Development',
+          api: 'API',
+          backend: 'Backend',
+          frontend: 'Frontend',
+          deployment: 'Deployment',
+          architecture: 'Architecture',
+        };
 
-    // Frontend
-    { path: 'frontend/FRONTEND_GUIDE', title: 'Frontend Guide', category: 'Frontend' },
-  ];
+        Object.entries(docStructure).forEach(([category, docs]) => {
+          (docs as Array<{ path: string; title: string }>).forEach(doc => {
+            docList.push({
+              path: doc.path,
+              title: doc.title,
+              category: categoryMap[category] || category.charAt(0).toUpperCase() + category.slice(1),
+            });
+          });
+        });
+
+        setDocumentation(docList);
+      } catch (error) {
+        console.error('Error fetching documentation list:', error);
+        // Fallback to empty list - could also use a hardcoded fallback
+        setDocumentation([]);
+      }
+    };
+
+    fetchDocList();
+  }, []);
 
   // Group docs by category
   const groupedDocs = documentation.reduce((acc, doc) => {
@@ -74,18 +97,7 @@ const Docs: React.FC = () => {
     doc.path.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  useEffect(() => {
-    if (docPath) {
-      setSelectedDoc(docPath);
-      loadDocContent(docPath);
-    } else if (!selectedDoc && documentation.length > 0) {
-      // Default to README
-      setSelectedDoc('README');
-      loadDocContent('README');
-    }
-  }, [docPath]);
-
-  const loadDocContent = async (path: string) => {
+  const loadDocContent = useCallback(async (path: string) => {
     setIsLoading(true);
     setError(null);
 
@@ -106,7 +118,21 @@ const Docs: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (docPath) {
+      // URL has a specific doc path - load it
+      setSelectedDoc(docPath);
+      loadDocContent(docPath);
+    } else if (documentation.length > 0 && !docContent) {
+      // No doc path in URL and no content loaded yet - load default README
+      const defaultDoc = 'README';
+      setSelectedDoc(defaultDoc);
+      loadDocContent(defaultDoc);
+      navigate(`/docs/${defaultDoc}`, { replace: true });
+    }
+  }, [docPath, documentation.length, docContent, loadDocContent, navigate]);
 
   const handleDocSelect = (path: string) => {
     setSelectedDoc(path);
@@ -309,6 +335,7 @@ const Docs: React.FC = () => {
 
     .markdown-content pre {
       background-color: ${ONETRUTH.colors.surfaceDark};
+      color: ${ONETRUTH.colors.textInverse};
       padding: ${ONETRUTH.spacing.lg};
       border-radius: ${ONETRUTH.borderRadius.md};
       overflow-x: auto;
@@ -321,6 +348,39 @@ const Docs: React.FC = () => {
       padding: 0;
       color: inherit;
       font-size: ${ONETRUTH.fonts.sizes.sm};
+    }
+
+    /* Ensure syntax highlighting from highlight.js is visible */
+    .markdown-content pre code .hljs {
+      color: inherit;
+    }
+
+    /* Override any conflicting highlight.js colors for better visibility */
+    .markdown-content pre .hljs-comment,
+    .markdown-content pre .hljs-quote {
+      color: #95a5a6;
+    }
+
+    .markdown-content pre .hljs-keyword,
+    .markdown-content pre .hljs-selector-tag,
+    .markdown-content pre .hljs-tag {
+      color: #3498db;
+    }
+
+    .markdown-content pre .hljs-string,
+    .markdown-content pre .hljs-attr,
+    .markdown-content pre .hljs-attribute {
+      color: #2ecc71;
+    }
+
+    .markdown-content pre .hljs-number,
+    .markdown-content pre .hljs-literal {
+      color: #e67e22;
+    }
+
+    .markdown-content pre .hljs-built_in,
+    .markdown-content pre .hljs-builtin-name {
+      color: #9b59b6;
     }
 
     .markdown-content ul, .markdown-content ol {

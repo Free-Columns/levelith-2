@@ -1281,6 +1281,143 @@ https://levlith.online/docs
 
 ---
 
+### Statistics Endpoint
+
+#### GET `/stats`
+
+Get aggregated statistics for admin dashboard analytics.
+
+**Purpose**: Provides comprehensive statistics about users, experiences, skills, and geographic distribution for administrative dashboards and analytics.
+
+**Headers**: None required (public endpoint, can be restricted later)
+
+**Response (200 OK):**
+```json
+{
+  "users": {
+    "total": 100,
+    "active": 85,
+    "verified": 60,
+    "inactive": 15,
+    "growth": [
+      {"month": "Jan", "users": 10},
+      {"month": "Feb", "users": 25},
+      {"month": "Mar", "users": 42}
+    ],
+    "activity": [
+      {"date": "Nov 18", "logins": 42},
+      {"date": "Nov 19", "logins": 38}
+    ]
+  },
+  "experiences": {
+    "total": 450,
+    "byType": {
+      "full_time": 120,
+      "degree": 80,
+      "hard_skill": 100,
+      "certificate": 50
+    },
+    "byCategory": {
+      "education": 150,
+      "workplace": 180,
+      "skills": 120
+    },
+    "byIndustry": {
+      "technology": 200,
+      "education": 100,
+      "healthcare": 50,
+      "finance": 40,
+      "general": 60
+    }
+  },
+  "skills": {
+    "top": [
+      {"skill": "Python", "count": 45},
+      {"skill": "JavaScript", "count": 38},
+      {"skill": "Communication", "count": 32}
+    ],
+    "total": 120
+  },
+  "geography": {
+    "locations": [
+      {"location": "San Francisco, CA", "count": 25},
+      {"location": "New York, NY", "count": 20},
+      {"location": "Austin, TX", "count": 15}
+    ]
+  }
+}
+```
+
+**Response Fields:**
+
+**users**:
+- `total` (integer): Total number of registered users
+- `active` (integer): Number of active users (is_active = true)
+- `verified` (integer): Number of verified users (is_verified = true)
+- `inactive` (integer): Number of inactive users
+- `growth` (array): User growth over last 12 months
+  - `month` (string): Month abbreviation (Jan, Feb, etc.)
+  - `users` (integer): Cumulative user count at end of month
+- `activity` (array): User login activity for last 30 days
+  - `date` (string): Date string (Mon DD format)
+  - `logins` (integer): Number of logins on that date
+
+**experiences**:
+- `total` (integer): Total number of experiences
+- `byType` (object): Count of experiences by type
+  - Keys: Experience type names (full_time, degree, hard_skill, etc.)
+  - Values: Count of experiences of that type
+- `byCategory` (object): Count of experiences by category
+  - Keys: Category names (education, workplace, skills)
+  - Values: Count of experiences in that category
+- `byIndustry` (object): Count of experiences by industry (NAICS-based)
+  - Keys: Industry names (technology, education, healthcare, etc.)
+  - Values: Count of experiences in that industry
+
+**skills**:
+- `top` (array): Top trending skills (currently returns empty array)
+  - `skill` (string): Skill name
+  - `count` (integer): Number of users with this skill
+- `total` (integer): Total unique skills (currently 0)
+
+**geography**:
+- `locations` (array): Top locations by user count (max 8)
+  - `location` (string): Location string from user profile
+  - `count` (integer): Number of users at that location
+
+**Performance:**
+- Response time: < 5 seconds for databases with up to 10,000 users
+- Caching recommended for production environments
+
+**Business Rules:**
+- All counts are based on current database state
+- Growth data shows last 12 months (month by month)
+- Activity data shows last 30 days (day by day)
+- Industry mapping based on NAICS code classification
+- Empty database returns zeros/empty arrays (not errors)
+
+**Usage Example:**
+```bash
+# Get statistics
+curl http://localhost:8000/api/v1/stats
+
+# Use in admin dashboard
+fetch('https://levlith.online/api/v1/stats')
+  .then(res => res.json())
+  .then(stats => {
+    console.log(`Total users: ${stats.users.total}`);
+    console.log(`Active users: ${stats.users.active}`);
+  });
+```
+
+**Notes:**
+- User activity (logins) is currently estimated; implement login tracking for accurate data
+- Skills data requires proper skill extraction from experiences
+- Geographic data depends on users having `profile_data.location` set
+- Consider adding caching (Redis) for production to reduce database load
+
+---
+
 ## Implementation Status
 
 ### ✅ Completed

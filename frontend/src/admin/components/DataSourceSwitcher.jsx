@@ -60,8 +60,6 @@ export default function DataSourceSwitcher() {
               ? ONETRUTH.colors.textInverse
               : ONETRUTH.colors.text,
           }}
-          disabled={true}
-          title="Server API integration coming soon"
         >
           <span className="flex items-center gap-2">
             <svg

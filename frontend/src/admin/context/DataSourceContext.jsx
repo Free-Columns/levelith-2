@@ -24,7 +24,7 @@ export const DATA_SOURCES = {
 };
 
 export const DataSourceProvider = ({ children }) => {
-  const [dataSource, setDataSource] = useState(DATA_SOURCES.SERVER);
+  const [dataSource, setDataSource] = useState(DATA_SOURCES.LOCAL);
   const [localUsers, setLocalUsers] = useState(mockUsers);
   const [localExperiences, setLocalExperiences] = useState(mockExperiences);
 

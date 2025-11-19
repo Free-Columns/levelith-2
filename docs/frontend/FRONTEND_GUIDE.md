@@ -731,6 +731,288 @@ const DocPage = () => {
 
 ---
 
+## Tailwind CSS Setup
+
+### Overview
+
+Levelith uses **Tailwind CSS** as the primary styling framework, integrated with the ONETRUTH design system. Tailwind provides utility-first CSS classes for rapid development while maintaining design consistency.
+
+### Configuration
+
+**tailwind.config.js** (Root level):
+```javascript
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        // ONETRUTH color palette mapped to Tailwind
+        primary: {
+          DEFAULT: '#3498db',
+          dark: '#2980b9',
+          light: '#5dade2',
+        },
+        secondary: {
+          DEFAULT: '#2ecc71',
+          dark: '#27ae60',
+          light: '#58d68d',
+        },
+        accent: {
+          DEFAULT: '#e74c3c',
+          dark: '#c0392b',
+          light: '#ec7063',
+        },
+        background: {
+          DEFAULT: '#ecf0f1',
+          dark: '#34495e',
+        },
+        surface: {
+          DEFAULT: '#ffffff',
+          dark: '#2c3e50',
+        },
+        text: {
+          DEFAULT: '#2c3e50',
+          light: '#7f8c8d',
+          dark: '#1a252f',
+          inverse: '#ffffff',
+        },
+        education: '#9b59b6',
+        workplace: '#e67e22',
+        skills: '#1abc9c',
+      },
+      fontFamily: {
+        heading: ['"Montserrat"', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+        body: ['"Open Sans"', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+        mono: ['"Fira Code"', '"Courier New"', 'Courier', 'monospace'],
+      },
+    },
+  },
+  plugins: [],
+}
+```
+
+**postcss.config.js**:
+```javascript
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+```
+
+**src/index.css**:
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #ecf0f1;
+  color: #2c3e50;
+}
+```
+
+### Using Tailwind Classes
+
+Tailwind classes can be used directly in JSX:
+
+```tsx
+// Example: Admin Panel Header
+export function Header() {
+  return (
+    <header className="px-6 py-4 shadow-sm border-b flex items-center justify-between bg-surface border-border">
+      <h1 className="text-2xl font-semibold text-text-dark font-heading">
+        Dashboard
+      </h1>
+      <DataSourceSwitcher />
+    </header>
+  );
+}
+
+// Example: Card Component
+export function Card({ title, children }) {
+  return (
+    <div className="p-6 rounded-lg shadow bg-surface">
+      <h3 className="text-lg font-semibold mb-4 text-text-dark">
+        {title}
+      </h3>
+      <div className="text-text">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// Example: Admin Layout Sidebar
+export function Sidebar() {
+  return (
+    <aside className="w-64 p-6 shadow-lg bg-surface-dark">
+      <h2 className="text-2xl font-bold text-text-inverse font-heading mb-8">
+        Levelith Admin
+      </h2>
+      {/* Navigation items */}
+    </aside>
+  );
+}
+```
+
+### Common Tailwind Classes
+
+**Layout**:
+- `flex`, `grid`: Layout systems
+- `w-64`, `h-screen`: Width/height
+- `p-6`, `px-4`, `py-2`: Padding
+- `m-4`, `mx-auto`, `my-2`: Margin
+
+**Typography**:
+- `text-2xl`, `text-lg`: Font sizes
+- `font-bold`, `font-semibold`: Font weights
+- `font-heading`, `font-body`: Custom font families
+- `text-primary`, `text-text-dark`: Text colors
+
+**Colors**:
+- `bg-surface`, `bg-primary`: Background colors
+- `text-primary`, `text-text-inverse`: Text colors
+- `border-border`: Border colors
+
+**Effects**:
+- `shadow-sm`, `shadow-lg`: Box shadows
+- `rounded-lg`, `rounded-md`: Border radius
+- `hover:bg-primary`: Hover states
+- `transition-all`: Transitions
+
+### Mixing Tailwind with ONETRUTH
+
+You can mix Tailwind classes with inline styles for dynamic values:
+
+```tsx
+function StatusBadge({ status }: { status: string }) {
+  return (
+    <span
+      className="px-3 py-1 rounded-full text-sm font-medium"
+      style={{
+        backgroundColor: status === 'active'
+          ? ONETRUTH.colors.success
+          : ONETRUTH.colors.error,
+        color: ONETRUTH.colors.textInverse,
+      }}
+    >
+      {status}
+    </span>
+  );
+}
+```
+
+### Responsive Design
+
+Tailwind includes responsive prefixes:
+
+```tsx
+<div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4">
+  {/* Responsive width */}
+</div>
+
+<nav className="space-y-2 lg:flex lg:space-y-0 lg:space-x-4">
+  {/* Stack on mobile, horizontal on large screens */}
+</nav>
+```
+
+### Custom Classes
+
+For repeated patterns, create custom classes:
+
+```css
+/* src/index.css */
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-primary text-text-inverse rounded-lg;
+    @apply hover:bg-primary-dark transition-colors;
+    @apply font-medium cursor-pointer;
+  }
+
+  .card {
+    @apply p-6 bg-surface rounded-lg shadow-md;
+  }
+}
+```
+
+Usage:
+```tsx
+<button className="btn-primary">Click me</button>
+<div className="card">Content</div>
+```
+
+### Production Optimization
+
+Tailwind automatically purges unused classes in production builds:
+
+```bash
+npm run build
+# Tailwind removes all unused utility classes
+# Resulting CSS is minimal and optimized
+```
+
+### When to Use Tailwind vs Inline Styles
+
+**Use Tailwind for**:
+- Static layouts and spacing
+- Typography and colors from theme
+- Responsive design
+- Common UI patterns
+
+**Use Inline Styles (with ONETRUTH) for**:
+- Dynamic values based on props/state
+- Conditional styling
+- Values not in Tailwind config
+- Component-specific calculations
+
+**Example - Combining Both**:
+```tsx
+function ProgressBar({ percentage }: { percentage: number }) {
+  return (
+    <div className="w-full bg-gray-200 rounded-full h-2">
+      <div
+        className="h-2 rounded-full transition-all"
+        style={{
+          width: `${percentage}%`,
+          backgroundColor: ONETRUTH.colors.success,
+        }}
+      />
+    </div>
+  );
+}
+```
+
+### Troubleshooting Tailwind
+
+**Classes not applying**:
+1. Check `tailwind.config.js` content paths include your files
+2. Ensure `@tailwind` directives are in `index.css`
+3. Restart dev server after config changes
+
+**Conflicts with inline styles**:
+- Inline styles override Tailwind classes
+- Use `!important` in Tailwind sparingly: `!bg-primary`
+
+**IDE not autocompleting Tailwind classes**:
+- Install "Tailwind CSS IntelliSense" extension
+- Check workspace settings for Tailwind support
+
+---
+
 ## Styling Guidelines
 
 ### 1. Always Use ONETRUTH

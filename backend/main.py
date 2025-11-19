@@ -16,7 +16,7 @@ from fastapi.responses import JSONResponse
 
 from backend.config import settings
 from backend.database import init_db
-from backend.api.routes import health, users, experiences, naics
+from backend.api.routes import health, users, experiences, naics, docs
 
 # Configure logging
 logging.basicConfig(
@@ -101,6 +101,11 @@ app.include_router(
     naics.router,
     prefix=f"{settings.api_v1_prefix}",
     tags=["NAICS"]
+)
+app.include_router(
+    docs.router,
+    prefix=f"{settings.api_v1_prefix}",
+    tags=["Documentation"]
 )
 
 

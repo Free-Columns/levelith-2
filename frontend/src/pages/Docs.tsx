@@ -28,36 +28,53 @@ const Docs: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
+  const [documentation, setDocumentation] = useState<DocItem[]>([]);
 
-  // Documentation structure - maps to /docs folder
-  const documentation: DocItem[] = [
-    // Core Documentation
-    { path: 'README', title: 'Documentation Index', category: 'Core' },
-    { path: 'core/MANIFEST', title: 'Project Manifest', category: 'Core' },
-    { path: 'core/AI_AGENT_GOLDEN_RULES', title: 'AI Agent Golden Rules', category: 'Core' },
-    { path: 'core/KNOWN_ISSUES', title: 'Known Issues', category: 'Core' },
-    { path: 'core/AI_AGENT_GUIDE', title: 'AI Agent Guide', category: 'Core' },
+  // Fetch documentation list from backend
+  useEffect(() => {
+    const fetchDocList = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || 'https://levelith-backend.onrender.com/api/v1';
+        const response = await fetch(`${apiUrl}/docs/list`);
 
-    // Development
-    { path: 'dev/DEVELOPMENT_PRIORITIES', title: 'Development Priorities', category: 'Development' },
-    { path: 'dev/CODEBASE_ANALYSIS', title: 'Codebase Analysis', category: 'Development' },
-    { path: 'dev/AI_AGENT_TOOLING', title: 'AI Agent Tooling', category: 'Development' },
-    { path: 'dev/ADMIN_PANEL_GUIDE', title: 'Admin Panel Guide', category: 'Development' },
-    { path: 'dev/NAICS_IMPORT_GUIDE', title: 'NAICS Import Guide', category: 'Development' },
-    { path: 'dev/NAICS_QUICK_REFERENCE', title: 'NAICS Quick Reference', category: 'Development' },
-    { path: 'dev/NAVIGATION', title: 'Navigation Guide', category: 'Development' },
-    { path: 'dev/TEST_REPORT', title: 'Test Report', category: 'Development' },
-    { path: 'dev/COMPREHENSIVE_TODO_REPORT', title: 'Todo Report', category: 'Development' },
+        if (!response.ok) {
+          throw new Error('Failed to fetch documentation list');
+        }
 
-    // API Documentation
-    { path: 'api/API_DOCUMENTATION', title: 'API Documentation', category: 'API' },
+        const docStructure = await response.json();
 
-    // Backend
-    { path: 'backend/NAICS_EXPANSION_SUMMARY', title: 'NAICS Expansion Summary', category: 'Backend' },
+        // Convert backend structure to DocItem[]
+        const docList: DocItem[] = [];
+        const categoryMap: Record<string, string> = {
+          core: 'Core',
+          dev: 'Development',
+          api: 'API',
+          backend: 'Backend',
+          frontend: 'Frontend',
+          deployment: 'Deployment',
+          architecture: 'Architecture',
+        };
 
-    // Frontend
-    { path: 'frontend/FRONTEND_GUIDE', title: 'Frontend Guide', category: 'Frontend' },
-  ];
+        Object.entries(docStructure).forEach(([category, docs]) => {
+          (docs as Array<{ path: string; title: string }>).forEach(doc => {
+            docList.push({
+              path: doc.path,
+              title: doc.title,
+              category: categoryMap[category] || category.charAt(0).toUpperCase() + category.slice(1),
+            });
+          });
+        });
+
+        setDocumentation(docList);
+      } catch (error) {
+        console.error('Error fetching documentation list:', error);
+        // Fallback to empty list - could also use a hardcoded fallback
+        setDocumentation([]);
+      }
+    };
+
+    fetchDocList();
+  }, []);
 
   // Group docs by category
   const groupedDocs = documentation.reduce((acc, doc) => {

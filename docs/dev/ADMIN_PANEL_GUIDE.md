@@ -38,10 +38,16 @@ You have a **fully functional admin panel** that can manage users and experience
 - ✅ Geographic distribution
 - ✅ User activity timeline
 
-### 🏢 NAICS Code Browser
-- ✅ Browse all industry codes
-- ✅ Search and filter by industry
+### 🏢 NAICS Code Management (Full CRUD)
+- ✅ Browse all 2222+ industry codes with pagination
+- ✅ Search and filter by code/title/description
+- ✅ **Edit NAICS codes** with admin-specific fields:
+  - Tags (for organization and categorization)
+  - Custom Category (admin-defined classification)
+  - Admin Notes (internal comments)
+- ✅ **Delete NAICS codes** (with confirmation)
 - ✅ View industry distribution
+- ✅ Server-side pagination (50 items/page)
 
 ---
 
@@ -229,7 +235,37 @@ http://localhost:5173/experiences
 http://localhost:5173/naics
 ```
 
-Browse all NAICS industry codes, search, and filter by industry category.
+**Full CRUD operations for managing NAICS industry codes**
+
+**Features:**
+- Browse all 2222+ NAICS codes with server-side pagination
+- Search by code, title, or description
+- Filter by category and hierarchical level
+- Edit admin-specific fields (tags, category, notes)
+- Delete codes (with warning confirmation)
+
+**Viewing NAICS Codes:**
+1. Navigate to NAICS page
+2. Use search box to find specific codes
+3. Pagination shows 50 codes per page
+4. View Tags column for admin-defined tags
+
+**Editing a NAICS Code:**
+1. Click "Edit" button in Actions column
+2. Modal opens with admin fields:
+   - **Tags**: Comma-separated tags for organization (e.g., "tech, high-demand")
+   - **Custom Category**: Your own classification system
+   - **Admin Notes**: Internal notes and comments
+3. Click "Save Changes"
+4. Changes persist immediately
+
+**Deleting a NAICS Code:**
+1. Click "Delete" button in Actions column
+2. Confirmation modal warns about permanent deletion
+3. Click "Delete" to confirm
+4. Code removed from database
+
+**Note:** Official NAICS fields (code, title, description, category) cannot be edited. Only admin-specific fields can be modified.
 
 ---
 
@@ -495,7 +531,26 @@ DELETE /api/v1/experiences/{id}    # Delete experience
 ### NAICS Endpoints
 ```
 GET    /api/v1/naics/              # List NAICS codes
+GET    /api/v1/naics/paginated     # Paginated search with filters
 GET    /api/v1/naics/{code}        # Get specific code
+PATCH  /api/v1/naics/{code}        # Update admin fields (tags, category, notes)
+DELETE /api/v1/naics/{code}        # Delete code (permanent)
+```
+
+**Example - Update NAICS Code:**
+```bash
+curl -X PATCH "http://localhost:8000/api/v1/naics/541511" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tags": ["technology", "software", "high-demand"],
+    "custom_category": "Tech Priority",
+    "admin_notes": "Popular code for software development companies"
+  }'
+```
+
+**Example - Paginated Search:**
+```bash
+curl "http://localhost:8000/api/v1/naics/paginated?q=computer&page=1&page_size=50"
 ```
 
 ### Health Endpoints

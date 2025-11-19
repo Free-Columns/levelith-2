@@ -6,7 +6,250 @@ This document tracks recent changes, fixes, and new features added to the Leveli
 
 ---
 
-## 🎉 Latest Updates (2025-11-19)
+## 🎉 Latest Updates (2025-11-19) - Admin Dashboard NAICS CRUD Complete
+
+### ✅ NAICS Code Management (Full CRUD)
+
+**Overview**: Implemented complete CRUD operations for NAICS codes with admin-specific fields, server-side pagination, and full frontend integration.
+
+#### Backend Implementation
+- **Database Migration**: Added admin fields to `naics_codes` table
+  - `tags` (JSON): Array of custom tags for organization
+  - `custom_category` (VARCHAR): Admin-defined category
+  - `admin_notes` (TEXT): Internal notes and comments
+- **Repository Layer**: Added UPDATE, DELETE, and paginated search methods
+- **Service Layer**: Business logic for admin operations
+- **API Endpoints**: PATCH, DELETE, and GET /paginated routes
+
+#### Frontend Implementation
+- **NAICSCodes.jsx**: Complete rewrite (244→558 lines)
+  - Server-side pagination (50 items/page)
+  - Edit modal with tags, custom_category, admin_notes
+  - Delete confirmation with warning
+  - Enhanced table with Tags and Actions columns
+  - Search and filter support
+- **apiService.js**: Added 3 new NAICS methods
+  - `getNAICSCodesPaginated()` - Server-side paginated search
+  - `updateNAICSCode()` - PATCH admin fields
+  - `deleteNAICSCode()` - DELETE operation
+
+#### Files Modified
+**Backend**:
+- `backend/models/db_models.py` - Added admin fields to NAICSCodeDB model
+- `backend/models/naics.py` - Updated NAICSCode domain model
+- `backend/repositories/naics_db_repository.py` - Added update/delete/pagination
+- `backend/services/naics_service.py` - Service methods for CRUD
+- `backend/api/routes/naics.py` - New API endpoints
+- `backend/alembic/versions/41518377be8d_add_admin_fields_to_naics_codes.py` - Migration
+
+**Frontend**:
+- `frontend/src/admin/pages/NAICSCodes.jsx` - Complete CRUD UI
+- `frontend/src/admin/services/apiService.js` - API integration
+
+---
+
+### ✅ Admin Dashboard Styling & Bug Fixes
+
+**Problem**: Multiple UI/UX issues reported by user including hardcoded CSS, missing filters, and broken modals.
+
+**Solution**: Comprehensive styling overhaul to enforce ONETRUTH dynamic theming and fix all reported bugs.
+
+#### Bug Fixes (All 5 Resolved)
+
+1. **Data Source Switcher "Coming Soon" Text**
+   - Removed `(Coming Soon)` text from Server API button
+   - Now shows clean "Server API" label
+
+2. **Modal Component Blank Screen**
+   - **Root Cause**: Hardcoded Tailwind className attributes not being compiled
+   - **Fix**: Complete rewrite of Modal.jsx removing ALL className
+   - Now uses only inline styles with ONETRUTH theme object
+   - Ensures dynamic theming works correctly
+
+3. **AdminLayout Styling Issues**
+   - Replaced all hardcoded className with ONETRUTH inline styles
+   - Sidebar, header, and navigation now fully dynamic
+   - Proper colors, spacing, and typography from theme
+
+4. **DataSourceSwitcher Styling**
+   - Removed all className attributes
+   - Implemented full inline styles using ONETRUTH
+   - Toggle buttons now properly styled
+
+5. **Experiences Missing Filters**
+   - Added `typeFilter` state variable
+   - Implemented Category dropdown (Education, Workplace, Skills, All)
+   - Implemented Type dropdown (dynamically filtered by category)
+   - Smart filtering: type options change based on selected category
+   - Auto-resets type when category changes
+
+#### Files Modified
+- `frontend/src/admin/components/Modal.jsx` - Complete rewrite
+- `frontend/src/admin/layouts/AdminLayout.jsx` - All styling updated
+- `frontend/src/admin/components/DataSourceSwitcher.jsx` - ONETRUTH styling
+- `frontend/src/admin/pages/Experiences.jsx` - Added filter dropdowns
+
+#### Key Principle Enforced
+**NO HARDCODED CSS ALLOWED** - All components must use ONETRUTH dynamic styling for:
+- Colors (primary, secondary, backgrounds, text)
+- Spacing (padding, margin, gaps)
+- Typography (fonts, sizes, weights)
+- Borders, shadows, transitions
+
+---
+
+### ✅ Pagination Updates
+
+**Experiences Pagination**:
+- Default `page_size`: 20 → **50**
+- Maximum `page_size`: 100 → **200**
+- Supports filtering by category and type while paginating
+
+**NAICS Pagination**:
+- Server-side pagination (50 items/page, max 200)
+- Search across code, title, description
+- Filter by category and level
+- Proper total_pages calculation
+
+---
+
+### 📊 API Endpoints Added
+
+#### NAICS Endpoints
+
+**GET /api/v1/naics/paginated**
+```bash
+curl "http://localhost:8000/api/v1/naics/paginated?q=computer&page=1&page_size=50"
+```
+Response:
+```json
+{
+  "items": [/* NAICS codes */],
+  "total": 2222,
+  "page": 1,
+  "page_size": 50,
+  "total_pages": 45
+}
+```
+
+**PATCH /api/v1/naics/{code}**
+```bash
+curl -X PATCH "http://localhost:8000/api/v1/naics/541511" \
+  -H "Content-Type: application/json" \
+  -d '{"tags": ["tech", "high-demand"], "admin_notes": "Priority sector"}'
+```
+
+**DELETE /api/v1/naics/{code}**
+```bash
+curl -X DELETE "http://localhost:8000/api/v1/naics/999999"
+```
+
+---
+
+### 🎨 ONETRUTH Styling Enforcement
+
+**What Changed**:
+All admin dashboard components now strictly use ONETRUTH for styling. No hardcoded values allowed.
+
+**Before** (Bad):
+```jsx
+<div className="bg-white p-6 rounded-lg shadow-md">
+```
+
+**After** (Good):
+```jsx
+<div style={{
+  backgroundColor: ONETRUTH.colors.surface,
+  padding: ONETRUTH.spacing.lg,
+  borderRadius: ONETRUTH.borderRadius.md,
+  boxShadow: ONETRUTH.shadows.md
+}}>
+```
+
+**Benefits**:
+- Centralized theming (change once, apply everywhere)
+- Dynamic color schemes
+- Consistent spacing and typography
+- Future dark mode support
+- No reliance on Tailwind compilation
+
+---
+
+### 🧪 Testing Checklist
+
+**Completed**:
+- ✅ NAICS pagination with 50 items/page
+- ✅ NAICS update with tags, custom_category, admin_notes
+- ✅ NAICS delete with confirmation
+- ✅ Experiences filter by category and type
+- ✅ Modal opens/closes correctly
+- ✅ All components use ONETRUTH styling
+- ✅ Data source switcher works
+- ✅ Server-side pagination loads correctly
+
+---
+
+### 📁 Complete File Changes Summary
+
+**Backend (7 files)**:
+1. `backend/models/db_models.py`
+2. `backend/models/naics.py`
+3. `backend/repositories/naics_db_repository.py`
+4. `backend/services/naics_service.py`
+5. `backend/api/routes/naics.py`
+6. `backend/api/routes/experiences.py`
+7. `backend/alembic/versions/41518377be8d_add_admin_fields_to_naics_codes.py`
+
+**Frontend (5 files)**:
+1. `frontend/src/admin/pages/NAICSCodes.jsx` - Complete rewrite
+2. `frontend/src/admin/pages/Experiences.jsx` - Added filters
+3. `frontend/src/admin/services/apiService.js` - New methods
+4. `frontend/src/admin/components/Modal.jsx` - ONETRUTH styling
+5. `frontend/src/admin/layouts/AdminLayout.jsx` - ONETRUTH styling
+6. `frontend/src/admin/components/DataSourceSwitcher.jsx` - ONETRUTH styling
+
+---
+
+### 🚀 Deployment Steps
+
+1. **Apply Database Migration**:
+```bash
+cd backend
+python -m alembic upgrade head
+```
+
+2. **Verify NAICS Table**:
+```sql
+SELECT code, tags, custom_category, admin_notes
+FROM naics_codes
+LIMIT 5;
+```
+
+3. **Frontend Build**:
+```bash
+cd frontend
+npm run build
+```
+
+4. **Test Admin Dashboard**:
+- Navigate to `/admin`
+- Test NAICS CRUD operations
+- Test Experiences filters
+- Verify modal styling
+
+---
+
+### 📚 Documentation Updated
+
+- ✅ `docs/dev/RECENT_UPDATES.md` - This file
+- ✅ `docs/dev/ADMIN_DASHBOARD_IMPLEMENTATION.md` - Frontend completion noted
+- ✅ `docs/dev/ADMIN_PANEL_GUIDE.md` - Updated with NAICS CRUD
+- ✅ `docs/frontend/FRONTEND_GUIDE.md` - Added ONETRUTH styling best practices
+- ✅ `docs/api/API_DOCUMENTATION.md` - NAICS endpoints documented
+
+---
+
+## 🎉 Previous Updates (Earlier 2025-11-19)
 
 ### ✅ Admin Panel Fixes
 

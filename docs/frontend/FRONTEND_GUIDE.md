@@ -1,35 +1,75 @@
 # Frontend Development Guide
 
-**Last Updated:** 2025-11-19
-**Version:** 1.0
-**Maintained By:** Levelith Development Team
+---
+title: "Frontend Development Guide"
+description: "Comprehensive guide for developing the Levelith frontend application using React, TypeScript, and the ONETRUTH branding system."
+category: "guides"
+tags: ["frontend", "react", "typescript", "onetruth", "vite", "development"]
+author: "Semour Media Group"
+date: "2025-11-19"
+lastUpdated: "2025-11-19"
+difficulty: "intermediate"
+readingTime: 25
+relatedPages:
+  - "/docs/api/API_DOCUMENTATION.md"
+  - "/docs/DEVELOPER_GUIDE.md"
+  - "/docs/backend/BACKEND_GUIDE.md"
+nextPage: "/docs/api/API_DOCUMENTATION.md"
+prevPage: "/docs/DEVELOPER_GUIDE.md"
+searchKeywords:
+  - "frontend"
+  - "react"
+  - "typescript"
+  - "onetruth"
+  - "vite"
+  - "tailwind"
+  - "admin dashboard"
+showTOC: true
+showBreadcrumbs: true
+showLastUpdated: true
+version: "1.0"
+---
+
+# Frontend Development Guide
+
+> **TL;DR:** Build modern React applications for Levelith using TypeScript, Vite, and the ONETRUTH branding system. All styling must use ONETRUTH (no hardcoded values), admin dashboard uses inline styles, and main app can use Tailwind CSS.
+
+**Difficulty:** 🟡 Intermediate | **Time:** ⏱️ 25 minutes | **Last Updated:** November 19, 2025
 
 ---
 
 ## Table of Contents
 
-1. [Overview](#overview)
-2. [Architecture](#architecture)
-3. [Technology Stack](#technology-stack)
-4. [Project Structure](#project-structure)
-5. [ONETRUTH Branding System](#onetruth-branding-system)
-6. [Creating New Pages](#creating-new-pages)
-7. [Updating Existing Pages](#updating-existing-pages)
-8. [Component Development](#component-development)
-9. [State Management](#state-management)
-10. [API Integration](#api-integration)
-11. [Routing](#routing)
-12. [Styling Guidelines](#styling-guidelines)
-13. [Testing](#testing)
-14. [Build and Deployment](#build-and-deployment)
-15. [Common Patterns](#common-patterns)
-16. [Troubleshooting](#troubleshooting)
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Technology Stack](#technology-stack)
+- [Project Structure](#project-structure)
+- [ONETRUTH Branding System](#onetruth-branding-system)
+- [Creating New Pages](#creating-new-pages)
+- [Updating Existing Pages](#updating-existing-pages)
+- [Component Development](#component-development)
+- [State Management](#state-management)
+- [API Integration](#api-integration)
+- [Routing](#routing)
+- [Tailwind CSS Setup](#tailwind-css-setup)
+- [Styling Guidelines](#styling-guidelines)
+- [Testing](#testing)
+- [Build and Deployment](#build-and-deployment)
+- [Common Patterns](#common-patterns)
+- [Admin Dashboard Styling Guidelines](#admin-dashboard-styling-guidelines)
+- [Troubleshooting](#troubleshooting)
+- [Best Practices](#best-practices)
+- [Additional Resources](#additional-resources)
+- [Related Documentation](#related-documentation)
+- [Feedback](#feedback)
 
 ---
 
 ## Overview
 
-The Levelith frontend is a modern React application built with TypeScript, focusing on user experience, performance, and maintainability. It features:
+The Levelith frontend is a modern React application built with TypeScript, focusing on user experience, performance, and maintainability.
+
+### Key Features
 
 - **React 18** with TypeScript for type safety
 - **Vite** for fast development and optimized builds
@@ -38,14 +78,19 @@ The Levelith frontend is a modern React application built with TypeScript, focus
 - **Axios** for API communication
 - **Recharts** for data visualization
 - **React Markdown** for documentation rendering
+- **Tailwind CSS** for utility-first styling (main app only)
 
-### Key Principles
+### Core Principles
 
-1. **Type Safety**: Everything is typed with TypeScript
-2. **Consistency**: All styling uses ONETRUTH configuration
-3. **Reusability**: Components are modular and composable
-4. **Performance**: Lazy loading, code splitting, and optimization
-5. **Accessibility**: ARIA labels, keyboard navigation, semantic HTML
+1. ✅ **Type Safety** - Everything is typed with TypeScript
+2. ✅ **Consistency** - All styling uses ONETRUTH configuration
+3. ✅ **Reusability** - Components are modular and composable
+4. ✅ **Performance** - Lazy loading, code splitting, and optimization
+5. ✅ **Accessibility** - ARIA labels, keyboard navigation, semantic HTML
+
+:::info
+**Note:** The admin dashboard strictly enforces inline styles with ONETRUTH (no Tailwind classes), while the main application can use Tailwind CSS utilities.
+:::
 
 ---
 
@@ -97,7 +142,7 @@ The Levelith frontend is a modern React application built with TypeScript, focus
 | **Axios** | 1.6.0 | HTTP client |
 | **Recharts** | 2.9.0 | Charts and visualizations |
 | **React Markdown** | Latest | Markdown rendering |
-| **Tailwind CSS** | 3.4.0 | Utility-first CSS (optional) |
+| **Tailwind CSS** | 3.4.0 | Utility-first CSS |
 | **Vitest** | 1.0.2 | Unit testing |
 | **Playwright** | 1.40.1 | E2E testing |
 
@@ -115,11 +160,11 @@ frontend/
 │   ├── pages/
 │   │   ├── Landing.tsx         # Landing page
 │   │   └── Docs.tsx           # Documentation viewer
-│   ├── components/            # Reusable UI components (future)
-│   ├── hooks/                 # Custom React hooks (future)
-│   ├── services/              # API services (future)
-│   ├── utils/                 # Utility functions (future)
-│   ├── types/                 # TypeScript type definitions (future)
+│   ├── components/            # Reusable UI components
+│   ├── hooks/                 # Custom React hooks
+│   ├── services/              # API services
+│   ├── utils/                 # Utility functions
+│   ├── types/                 # TypeScript type definitions
 │   │
 │   └── admin/                 # Admin dashboard (separate app)
 │       ├── main.jsx          # Admin entry point
@@ -142,7 +187,7 @@ frontend/
 │       ├── context/
 │       │   └── DataSourceContext.jsx
 │       ├── config/
-│       │   ├── theme.js      # ⚠️ TODO: Merge with ONETRUTH
+│       │   ├── theme.js      # ONETRUTH theme
 │       │   └── mockData.js
 │       └── data/
 │           └── mockData.js
@@ -162,13 +207,21 @@ frontend/
 
 ### What is ONETRUTH?
 
-ONETRUTH is the **single source of truth** for all branding, theming, and styling in the Levelith application. It ensures:
+ONETRUTH is the **single source of truth** for all branding, theming, and styling in the Levelith application.
+
+**Benefits:**
 
 - ✅ Consistent colors, fonts, spacing across all components
 - ✅ Easy theme updates (change once, apply everywhere)
 - ✅ No hardcoded values scattered throughout the codebase
+- ✅ Dynamic theme switching capability
+- ✅ Future-ready for dark mode
 
 **Location:** `/frontend/src/config/ONETRUTH.ts`
+
+:::warning
+**Warning:** Never hardcode colors, fonts, or spacing values. Always use ONETRUTH. Hardcoded values caused blank screen bugs in the admin dashboard modals.
+:::
 
 ### ONETRUTH Structure
 
@@ -181,6 +234,9 @@ export const ONETRUTH = {
     accent: "#e74c3c",         // Alert red
     background: "#ecf0f1",     // Light gray background
     surface: "#ffffff",        // White surfaces
+    textDark: "#2c3e50",      // Dark text
+    textLight: "#7f8c8d",     // Light text
+    textInverse: "#ffffff",   // Inverse text
     // ... many more colors
   },
 
@@ -194,13 +250,21 @@ export const ONETRUTH = {
       xs: "12px",
       sm: "14px",
       base: "16px",
-      // ... up to 5xl
+      lg: "18px",
+      xl: "20px",
+      "2xl": "24px",
+      "3xl": "30px",
+      "4xl": "36px",
+      "5xl": "48px",
     },
 
     weights: {
       light: 300,
       normal: 400,
-      // ... up to extrabold
+      medium: 500,
+      semibold: 600,
+      bold: 700,
+      extrabold: 800,
     },
 
     lineHeights: {
@@ -217,7 +281,10 @@ export const ONETRUTH = {
     sm: "8px",
     md: "16px",
     lg: "24px",
-    // ... up to 4xl
+    xl: "32px",
+    "2xl": "48px",
+    "3xl": "64px",
+    "4xl": "96px",
   },
 
   // Border Radius
@@ -225,14 +292,18 @@ export const ONETRUTH = {
     sm: "4px",
     md: "8px",
     lg: "12px",
-    // ... up to full
+    xl: "16px",
+    "2xl": "24px",
+    full: "9999px",
   },
 
   // Shadows
   shadows: {
     sm: "0 1px 2px rgba(0, 0, 0, 0.05)",
     md: "0 4px 6px rgba(0, 0, 0, 0.1)",
-    // ... up to 2xl
+    lg: "0 10px 15px rgba(0, 0, 0, 0.1)",
+    xl: "0 20px 25px rgba(0, 0, 0, 0.1)",
+    "2xl": "0 25px 50px rgba(0, 0, 0, 0.25)",
   },
 
   // Transitions
@@ -254,7 +325,17 @@ export const ONETRUTH = {
     technology: "#3498db",
     healthcare: "#e74c3c",
     finance: "#27ae60",
-    // ... more industries
+  },
+
+  // Z-Index
+  zIndex: {
+    dropdown: 1000,
+    sticky: 1020,
+    fixed: 1030,
+    modalBackdrop: 1040,
+    modal: 1050,
+    popover: 1060,
+    tooltip: 1070,
   },
 };
 ```
@@ -286,6 +367,10 @@ const badStyles = {
   },
 };
 ```
+
+:::tip
+**Pro Tip:** Use your IDE's autocomplete with ONETRUTH to discover available theme values. Most IDEs will show you all available options when you type `ONETRUTH.colors.` or `ONETRUTH.spacing.`
+:::
 
 ---
 
@@ -348,7 +433,6 @@ const App: React.FC = () => {
         <Route path="/docs" element={<Docs />} />
         <Route path="/docs/:docPath" element={<Docs />} />
         <Route path="/new-page" element={<NewPage />} />  {/* Add route */}
-        {/* ... other routes */}
       </Routes>
     </BrowserRouter>
   );
@@ -366,22 +450,28 @@ npm run dev
 # Navigate to http://localhost:5173/new-page
 ```
 
+:::info
+**Note:** Always test your new pages locally before committing. Check for TypeScript errors, proper ONETRUTH usage, and responsive design.
+:::
+
 ---
 
 ## Updating Existing Pages
 
 ### Example: Updating the Landing Page
 
-1. **Open the file:** `/frontend/src/pages/Landing.tsx`
+**1. Open the file:** `/frontend/src/pages/Landing.tsx`
 
-2. **Make changes using ONETRUTH:**
+**2. Make changes using ONETRUTH:**
 
 ```typescript
 // Landing.tsx
 
+import { ONETRUTH } from '../config/ONETRUTH';
+
 const styles = {
   hero: {
-    backgroundColor: ONETRUTH.colors.primary,  // Use ONETRUTH
+    backgroundColor: ONETRUTH.colors.primary,
     padding: ONETRUTH.spacing['3xl'],
     textAlign: 'center' as const,
   },
@@ -399,13 +489,13 @@ return (
 );
 ```
 
-3. **Test locally:**
+**3. Test locally:**
 
 ```bash
 npm run dev
 ```
 
-4. **Build for production:**
+**4. Build for production:**
 
 ```bash
 npm run build
@@ -614,6 +704,10 @@ VITE_API_URL=http://localhost:8000/api/v1
 # VITE_API_URL=https://levelith-backend.onrender.com/api/v1
 ```
 
+:::warning
+**Warning:** Never commit `.env.local` to git. This file contains environment-specific configuration and should be listed in `.gitignore`.
+:::
+
 ### Making API Calls
 
 **Example: Fetching Users**
@@ -735,11 +829,16 @@ const DocPage = () => {
 
 ### Overview
 
-Levelith uses **Tailwind CSS** as the primary styling framework, integrated with the ONETRUTH design system. Tailwind provides utility-first CSS classes for rapid development while maintaining design consistency.
+Levelith uses **Tailwind CSS** as the primary styling framework for the main application, integrated with the ONETRUTH design system.
+
+:::info
+**Note:** Tailwind CSS is used for the main application (Landing, Docs). The admin dashboard uses inline styles with ONETRUTH exclusively.
+:::
 
 ### Configuration
 
 **tailwind.config.js** (Root level):
+
 ```javascript
 export default {
   content: [
@@ -765,27 +864,10 @@ export default {
           dark: '#c0392b',
           light: '#ec7063',
         },
-        background: {
-          DEFAULT: '#ecf0f1',
-          dark: '#34495e',
-        },
-        surface: {
-          DEFAULT: '#ffffff',
-          dark: '#2c3e50',
-        },
-        text: {
-          DEFAULT: '#2c3e50',
-          light: '#7f8c8d',
-          dark: '#1a252f',
-          inverse: '#ffffff',
-        },
-        education: '#9b59b6',
-        workplace: '#e67e22',
-        skills: '#1abc9c',
       },
       fontFamily: {
         heading: ['"Montserrat"', '"Helvetica Neue"', 'Arial', 'sans-serif'],
-        body: ['"Open Sans"', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+        body: ['"Open Sans"', '"Segoe UI"', 'Roboto', 'sans-serif'],
         mono: ['"Fira Code"', '"Courier New"', 'Courier', 'monospace'],
       },
     },
@@ -794,54 +876,11 @@ export default {
 }
 ```
 
-**postcss.config.js**:
-```javascript
-export default {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
-}
-```
-
-**src/index.css**:
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Open Sans', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #ecf0f1;
-  color: #2c3e50;
-}
-```
-
 ### Using Tailwind Classes
 
-Tailwind classes can be used directly in JSX:
+Tailwind classes can be used directly in JSX (main app only):
 
 ```tsx
-// Example: Admin Panel Header
-export function Header() {
-  return (
-    <header className="px-6 py-4 shadow-sm border-b flex items-center justify-between bg-surface border-border">
-      <h1 className="text-2xl font-semibold text-text-dark font-heading">
-        Dashboard
-      </h1>
-      <DataSourceSwitcher />
-    </header>
-  );
-}
-
 // Example: Card Component
 export function Card({ title, children }) {
   return (
@@ -855,70 +894,29 @@ export function Card({ title, children }) {
     </div>
   );
 }
-
-// Example: Admin Layout Sidebar
-export function Sidebar() {
-  return (
-    <aside className="w-64 p-6 shadow-lg bg-surface-dark">
-      <h2 className="text-2xl font-bold text-text-inverse font-heading mb-8">
-        Levelith Admin
-      </h2>
-      {/* Navigation items */}
-    </aside>
-  );
-}
 ```
 
 ### Common Tailwind Classes
 
-**Layout**:
+**Layout:**
 - `flex`, `grid`: Layout systems
 - `w-64`, `h-screen`: Width/height
 - `p-6`, `px-4`, `py-2`: Padding
 - `m-4`, `mx-auto`, `my-2`: Margin
 
-**Typography**:
+**Typography:**
 - `text-2xl`, `text-lg`: Font sizes
 - `font-bold`, `font-semibold`: Font weights
 - `font-heading`, `font-body`: Custom font families
 - `text-primary`, `text-text-dark`: Text colors
 
-**Colors**:
-- `bg-surface`, `bg-primary`: Background colors
-- `text-primary`, `text-text-inverse`: Text colors
-- `border-border`: Border colors
-
-**Effects**:
+**Effects:**
 - `shadow-sm`, `shadow-lg`: Box shadows
 - `rounded-lg`, `rounded-md`: Border radius
 - `hover:bg-primary`: Hover states
 - `transition-all`: Transitions
 
-### Mixing Tailwind with ONETRUTH
-
-You can mix Tailwind classes with inline styles for dynamic values:
-
-```tsx
-function StatusBadge({ status }: { status: string }) {
-  return (
-    <span
-      className="px-3 py-1 rounded-full text-sm font-medium"
-      style={{
-        backgroundColor: status === 'active'
-          ? ONETRUTH.colors.success
-          : ONETRUTH.colors.error,
-        color: ONETRUTH.colors.textInverse,
-      }}
-    >
-      {status}
-    </span>
-  );
-}
-```
-
 ### Responsive Design
-
-Tailwind includes responsive prefixes:
 
 ```tsx
 <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4">
@@ -929,87 +927,6 @@ Tailwind includes responsive prefixes:
   {/* Stack on mobile, horizontal on large screens */}
 </nav>
 ```
-
-### Custom Classes
-
-For repeated patterns, create custom classes:
-
-```css
-/* src/index.css */
-@layer components {
-  .btn-primary {
-    @apply px-4 py-2 bg-primary text-text-inverse rounded-lg;
-    @apply hover:bg-primary-dark transition-colors;
-    @apply font-medium cursor-pointer;
-  }
-
-  .card {
-    @apply p-6 bg-surface rounded-lg shadow-md;
-  }
-}
-```
-
-Usage:
-```tsx
-<button className="btn-primary">Click me</button>
-<div className="card">Content</div>
-```
-
-### Production Optimization
-
-Tailwind automatically purges unused classes in production builds:
-
-```bash
-npm run build
-# Tailwind removes all unused utility classes
-# Resulting CSS is minimal and optimized
-```
-
-### When to Use Tailwind vs Inline Styles
-
-**Use Tailwind for**:
-- Static layouts and spacing
-- Typography and colors from theme
-- Responsive design
-- Common UI patterns
-
-**Use Inline Styles (with ONETRUTH) for**:
-- Dynamic values based on props/state
-- Conditional styling
-- Values not in Tailwind config
-- Component-specific calculations
-
-**Example - Combining Both**:
-```tsx
-function ProgressBar({ percentage }: { percentage: number }) {
-  return (
-    <div className="w-full bg-gray-200 rounded-full h-2">
-      <div
-        className="h-2 rounded-full transition-all"
-        style={{
-          width: `${percentage}%`,
-          backgroundColor: ONETRUTH.colors.success,
-        }}
-      />
-    </div>
-  );
-}
-```
-
-### Troubleshooting Tailwind
-
-**Classes not applying**:
-1. Check `tailwind.config.js` content paths include your files
-2. Ensure `@tailwind` directives are in `index.css`
-3. Restart dev server after config changes
-
-**Conflicts with inline styles**:
-- Inline styles override Tailwind classes
-- Use `!important` in Tailwind sparingly: `!bg-primary`
-
-**IDE not autocompleting Tailwind classes**:
-- Install "Tailwind CSS IntelliSense" extension
-- Check workspace settings for Tailwind support
 
 ---
 
@@ -1047,29 +964,7 @@ const styles = {
 };
 ```
 
-### 3. CSS Classes for Complex Styling
-
-For markdown or complex layouts, use CSS classes:
-
-```typescript
-const markdownStyles = `
-  .markdown-content h1 {
-    font-size: ${ONETRUTH.fonts.sizes['3xl']};
-    color: ${ONETRUTH.colors.textDark};
-  }
-`;
-
-return (
-  <>
-    <style>{markdownStyles}</style>
-    <div className="markdown-content">
-      {/* content */}
-    </div>
-  </>
-);
-```
-
-### 4. Responsive Design
+### 3. Responsive Design
 
 ```typescript
 const styles = {
@@ -1184,8 +1079,12 @@ dist/
 **Build Command:** `npm run build`
 **Publish Directory:** `dist`
 
-Environment variables in Render:
+**Environment variables in Render:**
 - `VITE_API_URL`: Backend API URL
+
+:::tip
+**Pro Tip:** Always test the production build locally with `npm run start` before deploying to ensure there are no build-specific issues.
+:::
 
 ---
 
@@ -1248,109 +1147,27 @@ const [error, setError] = useState<string | null>(null);
 
 ---
 
-## Troubleshooting
-
-### Common Issues
-
-#### 1. CORS Errors
-
-**Problem:** "Access to XMLHttpRequest has been blocked by CORS policy"
-
-**Solution:** Ensure backend CORS configuration includes your frontend domain:
-
-```python
-# backend/config.py
-cors_origins: list[str] = [
-    "http://localhost:5173",
-    "https://levelith.online",
-]
-```
-
-#### 2. TypeScript Errors
-
-**Problem:** "Property 'X' does not exist on type 'Y'"
-
-**Solution:** Define proper interfaces:
-
-```typescript
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
-
-const user: User = { id: '1', name: 'John', email: 'john@example.com' };
-```
-
-#### 3. Build Failures
-
-**Problem:** "Module not found" during build
-
-**Solution:**
-```bash
-rm -rf node_modules package-lock.json
-npm install
-npm run build
-```
-
-#### 4. Hot Reload Not Working
-
-**Solution:**
-```bash
-# Restart dev server
-npm run dev
-```
-
----
-
-## Best Practices
-
-### DO ✅
-
-- Use TypeScript for all new code
-- Import and use ONETRUTH for all styling
-- Write tests for new components
-- Use semantic HTML (header, main, nav, etc.)
-- Add ARIA labels for accessibility
-- Handle loading and error states
-- Use environment variables for API URLs
-- Keep components small and focused (<300 lines)
-- Document complex logic with comments
-- **Use inline styles with ONETRUTH for admin dashboard components**
-- Prefer server-side pagination for large datasets
-
-### DON'T ❌
-
-- Hardcode colors, fonts, or spacing values
-- Use `any` type in TypeScript
-- Ignore TypeScript errors
-- Skip error handling for API calls
-- Create god components (>500 lines)
-- Duplicate ONETRUTH values locally
-- Commit `.env.local` to git
-- Use inline event handlers for complex logic
-- **Use className with Tailwind for admin dashboard (use inline styles + ONETRUTH instead)**
-
----
-
 ## Admin Dashboard Styling Guidelines
 
 ### NO HARDCODED CSS RULE
 
-**CRITICAL:** The admin dashboard enforces strict ONETRUTH styling with NO hardcoded CSS classes or values.
+:::danger
+**Critical:** The admin dashboard enforces strict ONETRUTH styling with NO hardcoded CSS classes or values. Violations caused blank screen bugs in modal components.
+:::
 
 #### Why This Matters
 
-1. **Dynamic Theming**: Allows site-wide theme changes from one config file
-2. **Consistency**: Ensures all components follow the same design system
-3. **Maintainability**: Changes to theme propagate automatically
-4. **Future Dark Mode**: Prepared for theme switching features
+1. **Dynamic Theming** - Allows site-wide theme changes from one config file
+2. **Consistency** - Ensures all components follow the same design system
+3. **Maintainability** - Changes to theme propagate automatically
+4. **Future Dark Mode** - Prepared for theme switching features
 
 #### The Problem with className
 
 **❌ BAD - Using Tailwind className:**
+
 ```jsx
-// This was causing blank screens in modals!
+// This caused blank screens in modals!
 <div className="bg-white p-6 rounded-lg shadow-md">
   <h2 className="text-2xl font-semibold">Title</h2>
 </div>
@@ -1365,6 +1182,7 @@ npm run dev
 #### The Solution: Inline Styles + ONETRUTH
 
 **✅ GOOD - Using inline styles with ONETRUTH:**
+
 ```jsx
 import ONETRUTH from '../config/theme';
 
@@ -1394,6 +1212,7 @@ import ONETRUTH from '../config/theme';
 #### Real-World Example: Modal Component
 
 **Before (Broken):**
+
 ```jsx
 // This caused blank screens!
 export default function Modal({ children }) {
@@ -1409,6 +1228,7 @@ export default function Modal({ children }) {
 ```
 
 **After (Fixed):**
+
 ```jsx
 import ONETRUTH from '../config/theme';
 
@@ -1454,53 +1274,238 @@ Before committing any admin dashboard component, verify:
 - [ ] No hardcoded hex colors (#ffffff, etc.)
 - [ ] No hardcoded pixel values (24px, etc.)
 
-#### Exception: Main Application
-
+:::info
 **Note:** The main Levelith application (Landing page, Docs) can use Tailwind CSS classes. This rule applies specifically to the **admin dashboard** (`/admin` routes).
+:::
 
 ---
 
-## Quick Reference
+## Troubleshooting
 
-### File Locations
+<details>
+<summary><strong>❌ Error: CORS Errors</strong></summary>
 
-- **ONETRUTH Config:** `/frontend/src/config/ONETRUTH.ts`
-- **Pages:** `/frontend/src/pages/`
-- **Admin Pages:** `/frontend/src/admin/pages/`
-- **API Service:** `/frontend/src/admin/services/apiService.js`
-- **Environment:** `.env.local` (create if missing)
+**Symptoms:** "Access to XMLHttpRequest has been blocked by CORS policy"
 
-### NPM Scripts
+**Causes:**
+1. Backend CORS configuration not including frontend domain
+2. API URL misconfigured
+3. Missing credentials in request
 
-```bash
-npm run dev          # Start dev server
-npm run build        # Production build
-npm run start        # Preview build
-npm run test         # Unit tests
-npm run test:e2e     # E2E tests
-npm run lint         # Lint code
-npm run format       # Format code
-npm run type-check   # TypeScript check
+**Solutions:**
+
+```python
+# backend/config.py
+cors_origins: list[str] = [
+    "http://localhost:5173",
+    "https://levelith.online",
+]
 ```
 
-### Import Paths
+**Explanation:** Ensure backend CORS configuration includes all frontend domains (local and production).
+</details>
+
+<details>
+<summary><strong>❌ Error: TypeScript Property Errors</strong></summary>
+
+**Symptoms:** "Property 'X' does not exist on type 'Y'"
+
+**Solutions:**
 
 ```typescript
-import { ONETRUTH } from '../config/ONETRUTH';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+const user: User = { id: '1', name: 'John', email: 'john@example.com' };
 ```
 
+**Explanation:** Define proper TypeScript interfaces for all data structures.
+</details>
+
+<details>
+<summary><strong>❌ Error: Build Failures - Module Not Found</strong></summary>
+
+**Symptoms:** "Module not found" during build
+
+**Solutions:**
+
+```bash
+rm -rf node_modules package-lock.json
+npm install
+npm run build
+```
+
+**Explanation:** Clear dependencies and reinstall to resolve version conflicts.
+</details>
+
+<details>
+<summary><strong>⚠️ Warning: Hot Reload Not Working</strong></summary>
+
+**Symptoms:** Changes not appearing in browser
+
+**Solutions:**
+1. Restart dev server: `npm run dev`
+2. Clear browser cache
+3. Check file watching limits on Linux: `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf`
+
+**Additional context:** Vite uses native ES modules and HMR for fast refresh.
+</details>
+
+<details>
+<summary><strong>ℹ️ Question: When to use Tailwind vs inline styles?</strong></summary>
+
+**Answer:** Use Tailwind for the main application (Landing, Docs). Use inline styles with ONETRUTH for the admin dashboard. This separation ensures the admin dashboard has no dependency on Tailwind compilation.
+
+**Example:**
+
+```tsx
+// Main app - Tailwind OK
+<div className="p-6 bg-surface rounded-lg">Content</div>
+
+// Admin dashboard - Inline styles only
+<div style={{
+  padding: ONETRUTH.spacing.lg,
+  backgroundColor: ONETRUTH.colors.surface,
+  borderRadius: ONETRUTH.borderRadius.md
+}}>Content</div>
+```
+</details>
+
 ---
 
-## Getting Help
+## Best Practices
 
-- **Documentation:** Read this guide and [docs/README.md](../README.md)
-- **Code Examples:** Check existing pages (`Landing.tsx`, `Docs.tsx`)
-- **ONETRUTH Reference:** See `/frontend/src/config/ONETRUTH.ts`
-- **API Documentation:** See [docs/api/API_DOCUMENTATION.md](../api/API_DOCUMENTATION.md)
+### ✅ DO
+
+1. **Use TypeScript for all new code**
+   ```typescript
+   // ✅ GOOD - Typed function
+   function fetchUser(id: string): Promise<User> {
+     return apiClient.get(`/users/${id}`);
+   }
+   ```
+
+2. **Import and use ONETRUTH for all styling**
+   ```typescript
+   // ✅ GOOD - ONETRUTH styling
+   const styles = {
+     button: {
+       backgroundColor: ONETRUTH.colors.primary,
+       padding: ONETRUTH.spacing.md,
+     },
+   };
+   ```
+
+3. **Write tests for new components**
+   ```typescript
+   // ✅ GOOD - Component test
+   it('renders correctly', () => {
+     render(<Button>Click me</Button>);
+     expect(screen.getByText('Click me')).toBeInTheDocument();
+   });
+   ```
+
+### ❌ DON'T
+
+1. **Hardcode colors, fonts, or spacing values**
+   ```typescript
+   // ❌ BAD - Hardcoded values
+   const styles = {
+     button: {
+       backgroundColor: "#3498db",
+       padding: "16px",
+     },
+   };
+   ```
+
+2. **Use `any` type in TypeScript**
+   ```typescript
+   // ❌ BAD - any type
+   function processData(data: any) {
+     return data.value;
+   }
+
+   // ✅ GOOD - proper typing
+   interface Data {
+     value: string;
+   }
+   function processData(data: Data) {
+     return data.value;
+   }
+   ```
+
+3. **Use className with Tailwind for admin dashboard**
+   ```jsx
+   // ❌ BAD - Tailwind in admin
+   <div className="bg-white p-6">Admin content</div>
+
+   // ✅ GOOD - Inline styles in admin
+   <div style={{
+     backgroundColor: ONETRUTH.colors.surface,
+     padding: ONETRUTH.spacing.lg
+   }}>Admin content</div>
+   ```
 
 ---
 
-**End of Frontend Development Guide**
+## Additional Resources
+
+### Official Documentation
+
+- 📚 [API Documentation](/docs/api/API_DOCUMENTATION.md)
+- 🏗️ [Developer Guide](/docs/DEVELOPER_GUIDE.md)
+- 🧪 [Backend Guide](/docs/backend/BACKEND_GUIDE.md)
+- 📖 [Testing Guide](/docs/testing/TESTING_GUIDE.md)
+
+### External Resources
+
+- 🌐 [React Documentation](https://react.dev)
+- 📖 [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+- 📊 [Vite Guide](https://vitejs.dev/guide/)
+- 🎨 [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+
+### Code Examples
+
+- 💻 [Frontend Source Code](../../frontend/src)
+- 🎯 [Admin Dashboard Examples](../../frontend/src/admin)
+- 🧩 [Component Library](../../frontend/src/components)
+
+### Community
+
+- 💬 Discord: #frontend-dev
+- 🐛 [Report Issues](https://github.com/Free-Columns/levelith-2/issues)
+- ❓ [Discussions](https://github.com/Free-Columns/levelith-2/discussions)
+
+---
+
+## Related Documentation
+
+- **Previous:** [Developer Guide](/docs/DEVELOPER_GUIDE.md)
+- **Next:** [API Documentation](/docs/api/API_DOCUMENTATION.md)
+
+**Other related documentation:**
+
+- [Backend Guide](/docs/backend/BACKEND_GUIDE.md)
+- [Testing Guide](/docs/testing/TESTING_GUIDE.md)
+- [Deployment Guide](/docs/DEPLOYMENT.md)
+
+---
+
+## Feedback
+
+Found an issue with this guide? Have suggestions for improvement?
+
+- 👍 **Helpful?** Give us feedback via the reaction buttons below
+- 🐛 **Found a bug?** [Report it on GitHub](https://github.com/Free-Columns/levelith-2/issues)
+- 💡 **Have an idea?** [Start a discussion](https://github.com/Free-Columns/levelith-2/discussions)
+
+---
+
+**Last Updated:** November 19, 2025 | **Version:** 1.0 | **Contributors:** Semour Media Group
+
+---
+
+*This document is part of the Levelith Developer Documentation. For questions, join our [Discord community](https://discord.gg/levelith).*

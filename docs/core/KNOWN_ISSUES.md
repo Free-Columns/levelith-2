@@ -1,31 +1,93 @@
 # Known Issues & Critical Gaps
 
-**Last Updated:** 2025-01-19
-**Version:** 1.0
-**Status:** Active Development
+---
+title: "Known Issues & Critical Gaps"
+description: "Comprehensive list of critical issues, high-priority bugs, and technical debt that must be addressed before production deployment of the Levelith platform."
+category: "reference"
+tags: ["known-issues", "bugs", "technical-debt", "critical-issues", "roadmap"]
+author: "Semour Media Group"
+date: "2025-01-19"
+lastUpdated: "2025-11-19"
+difficulty: "intermediate"
+readingTime: 20
+relatedPages:
+  - "/docs/dev/DEVELOPMENT_PRIORITIES.md"
+  - "/docs/dev/CODEBASE_ANALYSIS.md"
+  - "/docs/core/AI_AGENT_GOLDEN_RULES.md"
+nextPage: "/docs/dev/DEVELOPMENT_PRIORITIES.md"
+prevPage: "/docs/core/MANIFEST.md"
+searchKeywords:
+  - "known issues"
+  - "critical bugs"
+  - "technical debt"
+  - "production blockers"
+  - "service layer"
+  - "jwt authentication"
+showTOC: true
+showBreadcrumbs: true
+showLastUpdated: true
+version: "1.0"
+---
+
+# Known Issues & Critical Gaps
+
+> **TL;DR:** This document tracks 10 critical issues blocking production deployment: service layer bypassed in API routes (3-4 hrs), missing service tests violating 80% coverage (5-6 hrs), incomplete JWT authentication (2-3 hrs), mixed domain/DB models (4-5 hrs), plus 6 additional high/medium priority items. Total estimated fix time: 62-106 hours.
+
+**Difficulty:** 🟡 Intermediate | **Time:** ⏱️ 20 minutes | **Last Updated:** November 19, 2025
 
 ---
 
-## ⚠️ Critical Issues (Must Fix Before Production)
+## Table of Contents
+
+- [Overview](#overview)
+- [Critical Issues (Must Fix Before Production)](#critical-issues-must-fix-before-production)
+  - [1. Service Layer Bypassed](#1-service-layer-bypassed-)
+  - [2. Missing Service Layer Tests](#2-missing-service-layer-tests-)
+  - [3. JWT Authentication Incomplete](#3-jwt-authentication-incomplete-)
+  - [4. Mixed Domain/DB Models](#4-mixed-domaindb-models-)
+- [High Priority Issues (Should Fix Soon)](#high-priority-issues-should-fix-soon)
+- [Medium Priority Issues (Nice to Have)](#medium-priority-issues-nice-to-have)
+- [Issue Summary & Recommended Fix Order](#issue-summary--recommended-fix-order)
+- [Additional Resources](#additional-resources)
+
+---
+
+## Overview
+
+This document maintains a comprehensive list of known issues, bugs, and technical debt that must be addressed before the Levelith platform can be deployed to production. Issues are categorized by severity and include estimated fix times, affected files, and detailed solutions.
+
+:::danger
+**Status:** Active Development - Several critical issues must be resolved before production deployment
+:::
+
+### Issue Categories
+
+| Priority | Description | Count | Total Time |
+|----------|-------------|-------|------------|
+| **Critical** | Must fix before production | 4 | 14-17 hours |
+| **High** | Should fix soon | 3 | 5 hours |
+| **Medium** | Nice to have | 3 | 43-84 hours |
+| **Total** | All issues | 10 | 62-106 hours |
+
+---
+
+## Critical Issues (Must Fix Before Production)
 
 These issues must be resolved before the application can be deployed to production.
 
----
-
 ### 1. Service Layer Bypassed ❌
 
-**Severity:** CRITICAL
+**Severity:** 🔴 CRITICAL
 **Impact:** Architecture violation, code duplication, maintainability
 **Estimated Fix Time:** 3-4 hours
+**Affected Files:** `backend/api/routes/users.py:30-100`, `backend/api/routes/experiences.py:25-80`
 
-**Issue:**
+#### Issue
+
 API routes query the database directly instead of using the service layer, violating the clean architecture pattern.
 
-**Affected Files:**
-- `/home/user/levelith-2/backend/api/routes/users.py` (lines 30-100)
-- `/home/user/levelith-2/backend/api/routes/experiences.py` (lines 25-80)
+#### Current Implementation (Wrong)
 
-**Current Implementation (Wrong):**
 ```python
 @router.post("/api/v1/users")
 async def create_user(user_data: UserCreate, db: Session = Depends(get_db)):
@@ -44,7 +106,8 @@ async def create_user(user_data: UserCreate, db: Session = Depends(get_db)):
     return db_user
 ```
 
-**Should Be (Correct):**
+#### Should Be (Correct)
+
 ```python
 @router.post("/api/v1/users")
 async def create_user(
@@ -63,45 +126,54 @@ async def create_user(
         raise HTTPException(status_code=400, detail=str(e))
 ```
 
-**Why This Matters:**
+#### Why This Matters
+
 - Business logic is duplicated in routes and services
 - Services are written but never used
 - Makes testing difficult (can't mock service layer)
 - Violates Single Responsibility Principle
 - Hard to maintain and extend
 
-**Required Changes:**
+#### Required Changes
+
 1. Create dependency injection functions for services
 2. Update all user endpoints to use `UserService`
 3. Update all experience endpoints to use `ExperienceService`
 4. Remove direct database queries from routes
 5. Update tests to verify service usage
 
+:::warning
 **Related Issue:** #4 (Mixed Domain/DB Models)
+:::
 
 ---
 
 ### 2. Missing Service Layer Tests ❌
 
-**Severity:** CRITICAL
+**Severity:** 🔴 CRITICAL
 **Impact:** Test coverage below 80%, violates Golden Rule 1
 **Estimated Fix Time:** 5-6 hours
+**Affected Files:**
+- `backend/services/experience_service.py` (968 lines, 0 tests)
+- `backend/services/user_service.py` (582 lines, 0 tests)
+- `backend/models/db_models.py` (100 lines, 0 tests)
 
-**Issue:**
+#### Issue
+
 Two critical service files (1,550 lines of business logic) have zero tests, causing overall test coverage to fall below the 80% minimum requirement.
 
-**Affected Files:**
-- `/home/user/levelith-2/backend/services/experience_service.py` (968 lines, 0 tests)
-- `/home/user/levelith-2/backend/services/user_service.py` (582 lines, 0 tests)
-- `/home/user/levelith-2/backend/models/db_models.py` (100 lines, 0 tests)
+#### Current Coverage
 
-**Current Coverage:**
-- Overall: ~75% (need 80%)
-- Experience Service: 0%
-- User Service: 0%
-- DB Models: 0%
+| Component | Coverage | Target |
+|-----------|----------|--------|
+| Overall | ~75% | 80% |
+| Experience Service | 0% | 80% |
+| User Service | 0% | 80% |
+| DB Models | 0% | 80% |
 
-**Untested Methods in experience_service.py:**
+<details>
+<summary><strong>📋 Untested Methods in experience_service.py</strong></summary>
+
 ```python
 create_certificate()    # Certificate experience creation
 create_degree()         # Degree experience creation
@@ -119,8 +191,11 @@ delete_experience()    # Delete experience
 get_experience_count() # Count experiences
 _validate_dates()      # Date validation
 ```
+</details>
 
-**Untested Methods in user_service.py:**
+<details>
+<summary><strong>📋 Untested Methods in user_service.py</strong></summary>
+
 ```python
 register_user()              # User registration
 authenticate_user()          # Login/authentication
@@ -137,15 +212,18 @@ get_user_by_username()      # Username lookup
 add_experience_to_user()    # Link experience
 remove_experience_from_user() # Unlink experience
 ```
+</details>
 
-**Required Test Files:**
+#### Required Test Files
+
 ```bash
 tests/test_experience_service.py  # ~50 test functions needed
 tests/test_user_service.py        # ~40 test functions needed
 tests/test_db_models.py           # ~20 test functions needed
 ```
 
-**Test Template Generation:**
+#### Test Template Generation
+
 ```bash
 # Use test system to generate templates
 python tests/test_system.py generate backend/services/experience_service.py
@@ -153,27 +231,29 @@ python tests/test_system.py generate backend/services/user_service.py
 python tests/test_system.py generate backend/models/db_models.py
 ```
 
+:::danger
 **Impact:**
 - Violates Golden Rule 1: "Every code change MUST include tests"
 - CI/CD fails due to coverage < 80%
 - High risk of regressions when modifying services
 - Business logic not validated
+:::
 
 ---
 
 ### 3. JWT Authentication Incomplete ⚠️
 
-**Severity:** CRITICAL
+**Severity:** 🔴 CRITICAL
 **Impact:** Authentication doesn't work, security vulnerability
 **Estimated Fix Time:** 2-3 hours
+**Affected File:** `backend/api/routes/users.py:234-270`
 
-**Issue:**
+#### Issue
+
 The login endpoint returns user data but doesn't generate JWT tokens. Authentication is non-functional.
 
-**Affected File:**
-- `/home/user/levelith-2/backend/api/routes/users.py:234-270`
+#### Current Implementation
 
-**Current Implementation:**
 ```python
 @router.post("/login", response_model=UserResponse)
 async def login(credentials: UserLogin, db: Session = Depends(get_db)):
@@ -193,7 +273,8 @@ async def login(credentials: UserLogin, db: Session = Depends(get_db)):
     return user  # Should return tokens!
 ```
 
-**What's Missing:**
+#### What's Missing
+
 1. JWT token generation (access + refresh)
 2. Password verification
 3. Token validation middleware
@@ -201,7 +282,9 @@ async def login(credentials: UserLogin, db: Session = Depends(get_db)):
 5. Token refresh endpoint
 6. Token blacklisting (optional)
 
-**Required Implementation:**
+<details>
+<summary><strong>📋 Show Required Implementation</strong></summary>
+
 ```python
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
@@ -260,34 +343,37 @@ async def login(credentials: UserLogin, service: UserService = Depends(get_user_
 async def get_current_user_info(current_user: UserDB = Depends(get_current_user)):
     return current_user
 ```
+</details>
 
-**Dependencies to Add:**
+#### Dependencies to Add
+
 ```bash
 pip install python-jose[cryptography]
 pip install passlib[bcrypt]
 ```
 
-**Configuration Already Present:**
-```python
-# backend/config.py (already configured)
-secret_key: str = "your-secret-key-here"
-algorithm: str = "HS256"
-access_token_expire_minutes: int = 30
-refresh_token_expire_days: int = 7
-```
+:::info
+**Note:** Configuration is already present in `backend/config.py`:
+- secret_key: "your-secret-key-here"
+- algorithm: "HS256"
+- access_token_expire_minutes: 30
+- refresh_token_expire_days: 7
+:::
 
 ---
 
 ### 4. Mixed Domain/DB Models ⚠️
 
-**Severity:** HIGH
+**Severity:** 🔴 HIGH
 **Impact:** Architecture confusion, unused code
 **Estimated Fix Time:** 4-5 hours
 
-**Issue:**
+#### Issue
+
 The codebase has both domain models and database models, but they're used inconsistently. Services are designed for domain models, but API routes use database models directly.
 
-**Current State:**
+#### Current State
+
 ```
 Domain Models (unused):
 ├── backend/models/user.py       → User class (320 lines)
@@ -298,34 +384,17 @@ Database Models (used):
 ├── backend/models/db_models.py  → UserDB, ExperienceDB, NAICSCodeDB
 ```
 
-**Services Designed For Domain Models:**
-```python
-# backend/services/user_service.py
-class UserService:
-    def register_user(...) -> User:  # Returns domain model
-        # But domain model is never actually created!
-        pass
-```
+#### The Problem
 
-**API Routes Use DB Models:**
-```python
-# backend/api/routes/users.py
-@router.post("/users")
-async def create_user(...) -> UserDB:  # Returns DB model
-    db_user = UserDB(...)  # Uses DB model directly
-    return db_user
-```
-
-**The Problem:**
 - Domain models exist but are never instantiated
 - Services return type hints for domain models but can't actually return them
 - API uses DB models, bypassing services
 - No mapping layer between DB and domain models
 - Architectural intent unclear
 
-**Decision Required:**
+<details>
+<summary><strong>Option A: Pure DB Models (Recommended - Simpler)</strong></summary>
 
-**Option A: Pure DB Models (Recommended - Simpler)**
 ```python
 # Remove domain models entirely
 # Use DB models throughout
@@ -338,16 +407,19 @@ class UserService:
 ```
 
 **Pros:**
-- Simpler architecture
-- Less code to maintain
-- No mapping overhead
-- Easier to understand
+- ✅ Simpler architecture
+- ✅ Less code to maintain
+- ✅ No mapping overhead
+- ✅ Easier to understand
 
 **Cons:**
-- Couples business logic to database
-- ORM objects in service layer
+- ❌ Couples business logic to database
+- ❌ ORM objects in service layer
+</details>
 
-**Option B: Full Domain Model Separation (Complex)**
+<details>
+<summary><strong>Option B: Full Domain Model Separation (Complex)</strong></summary>
+
 ```python
 # Keep domain models
 # Implement mapper layer
@@ -362,65 +434,39 @@ class UserMapper:
     @staticmethod
     def to_db(user: User) -> UserDB:
         return UserDB(...)
-
-class UserService:
-    def register_user(...) -> User:  # Domain model
-        user = User(...)  # Business logic
-        db_user = UserMapper.to_db(user)
-        return user
-
-@router.post("/users")
-async def create_user(...):
-    user = service.register_user(...)  # Domain
-    db_user = UserMapper.to_db(user)   # Map to DB
-    db.add(db_user)
-    return UserMapper.to_domain(db_user)  # Map back
 ```
 
 **Pros:**
-- True domain-driven design
-- Business logic decoupled from database
-- Easier to test business logic
-- Can switch databases easily
+- ✅ True domain-driven design
+- ✅ Business logic decoupled from database
+- ✅ Easier to test business logic
+- ✅ Can switch databases easily
 
 **Cons:**
-- More code and complexity
-- Mapping overhead
-- More files to maintain
+- ❌ More code and complexity
+- ❌ Mapping overhead
+- ❌ More files to maintain
+</details>
 
 **Recommendation:** Choose Option A (Pure DB Models) for simplicity, unless there's a specific need for database independence.
 
 ---
 
-## ⚠️ High Priority Issues (Should Fix Soon)
+## High Priority Issues (Should Fix Soon)
 
 ### 5. ONETRUTH Configuration Duplicated ⚠️
 
-**Severity:** MEDIUM
-**Impact:** Maintenance burden, inconsistency risk
-**Estimated Fix Time:** 1 hour
+**Severity:** 🟡 MEDIUM | **Fix Time:** 1 hour
 
-**Issue:**
-The admin dashboard duplicates the ONETRUTH branding configuration instead of importing it from the main frontend.
+**Issue:** Admin dashboard duplicates ONETRUTH branding instead of importing it.
 
 **Locations:**
-- **Source:** `/home/user/levelith-2/frontend/src/config/ONETRUTH.ts` (240 lines)
-- **Duplicate:** `/home/user/levelith-2/dev/dev-frontend/levelith_admin_dashboard/src/config/theme.js` (167 lines)
+- Source: `frontend/src/config/ONETRUTH.ts` (240 lines)
+- Duplicate: `dev/dev-frontend/levelith_admin_dashboard/src/config/theme.js` (167 lines)
 
-**Comment in Duplicated File:**
-```javascript
-// src/config/theme.js lines 8-10
-// Import ONETRUTH from main frontend config
-// For now, we'll replicate the essential values here
-// TODO: Set up proper import path when integrating with main frontend
-```
+<details>
+<summary><strong>Show Solution</strong></summary>
 
-**Impact:**
-- Changes must be made in two places
-- Risk of configuration drift
-- Code duplication violates DRY principle
-
-**Solution:**
 ```javascript
 // Option 1: Symlink (simple)
 cd dev/dev-frontend/levelith_admin_dashboard/src/config/
@@ -439,31 +485,19 @@ export default {
 // Then import:
 import ONETRUTH from '@onetruth';
 ```
+</details>
 
 ---
 
 ### 6. No Database Migrations ⚠️
 
-**Severity:** MEDIUM
-**Impact:** Manual schema management, deployment difficulty
-**Estimated Fix Time:** 2 hours
+**Severity:** 🟡 MEDIUM | **Fix Time:** 2 hours
 
-**Issue:**
-No Alembic migrations configured. Schema changes are manual and error-prone.
+**Issue:** No Alembic migrations configured. Schema changes are manual and error-prone.
 
-**Current State:**
-- Database schema defined in `backend/models/db_models.py`
-- Tables created via `init_db.py` script
-- No version control for database schema
-- No way to roll back schema changes
+<details>
+<summary><strong>Show Solution</strong></summary>
 
-**Problems:**
-- Difficult to deploy updates
-- Risk of schema drift between environments
-- Can't track schema history
-- Manual coordination required for schema changes
-
-**Solution:**
 ```bash
 # Install Alembic
 pip install alembic
@@ -472,61 +506,25 @@ pip install alembic
 cd backend
 alembic init alembic
 
-# Configure alembic.ini
-# Set sqlalchemy.url = postgresql://...
-
 # Generate initial migration
 alembic revision --autogenerate -m "Initial schema"
 
 # Apply migration
 alembic upgrade head
-
-# Future changes
-alembic revision --autogenerate -m "Add new field"
-alembic upgrade head
-
-# Rollback if needed
-alembic downgrade -1
 ```
-
-**Files to Create:**
-```
-backend/alembic/
-├── env.py           # Alembic environment
-├── script.py.mako   # Migration template
-└── versions/        # Migration files
-    └── xxxx_initial_schema.py
-```
+</details>
 
 ---
 
 ### 7. Rate Limiting Not Active ⚠️
 
-**Severity:** MEDIUM
-**Impact:** No protection against abuse
-**Estimated Fix Time:** 2 hours
+**Severity:** 🟡 MEDIUM | **Fix Time:** 2 hours
 
-**Issue:**
-Rate limiting is configured in settings but not implemented in middleware.
+**Issue:** Rate limiting is configured but not implemented in middleware.
 
-**Current State:**
-```python
-# backend/config.py (configuration exists)
-rate_limit_enabled: bool = True
-rate_limit_requests: int = 100
-rate_limit_period: int = 60  # seconds
-```
+<details>
+<summary><strong>Show Solution</strong></summary>
 
-**But no middleware:**
-```python
-# backend/main.py (no rate limiting middleware)
-app = FastAPI(...)
-app.add_middleware(CORSMiddleware, ...)
-app.add_middleware(GZipMiddleware, ...)
-# Missing: Rate limiting middleware
-```
-
-**Solution:**
 ```bash
 pip install slowapi
 ```
@@ -535,158 +533,70 @@ pip install slowapi
 # backend/main.py
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
-from slowapi.errors import RateLimitExceeded
 
 limiter = Limiter(key_func=get_remote_address)
 app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # Apply to endpoints
 @router.post("/login")
-@limiter.limit("5/minute")  # 5 login attempts per minute
+@limiter.limit("5/minute")
 async def login(...):
     pass
-
-@router.get("/naics/search")
-@limiter.limit("100/minute")  # 100 searches per minute
-async def search(...):
-    pass
 ```
+</details>
 
 ---
 
-## 📋 Medium Priority Issues (Nice to Have)
+## Medium Priority Issues (Nice to Have)
 
 ### 8. No Main Frontend Application
 
-**Severity:** LOW
-**Impact:** Can't launch user-facing product
-**Estimated Fix Time:** 40-80 hours
+**Severity:** 🟢 LOW | **Fix Time:** 40-80 hours
 
-**Issue:**
-Only the admin dashboard exists. No user-facing frontend application.
-
-**Current State:**
-- Only `ONETRUTH.ts` configuration exists
-- Build tools configured but unused
-- No components, pages, or application structure
-
-**Required Work:**
-1. Design component architecture
-2. Implement authentication flow
-3. Build core pages (home, profile, experiences)
-4. Create experience showcase components
-5. Add search/browse functionality
-6. Connect to backend API
-7. Add responsive design
-8. Implement gamification UI
+Only the admin dashboard exists. No user-facing frontend application. This represents the bulk of remaining frontend development work.
 
 ---
 
 ### 9. No Request ID Tracking
 
-**Severity:** LOW
-**Impact:** Difficult to trace requests
-**Estimated Fix Time:** 1-2 hours
+**Severity:** 🟢 LOW | **Fix Time:** 1-2 hours
 
-**Issue:**
 No request ID middleware makes log correlation difficult.
-
-**Solution:**
-```python
-import uuid
-from starlette.middleware.base import BaseHTTPMiddleware
-
-class RequestIDMiddleware(BaseHTTPMiddleware):
-    async def dispatch(self, request, call_next):
-        request_id = str(uuid.uuid4())
-        request.state.request_id = request_id
-
-        response = await call_next(request)
-        response.headers["X-Request-ID"] = request_id
-        return response
-
-app.add_middleware(RequestIDMiddleware)
-```
 
 ---
 
 ### 10. Simple Password Hashing
 
-**Severity:** LOW
-**Impact:** Password security could be better
-**Estimated Fix Time:** 1-2 hours
+**Severity:** 🟢 LOW | **Fix Time:** 1-2 hours
 
-**Issue:**
-Currently uses PBKDF2. Should upgrade to Argon2 or bcrypt.
-
-**Current Implementation:**
-```python
-# backend/models/user.py
-import hashlib
-
-def hash_password(password: str) -> str:
-    # PBKDF2 (acceptable but not ideal)
-    return hashlib.pbkdf2_hmac('sha256', password.encode(), salt, 100000).hex()
-```
-
-**Better Implementation:**
-```python
-from argon2 import PasswordHasher
-
-ph = PasswordHasher()
-
-def hash_password(password: str) -> str:
-    return ph.hash(password)
-
-def verify_password(password: str, hash: str) -> bool:
-    try:
-        ph.verify(hash, password)
-        return True
-    except:
-        return False
-```
+Currently uses PBKDF2. Should upgrade to Argon2 or bcrypt for better security.
 
 ---
 
-## 📊 Issue Summary
+## Issue Summary & Recommended Fix Order
 
-| Priority | Count | Total Time | Status |
-|----------|-------|------------|--------|
-| Critical | 4 | 14-17 hours | Must fix |
-| High | 3 | 5 hours | Should fix |
-| Medium | 3 | 43-84 hours | Nice to have |
-| **Total** | **10** | **62-106 hours** | - |
+### Week 1: Critical Issues (14-18 hours)
 
----
+1. ✅ Add service layer tests (5-6 hours)
+2. ✅ Refactor API to use services (3-4 hours)
+3. ✅ Complete JWT authentication (2-3 hours)
+4. ✅ Standardize model usage (4-5 hours)
 
-## 🎯 Recommended Fix Order
+### Week 2: High Priority (5 hours)
 
-### Week 1: Critical Issues
-1. Add service layer tests (5-6 hours)
-2. Refactor API to use services (3-4 hours)
-3. Complete JWT authentication (2-3 hours)
-4. Standardize model usage (4-5 hours)
+5. ✅ Fix ONETRUTH duplication (1 hour)
+6. ✅ Add database migrations (2 hours)
+7. ✅ Implement rate limiting (2 hours)
 
-**Total: 14-18 hours**
+### Month 1: Medium Priority (42-84 hours)
 
-### Week 2: High Priority
-5. Fix ONETRUTH duplication (1 hour)
-6. Add database migrations (2 hours)
-7. Implement rate limiting (2 hours)
-
-**Total: 5 hours**
-
-### Month 1: Medium Priority
-8. Add request ID tracking (1-2 hours)
-9. Upgrade password hashing (1-2 hours)
-10. Begin main frontend (40-80 hours)
-
-**Total: 42-84 hours**
+8. ✅ Add request ID tracking (1-2 hours)
+9. ✅ Upgrade password hashing (1-2 hours)
+10. ✅ Begin main frontend (40-80 hours)
 
 ---
 
-## 📝 Issue Tracking
+## Issue Tracking
 
 For each issue, create a GitHub issue with:
 - Title from this document
@@ -707,9 +617,47 @@ For each issue, create a GitHub issue with:
 
 ---
 
-**Last Reviewed:** 2025-01-19
-**Next Review:** After critical issues are resolved
+## Additional Resources
+
+### Official Documentation
+
+- 📚 [Development Priorities](/docs/dev/DEVELOPMENT_PRIORITIES.md) - Prioritized roadmap
+- 🏗️ [Codebase Analysis](/docs/dev/CODEBASE_ANALYSIS.md) - Architecture assessment
+- 🧪 [AI Agent Golden Rules](/docs/core/AI_AGENT_GOLDEN_RULES.md) - Development standards
+
+### Code References
+
+- 💻 [Service Layer](https://github.com/Free-Columns/levelith-2/tree/main/backend/services)
+- 🎯 [API Routes](https://github.com/Free-Columns/levelith-2/tree/main/backend/api/routes)
+- 📊 [Models](https://github.com/Free-Columns/levelith-2/tree/main/backend/models)
 
 ---
 
-**End of Known Issues Document**
+## Related Documentation
+
+- **Previous:** [MANIFEST](/docs/core/MANIFEST.md)
+- **Next:** [Development Priorities](/docs/dev/DEVELOPMENT_PRIORITIES.md)
+
+**Other related documentation:**
+
+- [Codebase Analysis](/docs/dev/CODEBASE_ANALYSIS.md)
+- [API Documentation](/docs/api/API_DOCUMENTATION.md)
+- [Testing Guide](/docs/core/AI_AGENT_GOLDEN_RULES.md#rule-1-test-first-development-mandatory)
+
+---
+
+## Feedback
+
+Found an issue with this guide? Have suggestions for improvement?
+
+- 👍 **Helpful?** This document tracks all known issues
+- 🐛 **Found a bug?** [Report it on GitHub](https://github.com/Free-Columns/levelith-2/issues)
+- 💡 **Have an idea?** [Start a discussion](https://github.com/Free-Columns/levelith-2/discussions)
+
+---
+
+**Last Updated:** November 19, 2025 | **Version:** 1.0 | **Next Review:** After critical issues are resolved
+
+---
+
+*This document is part of the Levelith Developer Documentation. For questions, join our [Discord community](https://discord.gg/levelith).*

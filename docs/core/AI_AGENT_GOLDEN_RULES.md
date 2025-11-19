@@ -1,8 +1,79 @@
 # AI Agent Golden Rules
 
+---
+title: "AI Agent Golden Rules"
+description: "Mandatory development rules that all AI agents must follow when working with the Levelith codebase. Defines 10 core principles for code quality, maintainability, and scalability."
+category: "reference"
+tags: ["ai-agents", "development-rules", "code-quality", "testing", "security"]
+author: "Semour Media Group"
+date: "2025-01-17"
+lastUpdated: "2025-11-19"
+difficulty: "advanced"
+readingTime: 15
+relatedPages:
+  - "/docs/core/AI_AGENT_GUIDE.md"
+  - "/docs/core/MANIFEST.md"
+  - "/docs/dev/AI_AGENT_TOOLING.md"
+nextPage: "/docs/core/AI_AGENT_GUIDE.md"
+prevPage: "/docs/core/MANIFEST.md"
+searchKeywords:
+  - "golden rules"
+  - "ai agent development"
+  - "code standards"
+  - "testing requirements"
+  - "security guidelines"
+showTOC: true
+showBreadcrumbs: true
+showLastUpdated: true
+version: "1.0"
+---
+
+# AI Agent Golden Rules
+
+> **TL;DR:** These 10 mandatory rules define code quality standards for AI agents: test-first development (≥80% coverage), comprehensive documentation, security-first design, AI index maintenance, quality standards, dependency management, performance awareness, scalability by design, error handling, and version control hygiene. No exceptions permitted.
+
+**Difficulty:** 🔴 Advanced | **Time:** ⏱️ 15 minutes | **Last Updated:** November 19, 2025
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Core Golden Rules](#core-golden-rules)
+  - [Rule 1: Test-First Development](#rule-1-test-first-development-mandatory)
+  - [Rule 2: Documentation is Non-Negotiable](#rule-2-documentation-is-non-negotiable)
+  - [Rule 3: Security First](#rule-3-security-first)
+  - [Rule 4: Maintain the AI Agent Index](#rule-4-maintain-the-ai-agent-index)
+  - [Rule 5: Code Quality Standards](#rule-5-code-quality-standards)
+  - [Rule 6: Dependency Management](#rule-6-dependency-management)
+  - [Rule 7: Performance Awareness](#rule-7-performance-awareness)
+  - [Rule 8: Scalability by Design](#rule-8-scalability-by-design)
+  - [Rule 9: Error Handling and Logging](#rule-9-error-handling-and-logging)
+  - [Rule 10: Version Control Hygiene](#rule-10-version-control-hygiene)
+- [Enforcement Mechanisms](#enforcement-mechanisms)
+- [Quick Reference for AI Agents](#quick-reference-for-ai-agents)
+- [Additional Resources](#additional-resources)
+
+---
+
+## Overview
+
 **CRITICAL: These rules MUST be followed for every action. No exceptions.**
 
 This document defines the core principles that AI agents must follow when working with this codebase. These rules ensure code quality, maintainability, and scalability.
+
+:::danger
+**Critical:** All AI agents must read and follow these golden rules before making ANY code changes. Violations will result in commit rejection, CI/CD failures, and code review rejections.
+:::
+
+### Why These Rules Exist
+
+1. **Quality**: High standards produce reliable software
+2. **Maintainability**: Future developers (AI and human) understand the code
+3. **Scalability**: Code grows without technical debt
+4. **Security**: Vulnerabilities are prevented, not patched
+5. **Collaboration**: AI agents work effectively with humans
+6. **Sustainability**: Codebase remains healthy long-term
 
 ---
 
@@ -17,7 +88,7 @@ This document defines the core principles that AI agents must follow when workin
 def new_feature():
     return "implementation"
 
-# ✓ CORRECT - Code with tests
+# ✅ CORRECT - Code with tests
 def new_feature():
     return "implementation"
 
@@ -26,13 +97,15 @@ def test_new_feature():
     assert new_feature() == "implementation"
 ```
 
-**Requirements:**
-- ✓ Unit tests for all functions and classes
-- ✓ Integration tests for cross-component features
-- ✓ Minimum 80% code coverage
-- ✓ Tests must pass before committing
+#### Requirements
 
-**Enforcement:**
+- ✅ **Unit tests** for all functions and classes
+- ✅ **Integration tests** for cross-component features
+- ✅ **Minimum 80% code coverage** (non-negotiable)
+- ✅ **Tests must pass** before committing
+
+#### Enforcement
+
 ```bash
 # Generate test template
 python tests/test_system.py generate <module_path>
@@ -41,10 +114,12 @@ python tests/test_system.py generate <module_path>
 python tests/test_system.py enforce
 ```
 
+:::warning
 **Consequences of violation:**
 - Commit will be rejected
 - CI/CD pipeline will fail
 - Code review will request changes
+:::
 
 ---
 
@@ -57,7 +132,7 @@ python tests/test_system.py enforce
 def process_data(data):
     return data.transform()
 
-# ✓ CORRECT - Complete documentation
+# ✅ CORRECT - Complete documentation
 def process_data(data: dict) -> dict:
     """
     Process raw data and transform it for storage.
@@ -78,14 +153,17 @@ def process_data(data: dict) -> dict:
     return data.transform()
 ```
 
-**Requirements:**
-- ✓ Module-level docstring explaining purpose
-- ✓ Class docstrings with attributes and usage
-- ✓ Function docstrings with Args/Returns/Raises
-- ✓ Type hints for all parameters and returns
-- ✓ Examples for complex functions
+#### Requirements
 
-**AI agents automatically extract docstrings for navigation.**
+- ✅ **Module-level docstring** explaining purpose
+- ✅ **Class docstrings** with attributes and usage
+- ✅ **Function docstrings** with Args/Returns/Raises
+- ✅ **Type hints** for all parameters and returns
+- ✅ **Examples** for complex functions
+
+:::info
+**Note:** AI agents automatically extract docstrings for navigation.
+:::
 
 ---
 
@@ -93,40 +171,42 @@ def process_data(data: dict) -> dict:
 
 **Never introduce security vulnerabilities.**
 
-**Common vulnerabilities to avoid:**
+#### Common Vulnerabilities to Avoid
 
 ```python
 # ❌ WRONG - SQL Injection
 query = f"SELECT * FROM users WHERE id = {user_id}"
 
-# ✓ CORRECT - Parameterized query
+# ✅ CORRECT - Parameterized query
 query = "SELECT * FROM users WHERE id = ?"
 cursor.execute(query, (user_id,))
 
 # ❌ WRONG - Command injection
 os.system(f"process {user_input}")
 
-# ✓ CORRECT - Safe execution
+# ✅ CORRECT - Safe execution
 subprocess.run(["process", user_input], check=True)
 
 # ❌ WRONG - Hardcoded secrets
 API_KEY = "sk-1234567890abcdef"
 
-# ✓ CORRECT - Environment variables
+# ✅ CORRECT - Environment variables
 API_KEY = os.getenv("API_KEY")
 ```
 
-**Security checklist:**
-- ✓ No hardcoded secrets or credentials
-- ✓ Validate and sanitize all inputs
-- ✓ Use parameterized queries for databases
-- ✓ Avoid dangerous functions (eval, exec, os.system)
-- ✓ Implement proper authentication/authorization
-- ✓ Use secure random for cryptography
-- ✓ Keep dependencies updated
-- ✓ Follow OWASP Top 10 guidelines
+#### Security Checklist
 
-**Tools:**
+- ✅ No hardcoded secrets or credentials
+- ✅ Validate and sanitize all inputs
+- ✅ Use parameterized queries for databases
+- ✅ Avoid dangerous functions (eval, exec, os.system)
+- ✅ Implement proper authentication/authorization
+- ✅ Use secure random for cryptography
+- ✅ Keep dependencies updated
+- ✅ Follow OWASP Top 10 guidelines
+
+#### Security Scanning Tools
+
 ```bash
 # Run security scan
 bandit -r . -f json
@@ -145,19 +225,24 @@ python dev/aiagent_navigator.py index
 python dev/aiagent_navigator.py guide
 ```
 
-**Why this matters:**
+#### Why This Matters
+
 - AI agents rely on the index for navigation
 - Stale index = incorrect understanding
 - Fresh index = accurate code comprehension
 
-**In CI/CD:**
-The index is automatically updated, but for local development:
+#### Quick Workflow
+
 ```bash
-# Quick workflow
+# Recommended workflow
 git add <files>
 python dev/aiagent_navigator.py index  # Update index
 git commit -m "message"
 ```
+
+:::tip
+**Pro Tip:** The index is automatically updated in CI/CD, but keeping it fresh during local development helps catch issues earlier.
+:::
 
 ---
 
@@ -165,10 +250,10 @@ git commit -m "message"
 
 **Write clean, maintainable, production-ready code.**
 
-**Standards:**
+#### Code Examples
 
 ```python
-# ✓ Meaningful names
+# ✅ Meaningful names
 def calculate_total_revenue(transactions: List[Transaction]) -> Decimal:
     """Calculate total revenue from transactions"""
     pass
@@ -177,7 +262,7 @@ def calculate_total_revenue(transactions: List[Transaction]) -> Decimal:
 def calc(t):
     pass
 
-# ✓ Small, focused functions
+# ✅ Small, focused functions
 def validate_email(email: str) -> bool:
     """Validate email format"""
     return EMAIL_REGEX.match(email) is not None
@@ -191,7 +276,7 @@ def validate(data):
     # 500 lines of validation logic
     pass
 
-# ✓ Clear error handling
+# ✅ Clear error handling
 try:
     result = risky_operation()
 except ValueError as e:
@@ -208,17 +293,19 @@ except:
     pass
 ```
 
-**Quality checklist:**
-- ✓ Functions < 50 lines
-- ✓ Classes < 300 lines
-- ✓ Cyclomatic complexity < 10
-- ✓ No duplicated code
-- ✓ Clear variable names
-- ✓ Consistent formatting (use black/prettier)
-- ✓ No commented-out code
-- ✓ Proper error handling
+#### Quality Checklist
 
-**Tools:**
+- ✅ Functions < 50 lines
+- ✅ Classes < 300 lines
+- ✅ Cyclomatic complexity < 10
+- ✅ No duplicated code
+- ✅ Clear variable names
+- ✅ Consistent formatting (use black/prettier)
+- ✅ No commented-out code
+- ✅ Proper error handling
+
+#### Quality Tools
+
 ```bash
 # Python
 black .
@@ -239,7 +326,7 @@ eslint --fix .
 
 ```toml
 # pyproject.toml or requirements.txt
-# ✓ CORRECT - Pinned versions with comments
+# ✅ CORRECT - Pinned versions with comments
 requests==2.31.0  # HTTP library for API calls
 pydantic==2.5.0   # Data validation
 
@@ -248,15 +335,17 @@ requests
 pydantic
 ```
 
-**Rules:**
-- ✓ Pin exact versions
-- ✓ Document why each dependency is needed
-- ✓ Regular security updates
-- ✓ Remove unused dependencies
-- ✓ Use virtual environments
-- ✓ Check for vulnerabilities
+#### Dependency Rules
 
-**Workflow:**
+- ✅ Pin exact versions
+- ✅ Document why each dependency is needed
+- ✅ Regular security updates
+- ✅ Remove unused dependencies
+- ✅ Use virtual environments
+- ✅ Check for vulnerabilities
+
+#### Dependency Workflow
+
 ```bash
 # Check for updates
 pip list --outdated
@@ -280,7 +369,7 @@ pip install --upgrade <package>
 for user in users:
     user.orders = db.query(Order).filter_by(user_id=user.id).all()
 
-# ✓ CORRECT - Single query
+# ✅ CORRECT - Single query
 users_with_orders = db.query(User).options(joinedload(User.orders)).all()
 
 # ❌ WRONG - Inefficient algorithm
@@ -292,7 +381,7 @@ def find_duplicates(items):
                 duplicates.append(item)
     return duplicates
 
-# ✓ CORRECT - Efficient algorithm
+# ✅ CORRECT - Efficient algorithm
 def find_duplicates(items):
     seen = set()
     duplicates = set()
@@ -303,14 +392,15 @@ def find_duplicates(items):
     return list(duplicates)
 ```
 
-**Performance checklist:**
-- ✓ Use appropriate data structures
-- ✓ Avoid N+1 queries
-- ✓ Cache expensive operations
-- ✓ Use lazy loading when appropriate
-- ✓ Profile before optimizing
-- ✓ Set timeouts for external calls
-- ✓ Use async for I/O-bound operations
+#### Performance Checklist
+
+- ✅ Use appropriate data structures
+- ✅ Avoid N+1 queries
+- ✅ Cache expensive operations
+- ✅ Use lazy loading when appropriate
+- ✅ Profile before optimizing
+- ✅ Set timeouts for external calls
+- ✅ Use async for I/O-bound operations
 
 ---
 
@@ -318,40 +408,39 @@ def find_duplicates(items):
 
 **Design for growth from day one.**
 
-**Principles:**
-
 ```python
-# ✓ Configurable limits
+# ✅ Configurable limits
 MAX_BATCH_SIZE = int(os.getenv("MAX_BATCH_SIZE", "1000"))
 
-# ✓ Pagination
+# ✅ Pagination
 def get_items(page: int = 1, page_size: int = 50):
     offset = (page - 1) * page_size
     return db.query(Item).offset(offset).limit(page_size).all()
 
-# ✓ Rate limiting
+# ✅ Rate limiting
 @rate_limit(requests=100, period=60)
 def api_endpoint():
     pass
 
-# ✓ Resource cleanup
+# ✅ Resource cleanup
 with open("file.txt") as f:
     process(f)  # File automatically closed
 
-# ✓ Horizontal scaling considerations
+# ✅ Horizontal scaling considerations
 # Use stateless design
 # Externalize session storage
 # Design for multiple instances
 ```
 
-**Scalability checklist:**
-- ✓ Stateless architecture
-- ✓ Pagination for large datasets
-- ✓ Rate limiting on APIs
-- ✓ Configurable resource limits
-- ✓ Database connection pooling
-- ✓ Caching strategy
-- ✓ Async/queue for long tasks
+#### Scalability Checklist
+
+- ✅ Stateless architecture
+- ✅ Pagination for large datasets
+- ✅ Rate limiting on APIs
+- ✅ Configurable resource limits
+- ✅ Database connection pooling
+- ✅ Caching strategy
+- ✅ Async/queue for long tasks
 
 ---
 
@@ -365,7 +454,7 @@ from typing import Optional
 
 logger = logging.getLogger(__name__)
 
-# ✓ CORRECT - Comprehensive error handling
+# ✅ CORRECT - Comprehensive error handling
 def process_user_data(user_id: str) -> Optional[dict]:
     """
     Process user data with proper error handling.
@@ -410,22 +499,26 @@ def process_user_data(user_id):
         return None
 ```
 
-**Logging levels:**
-- **DEBUG**: Detailed diagnostic information
-- **INFO**: General informational messages
-- **WARNING**: Warning messages for recoverable issues
-- **ERROR**: Error messages for failures
-- **CRITICAL**: Critical issues requiring immediate attention
+#### Logging Levels
 
-**What to log:**
-- ✓ Application startup/shutdown
-- ✓ Configuration loaded
-- ✓ User actions (with privacy consideration)
-- ✓ External API calls
-- ✓ Database queries (in debug mode)
-- ✓ Errors with context
-- ✓ Performance metrics
-- ✗ Sensitive data (passwords, tokens, PII)
+| Level | Use Case |
+|-------|----------|
+| **DEBUG** | Detailed diagnostic information |
+| **INFO** | General informational messages |
+| **WARNING** | Warning messages for recoverable issues |
+| **ERROR** | Error messages for failures |
+| **CRITICAL** | Critical issues requiring immediate attention |
+
+#### What to Log
+
+- ✅ Application startup/shutdown
+- ✅ Configuration loaded
+- ✅ User actions (with privacy consideration)
+- ✅ External API calls
+- ✅ Database queries (in debug mode)
+- ✅ Errors with context
+- ✅ Performance metrics
+- ❌ Sensitive data (passwords, tokens, PII)
 
 ---
 
@@ -434,7 +527,7 @@ def process_user_data(user_id):
 **Make meaningful commits with clear messages.**
 
 ```bash
-# ✓ CORRECT - Clear, descriptive commits
+# ✅ CORRECT - Clear, descriptive commits
 git commit -m "Add user authentication with JWT
 
 Implemented:
@@ -453,7 +546,8 @@ git commit -m "wip"
 git commit -m "updates"
 ```
 
-**Commit message format:**
+#### Commit Message Format
+
 ```
 <type>: <subject>
 
@@ -462,7 +556,8 @@ git commit -m "updates"
 <footer>
 ```
 
-**Types:**
+#### Commit Types
+
 - **feat**: New feature
 - **fix**: Bug fix
 - **docs**: Documentation changes
@@ -471,13 +566,14 @@ git commit -m "updates"
 - **perf**: Performance improvements
 - **chore**: Maintenance tasks
 
-**Commit checklist:**
-- ✓ One logical change per commit
-- ✓ Tests pass
-- ✓ Code formatted
-- ✓ No debugging code
-- ✓ No sensitive data
-- ✓ AI agent index updated
+#### Commit Checklist
+
+- ✅ One logical change per commit
+- ✅ Tests pass
+- ✅ Code formatted
+- ✅ No debugging code
+- ✅ No sensitive data
+- ✅ AI agent index updated
 
 ---
 
@@ -519,12 +615,12 @@ All golden rules are enforced in CI/CD:
 ### Code Review Checklist
 
 Reviewers must verify:
-- ✓ Tests included and passing
-- ✓ Documentation complete
-- ✓ No security vulnerabilities
-- ✓ AI agent index updated
-- ✓ Code quality standards met
-- ✓ Performance considerations addressed
+- ✅ Tests included and passing
+- ✅ Documentation complete
+- ✅ No security vulnerabilities
+- ✅ AI agent index updated
+- ✅ Code quality standards met
+- ✅ Performance considerations addressed
 
 ---
 
@@ -532,16 +628,17 @@ Reviewers must verify:
 
 **Before making ANY code change:**
 
-1. ✓ Generate test template: `python tests/test_system.py generate <file>`
-2. ✓ Write tests FIRST
-3. ✓ Implement feature
-4. ✓ Run tests: `pytest`
-5. ✓ Update AI index: `python dev/aiagent_navigator.py index`
-6. ✓ Format code: `black .` or `prettier --write .`
-7. ✓ Security scan: `bandit -r .`
-8. ✓ Commit with clear message
+1. ✅ Generate test template: `python tests/test_system.py generate <file>`
+2. ✅ Write tests FIRST
+3. ✅ Implement feature
+4. ✅ Run tests: `pytest`
+5. ✅ Update AI index: `python dev/aiagent_navigator.py index`
+6. ✅ Format code: `black .` or `prettier --write .`
+7. ✅ Security scan: `bandit -r .`
+8. ✅ Commit with clear message
 
-**Command sequence:**
+### Command Sequence
+
 ```bash
 # 1. Generate test
 python tests/test_system.py generate dev/new_module.py
@@ -582,24 +679,72 @@ git commit -m "feat: Add new module with tests"
 
 ---
 
-## Golden Rule Philosophy
+## Best Practices
 
-**Why these rules exist:**
+### ✅ DO
 
-1. **Quality**: High standards produce reliable software
-2. **Maintainability**: Future developers (AI and human) understand the code
-3. **Scalability**: Code grows without technical debt
-4. **Security**: Vulnerabilities are prevented, not patched
-5. **Collaboration**: AI agents work effectively with humans
-6. **Sustainability**: Codebase remains healthy long-term
+1. **Read these rules before every task** - Keep them fresh in memory
+2. **Run tests frequently** - Catch issues early
+3. **Update documentation as you code** - Don't leave it for later
+4. **Ask questions when uncertain** - Better to clarify than assume
 
-**Remember:**
+### ❌ DON'T
 
-> "Every AI agent is responsible for maintaining code quality.
-> No exceptions. No shortcuts. No technical debt."
+1. **Skip tests to save time** - Technical debt compounds quickly
+2. **Copy-paste code without understanding** - Leads to bugs and security issues
+3. **Ignore security warnings** - They exist for a reason
+4. **Commit broken code** - Breaks CI/CD and team workflow
 
 ---
 
-**Last Updated:** Auto-generated from golden rules enforcement system
-**Version:** 1.0
-**Enforcement:** Automated via CI/CD
+## Additional Resources
+
+### Official Documentation
+
+- 📚 [AI Agent Guide](/docs/core/AI_AGENT_GUIDE.md) - Complete operating guide
+- 🏗️ [MANIFEST](/docs/core/MANIFEST.md) - Project vision and architecture
+- 🧪 [AI Agent Tooling](/docs/dev/AI_AGENT_TOOLING.md) - Technical navigation system
+
+### External Resources
+
+- 🌐 [OWASP Top 10](https://owasp.org/www-project-top-ten/)
+- 📖 [Python Type Hints](https://docs.python.org/3/library/typing.html)
+- 📊 [Conventional Commits](https://www.conventionalcommits.org/)
+
+### Code Examples
+
+- 💻 [Test Examples](https://github.com/Free-Columns/levelith-2/tree/main/tests)
+- 🎯 [Service Layer Examples](https://github.com/Free-Columns/levelith-2/tree/main/backend/services)
+
+---
+
+## Related Documentation
+
+- **Previous:** [MANIFEST - Project Vision](/docs/core/MANIFEST.md)
+- **Next:** [AI Agent Guide](/docs/core/AI_AGENT_GUIDE.md)
+
+**Other related documentation:**
+
+- [Codebase Analysis](/docs/dev/CODEBASE_ANALYSIS.md)
+- [Development Priorities](/docs/dev/DEVELOPMENT_PRIORITIES.md)
+- [Known Issues](/docs/core/KNOWN_ISSUES.md)
+
+---
+
+## Feedback
+
+Found an issue with this guide? Have suggestions for improvement?
+
+- 👍 **Helpful?** These rules help maintain code quality
+- 🐛 **Found a bug?** [Report it on GitHub](https://github.com/Free-Columns/levelith-2/issues)
+- 💡 **Have an idea?** [Start a discussion](https://github.com/Free-Columns/levelith-2/discussions)
+
+---
+
+**Last Updated:** November 19, 2025 | **Version:** 1.0 | **Contributors:** Semour Media Group
+
+---
+
+> "Every AI agent is responsible for maintaining code quality. No exceptions. No shortcuts. No technical debt."
+
+*This document is part of the Levelith Developer Documentation. For questions, join our [Discord community](https://discord.gg/levelith).*

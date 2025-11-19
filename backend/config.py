@@ -41,13 +41,7 @@ class Settings(BaseSettings):
     algorithm: str = "HS256"
 
     # CORS
-    cors_origins: list[str] = [
-        "http://localhost:3000",
-        "http://localhost:8000",
-        "http://localhost:5173",  # Vite dev server
-        "https://levelith.online",
-        "https://www.levelith.online",
-    ]
+    cors_origins: str = "http://localhost:3000,http://localhost:8000,http://localhost:5173,https://levelith.online,https://www.levelith.online"
     cors_allow_credentials: bool = True
     cors_allow_methods: list[str] = ["*"]
     cors_allow_headers: list[str] = ["*"]
@@ -83,13 +77,12 @@ class Settings(BaseSettings):
             raise ValueError(f"Environment must be one of {allowed}")
         return v.lower()
 
-    @field_validator("cors_origins", mode="before")
-    @classmethod
-    def parse_cors_origins(cls, v) -> list[str]:
-        """Parse CORS origins from string or list."""
-        if isinstance(v, str):
-            return [origin.strip() for origin in v.split(",")]
-        return v
+    @property
+    def cors_origins_list(self) -> list[str]:
+        """Get CORS origins as a list."""
+        if isinstance(self.cors_origins, str):
+            return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
+        return self.cors_origins
 
     @property
     def is_production(self) -> bool:

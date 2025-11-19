@@ -14,13 +14,13 @@ export const ONETRUTH = {
    */
   colors: {
     // Primary brand colors
-    primary: "#3498db", // Bright blue - main brand color
+    primary: "#007EA7", //  main brand color
     primaryDark: "#2980b9", // Darker blue for hover states
     primaryLight: "#5dade2", // Lighter blue for backgrounds
 
     // Secondary colors
-    secondary: "#2ecc71", // Green - success, positive actions
-    secondaryDark: "#27ae60",
+    secondary: "#088732", // Green - success, positive actions
+    secondaryDark: "#0b752eff",
     secondaryLight: "#58d68d",
 
     // Accent colors
@@ -29,15 +29,15 @@ export const ONETRUTH = {
     accentLight: "#ec7063",
 
     // Neutral colors
-    background: "#ecf0f1", // Light gray background
-    backgroundDark: "#34495e", // Dark background for dark mode
-    surface: "#ffffff", // White surface for cards, modals
+    background: "#FFFFFF", // Light gray background
+    backgroundDark: "#000000", // Dark background for dark mode
+    surface: "#F4F4F9", // White surface for cards, modals
     surfaceDark: "#2c3e50",
 
     // Text colors
     text: "#2c3e50", // Dark gray for body text
-    textLight: "#7f8c8d", // Light gray for secondary text
-    textDark: "#1a252f", // Almost black for headings
+    textLight: "#FFFFFF", // Light gray for secondary text
+    textDark: "#0f151bff", // Almost black for headings
     textInverse: "#ffffff", // White text on dark backgrounds
 
     // Status colors
@@ -47,9 +47,9 @@ export const ONETRUTH = {
     info: "#3498db",
 
     // Experience type colors (for gamification)
-    education: "#9b59b6", // Purple for education
-    workplace: "#e67e22", // Orange for workplace
-    skills: "#1abc9c", // Teal for skills
+    education: "#088732", // Purple for education
+    workplace: "#007EA7", // Orange for workplace
+    skills: "#F24236 ", // Teal for skills
 
     // Borders and dividers
     border: "#bdc3c7",

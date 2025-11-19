@@ -4,8 +4,8 @@
  * Uses ONETRUTH configuration for all styling
  */
 
-import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -20,8 +20,14 @@ interface DocItem {
 }
 
 const Docs: React.FC = () => {
-  const { docPath } = useParams<{ docPath?: string }>();
+  const location = useLocation();
   const navigate = useNavigate();
+
+  // Extract the doc path from URL - everything after /docs/
+  // e.g., /docs/core/MANIFEST -> core/MANIFEST
+  const docPath = location.pathname.startsWith('/docs/')
+    ? location.pathname.slice(6) // Remove '/docs/' prefix
+    : undefined;
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
   const [docContent, setDocContent] = useState<string>('');
@@ -91,18 +97,7 @@ const Docs: React.FC = () => {
     doc.path.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  useEffect(() => {
-    if (docPath) {
-      setSelectedDoc(docPath);
-      loadDocContent(docPath);
-    } else if (!selectedDoc && documentation.length > 0) {
-      // Default to README
-      setSelectedDoc('README');
-      loadDocContent('README');
-    }
-  }, [docPath]);
-
-  const loadDocContent = async (path: string) => {
+  const loadDocContent = useCallback(async (path: string) => {
     setIsLoading(true);
     setError(null);
 
@@ -123,7 +118,21 @@ const Docs: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (docPath) {
+      // URL has a specific doc path - load it
+      setSelectedDoc(docPath);
+      loadDocContent(docPath);
+    } else if (documentation.length > 0 && !docContent) {
+      // No doc path in URL and no content loaded yet - load default README
+      const defaultDoc = 'README';
+      setSelectedDoc(defaultDoc);
+      loadDocContent(defaultDoc);
+      navigate(`/docs/${defaultDoc}`, { replace: true });
+    }
+  }, [docPath, documentation.length, docContent, loadDocContent, navigate]);
 
   const handleDocSelect = (path: string) => {
     setSelectedDoc(path);

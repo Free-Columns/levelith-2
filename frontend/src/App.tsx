@@ -20,9 +20,9 @@ const App: React.FC = () => {
       {/* Main landing page */}
       <Route path="/" element={<Landing />} />
 
-      {/* Documentation wiki */}
+      {/* Documentation wiki - supports nested paths like core/MANIFEST */}
       <Route path="/docs" element={<Docs />} />
-      <Route path="/docs/:docPath" element={<Docs />} />
+      <Route path="/docs/*" element={<Docs />} />
 
       {/* Admin dashboard - wrapped in DataSourceProvider */}
       <Route

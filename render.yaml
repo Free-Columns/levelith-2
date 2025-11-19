@@ -35,7 +35,7 @@ services:
     name: levelith-frontend
     env: static
     #region: oregon #static sites cant have a region
-    plan: free
+    #plan: free #no plans
     buildCommand: "cd frontend && npm install && npm run build"
     staticPublishPath: frontend/dist
     headers:

@@ -1,0 +1,381 @@
+name: 🚀 Deploy to Production
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline", "🏆 Golden Rules Enforcement"]
+    types:
+      - completed
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+
+env:
+  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '20.x'
+
+jobs:
+  # ============================================================================
+  # PRE-DEPLOYMENT CHECKS
+  # ============================================================================
+
+  pre-deploy-checks:
+    name: Pre-Deployment Validation
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+
+    outputs:
+      should_deploy: ${{ steps.check.outputs.should_deploy }}
+      environment: ${{ steps.check.outputs.environment }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify CI passed
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "Manual deployment triggered"
+            echo "should_deploy=true" >> $GITHUB_OUTPUT
+            echo "environment=${{ inputs.environment }}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.workflow_run.conclusion }}" == "success" ]; then
+            echo "CI passed - proceeding with deployment"
+            echo "should_deploy=true" >> $GITHUB_OUTPUT
+            echo "environment=production" >> $GITHUB_OUTPUT
+          else
+            echo "CI did not pass - skipping deployment"
+            echo "should_deploy=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if on main branch
+        run: |
+          if [ "${{ github.ref }}" != "refs/heads/main" ] && [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
+            echo "Not on main branch - skipping deployment"
+            exit 1
+          fi
+
+  # ============================================================================
+  # BUILD ARTIFACTS
+  # ============================================================================
+
+  build-backend:
+    name: Build Backend
+    needs: pre-deploy-checks
+    if: needs.pre-deploy-checks.outputs.should_deploy == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f backend/requirements.txt ]; then
+            pip install -r backend/requirements.txt
+          fi
+
+      - name: Create deployment package
+        run: |
+          mkdir -p deployment/backend
+          cp -r backend/* deployment/backend/
+          cp -r dev deployment/
+          echo "${{ github.sha }}" > deployment/backend/VERSION
+
+      - name: Upload backend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-deployment
+          path: deployment/backend/
+          retention-days: 7
+
+  build-frontend:
+    name: Build Frontend
+    needs: pre-deploy-checks
+    if: needs.pre-deploy-checks.outputs.should_deploy == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: |
+          if [ -f package.json ]; then
+            npm ci || npm install
+          fi
+
+      - name: Build production bundle
+        working-directory: frontend
+        env:
+          NODE_ENV: production
+        run: |
+          npm run build
+
+      - name: Upload frontend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-deployment
+          path: frontend/dist/
+          retention-days: 7
+
+  # ============================================================================
+  # DEPLOY TO RENDER.COM
+  # ============================================================================
+
+  deploy-backend:
+    name: Deploy Backend to Render
+    needs: [pre-deploy-checks, build-backend]
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ needs.pre-deploy-checks.outputs.environment }}
+      url: https://levlith.online/api/health
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download backend artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-deployment
+          path: backend/
+
+      - name: Deploy to Render.com (Backend)
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_BACKEND_SERVICE_ID }}
+        run: |
+          echo "🚀 Triggering Render.com deployment..."
+
+          if [ -z "$RENDER_API_KEY" ] || [ -z "$RENDER_SERVICE_ID" ]; then
+            echo "⚠️  Render.com credentials not configured"
+            echo "Please set RENDER_API_KEY and RENDER_BACKEND_SERVICE_ID secrets"
+            echo "Skipping automatic deployment"
+            exit 0
+          fi
+
+          # Trigger Render deployment via API
+          curl -X POST \
+            "https://api.render.com/v1/services/$RENDER_SERVICE_ID/deploys" \
+            -H "Authorization: Bearer $RENDER_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "clearCache": false
+            }'
+
+          echo "✅ Deployment triggered successfully"
+
+      - name: Wait for deployment to complete
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_BACKEND_SERVICE_ID }}
+        run: |
+          if [ -z "$RENDER_API_KEY" ] || [ -z "$RENDER_SERVICE_ID" ]; then
+            echo "Skipping deployment wait"
+            exit 0
+          fi
+
+          echo "⏳ Waiting for deployment to complete..."
+          sleep 60  # Wait for deployment to start
+
+          for i in {1..20}; do
+            STATUS=$(curl -s \
+              "https://api.render.com/v1/services/$RENDER_SERVICE_ID" \
+              -H "Authorization: Bearer $RENDER_API_KEY" | \
+              jq -r '.service.state')
+
+            echo "Deployment status: $STATUS"
+
+            if [ "$STATUS" == "available" ]; then
+              echo "✅ Deployment completed successfully!"
+              break
+            fi
+
+            if [ "$i" == "20" ]; then
+              echo "⚠️  Deployment timeout - please check Render dashboard"
+              exit 1
+            fi
+
+            sleep 30
+          done
+
+  deploy-frontend:
+    name: Deploy Frontend to Render
+    needs: [pre-deploy-checks, build-frontend]
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ needs.pre-deploy-checks.outputs.environment }}
+      url: https://levlith.online
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download frontend artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-deployment
+          path: frontend/dist/
+
+      - name: Deploy to Render.com (Frontend)
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_FRONTEND_SERVICE_ID }}
+        run: |
+          echo "🚀 Triggering Render.com deployment..."
+
+          if [ -z "$RENDER_API_KEY" ] || [ -z "$RENDER_SERVICE_ID" ]; then
+            echo "⚠️  Render.com credentials not configured"
+            echo "Please set RENDER_API_KEY and RENDER_FRONTEND_SERVICE_ID secrets"
+            echo "Skipping automatic deployment"
+            exit 0
+          fi
+
+          # Trigger Render deployment via API
+          curl -X POST \
+            "https://api.render.com/v1/services/$RENDER_SERVICE_ID/deploys" \
+            -H "Authorization: Bearer $RENDER_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "clearCache": false
+            }'
+
+          echo "✅ Deployment triggered successfully"
+
+  # ============================================================================
+  # POST-DEPLOYMENT VERIFICATION
+  # ============================================================================
+
+  verify-deployment:
+    name: Verify Deployment
+    needs: [deploy-backend, deploy-frontend]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Wait for services to stabilize
+        run: |
+          echo "⏳ Waiting for services to stabilize..."
+          sleep 30
+
+      - name: Health check - Backend API
+        run: |
+          echo "🏥 Checking backend health..."
+
+          MAX_RETRIES=10
+          RETRY_COUNT=0
+
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://levlith.online/api/health || echo "000")
+
+            if [ "$HTTP_CODE" == "200" ]; then
+              echo "✅ Backend health check passed!"
+              break
+            else
+              echo "⏳ Backend not ready yet (attempt $((RETRY_COUNT + 1))/$MAX_RETRIES)"
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+              sleep 10
+            fi
+          done
+
+          if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
+            echo "❌ Backend health check failed after $MAX_RETRIES attempts"
+            exit 1
+          fi
+
+      - name: Health check - Frontend
+        run: |
+          echo "🏥 Checking frontend health..."
+
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://levlith.online || echo "000")
+
+          if [ "$HTTP_CODE" == "200" ]; then
+            echo "✅ Frontend health check passed!"
+          else
+            echo "❌ Frontend health check failed (HTTP $HTTP_CODE)"
+            exit 1
+          fi
+
+      - name: Smoke tests
+        run: |
+          echo "🧪 Running smoke tests..."
+
+          # Test API endpoints
+          echo "Testing API version endpoint..."
+          curl -f https://levlith.online/api/v1/health || exit 1
+
+          echo "Testing NAICS search..."
+          curl -f "https://levlith.online/api/v1/naics/search?q=software" || exit 1
+
+          echo "✅ All smoke tests passed!"
+
+  # ============================================================================
+  # DEPLOYMENT SUMMARY
+  # ============================================================================
+
+  deployment-summary:
+    name: Deployment Summary
+    needs: [verify-deployment]
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: Generate deployment summary
+        run: |
+          echo "# 🚀 Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** ${{ needs.pre-deploy-checks.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Deployed by:** @${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Time:** $(date -u)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Services" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Service | Status | URL |" >> $GITHUB_STEP_SUMMARY
+          echo "|---------|--------|-----|" >> $GITHUB_STEP_SUMMARY
+          echo "| Backend | ${{ needs.deploy-backend.result == 'success' && '✅ Deployed' || '❌ Failed' }} | https://levlith.online/api |" >> $GITHUB_STEP_SUMMARY
+          echo "| Frontend | ${{ needs.deploy-frontend.result == 'success' && '✅ Deployed' || '❌ Failed' }} | https://levlith.online |" >> $GITHUB_STEP_SUMMARY
+          echo "| Health Check | ${{ needs.verify-deployment.result == 'success' && '✅ Passed' || '❌ Failed' }} | - |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ needs.verify-deployment.result }}" == "success" ]; then
+            echo "✅ **Deployment successful!**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Deployment failed - please check logs**" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Notify on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🚨 Deployment Failed',
+              body: `Deployment to production failed for commit ${context.sha}\n\nPlease check the [workflow run](${context.payload.repository.html_url}/actions/runs/${context.runId}) for details.`,
+              labels: ['deployment', 'bug', 'priority: critical']
+            });

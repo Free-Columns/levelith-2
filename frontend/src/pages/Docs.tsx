@@ -1,6 +1,7 @@
 /**
  * Docs Page - Wiki-style documentation viewer
- * Dynamically displays markdown documentation with sidebar navigation
+ * Dynamically displays markdown documentation with hierarchical sidebar navigation
+ * Supports 4-level deep folder structure with breadcrumb navigation
  * Uses ONETRUTH configuration for all styling
  */
 
@@ -13,18 +14,29 @@ import rehypeHighlight from 'rehype-highlight';
 import { ONETRUTH } from '../config/ONETRUTH';
 import 'highlight.js/styles/github-dark.css';
 
-interface DocItem {
-  path: string;
+interface DocFile {
+  type: 'file';
+  name: string;
   title: string;
-  category: string;
+  path: string;
+  filename: string;
 }
+
+interface DocFolder {
+  type: 'folder';
+  name: string;
+  path: string;
+  children: (DocFile | DocFolder)[];
+}
+
+type DocItem = DocFile | DocFolder;
 
 const Docs: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
   // Extract the doc path from URL - everything after /docs/
-  // e.g., /docs/core/MANIFEST -> core/MANIFEST
+  // e.g., /docs/agent/MANIFEST -> agent/MANIFEST
   const docPath = location.pathname.startsWith('/docs/')
     ? location.pathname.slice(6) // Remove '/docs/' prefix
     : undefined;
@@ -34,9 +46,10 @@ const Docs: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
-  const [documentation, setDocumentation] = useState<DocItem[]>([]);
+  const [docStructure, setDocStructure] = useState<DocItem[]>([]);
+  const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set());
 
-  // Fetch documentation list from backend
+  // Fetch documentation structure from backend
   useEffect(() => {
     const fetchDocList = async () => {
       try {
@@ -47,55 +60,61 @@ const Docs: React.FC = () => {
           throw new Error('Failed to fetch documentation list');
         }
 
-        const docStructure = await response.json();
+        const data = await response.json();
+        setDocStructure(data.structure || []);
 
-        // Convert backend structure to DocItem[]
-        const docList: DocItem[] = [];
-        const categoryMap: Record<string, string> = {
-          core: 'Core',
-          dev: 'Development',
-          api: 'API',
-          backend: 'Backend',
-          frontend: 'Frontend',
-          deployment: 'Deployment',
-          architecture: 'Architecture',
-        };
-
-        Object.entries(docStructure).forEach(([category, docs]) => {
-          (docs as Array<{ path: string; title: string }>).forEach(doc => {
-            docList.push({
-              path: doc.path,
-              title: doc.title,
-              category: categoryMap[category] || category.charAt(0).toUpperCase() + category.slice(1),
-            });
-          });
+        // Auto-expand first level folders
+        const firstLevelPaths = new Set<string>();
+        data.structure?.forEach((item: DocItem) => {
+          if (item.type === 'folder') {
+            firstLevelPaths.add(item.path);
+          }
         });
-
-        setDocumentation(docList);
+        setExpandedFolders(firstLevelPaths);
       } catch (error) {
         console.error('Error fetching documentation list:', error);
-        // Fallback to empty list - could also use a hardcoded fallback
-        setDocumentation([]);
+        setDocStructure([]);
       }
     };
 
     fetchDocList();
   }, []);
 
-  // Group docs by category
-  const groupedDocs = documentation.reduce((acc, doc) => {
-    if (!acc[doc.category]) {
-      acc[doc.category] = [];
-    }
-    acc[doc.category].push(doc);
-    return acc;
-  }, {} as Record<string, DocItem[]>);
+  // Toggle folder expansion
+  const toggleFolder = (path: string) => {
+    setExpandedFolders(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(path)) {
+        newSet.delete(path);
+      } else {
+        newSet.add(path);
+      }
+      return newSet;
+    });
+  };
+
+  // Find all files for search
+  const findAllFiles = (items: DocItem[]): DocFile[] => {
+    const files: DocFile[] = [];
+    items.forEach(item => {
+      if (item.type === 'file') {
+        files.push(item);
+      } else {
+        files.push(...findAllFiles(item.children));
+      }
+    });
+    return files;
+  };
+
+  const allFiles = findAllFiles(docStructure);
 
   // Filter docs based on search
-  const filteredDocs = documentation.filter(doc =>
-    doc.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    doc.path.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredDocs = searchTerm
+    ? allFiles.filter(doc =>
+        doc.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        doc.path.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
 
   const loadDocContent = useCallback(async (path: string) => {
     setIsLoading(true);
@@ -122,22 +141,103 @@ const Docs: React.FC = () => {
 
   useEffect(() => {
     if (docPath) {
-      // URL has a specific doc path - load it
+      // URL has a specific doc path - load it and expand parent folders
       setSelectedDoc(docPath);
       loadDocContent(docPath);
-    } else if (documentation.length > 0 && !docContent) {
+
+      // Auto-expand all parent folders
+      const pathParts = docPath.split('/');
+      const newExpanded = new Set(expandedFolders);
+      for (let i = 1; i <= pathParts.length; i++) {
+        newExpanded.add(pathParts.slice(0, i).join('/'));
+      }
+      setExpandedFolders(newExpanded);
+    } else if (docStructure.length > 0 && !docContent) {
       // No doc path in URL and no content loaded yet - load default README
       const defaultDoc = 'README';
       setSelectedDoc(defaultDoc);
       loadDocContent(defaultDoc);
       navigate(`/docs/${defaultDoc}`, { replace: true });
     }
-  }, [docPath, documentation.length, docContent, loadDocContent, navigate]);
+  }, [docPath, docStructure.length, docContent, loadDocContent, navigate]);
 
   const handleDocSelect = (path: string) => {
     setSelectedDoc(path);
     loadDocContent(path);
     navigate(`/docs/${path}`);
+  };
+
+  // Generate breadcrumb from path
+  const generateBreadcrumbs = (path: string): { label: string; path: string }[] => {
+    if (!path) return [];
+
+    const parts = path.split('/');
+    const breadcrumbs: { label: string; path: string }[] = [];
+
+    for (let i = 0; i < parts.length; i++) {
+      const partPath = parts.slice(0, i + 1).join('/');
+      const label = parts[i].replace(/_/g, ' ').replace(/-/g, ' ');
+      breadcrumbs.push({
+        label: label.charAt(0).toUpperCase() + label.slice(1),
+        path: partPath,
+      });
+    }
+
+    return breadcrumbs;
+  };
+
+  // Render a single navigation item (file or folder)
+  const renderNavItem = (item: DocItem, depth: number = 0): React.ReactNode => {
+    const indentStyle = {
+      paddingLeft: `${depth * 16 + 8}px`,
+    };
+
+    if (item.type === 'file') {
+      return (
+        <div
+          key={item.path}
+          style={{
+            ...styles.docItem,
+            ...indentStyle,
+            ...(selectedDoc === item.path ? styles.docItemActive : {}),
+          }}
+          onClick={() => handleDocSelect(item.path)}
+          onMouseOver={(e) => {
+            if (selectedDoc !== item.path) {
+              e.currentTarget.style.backgroundColor = 'rgba(52, 152, 219, 0.2)';
+            }
+          }}
+          onMouseOut={(e) => {
+            if (selectedDoc !== item.path) {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }
+          }}
+        >
+          📄 {item.title}
+        </div>
+      );
+    } else {
+      const isExpanded = expandedFolders.has(item.path);
+      return (
+        <div key={item.path}>
+          <div
+            style={{
+              ...styles.folderItem,
+              ...indentStyle,
+            }}
+            onClick={() => toggleFolder(item.path)}
+          >
+            <span style={{ marginRight: '6px' }}>{isExpanded ? '📂' : '📁'}</span>
+            <span>{item.name}</span>
+          </div>
+          {isExpanded && (
+            <div>
+              {item.children.map(child => renderNavItem(child, depth + 1))}
+            </div>
+          )}
+        </div>
+      );
+    }
   };
 
   const styles = {
@@ -189,17 +289,20 @@ const Docs: React.FC = () => {
       backgroundColor: ONETRUTH.colors.surface,
       display: sidebarExpanded ? 'block' : 'none',
     },
-    category: {
-      marginBottom: ONETRUTH.spacing.lg,
+    navContainer: {
       display: sidebarExpanded ? 'block' : 'none',
     },
-    categoryTitle: {
+    folderItem: {
+      padding: ONETRUTH.spacing.sm,
+      marginBottom: ONETRUTH.spacing.xs,
+      borderRadius: ONETRUTH.borderRadius.sm,
+      cursor: 'pointer',
+      transition: `all ${ONETRUTH.transitions.fast}`,
       fontSize: ONETRUTH.fonts.sizes.sm,
-      fontWeight: ONETRUTH.fonts.weights.semibold,
-      color: ONETRUTH.colors.primary,
-      textTransform: 'uppercase' as const,
-      marginBottom: ONETRUTH.spacing.sm,
-      letterSpacing: '0.05em',
+      color: ONETRUTH.colors.textInverse,
+      fontWeight: ONETRUTH.fonts.weights.medium,
+      display: 'flex',
+      alignItems: 'center',
     },
     docItem: {
       padding: ONETRUTH.spacing.sm,
@@ -237,6 +340,28 @@ const Docs: React.FC = () => {
       cursor: 'pointer',
       textDecoration: 'none',
     },
+    breadcrumbs: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: ONETRUTH.spacing.xs,
+      marginBottom: ONETRUTH.spacing.md,
+      fontSize: ONETRUTH.fonts.sizes.sm,
+      color: ONETRUTH.colors.text,
+      flexWrap: 'wrap' as const,
+    },
+    breadcrumbItem: {
+      color: ONETRUTH.colors.primary,
+      cursor: 'pointer',
+      textDecoration: 'none',
+    },
+    breadcrumbSeparator: {
+      color: ONETRUTH.colors.textLight,
+      margin: `0 ${ONETRUTH.spacing.xs}`,
+    },
+    breadcrumbCurrent: {
+      color: ONETRUTH.colors.textDark,
+      fontWeight: ONETRUTH.fonts.weights.semibold,
+    },
     contentTitle: {
       fontSize: ONETRUTH.fonts.sizes['4xl'],
       fontFamily: ONETRUTH.fonts.heading,
@@ -258,6 +383,17 @@ const Docs: React.FC = () => {
       padding: ONETRUTH.spacing.lg,
       borderRadius: ONETRUTH.borderRadius.md,
       marginBottom: ONETRUTH.spacing.lg,
+    },
+    searchResults: {
+      marginBottom: ONETRUTH.spacing.lg,
+    },
+    searchResultsTitle: {
+      fontSize: ONETRUTH.fonts.sizes.sm,
+      fontWeight: ONETRUTH.fonts.weights.semibold,
+      color: ONETRUTH.colors.primary,
+      textTransform: 'uppercase' as const,
+      marginBottom: ONETRUTH.spacing.sm,
+      letterSpacing: '0.05em',
     },
   };
 
@@ -456,6 +592,9 @@ const Docs: React.FC = () => {
     }
   `;
 
+  const breadcrumbs = selectedDoc ? generateBreadcrumbs(selectedDoc) : [];
+  const selectedFile = selectedDoc ? allFiles.find(f => f.path === selectedDoc) : null;
+
   return (
     <>
       <style>{markdownStyles}</style>
@@ -483,37 +622,11 @@ const Docs: React.FC = () => {
                 style={styles.searchBox}
               />
 
-              {searchTerm ? (
-                <div style={styles.category}>
-                  <div style={styles.categoryTitle}>Search Results</div>
-                  {filteredDocs.map((doc) => (
-                    <div
-                      key={doc.path}
-                      style={{
-                        ...styles.docItem,
-                        ...(selectedDoc === doc.path ? styles.docItemActive : {}),
-                      }}
-                      onClick={() => handleDocSelect(doc.path)}
-                      onMouseOver={(e) => {
-                        if (selectedDoc !== doc.path) {
-                          e.currentTarget.style.backgroundColor = 'rgba(52, 152, 219, 0.2)';
-                        }
-                      }}
-                      onMouseOut={(e) => {
-                        if (selectedDoc !== doc.path) {
-                          e.currentTarget.style.backgroundColor = 'transparent';
-                        }
-                      }}
-                    >
-                      {doc.title}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                Object.entries(groupedDocs).map(([category, docs]) => (
-                  <div key={category} style={styles.category}>
-                    <div style={styles.categoryTitle}>{category}</div>
-                    {docs.map((doc) => (
+              <div style={styles.navContainer}>
+                {searchTerm ? (
+                  <div style={styles.searchResults}>
+                    <div style={styles.searchResultsTitle}>Search Results ({filteredDocs.length})</div>
+                    {filteredDocs.map((doc) => (
                       <div
                         key={doc.path}
                         style={{
@@ -532,12 +645,17 @@ const Docs: React.FC = () => {
                           }
                         }}
                       >
-                        {doc.title}
+                        📄 {doc.title}
+                        <div style={{ fontSize: '11px', color: ONETRUTH.colors.textLight, marginTop: '2px' }}>
+                          {doc.path}
+                        </div>
                       </div>
                     ))}
                   </div>
-                ))
-              )}
+                ) : (
+                  docStructure.map(item => renderNavItem(item, 0))
+                )}
+              </div>
             </>
           )}
         </aside>
@@ -548,8 +666,35 @@ const Docs: React.FC = () => {
             <Link to="/" style={styles.backLink}>
               ← Back to Home
             </Link>
+
+            {/* Breadcrumbs */}
+            {breadcrumbs.length > 0 && (
+              <div style={styles.breadcrumbs}>
+                <Link to="/docs/README" style={styles.breadcrumbItem}>📚 Docs</Link>
+                {breadcrumbs.map((crumb, index) => (
+                  <React.Fragment key={crumb.path}>
+                    <span style={styles.breadcrumbSeparator}>/</span>
+                    {index === breadcrumbs.length - 1 ? (
+                      <span style={styles.breadcrumbCurrent}>{crumb.label}</span>
+                    ) : (
+                      <a
+                        href={`/docs/${crumb.path}`}
+                        style={styles.breadcrumbItem}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleDocSelect(crumb.path);
+                        }}
+                      >
+                        {crumb.label}
+                      </a>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            )}
+
             <h1 style={styles.contentTitle}>
-              {documentation.find(d => d.path === selectedDoc)?.title || 'Documentation'}
+              {selectedFile?.title || 'Documentation'}
             </h1>
           </div>
 

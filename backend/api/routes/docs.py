@@ -18,47 +18,99 @@ PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
 DOCS_DIR = PROJECT_ROOT / "docs"
 
 
+def _scan_docs_recursive(base_path: Path, relative_path: str = "", max_depth: int = 4, current_depth: int = 0):
+    """
+    Recursively scan documentation directory up to max_depth levels.
+
+    Args:
+        base_path: Absolute path to scan
+        relative_path: Relative path from docs root (for building doc paths)
+        max_depth: Maximum depth to scan (default 4)
+        current_depth: Current recursion depth
+
+    Returns:
+        List of dicts or nested structure with files and subdirectories
+    """
+    if current_depth >= max_depth or not base_path.exists():
+        return []
+
+    structure = []
+
+    # Get all items in this directory
+    items = sorted(base_path.iterdir(), key=lambda x: (not x.is_dir(), x.name))
+
+    for item in items:
+        if item.name.startswith('.'):
+            continue
+
+        item_relative_path = f"{relative_path}/{item.name}" if relative_path else item.name
+
+        if item.is_dir():
+            # Recursively scan subdirectory
+            children = _scan_docs_recursive(item, item_relative_path, max_depth, current_depth + 1)
+            if children:  # Only add if there are children
+                structure.append({
+                    "type": "folder",
+                    "name": item.name,
+                    "path": item_relative_path,
+                    "children": children,
+                })
+        elif item.suffix == ".md":
+            # Extract title from first line of markdown file
+            try:
+                with open(item, 'r', encoding='utf-8') as f:
+                    first_line = f.readline().strip()
+                    title = first_line.lstrip('#').strip() if first_line.startswith('#') else item.stem.replace("_", " ").replace("-", " ").title()
+            except:
+                title = item.stem.replace("_", " ").replace("-", " ").title()
+
+            doc_path = f"{relative_path}/{item.stem}" if relative_path else item.stem
+
+            structure.append({
+                "type": "file",
+                "name": item.stem,
+                "title": title,
+                "path": doc_path,
+                "filename": item.name,
+            })
+
+    return structure
+
+
 @router.get("/docs/list")
 async def list_docs() -> Dict:
     """
-    List all available documentation files.
+    List all available documentation files in a hierarchical structure up to 4 levels deep.
 
     Returns:
-        Dictionary with documentation structure
+        Dictionary with hierarchical documentation structure:
+        {
+            "structure": [
+                {
+                    "type": "folder",
+                    "name": "agent",
+                    "path": "agent",
+                    "children": [
+                        {
+                            "type": "file",
+                            "name": "MANIFEST",
+                            "title": "Levelith Project Manifest",
+                            "path": "agent/MANIFEST",
+                            "filename": "MANIFEST.md"
+                        },
+                        ...
+                    ]
+                },
+                ...
+            ]
+        }
     """
     if not DOCS_DIR.exists():
         raise HTTPException(status_code=404, detail="Documentation directory not found")
 
-    docs_structure = {
-        "core": [],
-        "dev": [],
-        "api": [],
-        "backend": [],
-        "frontend": [],
-        "deployment": [],
-        "architecture": [],
-    }
+    structure = _scan_docs_recursive(DOCS_DIR, "", max_depth=4, current_depth=0)
 
-    for category in docs_structure.keys():
-        category_path = DOCS_DIR / category
-        if category_path.exists():
-            for file_path in category_path.glob("*.md"):
-                docs_structure[category].append({
-                    "path": f"{category}/{file_path.stem}",
-                    "title": file_path.stem.replace("_", " ").title(),
-                    "filename": file_path.name,
-                })
-
-    # Add root README
-    readme_path = DOCS_DIR / "README.md"
-    if readme_path.exists():
-        docs_structure["core"].insert(0, {
-            "path": "README",
-            "title": "Documentation Index",
-            "filename": "README.md",
-        })
-
-    return docs_structure
+    return {"structure": structure}
 
 
 @router.get("/docs/{doc_path:path}")

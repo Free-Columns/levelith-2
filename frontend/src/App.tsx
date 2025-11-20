@@ -10,7 +10,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
-import Docs from './pages/Docs_old';
+import Docs from './pages/Docs';
 import AdminApp from './admin/App';
 import { DataSourceProvider } from './admin/context/DataSourceContext';
 

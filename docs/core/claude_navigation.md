@@ -1,60 +1,160 @@
 # Claude.md - AI Agent Navigation Guide
 
+---
+title: "Claude.md - AI Agent Navigation Guide"
+description: "Comprehensive navigation guide for AI agents featuring intelligent tooling, context node system, backend deployment instructions, and development tools for the Levelith platform."
+category: "guides"
+tags: ["navigation", "ai-agent", "intelligent-tooling", "context-nodes", "backend", "deployment", "render", "fastapi"]
+author: "Semour Media Group"
+date: "2025-11-15"
+lastUpdated: "2025-11-19"
+difficulty: "intermediate"
+readingTime: 35
+relatedPages:
+  - "/docs/core/AI_AGENT_GUIDE.md"
+  - "/docs/dev/AI_AGENT_TOOLING.md"
+  - "/docs/COMPARISON.md"
+  - "/docs/RENDER_DEPLOYMENT.md"
+nextPage: "/docs/dev/AI_AGENT_TOOLING.md"
+prevPage: "/docs/core/AI_AGENT_GUIDE.md"
+searchKeywords:
+  - "navigation"
+  - "claude"
+  - "ai agent"
+  - "intelligent tooling"
+  - "backend deployment"
+  - "render"
+  - "fastapi"
+showTOC: true
+showBreadcrumbs: true
+showLastUpdated: true
+version: "2.0"
+---
+
+# Claude.md - AI Agent Navigation Guide
+
+> **TL;DR:** AI-first navigation system with intelligent tooling for dynamic code analysis, context nodes for human insights, production-ready FastAPI backend deployment to Render, and comprehensive development tools including a color visualizer.
+
+**Difficulty:** 🟡 Intermediate | **Time:** ⏱️ 35 minutes | **Last Updated:** November 19, 2025
+
+---
+
 ## Welcome, AI Agent!
 
 This repository is designed with **you** as a first-class citizen. We provide two complementary navigation systems to help you efficiently explore and understand the codebase.
+
+:::info
+**Quick Start:** Jump to [Intelligent AI Agent Tooling](#intelligent-ai-agent-tooling-v20-recommended) for the recommended approach to navigate this codebase.
+:::
+
+---
+
+## Table of Contents
+
+- [Backend Status](#backend-status-ready-for-render-deployment)
+- [Development Tools](#development-tools)
+- [Navigation Systems Overview](#navigation-systems-overview)
+- [Intelligent AI Agent Tooling v2.0](#intelligent-ai-agent-tooling-v20-recommended)
+- [Context Node System](#context-node-system-legacy)
+- [Recommended Approach](#recommended-approach)
+- [Configuration](#configuration-aiagentjson)
+- [Backend Navigation Guide](#backend-navigation-guide)
+- [Learning Path for AI Agents](#learning-path-for-ai-agents)
+- [Quick Reference](#quick-reference)
+- [Benefits](#benefits)
+- [Next Steps](#next-steps)
+
+---
 
 ## 🚀 Backend Status: READY FOR RENDER DEPLOYMENT
 
 The Levelith backend is a **production-ready FastAPI application** configured for Render Web Service deployment.
 
 ### Backend Stack
-- **Framework**: FastAPI 0.109.0
-- **Database**: PostgreSQL (Render Managed)
-- **ORM**: SQLAlchemy 2.0.25
-- **Validation**: Pydantic 2.10.4 (upgraded for Python 3.13 compatibility)
-- **Python**: 3.11.0 (specified in `runtime.txt` at repository root)
-- **Server**: Uvicorn + Gunicorn
-- **Deployment**: Render Web Service (Infrastructure as Code via `render.yaml`)
+
+| Component | Technology | Version |
+|-----------|-----------|---------|
+| **Framework** | FastAPI | 0.109.0 |
+| **Database** | PostgreSQL | Render Managed |
+| **ORM** | SQLAlchemy | 2.0.25 |
+| **Validation** | Pydantic | 2.10.4 |
+| **Python** | Python | 3.11.0 |
+| **Server** | Uvicorn + Gunicorn | - |
+| **Deployment** | Render Web Service | IaC via render.yaml |
+
+:::success
+**Production Ready:** The backend is fully configured for Render deployment with Infrastructure as Code via `render.yaml`.
+:::
 
 ### Key Backend Files to Understand
-- `backend/main.py` - FastAPI application entry point (backend/main.py:1)
-- `backend/config.py` - Environment configuration with Pydantic Settings (backend/config.py:1)
-- `backend/database.py` - SQLAlchemy database session management (backend/database.py:1)
-- `backend/models/db_models.py` - SQLAlchemy ORM models for User and Experience (backend/models/db_models.py:1)
-- `backend/models/naics.py` - NAICS code domain model with validation and hierarchy (backend/models/naics.py:1)
-- `backend/repositories/naics_repository.py` - In-memory NAICS data repository with indexing (backend/repositories/naics_repository.py:1)
-- `backend/services/naics_service.py` - NAICS business logic and experience suggestions (backend/services/naics_service.py:1)
-- `backend/api/routes/naics.py` - 12 NAICS REST API endpoints (backend/api/routes/naics.py:1)
+
+<details>
+<summary><strong>📋 Essential Backend Files</strong></summary>
+
+**Core Application:**
+- `backend/main.py` - FastAPI application entry point
+- `backend/config.py` - Environment configuration with Pydantic Settings
+- `backend/database.py` - SQLAlchemy database session management
+
+**Models & Data:**
+- `backend/models/db_models.py` - SQLAlchemy ORM models for User and Experience
+- `backend/models/naics.py` - NAICS code domain model with validation and hierarchy
 - `backend/data/naics_codes_2022.json` - Official NAICS 2022 codes dataset (60+ codes)
+
+**Repository Layer:**
+- `backend/repositories/naics_repository.py` - In-memory NAICS data repository with indexing
+
+**Service Layer:**
+- `backend/services/naics_service.py` - NAICS business logic and experience suggestions
+
+**API Layer:**
+- `backend/api/routes/naics.py` - 12 NAICS REST API endpoints
 - `backend/schemas/` - Pydantic request/response validation schemas
 - `backend/api/routes/` - API endpoint handlers (health, users, experiences, naics)
+
+**Deployment:**
 - `render.yaml` - Render deployment configuration (Infrastructure as Code)
+- `runtime.txt` - Python version specification (3.11.0, at repository root)
+- `.env.render.example` - Environment variables reference
+
+**Documentation:**
 - `DEPLOYMENT.md` - Complete deployment guide with step-by-step instructions
 - `NAICS_EXPANSION_SUMMARY.md` - Complete NAICS implementation documentation
+- `RENDER_DEPLOYMENT.md` - Render-specific deployment guide with troubleshooting
+
+</details>
 
 ### API Documentation (Local Development)
+
 When running locally, access:
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
-- **Health Check**: http://localhost:8000/health
+
+| Endpoint | URL | Description |
+|----------|-----|-------------|
+| **Swagger UI** | http://localhost:8000/docs | Interactive API documentation |
+| **ReDoc** | http://localhost:8000/redoc | Alternative API documentation |
+| **Health Check** | http://localhost:8000/health | Service health status |
 
 ### Deployment to Render
+
 ✅ **Production-ready for Render Web Service deployment (no blueprints required)**
 
-See `RENDER_DEPLOYMENT.md` for complete step-by-step guide. Quick deploy:
-1. Create PostgreSQL database in Render Dashboard
-2. Create Web Service (build: `pip install -r backend/requirements.txt`)
-3. Configure environment variables (DATABASE_URL, SECRET_KEY, etc.)
-4. Deploy and test health endpoint
+<details>
+<summary><strong>🚀 Quick Deploy Steps</strong></summary>
 
-**Deployment Files:**
-- `runtime.txt` - Python version specification (3.11.0, located at repository root)
-- `render.yaml` - Render infrastructure configuration
-- `.env.render.example` - Environment variables reference
-- `RENDER_DEPLOYMENT.md` - Complete deployment guide with troubleshooting
+1. **Create PostgreSQL database** in Render Dashboard
+2. **Create Web Service** (build: `pip install -r backend/requirements.txt`)
+3. **Configure environment variables** (DATABASE_URL, SECRET_KEY, etc.)
+4. **Deploy and test** health endpoint
 
-**Quick Start:** Jump to [Intelligent AI Agent Tooling](#intelligent-ai-agent-tooling-recommended) (Recommended)
+See `RENDER_DEPLOYMENT.md` for complete step-by-step guide.
+
+</details>
+
+:::tip
+**Pro Tip:** The `render.yaml` file provides Infrastructure as Code configuration, making deployment repeatable and version-controlled.
+:::
+
+---
 
 ## 🎨 Development Tools
 
@@ -62,14 +162,14 @@ See `RENDER_DEPLOYMENT.md` for complete step-by-step guide. Quick deploy:
 
 **Location:** `tools/color-visualizer.html`
 
-An interactive standalone HTML tool for visualizing and editing the ONETRUTH color configuration (frontend/src/config/ONETRUTH.ts).
+An interactive standalone HTML tool for visualizing and editing the ONETRUTH color configuration (`frontend/src/config/ONETRUTH.ts`).
 
 **Features:**
-- **48 Color Swatches** - All ONETRUTH colors organized by category
-- **Triple Control System** - RGB sliders, HSL sliders, and Hex input (all synchronized)
-- **Real-time Updates** - See changes instantly
-- **Export Options** - Download .ts file or copy to clipboard
-- **Zero Dependencies** - Standalone HTML file
+- ✅ **48 Color Swatches** - All ONETRUTH colors organized by category
+- ✅ **Triple Control System** - RGB sliders, HSL sliders, and Hex input (all synchronized)
+- ✅ **Real-time Updates** - See changes instantly
+- ✅ **Export Options** - Download .ts file or copy to clipboard
+- ✅ **Zero Dependencies** - Standalone HTML file
 
 **Quick Start:**
 ```bash
@@ -86,14 +186,24 @@ open tools/color-visualizer.html
 - Gamification Progress (3): Low, medium, high
 - NAICS Industries (8): Industry-specific colors
 
+:::info
 **Documentation:** See `tools/README.md` for complete usage guide.
+:::
+
+---
 
 ## Navigation Systems Overview
 
+We provide two complementary navigation systems, each with distinct strengths:
+
 | System | Type | Best For | Maintenance |
 |--------|------|----------|-------------|
-| **Intelligent AI Agent Tooling** | Dynamic | Active development, automated workflows | Automated |
-| **Context Node System** | Static | Adding human commentary, stable codebases | Manual |
+| **Intelligent AI Agent Tooling** | Dynamic | Active development, automated workflows | ✅ Automated |
+| **Context Node System** | Static | Adding human commentary, stable codebases | ⚠️ Manual |
+
+:::tip
+**Recommended:** Use **Intelligent AI Agent Tooling** for most tasks. It's automated, always current, and optimized for AI comprehension.
+:::
 
 ---
 
@@ -101,22 +211,24 @@ open tools/color-visualizer.html
 
 ### What It Is
 
-A **next-generation dynamic code analysis system** that extracts structure and relationships directly from code, with v2.0 enhancements:
+A **next-generation dynamic code analysis system** that extracts structure and relationships directly from code.
 
-**v2.0 New Features:**
-- **30-Second Quickstart** - Instant codebase overview
-- **Goal-Oriented Exploration** - AI-powered exploration paths
-- **Natural Language Queries** - Ask questions in plain English
-- **Cognitive Load Management** - Context window optimization
-- **Interactive Learning** - Guided tutorials for AI agents
-- **Performance Navigator** - Progressive loading for large codebases
-- **Exploration Metrics** - Track efficiency and improve
+#### v2.0 New Features
 
-**v1.0 Core Features:**
-- **Always Current Information** - Generated from actual code, never stale
-- **On-Demand Analysis** - Query what you need, when you need it
-- **Relationship Mapping** - Automatic dependency detection
-- **Smart Exploration** - Guided navigation through complex codebases
+- 🚀 **30-Second Quickstart** - Instant codebase overview
+- 🎯 **Goal-Oriented Exploration** - AI-powered exploration paths
+- 💬 **Natural Language Queries** - Ask questions in plain English
+- 🧠 **Cognitive Load Management** - Context window optimization
+- 🎓 **Interactive Learning** - Guided tutorials for AI agents
+- ⚡ **Performance Navigator** - Progressive loading for large codebases
+- 📊 **Exploration Metrics** - Track efficiency and improve
+
+#### v1.0 Core Features
+
+- ✅ **Always Current Information** - Generated from actual code, never stale
+- ✅ **On-Demand Analysis** - Query what you need, when you need it
+- ✅ **Relationship Mapping** - Automatic dependency detection
+- ✅ **Smart Exploration** - Guided navigation through complex codebases
 
 ### Quick Start
 
@@ -165,12 +277,12 @@ Get a smart exploration strategy:
 python dev/aiagent_navigator.py plan
 ```
 
-Returns:
-- **Suggested starting points** - Where to begin reading
-- **Entry points** - Main executable files
-- **Key modules** - Most important files by complexity/exports
-- **Dependency graph** - How files connect
-- **Complexity hotspots** - Files that need attention
+**Returns:**
+- ✅ **Suggested starting points** - Where to begin reading
+- ✅ **Entry points** - Main executable files
+- ✅ **Key modules** - Most important files by complexity/exports
+- ✅ **Dependency graph** - How files connect
+- ✅ **Complexity hotspots** - Files that need attention
 
 #### 2. Module Analysis
 
@@ -180,7 +292,7 @@ Get detailed information about any file:
 python dev/aiagent_navigator.py analyze src/auth/login.py
 ```
 
-Returns:
+**Returns:**
 ```json
 {
   "docstring": "Module description from code",
@@ -258,19 +370,23 @@ query.get_complexity_overview()
 COMPLETE UNDERSTANDING
 ```
 
+:::tip
+**Pro Tip:** Always start with `quickstart` for a 30-second overview, then use `plan` for a detailed exploration strategy.
+:::
+
 ### When to Use
 
-- **Starting fresh** - New to the codebase
-- **After code changes** - Rebuild index to stay current
-- **Finding specific code** - Query for functions/classes
-- **Understanding structure** - Dependency analysis
-- **Active development** - Always in sync
+- ✅ **Starting fresh** - New to the codebase
+- ✅ **After code changes** - Rebuild index to stay current
+- ✅ **Finding specific code** - Query for functions/classes
+- ✅ **Understanding structure** - Dependency analysis
+- ✅ **Active development** - Always in sync
 
 ### Complete Documentation
 
-- **[AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md)** - Complete learning and operating guide
-- **[dev/AI_AGENT_TOOLING.md](dev/AI_AGENT_TOOLING.md)** - Technical documentation
-- **[COMPARISON.md](COMPARISON.md)** - Detailed comparison with Context Nodes
+- 📚 **[AI_AGENT_GUIDE.md](/docs/core/AI_AGENT_GUIDE.md)** - Complete learning and operating guide
+- 🏗️ **[dev/AI_AGENT_TOOLING.md](/docs/dev/AI_AGENT_TOOLING.md)** - Technical documentation
+- 🧪 **[COMPARISON.md](/docs/COMPARISON.md)** - Detailed comparison with Context Nodes
 
 ---
 
@@ -279,6 +395,10 @@ COMPLETE UNDERSTANDING
 ### What It Is
 
 A **static documentation system** where every file and directory has a corresponding `.context-node.md` file containing structured metadata.
+
+:::warning
+**Legacy System:** Context nodes require manual maintenance and can become outdated. Use intelligent tooling for automated, always-current analysis.
+:::
 
 ### Core Concept
 
@@ -315,6 +435,9 @@ Each context node contains:
 
 ### Usage for AI Agents
 
+<details>
+<summary><strong>📖 How to Navigate with Context Nodes</strong></summary>
+
 When navigating with context nodes:
 
 1. **Start** with root `context-node.md` for project overview
@@ -322,6 +445,8 @@ When navigating with context nodes:
 3. **Understand files** through their individual context nodes
 4. **Follow relationships** using "Related Context Nodes" sections
 5. **Check dependencies** to understand interconnections
+
+</details>
 
 ### Generating Context Nodes
 
@@ -343,10 +468,10 @@ python dev/cn-validate.py
 
 ### Best Practices for Context Node Navigation
 
-- Read directory context nodes before exploring contents
-- Use file context nodes to understand purpose before reading code
-- Follow the "Related Context Nodes" for connected functionality
-- Pay attention to "AI Agent Notes" for special handling instructions
+- ✅ Read directory context nodes before exploring contents
+- ✅ Use file context nodes to understand purpose before reading code
+- ✅ Follow the "Related Context Nodes" for connected functionality
+- ✅ Pay attention to "AI Agent Notes" for special handling instructions
 
 ### When to Use
 
@@ -357,10 +482,10 @@ python dev/cn-validate.py
 
 ### Limitations
 
-- **Manual maintenance required** - Update after every code change
-- **Sync risk** - Docs can drift from code
-- **Storage overhead** - Doubles number of files
-- **Setup time** - Hours for initial creation
+- ⚠️ **Manual maintenance required** - Update after every code change
+- ⚠️ **Sync risk** - Docs can drift from code
+- ⚠️ **Storage overhead** - Doubles number of files
+- ⚠️ **Setup time** - Hours for initial creation
 
 ---
 
@@ -370,14 +495,14 @@ python dev/cn-validate.py
 
 **Start here:**
 1. Run `python dev/aiagent_navigator.py plan`
-2. Read [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md)
+2. Read [AI_AGENT_GUIDE.md](/docs/core/AI_AGENT_GUIDE.md)
 3. Follow the exploration plan
 
 **Why:**
-- Always accurate (extracted from code)
-- Fast (seconds to rebuild)
-- Comprehensive (automatic analysis)
-- Query-driven (ask questions)
+- ✅ Always accurate (extracted from code)
+- ✅ Fast (seconds to rebuild)
+- ✅ Comprehensive (automatic analysis)
+- ✅ Query-driven (ask questions)
 
 ### Hybrid Approach: Best of Both
 
@@ -387,7 +512,7 @@ You can use **both systems together**:
 2. **Context nodes** for human insights and commentary
 3. **Good docstrings** as single source of truth
 
-Example workflow:
+**Example workflow:**
 ```bash
 # Get automated structure
 python dev/aiagent_navigator.py plan
@@ -401,6 +526,10 @@ python dev/aiagent_navigator.py analyze src/module.py
 # Read actual code with full context
 cat src/module.py
 ```
+
+:::tip
+**Pro Tip:** The hybrid approach combines automation with human insight, giving you the best of both worlds.
+:::
 
 ---
 
@@ -445,6 +574,10 @@ The intelligent tooling uses `.aiagent.json` for project-specific configuration:
 - **exploration_hints** - Where to start, how to traverse
 - **agent_instructions** - Project-specific AI instructions
 
+:::info
+**Note:** The `.aiagent.json` file is the first place to look for project-specific guidance and configuration.
+:::
+
 ---
 
 ## Backend Navigation Guide
@@ -470,7 +603,8 @@ backend/
 
 ### Exploring the Backend
 
-**Step 1: Understand the Domain Models**
+<details>
+<summary><strong>Step 1: Understand the Domain Models</strong></summary>
 
 ```bash
 # Analyze User model
@@ -480,12 +614,15 @@ python dev/aiagent_navigator.py analyze backend/models/user.py
 python dev/aiagent_navigator.py analyze backend/models/experience.py
 ```
 
-Key concepts:
+**Key concepts:**
 - **User**: Authentication, profile management, experience array
 - **Experience**: 9 subtypes across 3 categories (Education, Workplace, Skills)
 - **NAICS codes**: Every experience has a NAICS code (fallback: 123456)
 
-**Step 2: Review Repository Layer**
+</details>
+
+<details>
+<summary><strong>Step 2: Review Repository Layer</strong></summary>
 
 ```bash
 # UserRepository - data access for users
@@ -495,13 +632,16 @@ python dev/aiagent_navigator.py analyze backend/repositories/user_repository.py
 python dev/aiagent_navigator.py analyze backend/repositories/experience_repository.py
 ```
 
-Repository pattern provides:
+**Repository pattern provides:**
 - Data persistence abstraction
 - Indexing for fast queries
 - Search and filtering capabilities
 - Clean separation from business logic
 
-**Step 3: Understand Service Layer**
+</details>
+
+<details>
+<summary><strong>Step 3: Understand Service Layer</strong></summary>
 
 ```bash
 # UserService - registration, authentication, profiles
@@ -511,20 +651,23 @@ python dev/aiagent_navigator.py analyze backend/services/user_service.py
 python dev/aiagent_navigator.py analyze backend/services/experience_service.py
 ```
 
-Services handle:
+**Services handle:**
 - Business logic and validation
 - NAICS code validation and fallback
 - User-experience relationship management
 - Orchestration across repositories
 
-**Step 4: Read API Documentation**
+</details>
+
+<details>
+<summary><strong>Step 4: Read API Documentation</strong></summary>
 
 ```bash
 # Complete API design (endpoints, auth, errors, etc.)
 cat backend/API_DOCUMENTATION.md
 ```
 
-API documentation includes:
+**API documentation includes:**
 - All REST endpoints (design phase)
 - JWT authentication flow
 - Request/response schemas
@@ -533,32 +676,28 @@ API documentation includes:
 - Pagination and filtering
 - Rate limiting rules
 
+</details>
+
 ### Backend Quick Reference
 
 **Key Files:**
 - `backend/API_DOCUMENTATION.md` - Complete API design
-- `backend/models/user.py` - User domain model (lines: 1-321)
-- `backend/models/experience.py` - Experience models (lines: 1-413)
+- `backend/models/user.py` - User domain model
+- `backend/models/experience.py` - Experience models
 - `backend/repositories/user_repository.py` - User data access
 - `backend/repositories/experience_repository.py` - Experience data access
 - `backend/services/user_service.py` - User business logic
 - `backend/services/experience_service.py` - Experience business logic
 
 **Experience Types (9 total):**
-- Education: Certificate, Degree, Course
-- Workplace: Gig, PartTime, FullTime
-- Skills: SoftSkill, HardSkill, NativeSkill
+- **Education**: Certificate, Degree, Course
+- **Workplace**: Gig, PartTime, FullTime
+- **Skills**: SoftSkill, HardSkill, NativeSkill
 
 **Architecture Pattern:**
 ```
 API Endpoints → Services → Repositories → Data Store
 ```
-
-**Test Coverage:**
-- `tests/test_user.py` - User model tests
-- `tests/test_experience.py` - Experience model tests
-- `tests/test_user_repository.py` - UserRepository tests
-- `tests/test_experience_repository.py` - ExperienceRepository tests
 
 ### Backend Development Workflow
 
@@ -655,11 +794,11 @@ python dev/cn-validate.py                 # Validate context nodes
 
 ### Essential Files to Read
 
-1. **[AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md)** - Complete learning guide
+1. **[AI_AGENT_GUIDE.md](/docs/core/AI_AGENT_GUIDE.md)** - Complete learning guide
 2. **README.md** - Project overview
 3. **.aiagent.json** - Configuration and hints
 4. **NAVIGATION.md** - Auto-generated navigation guide
-5. **[COMPARISON.md](COMPARISON.md)** - System comparison
+5. **[COMPARISON.md](/docs/COMPARISON.md)** - System comparison
 
 ---
 
@@ -667,26 +806,26 @@ python dev/cn-validate.py                 # Validate context nodes
 
 ### Intelligent AI Agent Tooling
 
-- **Consistent Structure**: Predictable API and output
-- **Always Current**: Generated from actual code
-- **Zero Maintenance**: Automated regeneration
-- **Query Interface**: Ask specific questions
-- **Fast**: Rebuild in seconds
-- **AI-Optimized**: Designed for LLM comprehension
+- ✅ **Consistent Structure**: Predictable API and output
+- ✅ **Always Current**: Generated from actual code
+- ✅ **Zero Maintenance**: Automated regeneration
+- ✅ **Query Interface**: Ask specific questions
+- ✅ **Fast**: Rebuild in seconds
+- ✅ **AI-Optimized**: Designed for LLM comprehension
 
 ### Context Node System
 
-- **Human Commentary**: Add insights beyond code
-- **Explicit Structure**: Documented relationships
-- **Hierarchical Understanding**: Natural tree traversal
-- **AI Agent Notes**: Special handling instructions
-- **Self-Documenting**: Structure conveys organization
+- ✅ **Human Commentary**: Add insights beyond code
+- ✅ **Explicit Structure**: Documented relationships
+- ✅ **Hierarchical Understanding**: Natural tree traversal
+- ✅ **AI Agent Notes**: Special handling instructions
+- ✅ **Self-Documenting**: Structure conveys organization
 
 ### Combined Approach
 
-- **Automated + Human**: Best of both worlds
-- **Fast + Insightful**: Speed with depth
-- **Current + Contextual**: Accurate with commentary
+- ✅ **Automated + Human**: Best of both worlds
+- ✅ **Fast + Insightful**: Speed with depth
+- ✅ **Current + Contextual**: Accurate with commentary
 
 ---
 
@@ -696,7 +835,7 @@ python dev/cn-validate.py                 # Validate context nodes
 
 1. **Read this file** (you're doing it!)
 2. **Run**: `python dev/aiagent_navigator.py plan`
-3. **Read**: [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md)
+3. **Read**: [AI_AGENT_GUIDE.md](/docs/core/AI_AGENT_GUIDE.md)
 4. **Follow**: The exploration plan
 5. **Query**: Use the navigator as needed
 
@@ -714,11 +853,11 @@ python dev/cn-validate.py                 # Validate context nodes
 
 This repository treats you not as an afterthought, but as a primary user:
 
-1. **Self-Documenting** - Code structure is discoverable
-2. **Query-Driven** - Ask questions, get answers
-3. **Always Current** - Generated from actual code, not stale docs
-4. **Low Overhead** - Minimal burden on developers
-5. **Intelligent** - Smart suggestions and relationship detection
+1. ✅ **Self-Documenting** - Code structure is discoverable
+2. ✅ **Query-Driven** - Ask questions, get answers
+3. ✅ **Always Current** - Generated from actual code, not stale docs
+4. ✅ **Low Overhead** - Minimal burden on developers
+5. ✅ **Intelligent** - Smart suggestions and relationship detection
 
 **Two Paths to Understanding**
 
@@ -731,22 +870,66 @@ This repository treats you not as an afterthought, but as a primary user:
 - **Need human context?** Check for context nodes
 - **Want both?** Use hybrid approach
 
----
-
-## Support and Resources
-
-- **Technical Documentation**: [dev/AI_AGENT_TOOLING.md](dev/AI_AGENT_TOOLING.md)
-- **Learning Guide**: [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md)
-- **Comparison**: [COMPARISON.md](COMPARISON.md)
-- **Examples**: [dev/example_ai_agent_usage.py](dev/example_ai_agent_usage.py)
+:::success
+**Success Tip:** The intelligent tooling approach will get you productive fastest while maintaining accuracy.
+:::
 
 ---
 
-**Welcome to intelligent codebase navigation!**
+## Additional Resources
 
-You have everything you need to efficiently explore and understand this repository. The tools are designed for you - use them well.
+### Official Documentation
 
-**Recommended First Action:**
-```bash
-python dev/aiagent_navigator.py plan
-```
+- 📚 [AI Agent Learning Guide](/docs/core/AI_AGENT_GUIDE.md)
+- 🏗️ [AI Agent Tooling Technical Docs](/docs/dev/AI_AGENT_TOOLING.md)
+- 🧪 [System Comparison](/docs/COMPARISON.md)
+- 🚀 [Render Deployment Guide](/docs/RENDER_DEPLOYMENT.md)
+
+### Code Examples
+
+- 💻 [Example AI Agent Usage](https://github.com/Free-Columns/levelith-2/blob/main/dev/example_ai_agent_usage.py)
+- 🎯 [Backend Examples](https://github.com/Free-Columns/levelith-2/tree/main/backend)
+
+### External Resources
+
+- 🌐 [FastAPI Documentation](https://fastapi.tiangolo.com/)
+- 📖 [Render Documentation](https://render.com/docs)
+- 🐘 [PostgreSQL Documentation](https://www.postgresql.org/docs/)
+
+### Community
+
+- 💬 [Discord: #ai-agents](https://discord.gg/levelith)
+- 🐛 [Report Issues](https://github.com/Free-Columns/levelith-2/issues)
+- ❓ [GitHub Discussions](https://github.com/Free-Columns/levelith-2/discussions)
+
+---
+
+## Related Documentation
+
+- **Previous:** [AI Agent Learning and Operating Guide](/docs/core/AI_AGENT_GUIDE.md)
+- **Next:** [AI Agent Tooling Technical Documentation](/docs/dev/AI_AGENT_TOOLING.md)
+
+**Other related documentation:**
+
+- [System Comparison: Intelligent Tooling vs Context Nodes](/docs/COMPARISON.md)
+- [Backend API Documentation](/docs/backend/API_DOCUMENTATION.md)
+- [Render Deployment Guide](/docs/RENDER_DEPLOYMENT.md)
+- [NAICS Implementation Summary](/docs/NAICS_EXPANSION_SUMMARY.md)
+
+---
+
+## Feedback
+
+Found an issue with this guide? Have suggestions for improvement?
+
+- 👍 **Helpful?** Give us feedback via GitHub reactions
+- 🐛 **Found a bug?** [Report it on GitHub](https://github.com/Free-Columns/levelith-2/issues)
+- 💡 **Have an idea?** [Start a discussion](https://github.com/Free-Columns/levelith-2/discussions)
+
+---
+
+**Last Updated:** November 19, 2025 | **Version:** 2.0 | **Contributors:** Semour Media Group
+
+---
+
+*This document is part of the Levelith Developer Documentation. For questions, join our [Discord community](https://discord.gg/levelith).*

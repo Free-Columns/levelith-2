@@ -1,8 +1,56 @@
-# MANIFEST.md - Repository Manifestation File
+# Levelith Project Manifest
 
-**Last Updated:** 2025-01-17
-**Version:** 2.0
-**Maintained By:** Project Team (Human-curated)
+---
+title: "Levelith Project Manifest"
+description: "Complete project vision, architecture, conventions, and development guide for AI agents and human developers working with the Levelith social-resume gamification platform."
+category: "architecture"
+tags: ["manifest", "architecture", "ai-agents", "conventions", "project-vision", "development-guide"]
+author: "Semour Media Group"
+date: "2025-01-17"
+lastUpdated: "2025-11-19"
+difficulty: "intermediate"
+readingTime: 25
+relatedPages:
+  - "/docs/core/AI_AGENT_GOLDEN_RULES.md"
+  - "/docs/core/AI_AGENT_GUIDE.md"
+  - "/docs/dev/CODEBASE_ANALYSIS.md"
+nextPage: "/docs/core/AI_AGENT_GOLDEN_RULES.md"
+prevPage: "/docs/README.md"
+searchKeywords:
+  - "project manifest"
+  - "architecture"
+  - "conventions"
+  - "naics integration"
+  - "onetruth branding"
+  - "development workflow"
+showTOC: true
+showBreadcrumbs: true
+showLastUpdated: true
+version: "2.0"
+---
+
+# Levelith Project Manifest
+
+> **TL;DR:** Levelith is an AI-first social-resume gamification platform that transforms professional experience tracking into an engaging, interactive experience. Built with test-driven development (80% min coverage), enforced golden rules, NAICS industry classification, and ONETRUTH branding. This manifest provides all context AI agents and developers need to understand project goals, architecture, and conventions.
+
+**Difficulty:** 🟡 Intermediate | **Time:** ⏱️ 25 minutes | **Last Updated:** November 19, 2025
+
+---
+
+## Table of Contents
+
+- [Purpose of This File](#purpose-of-this-file)
+- [Project Vision & Goals](#project-vision--goals)
+- [Architecture Philosophy](#architecture-philosophy)
+- [Technology Stack](#technology-stack)
+- [Project Structure & Organization](#project-structure--organization)
+- [Development Workflow](#development-workflow)
+- [Code Conventions & Standards](#code-conventions--standards)
+- [Domain-Specific Context](#domain-specific-context)
+- [Quality Standards](#quality-standards)
+- [Common Patterns & Anti-Patterns](#common-patterns--anti-patterns)
+- [Project Status & Roadmap](#project-status--roadmap)
+- [Additional Resources](#additional-resources)
 
 ---
 
@@ -10,7 +58,18 @@
 
 This manifestation file provides **human-curated, broad-scope context** that AI agents cannot easily extract from code alone. It answers the "why" and "what" at a high level, guiding AI agents to make decisions aligned with project goals, team conventions, and architectural philosophy.
 
-**⚠️  AI Agents: Read this file FIRST before making any significant changes.**
+:::danger
+**CRITICAL - AI Agents:** Read this file FIRST before making any significant changes. This document provides essential context about project vision, architecture decisions, and development conventions that cannot be inferred from code alone.
+:::
+
+### What This Document Provides
+
+- **Project Vision**: Goals, non-goals, and strategic direction
+- **Architecture Decisions**: Why we chose specific technologies and patterns
+- **Domain Context**: NAICS codes, ONETRUTH branding, experience types
+- **Development Workflow**: Required steps for AI agents and humans
+- **Conventions**: Coding standards, naming, testing patterns
+- **Quality Standards**: Metrics, performance, security requirements
 
 ---
 
@@ -20,35 +79,42 @@ This manifestation file provides **human-curated, broad-scope context** that AI 
 
 **Levelith** is a **social-resume gamification web application** that transforms professional experience tracking into an engaging, interactive platform. Built with AI agents as first-class development citizens, Levelith demonstrates how modern development practices can create scalable, maintainable applications.
 
-**Core Product:**
-- Social resume platform with gamification elements
-- Experience tracking across Education, Workplace, and Skills
-- NAICS-based professional categorization
-- Mobile-first responsive design
-- Real-time social interactions
+#### Core Product
 
-**Technical Innovation:**
-- AI-first development methodology
-- Test-driven architecture with 80% minimum coverage
-- Automated quality and security enforcement
-- Self-documenting codebase
-- Intelligent navigation for AI agents
+- ✅ Social resume platform with gamification elements
+- ✅ Experience tracking across Education, Workplace, and Skills
+- ✅ NAICS-based professional categorization
+- ✅ Mobile-first responsive design
+- ✅ Real-time social interactions
+
+#### Technical Innovation
+
+- ✅ AI-first development methodology
+- ✅ Test-driven architecture with 80% minimum coverage
+- ✅ Automated quality and security enforcement
+- ✅ Self-documenting codebase
+- ✅ Intelligent navigation for AI agents
 
 ### Application Overview
 
-**Deployment:**
-- **Hosting:** Render.com
-- **Domain:** levlith.online
-- **Environment:** Production-ready cloud infrastructure
+#### Deployment
 
-**Platforms:**
+| Component | Value |
+|-----------|-------|
+| **Hosting** | Render.com |
+| **Domain** | levlith.online |
+| **Environment** | Production-ready cloud infrastructure |
+
+#### Platforms
+
 - ✅ Desktop web browsers (Chrome, Firefox, Safari, Edge)
 - ✅ Mobile web browsers (responsive design)
-- ✅ Mobile app (iOS and Android)
+- ✅ Mobile app (iOS and Android) - planned
 
-**Access:**
-- Public website: https://levlith.online
-- Mobile app: Available via app stores (future)
+#### Access
+
+- **Public Website:** https://levlith.online
+- **Mobile App:** Available via app stores (future)
 
 ### Primary Goals
 
@@ -74,70 +140,110 @@ This manifestation file provides **human-curated, broad-scope context** that AI 
 
 ### Core Principles
 
-1. **Explicit over Implicit**
-   - Clear, typed interfaces
-   - No magic or hidden behavior
-   - Document assumptions
+#### 1. Explicit over Implicit
 
-2. **Test-First, Always**
-   - Tests define behavior
-   - 80% minimum coverage is non-negotiable
-   - Integration tests for cross-component features
+- Clear, typed interfaces
+- No magic or hidden behavior
+- Document assumptions
 
-3. **Self-Documenting Code**
-   - Code should explain itself
-   - Docstrings for public APIs
-   - Type hints everywhere
-   - Comments only for "why", not "what"
+#### 2. Test-First, Always
 
-4. **Security by Design**
-   - Never trust user input
-   - Parameterized queries only
-   - Environment variables for secrets
-   - Regular security audits
+- Tests define behavior
+- 80% minimum coverage is non-negotiable
+- Integration tests for cross-component features
 
-5. **Scalability from Day One**
-   - Stateless design
-   - Pagination for large datasets
-   - Rate limiting on APIs
-   - Horizontal scaling considerations
+#### 3. Self-Documenting Code
+
+- Code should explain itself
+- Docstrings for public APIs
+- Type hints everywhere
+- Comments only for "why", not "what"
+
+#### 4. Security by Design
+
+- Never trust user input
+- Parameterized queries only
+- Environment variables for secrets
+- Regular security audits
+
+#### 5. Scalability from Day One
+
+- Stateless design
+- Pagination for large datasets
+- Rate limiting on APIs
+- Horizontal scaling considerations
 
 ### Architectural Decisions
 
-**Decision:** Use intelligent AI agent tooling (not static context nodes)
+<details>
+<summary><strong>Decision: Use intelligent AI agent tooling (not static context nodes)</strong></summary>
+
 **Rationale:** Always in sync with code, zero maintenance overhead, query-driven
+
 **Trade-offs:** Requires Python AST parsing, initial setup
-**Status:** ✅ Implemented
 
-**Decision:** Enforce 80% test coverage minimum
+**Status:** ✅ Implemented
+</details>
+
+<details>
+<summary><strong>Decision: Enforce 80% test coverage minimum</strong></summary>
+
 **Rationale:** High coverage prevents regressions, documents behavior
+
 **Trade-offs:** Slower initial development, more upfront work
-**Status:** ✅ Implemented
 
-**Decision:** Golden rules enforced via CI/CD
+**Status:** ✅ Implemented
+</details>
+
+<details>
+<summary><strong>Decision: Golden rules enforced via CI/CD</strong></summary>
+
 **Rationale:** Automation ensures consistency, prevents human error
+
 **Trade-offs:** CI/CD complexity, longer pipeline times
+
 **Status:** ✅ Implemented
+</details>
 
-**Decision:** Monorepo structure (backend, frontend, dev tools)
+<details>
+<summary><strong>Decision: Monorepo structure (backend, frontend, dev tools)</strong></summary>
+
 **Rationale:** Easier to maintain consistency, shared tooling
+
 **Trade-offs:** Larger repository size, potential for coupling
-**Status:** 🚧 In Progress
 
-**Decision:** NAICS code required for all experiences
+**Status:** 🚧 In Progress
+</details>
+
+<details>
+<summary><strong>Decision: NAICS code required for all experiences</strong></summary>
+
 **Rationale:** Standardized industry classification enables professional categorization, filtering, and analytics
+
 **Trade-offs:** Requires NAICS lookup/validation, uses 123456 as fallback "GENERAL" code
-**Status:** 🚧 In Progress
 
-**Decision:** Single ONETRUTH branding configuration
+**Status:** 🚧 In Progress
+</details>
+
+<details>
+<summary><strong>Decision: Single ONETRUTH branding configuration</strong></summary>
+
 **Rationale:** Centralized branding ensures consistency across all components, simplifies theme updates
-**Trade-offs:** All components must reference ONETRUTH, potential single point of failure
-**Status:** 🚧 In Progress
 
-**Decision:** Deploy on Render.com
-**Rationale:** Simple deployment, auto-scaling, integrated CI/CD, cost-effective for MVP
-**Trade-offs:** Vendor lock-in potential, migration complexity if needed later
+**Trade-offs:** All components must reference ONETRUTH, potential single point of failure
+
 **Status:** 🚧 In Progress
+</details>
+
+<details>
+<summary><strong>Decision: Deploy on Render.com</strong></summary>
+
+**Rationale:** Simple deployment, auto-scaling, integrated CI/CD, cost-effective for MVP
+
+**Trade-offs:** Vendor lock-in potential, migration complexity if needed later
+
+**Status:** 🚧 In Progress
+</details>
 
 ---
 
@@ -193,11 +299,15 @@ levelith-2/
 
 ### File Naming Conventions
 
-- **Python:** `snake_case.py` for modules
-- **JavaScript/TypeScript:** `PascalCase.tsx` for components, `camelCase.ts` for utilities
-- **Tests:** `test_*.py` mirroring source structure
-- **Docs:** `UPPERCASE.md` for important docs, `lowercase.md` for guides
-- **Config:** `.lowercase` for dotfiles
+| Type | Convention | Examples |
+|------|------------|----------|
+| **Python** | `snake_case.py` | `user_service.py`, `naics_repository.py` |
+| **JavaScript/TypeScript** | `PascalCase.tsx` for components | `UserCard.tsx`, `ExperienceList.tsx` |
+| **JavaScript/TypeScript** | `camelCase.ts` for utilities | `apiClient.ts`, `formatDate.ts` |
+| **Tests** | `test_*.py` | `test_user_service.py` |
+| **Docs** | `UPPERCASE.md` for important | `MANIFEST.md`, `GOLDEN_RULES.md` |
+| **Docs** | `lowercase.md` for guides | `deployment.md`, `troubleshooting.md` |
+| **Config** | `.lowercase` | `.gitignore`, `.env.example` |
 
 ### Module Organization
 
@@ -226,6 +336,10 @@ levelith-2/
 10. ✅ Enforce rules: `python tests/test_system.py enforce`
 11. ✅ Commit with conventional commit message
 
+:::tip
+**Pro Tip:** Run `python dev/aiagent_navigator.py ask "question"` to query the codebase before making changes.
+:::
+
 ### For Human Developers
 
 1. Understand the golden rules
@@ -240,11 +354,13 @@ levelith-2/
 
 ### Branching Strategy
 
-- **main**: Production-ready code, protected
-- **develop**: Integration branch, default for PRs
-- **feature/***: Feature branches (short-lived)
-- **fix/***: Bug fix branches (short-lived)
-- **claude/***: AI agent work branches (auto-managed)
+| Branch Type | Purpose | Lifetime |
+|-------------|---------|----------|
+| **main** | Production-ready code | Permanent (protected) |
+| **develop** | Integration branch | Permanent (default for PRs) |
+| **feature/** | Feature branches | Short-lived |
+| **fix/** | Bug fix branches | Short-lived |
+| **claude/** | AI agent work branches | Auto-managed |
 
 ---
 
@@ -360,12 +476,14 @@ class TestUserAuthentication:
 
 ### User System
 
-**Authentication:**
+#### Authentication
+
 - Username + password login (traditional authentication)
 - JWT tokens for session management
 - Secure password hashing (bcrypt)
 
-**User Model:**
+#### User Model
+
 ```python
 class User:
     """
@@ -395,75 +513,105 @@ class User:
 
 #### 1. Education Experiences
 
-**Certificate:**
+<details>
+<summary><strong>Certificate</strong></summary>
+
 - Short-term certifications
 - Professional credentials
 - Industry-specific training
 - Example: AWS Certified Developer, Google Analytics Certification
+</details>
 
-**Degree:**
+<details>
+<summary><strong>Degree</strong></summary>
+
 - Formal academic degrees
 - University/college programs
 - Example: Bachelor of Science, Master of Business Administration
+</details>
 
-**Course:**
+<details>
+<summary><strong>Course</strong></summary>
+
 - Individual courses or workshops
 - Online learning programs
 - Skill-specific training
 - Example: Introduction to Machine Learning, Advanced SQL
+</details>
 
 #### 2. Workplace Experiences
 
-**Gig:**
+<details>
+<summary><strong>Gig</strong></summary>
+
 - Short-term contract work
 - Freelance projects
 - One-off engagements
 - Example: Website redesign project, consulting engagement
+</details>
 
-**Part-Time:**
+<details>
+<summary><strong>Part-Time</strong></summary>
+
 - Regular part-time employment
 - Flexible schedules
 - Secondary employment
 - Example: Retail associate, teaching assistant
+</details>
 
-**Full-Time:**
+<details>
+<summary><strong>Full-Time</strong></summary>
+
 - Primary career positions
 - Standard employment
 - Long-term roles
 - Example: Software Engineer, Marketing Manager
+</details>
 
 #### 3. Skills Experiences
 
-**Soft Skills:**
+<details>
+<summary><strong>Soft Skills</strong></summary>
+
 - Interpersonal abilities
 - Communication skills
 - Leadership qualities
 - Example: Public speaking, team collaboration, conflict resolution
+</details>
 
-**Hard Skills:**
+<details>
+<summary><strong>Hard Skills</strong></summary>
+
 - Technical abilities
 - Measurable competencies
 - Industry-specific knowledge
 - Example: Python programming, data analysis, graphic design
+</details>
 
-**Native Skills:**
+<details>
+<summary><strong>Native Skills</strong></summary>
+
 - Natural talents
 - Innate abilities
 - Cultural knowledge
 - Language fluencies
 - Example: Bilingual (English/Spanish), artistic ability, musical talent
+</details>
 
 ### NAICS Integration
 
+:::danger
 **CRITICAL REQUIREMENT:** Every Experience entry MUST include a NAICS code.
+:::
 
-**What is NAICS?**
+#### What is NAICS?
+
 - North American Industry Classification System
 - Standardized industry categorization
 - 6-digit numerical codes
 - Enables professional categorization and filtering
 
-**Implementation Rules:**
+#### Implementation Rules
 
 ```python
 class Experience:
@@ -480,29 +628,36 @@ class Experience:
             self.naics_code = "123456"
 ```
 
-**NAICS Code: 123456**
+#### NAICS Code: 123456
+
 - Special fallback code
 - Represents "GENERAL" classification
 - Used when specific industry code not available
 - Ensures all experiences have valid NAICS
 
-**Examples:**
-- Software Development: 541511
-- Elementary Schools: 611110
-- Graphic Design: 541430
-- Unknown/General: 123456
+#### Examples
+
+| Industry | NAICS Code |
+|----------|------------|
+| Software Development | 541511 |
+| Elementary Schools | 611110 |
+| Graphic Design | 541430 |
+| Unknown/General | 123456 |
 
 ### ONETRUTH Branding System
 
+:::danger
 **CRITICAL REQUIREMENT:** All components, logic, and presentation must adhere to ONETRUTH branding configuration.
+:::
 
-**What is ONETRUTH?**
+#### What is ONETRUTH?
+
 - Single authoritative branding configuration file
 - Contains all theme variables (colors, fonts, spacing)
 - Ensures consistency across entire application
 - Centralized source of truth for design
 
-**Implementation:**
+#### Implementation
 
 ```typescript
 // ONETRUTH.ts - Single source of truth
@@ -538,7 +693,8 @@ function Header() {
 }
 ```
 
-**Rules:**
+#### ONETRUTH Rules
+
 - ✅ Always import branding from ONETRUTH
 - ✅ Never hardcode colors, fonts, or spacing
 - ✅ All UI components reference ONETRUTH
@@ -548,31 +704,31 @@ function Header() {
 
 ### Business Logic Areas
 
-**User Management:**
+#### User Management
 - Username/password authentication
 - User profile management
 - Experience CRUD operations
 - Social connections and networking
 
-**Experience Tracking:**
+#### Experience Tracking
 - Create/edit experiences (9 types)
 - NAICS code validation and assignment
 - Experience categorization and filtering
 - Timeline visualization
 
-**Gamification:**
+#### Gamification
 - Points system based on activity
 - Achievements and badges
 - User levels and progression
 - Leaderboards and rankings
 
-**Social Features:**
+#### Social Features
 - View other users' profiles
 - Connect with professionals
 - Share experiences
 - Comment and engage
 
-**API Layer:**
+#### API Layer
 - RESTful endpoints for all operations
 - JWT authentication
 - Rate limiting (prevent abuse)
@@ -580,11 +736,11 @@ function Header() {
 
 ### External Dependencies
 
-**Current:**
+#### Current
 - **Render.com:** Application hosting and deployment
 - **NAICS Database:** Industry classification lookup
 
-**Planned:**
+#### Planned
 - **JWT Library:** Token-based authentication
 - **PostgreSQL:** User and experience data storage
 - **Redis:** Session caching, performance
@@ -621,58 +777,33 @@ function Header() {
 
 ---
 
-## Team Conventions
-
-### Communication
-
-- **Commit Messages:** Conventional commits (feat/fix/docs/etc.)
-- **PR Descriptions:** Include context, screenshots, test results
-- **Code Comments:** Explain "why", not "what"
-- **Documentation:** Update docs in same PR as code changes
-
-### Review Guidelines
-
-**What Reviewers Check:**
-- ✅ Tests included and passing (80%+ coverage)
-- ✅ Docstrings present and clear
-- ✅ No security vulnerabilities
-- ✅ Follows coding conventions
-- ✅ AI agent index updated
-- ✅ Golden rules followed
-
-**What AI Agents Must Verify Before PR:**
-- ✅ All tests pass
-- ✅ Coverage meets minimum
-- ✅ Security scan clean
-- ✅ Code formatted
-- ✅ Documentation updated
-
----
-
 ## Common Patterns & Anti-Patterns
 
 ### ✅ Patterns to Follow
 
-**Dependency Injection**
+#### Dependency Injection
+
 ```python
-# Good - testable, flexible
+# ✅ GOOD - testable, flexible
 class UserService:
     def __init__(self, db: Database, cache: Cache):
         self.db = db
         self.cache = cache
 ```
 
-**Factory Pattern for Tests**
+#### Factory Pattern for Tests
+
 ```python
-# Good - reusable test data
+# ✅ GOOD - reusable test data
 def create_test_user(**overrides):
     defaults = {"email": "test@example.com", "name": "Test User"}
     return User(**{**defaults, **overrides})
 ```
 
-**Repository Pattern**
+#### Repository Pattern
+
 ```python
-# Good - separates data access
+# ✅ GOOD - separates data access
 class UserRepository:
     def find_by_email(self, email: str) -> Optional[User]:
         pass
@@ -680,9 +811,10 @@ class UserRepository:
 
 ### ❌ Anti-Patterns to Avoid
 
-**God Objects**
+#### God Objects
+
 ```python
-# Bad - does too much
+# ❌ BAD - does too much
 class ApplicationManager:
     def authenticate_user(self): pass
     def process_payment(self): pass
@@ -690,16 +822,18 @@ class ApplicationManager:
     # ... 50 more methods
 ```
 
-**Hidden Dependencies**
+#### Hidden Dependencies
+
 ```python
-# Bad - implicit global state
+# ❌ BAD - implicit global state
 def process_data(data):
     return DATABASE.query(...)  # Where does DATABASE come from?
 ```
 
-**Silent Failures**
+#### Silent Failures
+
 ```python
-# Bad - errors hidden
+# ❌ BAD - errors hidden
 try:
     critical_operation()
 except:
@@ -708,32 +842,101 @@ except:
 
 ---
 
-## Troubleshooting & FAQ
+## Troubleshooting
 
-### Common Issues
+<details>
+<summary><strong>❌ Error: Tests failing after code change</strong></summary>
 
-**Q: Tests failing after code change**
-A: Run `pytest -v` for details. Ensure you updated tests to match new behavior.
+**Solution:** Run `pytest -v` for details. Ensure you updated tests to match new behavior.
 
-**Q: AI agent index out of sync**
-A: Run `python dev/aiagent_navigator.py index` to rebuild.
+**Verification:**
+```bash
+pytest -v --tb=short
+```
+</details>
 
-**Q: Coverage below 80%**
-A: Use `pytest --cov-report=html` and open `htmlcov/index.html` to see uncovered lines.
+<details>
+<summary><strong>⚠️ Warning: AI agent index out of sync</strong></summary>
 
-**Q: Security scan failing**
-A: Check `bandit-report.json` for specific issues. Never ignore security warnings.
+**Solution:** Run `python dev/aiagent_navigator.py index` to rebuild.
 
-**Q: Pre-commit hooks failing**
-A: Run checks manually: `black .`, `flake8 .`, `mypy .`, `pytest`
+**Verification:**
+```bash
+python dev/aiagent_navigator.py index
+python dev/aiagent_navigator.py guide
+```
+</details>
 
-### Getting Help
+<details>
+<summary><strong>❌ Error: Coverage below 80%</strong></summary>
 
-1. Check `AI_AGENT_GUIDE.md` for operational guidance
-2. Check `AI_AGENT_GOLDEN_RULES.md` for requirements
-3. Search existing issues on GitHub
-4. Ask in project discussions
-5. Create new issue with reproduction steps
+**Solution:** Use `pytest --cov-report=html` and open `htmlcov/index.html` to see uncovered lines.
+
+**Verification:**
+```bash
+pytest --cov --cov-report=html
+open htmlcov/index.html  # or start htmlcov/index.html on Windows
+```
+</details>
+
+<details>
+<summary><strong>❌ Error: Security scan failing</strong></summary>
+
+**Solution:** Check `bandit-report.json` for specific issues. Never ignore security warnings.
+
+**Verification:**
+```bash
+bandit -r . -f json -o bandit-report.json
+cat bandit-report.json
+```
+</details>
+
+<details>
+<summary><strong>❌ Error: Pre-commit hooks failing</strong></summary>
+
+**Solution:** Run checks manually to identify specific issues.
+
+**Verification:**
+```bash
+black .
+flake8 .
+mypy .
+pytest
+```
+</details>
+
+---
+
+## Project Status & Roadmap
+
+### Current Phase: Foundation (v1.0)
+
+#### Completed
+- ✅ AI agent navigation system
+- ✅ Golden rules framework
+- ✅ Test system with enforcement
+- ✅ CI/CD pipelines
+- ✅ Documentation structure
+
+#### In Progress
+- 🚧 Backend API implementation
+- 🚧 Frontend application
+- 🚧 Database integration
+- 🚧 User authentication
+
+#### Planned
+- 📋 Full feature implementation
+- 📋 Production deployment
+- 📋 Performance optimization
+- 📋 User documentation
+
+### Future Enhancements
+
+- Multi-language support (JavaScript, Go, Rust)
+- Advanced AI agent capabilities
+- Real-time collaboration features
+- Performance monitoring
+- Automated refactoring suggestions
 
 ---
 
@@ -751,6 +954,7 @@ A: Run checks manually: `black .`, `flake8 .`, `mypy .`, `pytest`
 ### Who Updates This File:
 
 **Primarily:** Human developers and project leads
+
 **AI Agents:** Can suggest updates but should NOT make changes without human review
 
 ### Update Process:
@@ -763,36 +967,48 @@ A: Run checks manually: `black .`, `flake8 .`, `mypy .`, `pytest`
 
 ---
 
-## Project Status & Roadmap
+## Additional Resources
 
-### Current Phase: Foundation (v1.0)
+### Official Documentation
 
-**Completed:**
-- ✅ AI agent navigation system
-- ✅ Golden rules framework
-- ✅ Test system with enforcement
-- ✅ CI/CD pipelines
-- ✅ Documentation structure
+- 📚 [AI Agent Golden Rules](/docs/core/AI_AGENT_GOLDEN_RULES.md) - Mandatory development rules
+- 🏗️ [AI Agent Guide](/docs/core/AI_AGENT_GUIDE.md) - Complete operating guide
+- 🧪 [Codebase Analysis](/docs/dev/CODEBASE_ANALYSIS.md) - Comprehensive codebase report
+- 📋 [Development Priorities](/docs/dev/DEVELOPMENT_PRIORITIES.md) - Roadmap and priorities
 
-**In Progress:**
-- 🚧 Backend API implementation
-- 🚧 Frontend application
-- 🚧 Database integration
-- 🚧 User authentication
+### External Resources
 
-**Planned:**
-- 📋 Full feature implementation
-- 📋 Production deployment
-- 📋 Performance optimization
-- 📋 User documentation
+- 🌐 [NAICS Official Website](https://www.census.gov/naics/)
+- 📖 [FastAPI Documentation](https://fastapi.tiangolo.com/)
+- 📊 [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/)
 
-### Future Enhancements
+### Code Examples
 
-- Multi-language support (JavaScript, Go, Rust)
-- Advanced AI agent capabilities
-- Real-time collaboration features
-- Performance monitoring
-- Automated refactoring suggestions
+- 💻 [Backend Services](https://github.com/Free-Columns/levelith-2/tree/main/backend/services)
+- 🎯 [Test Examples](https://github.com/Free-Columns/levelith-2/tree/main/tests)
+
+---
+
+## Related Documentation
+
+- **Previous:** [Documentation Index](/docs/README.md)
+- **Next:** [AI Agent Golden Rules](/docs/core/AI_AGENT_GOLDEN_RULES.md)
+
+**Other related documentation:**
+
+- [Known Issues](/docs/core/KNOWN_ISSUES.md)
+- [API Documentation](/docs/api/API_DOCUMENTATION.md)
+- [Deployment Guide](/docs/deployment/RENDER_DEPLOYMENT.md)
+
+---
+
+## Feedback
+
+Found an issue with this guide? Have suggestions for improvement?
+
+- 👍 **Helpful?** This manifest guides all project development
+- 🐛 **Found a bug?** [Report it on GitHub](https://github.com/Free-Columns/levelith-2/issues)
+- 💡 **Have an idea?** [Start a discussion](https://github.com/Free-Columns/levelith-2/discussions)
 
 ---
 
@@ -812,4 +1028,8 @@ You are a valuable team member. Follow the golden rules, maintain quality standa
 
 ---
 
-**End of Manifest**
+**Last Updated:** November 19, 2025 | **Version:** 2.0 | **Maintained By:** Semour Media Group
+
+---
+
+*This document is part of the Levelith Developer Documentation. For questions, join our [Discord community](https://discord.gg/levelith).*

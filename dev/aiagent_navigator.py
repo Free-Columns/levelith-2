@@ -384,6 +384,65 @@ class AIAgentNavigator:
             reasons.append(f"shares {import_overlap} common imports")
         return ", ".join(reasons)
 
+    def _scan_documentation(self) -> Dict[str, List[Dict[str, Any]]]:
+        """Scan and organize documentation files by directory hierarchy (up to 4 levels deep)"""
+        docs_structure = {}
+        docs_path = self.root / "docs"
+
+        if not docs_path.exists():
+            return {}
+
+        for md_file in docs_path.rglob("*.md"):
+            try:
+                rel_path = md_file.relative_to(docs_path)
+                parts = rel_path.parts
+
+                # Limit to 4 levels deep
+                if len(parts) > 4:
+                    continue
+
+                # Build hierarchical key (e.g., "agent", "backend/database", "backend/database/models")
+                if len(parts) == 1:
+                    # Root level
+                    hierarchy_key = "_root"
+                else:
+                    # Folder hierarchy (exclude filename)
+                    hierarchy_key = "/".join(parts[:-1])
+
+                if hierarchy_key not in docs_structure:
+                    docs_structure[hierarchy_key] = []
+
+                # Read first 3 lines to get metadata/description
+                try:
+                    with open(md_file, 'r') as f:
+                        lines = [f.readline().strip() for _ in range(5)]
+                        title = lines[0].lstrip('#').strip() if lines else md_file.stem
+                        # Look for TL;DR or first paragraph
+                        description = ""
+                        for line in lines[1:]:
+                            if line and not line.startswith('#') and not line.startswith('**') and not line.startswith('---'):
+                                description = line[:100]
+                                break
+                except:
+                    title = md_file.stem
+                    description = ""
+
+                docs_structure[hierarchy_key].append({
+                    "file": str(rel_path),
+                    "name": md_file.stem,
+                    "title": title,
+                    "description": description,
+                    "depth": len(parts) - 1,
+                })
+            except Exception as e:
+                print(f"Warning: Could not process {md_file}: {e}")
+
+        # Sort files within each hierarchy level
+        for key in docs_structure:
+            docs_structure[key].sort(key=lambda x: x["name"])
+
+        return docs_structure
+
     def generate_navigation_guide(self, output_path: str = "NAVIGATION.md"):
         """Generate a markdown navigation guide from the index"""
         plan = self.get_exploration_plan()
@@ -391,38 +450,95 @@ class AIAgentNavigator:
         guide = ["# AI Agent Navigation Guide", ""]
         guide.append("*Auto-generated from codebase analysis*")
         guide.append("")
+        guide.append(f"**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        guide.append("")
+
+        # Documentation Section (NEW - 4-level hierarchy)
+        guide.append("## 📚 Documentation Structure")
+        guide.append("")
+        guide.append("Organized by directory hierarchy (up to 4 levels deep):")
+        guide.append("")
+
+        docs_structure = self._scan_documentation()
+
+        if docs_structure:
+            # Sort by hierarchy depth and name
+            sorted_hierarchies = sorted(docs_structure.keys(),
+                                       key=lambda x: (x.count('/'), x))
+
+            current_depth = -1
+            for hierarchy_key in sorted_hierarchies:
+                files = docs_structure[hierarchy_key]
+
+                if hierarchy_key == "_root":
+                    guide.append("### 📄 Root Documentation")
+                    guide.append("")
+                else:
+                    depth = hierarchy_key.count('/') + 1
+                    indent = "  " * depth
+
+                    # Add hierarchy header
+                    folder_name = hierarchy_key.split('/')[-1]
+                    guide.append(f"{'#' * (depth + 2)} {indent}📁 {hierarchy_key}/")
+                    guide.append("")
+
+                # List files in this hierarchy level
+                for doc in files:
+                    depth = doc["depth"]
+                    indent = "  " * depth
+                    guide.append(f"{indent}- **[{doc['name']}.md](docs/{doc['file']})** - {doc['description'][:80] if doc['description'] else doc['title'][:80]}")
+
+                guide.append("")
+        else:
+            guide.append("*No documentation found in docs/ directory*")
+            guide.append("")
 
         # Entry points
-        guide.append("## Entry Points")
+        guide.append("## 🚀 Entry Points")
         guide.append("")
         for ep in plan["entry_points"]:
             guide.append(f"- `{ep}`")
         guide.append("")
 
         # Key modules
-        guide.append("## Key Modules")
+        guide.append("## 🔑 Key Modules")
         guide.append("")
         for module in plan["key_modules"]:
             guide.append(f"### `{module['path']}`")
             guide.append(f"- **Reason**: {module['reason']}")
             if module["exports"]:
-                guide.append(f"- **Exports**: {', '.join(module['exports'])}")
+                guide.append(f"- **Exports**: {', '.join(module['exports'][:10])}")
             if module["docstring"]:
-                guide.append(f"- **Description**: {module['docstring']}")
+                guide.append(f"- **Description**: {module['docstring'][:150]}")
             guide.append("")
 
         # Complexity hotspots
-        guide.append("## Complexity Hotspots")
+        guide.append("## 🔥 Complexity Hotspots")
+        guide.append("")
+        guide.append("Files requiring careful attention due to high complexity:")
         guide.append("")
         for hotspot in plan["complexity_hotspots"]:
-            guide.append(f"- `{hotspot['path']}` (complexity: {hotspot['complexity']})")
+            guide.append(f"- `{hotspot['path']}` (complexity: {hotspot['complexity']}, {hotspot['classes']} classes, {hotspot['functions']} functions)")
+        guide.append("")
+
+        # Quick reference
+        guide.append("## 📖 Quick Reference")
+        guide.append("")
+        guide.append("**For AI Agents:**")
+        guide.append("1. Start with documentation in `docs/agent/MANIFEST.md`")
+        guide.append("2. Review `docs/agent/AI_AGENT_GOLDEN_RULES.md`")
+        guide.append("3. Explore key modules listed above")
+        guide.append("4. Use `python dev/aiagent_navigator.py ask \"<question>\"` for queries")
         guide.append("")
 
         # Write to file
-        with open(self.root / output_path, "w") as f:
+        output_full_path = self.root / "docs" / "development" / output_path
+        output_full_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(output_full_path, "w") as f:
             f.write("\n".join(guide))
 
-        return output_path
+        return str(output_full_path.relative_to(self.root))
 
     def quickstart(self) -> str:
         """

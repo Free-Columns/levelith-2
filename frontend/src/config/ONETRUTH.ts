@@ -55,6 +55,29 @@ export const ONETRUTH = {
     border: "#bdc3c7",
     borderLight: "#ecf0f1",
     divider: "#d5dbdb",
+
+    // Markdown & Documentation specific colors
+    codeText: "#ffd500", // Golden yellow for inline code text
+    codeBackground: "#0f151b", // Dark blue-black for inline code background
+    codeBlockBackground: "#2c3e50", // Dark surface for code blocks
+    codeBlockText: "#ffffff", // White text for code blocks
+
+    blockquoteText: "#7f8c8d", // Light gray for blockquote text
+    blockquoteBackground: "rgba(0, 126, 167, 0.05)", // Subtle blue tint
+    blockquoteBorder: "#007EA7", // Primary color for left border
+
+    tableHeaderBackground: "#000000", // Black background for table headers
+    tableHeaderText: "#ffd500", // Golden yellow for table header text
+    tableRowEven: "#f8f9fa", // Very light gray for alternating table rows
+
+    linkText: "#007EA7", // Primary color for links
+    linkHover: "#2980b9", // Darker blue for link hover
+
+    // Additional semantic text colors
+    textMuted: "#95a5a6", // Muted text for less important content
+    textSubdued: "#7f8c8d", // Subdued text for captions, meta info
+    textHighlight: "#ffd500", // Highlight color for important text
+    textCode: "#e74c3c", // Red for inline code mentions in text
   },
 
   /**

@@ -315,27 +315,27 @@ const Docs: React.FC = () => {
     }
 
     .markdown-content a {
-      color: ${ONETRUTH.colors.primary};
+      color: ${ONETRUTH.colors.linkText};
       text-decoration: underline;
       transition: color ${ONETRUTH.transitions.fast};
     }
 
     .markdown-content a:hover {
-      color: ${ONETRUTH.colors.primaryDark};
+      color: ${ONETRUTH.colors.linkHover};
     }
 
     .markdown-content code {
-      background-color: #0f151b;
+      background-color: ${ONETRUTH.colors.codeBackground};
       padding: 2px 6px;
       border-radius: ${ONETRUTH.borderRadius.sm};
       font-family: ${ONETRUTH.fonts.monospace};
       font-size: ${ONETRUTH.fonts.sizes.sm};
-      color: #ffd500;
+      color: ${ONETRUTH.colors.codeText};
     }
 
     .markdown-content pre {
-      background-color: ${ONETRUTH.colors.surfaceDark};
-      color: ${ONETRUTH.colors.textInverse};
+      background-color: ${ONETRUTH.colors.codeBlockBackground};
+      color: ${ONETRUTH.colors.codeBlockText};
       padding: ${ONETRUTH.spacing.lg};
       border-radius: ${ONETRUTH.borderRadius.md};
       overflow-x: auto;
@@ -393,13 +393,13 @@ const Docs: React.FC = () => {
     }
 
     .markdown-content blockquote {
-      border-left: 4px solid ${ONETRUTH.colors.primary};
+      border-left: 4px solid ${ONETRUTH.colors.blockquoteBorder};
       padding-left: ${ONETRUTH.spacing.lg};
       margin-left: 0;
       margin-bottom: ${ONETRUTH.spacing.md};
-      color: ${ONETRUTH.colors.text};
+      color: ${ONETRUTH.colors.blockquoteText};
       font-style: italic;
-      background-color: rgba(0, 126, 167, 0.05);
+      background-color: ${ONETRUTH.colors.blockquoteBackground};
       padding: ${ONETRUTH.spacing.md} ${ONETRUTH.spacing.lg};
       border-radius: ${ONETRUTH.borderRadius.sm};
     }
@@ -413,7 +413,7 @@ const Docs: React.FC = () => {
     }
 
     .markdown-content thead {
-      background-color: ${ONETRUTH.colors.backgroundDark};
+      background-color: ${ONETRUTH.colors.tableHeaderBackground};
     }
 
     .markdown-content th {
@@ -421,7 +421,7 @@ const Docs: React.FC = () => {
       text-align: left;
       font-weight: ${ONETRUTH.fonts.weights.semibold};
       border: 1px solid ${ONETRUTH.colors.border};
-      color: #ffd500;
+      color: ${ONETRUTH.colors.tableHeaderText};
     }
 
     .markdown-content td {
@@ -430,7 +430,7 @@ const Docs: React.FC = () => {
     }
 
     .markdown-content tr:nth-child(even) {
-      background-color: ${ONETRUTH.colors.backgroundLight};
+      background-color: ${ONETRUTH.colors.tableRowEven};
     }
 
     .markdown-content hr {

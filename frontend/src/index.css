@@ -1,6 +1,9 @@
 /**
  * Global styles for Levelith
  * Uses ONETRUTH configuration for consistent theming
+ *
+ * IMPORTANT: Colors here should sync with frontend/src/config/ONETRUTH.ts
+ * For component-specific styling, import and use ONETRUTH directly
  */
 
 @tailwind base;
@@ -17,25 +20,30 @@ body {
   font-family: 'Open Sans', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ecf0f1;
-  color: #2c3e50;
+  background-color: #FFFFFF; /* ONETRUTH.colors.background */
+  color: #2c3e50; /* ONETRUTH.colors.text */
 }
 
 code {
-  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace; /* ONETRUTH.fonts.monospace */
+  background-color: #0f151b; /* ONETRUTH.colors.codeBackground */
+  color: #ffd500; /* ONETRUTH.colors.codeText */
+  padding: 2px 6px;
+  border-radius: 0.125rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; /* ONETRUTH.fonts.heading */
 }
 
 a {
-  color: #3498db;
+  color: #007EA7; /* ONETRUTH.colors.linkText */
   text-decoration: none;
+  transition: color 150ms ease-in-out;
 }
 
 a:hover {
-  color: #2980b9;
+  color: #2980b9; /* ONETRUTH.colors.linkHover */
 }
 
 button {

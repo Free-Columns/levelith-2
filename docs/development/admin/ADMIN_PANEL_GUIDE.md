@@ -7,7 +7,7 @@ category: "guides"
 tags: ["admin-panel", "dashboard", "backend", "frontend", "database", "crud", "naics", "users", "experiences"]
 author: "Semour Media Group"
 date: "2025-11-19"
-lastUpdated: "2025-11-19"
+lastUpdated: "2025-11-20"
 difficulty: "intermediate"
 readingTime: 20
 relatedPages:
@@ -31,9 +31,25 @@ version: "2.0"
 
 # Levelith Admin Panel Integration Guide
 
-> **TL;DR:** Complete setup guide for the Levelith admin dashboard with full CRUD operations for users, experiences, and NAICS codes, backed by PostgreSQL and featuring real-time analytics.
+:::danger
+**⚠️ DEPRECATED - November 20, 2025**
 
-**Difficulty:** 🟡 Intermediate | **Time:** ⏱️ 20 minutes | **Last Updated:** November 19, 2025
+This guide describes the OLD admin dashboard which has been DEPRECATED and moved to `_deprecated/levelith_admin_dashboard_OLD/`.
+
+**DO NOT USE THE OLD DASHBOARD** - It has critical issues:
+- ❌ CRUD operations broken (blank white pages)
+- ❌ Routing incorrect (/users instead of /admin/users)
+- ❌ Mock data everywhere
+- ❌ No TypeScript type safety
+
+**NEW DASHBOARD:** See [ADMIN_DASHBOARD_REFACTOR_V2.md](./ADMIN_DASHBOARD_REFACTOR_V2.md) for the modern rebuild (Plan C).
+
+**Current Status:** Planning complete - 165 tasks documented - Ready for implementation
+:::
+
+> **TL;DR (OUTDATED):** Complete setup guide for the Levelith admin dashboard with full CRUD operations for users, experiences, and NAICS codes, backed by PostgreSQL and featuring real-time analytics.
+
+**Difficulty:** 🟡 Intermediate | **Time:** ⏱️ 20 minutes | **Last Updated:** November 20, 2025
 
 ---
 
@@ -57,12 +73,23 @@ version: "2.0"
 
 ## Overview
 
-The Levelith admin panel is a fully functional dashboard that manages users, experiences, and NAICS codes through a backend API connected to PostgreSQL.
+:::danger
+**DEPRECATED:** This section describes the OLD admin panel at `_deprecated/levelith_admin_dashboard_OLD/`.
 
-**Admin Panel Location:** `dev/dev-frontend/levelith_admin_dashboard/`
+**NEW LOCATION:** `frontend/src/admin/` (being refactored - see [ADMIN_DASHBOARD_REFACTOR_V2.md](./ADMIN_DASHBOARD_REFACTOR_V2.md))
+:::
+
+The Levelith admin panel ~~is~~ **was** a fully functional dashboard that manages users, experiences, and NAICS codes through a backend API connected to PostgreSQL.
+
+**Old Admin Panel Location:** `_deprecated/levelith_admin_dashboard_OLD/` (deprecated)
+**New Admin Panel Location:** `frontend/src/admin/` (in refactor - Plan C)
 
 :::info
 **Prerequisites:** PostgreSQL database, Python 3.11+, Node.js 18+, FastAPI backend
+:::
+
+:::warning
+**For Current Development:** Refer to [ADMIN_DASHBOARD_REFACTOR_V2.md](./ADMIN_DASHBOARD_REFACTOR_V2.md) for the new implementation plan. This guide is kept for historical reference only.
 :::
 
 ---

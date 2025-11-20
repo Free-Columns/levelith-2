@@ -1,3 +1,62 @@
+// ============================================================================
+// AdminDashboardRefactorv2: MIGRATE - Phase 2 (Users Feature)
+// ============================================================================
+// What: Migrate Users.jsx → features/users/ folder structure with TypeScript
+// Why: Feature-based organization, React Query integration, type safety
+// Risk: HIGH - core functionality, affects user management
+// Phase: 2 (Users Feature)
+// Complexity: High (242 lines, complex state management)
+// Depends: Phase 1 (React Query setup, base components)
+//
+// CURRENT PROBLEMS:
+// 1. Manual state management (useState for users, loading, errors)
+// 2. Manual API calls via useDataSource hook
+// 3. No caching - refetches on every mount
+// 4. No optimistic updates
+// 5. Inline styles instead of Tailwind
+// 6. No TypeScript type safety
+// 7. Form validation is manual
+// 8. Modal component not accessible
+//
+// NEW STRUCTURE (Phase 2):
+// features/users/
+//   ├── Users.tsx                    (Main page component)
+//   ├── api/
+//   │   ├── users.queries.ts         (React Query hooks: useUsers, useUser)
+//   │   └── users.mutations.ts       (useMutations: useCreateUser, useUpdateUser, useDeleteUser, useSeedUsers)
+//   ├── components/
+//   │   ├── UsersTable.tsx           (TanStack Table with sorting/filtering)
+//   │   ├── UserForm.tsx             (React Hook Form + Zod validation)
+//   │   ├── UserFilters.tsx          (Search + filter dropdowns)
+//   │   ├── UserStats.tsx            (Stats cards)
+//   │   └── UserActions.tsx          (Action dropdown menu)
+//   ├── schemas/
+//   │   └── user.schema.ts           (Zod validation schemas)
+//   ├── types/
+//   │   └── user.types.ts            (TypeScript interfaces)
+//   └── hooks/
+//       └── useUsers.ts              (Custom hook combining queries)
+//
+// MIGRATION TASKS (25 total - see ADMIN_DASHBOARD_REFACTOR_V2.md Phase 2):
+// ☐ Create user.types.ts with User, CreateUserInput, UpdateUserInput interfaces
+// ☐ Create user.schema.ts with Zod schemas for validation
+// ☐ Create users.queries.ts with useUsers, useUser hooks
+// ☐ Create users.mutations.ts with useCreateUser, useUpdateUser, useDeleteUser
+// ☐ Build UsersTable with TanStack Table (search, filter, pagination, sorting)
+// ☐ Build UserForm with React Hook Form + Zod
+// ☐ Build UserFilters component
+// ☐ Build CreateUserDialog using shadcn/ui Dialog
+// ☐ Build EditUserDialog
+// ☐ Build DeleteUserDialog with confirmation
+// ☐ Add loading states (skeleton)
+// ☐ Add error handling (toast notifications)
+// ☐ Add optimistic updates
+// ☐ Migrate inline styles to Tailwind CSS
+// ☐ Test all CRUD operations
+//
+// REPLACE THIS ENTIRE FILE after migration complete
+// ============================================================================
+
 /**
  * Users Page - Comprehensive CRUD Interface
  *
@@ -10,11 +69,18 @@
  */
 
 import React, { useState, useEffect } from "react";
+// AdminDashboardRefactorv2: REPLACE - Remove useDataSource, use React Query hooks
+// OLD: const { getUsers, createUser } = useDataSource();
+// NEW: const { data: users, isLoading } = useUsers(filters);
+//      const { mutate: createUser } = useCreateUser();
 import { useDataSource } from "../context/DataSourceContext";
+// AdminDashboardRefactorv2: REPLACE - Use shadcn/ui Dialog instead
 import Modal from "../components/Modal";
+// AdminDashboardRefactorv2: REPLACE - Use shadcn/ui form components
 import FormInput from "../components/forms/FormInput";
 import FormTextarea from "../components/forms/FormTextarea";
 import Button from "../components/forms/Button";
+// AdminDashboardRefactorv2: REPLACE - Use Tailwind classes instead
 import ONETRUTH, { getStatusColor } from "../config/theme";
 
 export default function Users() {

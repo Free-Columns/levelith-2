@@ -1,3 +1,20 @@
+// ============================================================================
+// AdminDashboardRefactorv2: MIGRATE - Phase 4 (NAICS Feature)
+// ============================================================================
+// What: Migrate to features/naics/ with tag/category editing
+// Phase: 4 (NAICS Feature)
+// Complexity: High (600+ lines, pagination, editing)
+// Depends: Phase 1 (infrastructure)
+//
+// MIGRATION TASKS (20 total - see ADMIN_DASHBOARD_REFACTOR_V2.md Phase 4):
+// ☐ Build NAICSTable with server-side pagination
+// ☐ Build NAICSEditDialog for tags/category/notes editing
+// ☐ Add NAICSFilters (search, category, level)
+// ☐ Integrate with React Query
+//
+// REPLACE THIS FILE after migration
+// ============================================================================
+
 /**
  * NAICS Codes Management Page
  *
@@ -6,6 +23,7 @@
  */
 
 import React, { useState, useEffect } from "react";
+// AdminDashboardRefactorv2: REPLACE - Use React Query
 import { useDataSource } from "../context/DataSourceContext";
 import apiService from "../services/apiService";
 import ONETRUTH, { getNAICSColor } from "../config/theme";

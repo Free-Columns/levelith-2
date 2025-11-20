@@ -1,3 +1,20 @@
+// ============================================================================
+// AdminDashboardRefactorv2: MIGRATE - Phase 5 (Dashboard & Analytics)
+// ============================================================================
+// What: Migrate to features/dashboard/ with charts and stats
+// Phase: 5 (Dashboard & Analytics)
+// Complexity: Medium (400+ lines, charts with recharts)
+// Depends: Phase 1 (infrastructure), Phase 2-4 (data from other features)
+//
+// MIGRATION TASKS (15 total - see ADMIN_DASHBOARD_REFACTOR_V2.md Phase 5):
+// ☐ Build StatsCard components
+// ☐ Build UserGrowthChart, ExperienceDistributionChart
+// ☐ Build RecentActivity feed
+// ☐ Use React Query for stats
+//
+// REPLACE THIS FILE after migration
+// ============================================================================
+
 /**
  * Dashboard - Overview and Analytics
  *
@@ -5,6 +22,7 @@
  */
 
 import React, { useState, useEffect } from "react";
+// AdminDashboardRefactorv2: REPLACE - Use React Query
 import { useDataSource } from "../context/DataSourceContext";
 import {
   BarChart,

@@ -77,10 +77,14 @@ Deliver a fully functional, tested, and secure application ready for deployment 
 | Test Coverage | Below minimum | C (75%) | A (80%+) |
 | Authentication | Incomplete | F (0%) | A (100%) |
 | Frontend Main | Not started | F (0%) | A (100%) |
-| Frontend Admin | Complete | A (95%) | A (95%) |
+| Frontend Admin | **Refactoring** | **F (0%)** | **A (100%)** |
 | Documentation | Excellent | A (95%) | A (95%) |
 | Security | Strong | A- (90%) | A+ (95%) |
 | **Overall** | **In Progress** | **B+ (85%)** | **A (95%)** |
+
+:::danger
+**CRITICAL UPDATE (Nov 20, 2025):** Admin dashboard requires complete rebuild (AdminDashboardRefactorv2 - Plan C). Old dashboard deprecated, moved to `_deprecated/`. See Phase 0 below.
+:::
 
 :::warning
 **Warning:** Authentication and test coverage are blocking production deployment. These must be addressed in Phase 1.
@@ -88,7 +92,118 @@ Deliver a fully functional, tested, and secure application ready for deployment 
 
 ---
 
-## Phase 1: Critical Fixes (Week 1)
+## Phase 0: Admin Dashboard Rebuild (Weeks 1-3) **NEW - PRIORITY 0**
+
+**Duration:** 20-30 hours
+**Goal:** Complete modern rebuild of admin dashboard with TypeScript + React Query
+**Status:** 📋 Planning Complete - Ready for Implementation
+
+### Overview
+
+The existing admin dashboard has critical issues and needs complete replacement:
+- ❌ CRUD operations fail (blank white pages)
+- ❌ Routing broken (/users should be /admin/users)
+- ❌ Mock data everywhere (no server-only mode)
+- ❌ No TypeScript (type safety missing)
+- ❌ Manual state management (no caching/optimistic updates)
+
+**Solution:** AdminDashboardRefactorv2 (Plan C) - Modern Stack Rebuild
+
+### Technology Stack Migration
+
+| Current (Deprecated) | New (Plan C) |
+|---------------------|--------------|
+| JavaScript | **TypeScript** (full type safety) |
+| DataSourceContext (manual) | **React Query** (automatic caching) |
+| Custom tables | **TanStack Table** (advanced features) |
+| Manual forms | **React Hook Form + Zod** (type-safe validation) |
+| Inline styles | **Tailwind CSS** (utility classes) |
+| Custom components | **shadcn/ui** (accessible component library) |
+| LOCAL/SERVER switching | **Server-only** (no mock data) |
+
+### Implementation Phases (8 total)
+
+**Phase 0.0: Setup (2-3 hours)**
+- Install dependencies (React Query, TanStack Table, Tailwind, shadcn/ui, Zod)
+- Configure TypeScript, Tailwind, React Query
+- Create feature-based folder structure
+
+**Phase 0.1: Infrastructure (3-4 hours)**
+- Build API client with axios
+- Set up React Query providers
+- Install shadcn/ui base components
+- Create reusable DataTable, SearchBar, FilterPanel
+
+**Phase 0.2: Users Feature (4-5 hours)**
+- Migrate Users.jsx → features/users/ with TypeScript
+- React Query hooks (useUsers, useCreateUser, etc.)
+- TanStack Table with search/filter/pagination/sorting
+- React Hook Form + Zod validation
+
+**Phase 0.3: Experiences Feature (5-6 hours)**
+- Migrate Experiences.jsx → features/experiences/
+- Handle all 9 experience types with polymorphic forms
+- Type-safe form handling per experience type
+
+**Phase 0.4: NAICS Feature (3-4 hours)**
+- Migrate NAICSCodes.jsx → features/naics/
+- Tag/category editing functionality
+- Server-side pagination
+
+**Phase 0.5: Dashboard (2-3 hours)**
+- Migrate Dashboard.jsx → features/dashboard/
+- Stats cards and analytics charts
+
+**Phase 0.6: Settings & Routing (2-3 hours)**
+- Build Settings page with seed database form
+- Fix routing with /admin prefix
+- Add route guards
+
+**Phase 0.7: Production (2-3 hours)**
+- Error boundaries, loading states
+- Responsive design testing
+- Deploy to admin.levelith.online
+
+### Tasks Breakdown
+
+See [ADMIN_DASHBOARD_REFACTOR_V2.md](../development/admin/ADMIN_DASHBOARD_REFACTOR_V2.md) for complete 165-task checklist.
+
+**Total Tasks:** 165
+- Phase 0.0: 15 tasks (Setup)
+- Phase 0.1: 20 tasks (Infrastructure)
+- Phase 0.2: 25 tasks (Users)
+- Phase 0.3: 30 tasks (Experiences)
+- Phase 0.4: 20 tasks (NAICS)
+- Phase 0.5: 15 tasks (Dashboard)
+- Phase 0.6: 22 tasks (Settings + Routing)
+- Phase 0.7: 18 tasks (Production)
+
+### Dependencies
+
+**Blocks:** User registration, profile management, all admin operations
+**Requires:** Backend API working (already deployed)
+**External:** None
+
+### Success Criteria
+
+- ☐ All CRUD operations functional (users, experiences, NAICS)
+- ☐ No mock data anywhere (server-only)
+- ☐ Search/filtering on all tables
+- ☐ NAICS tag/category editing working
+- ☐ Seed database form functional
+- ☐ TypeScript compilation successful (0 errors)
+- ☐ Deployed to admin.levelith.online
+- ☐ All inline AdminDashboardRefactorv2 TODOs addressed
+
+### Documentation
+
+- **Planning Doc:** [ADMIN_DASHBOARD_REFACTOR_V2.md](../development/admin/ADMIN_DASHBOARD_REFACTOR_V2.md)
+- **Deprecated Dashboard:** `_deprecated/levelith_admin_dashboard_OLD/`
+- **Inline TODOs:** Search codebase for `AdminDashboardRefactorv2`
+
+---
+
+## Phase 1: Critical Fixes (Week 4) **REVISED TIMELINE**
 
 **Duration:** 14-18 hours
 **Goal:** Fix architecture violations and reach 80% test coverage

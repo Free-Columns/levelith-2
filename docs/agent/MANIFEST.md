@@ -936,33 +936,43 @@ pytest
 - ✅ NAICS 2022 database integration
 
 #### In Progress 🚧
-- 🚧 **PRIORITY 0:** Fix Admin Dashboard CRUD operations (CRITICAL - blocks all user input)
+- 🚧 **PRIORITY 0: AdminDashboardRefactorv2 (Plan C)** - Complete rebuild with modern stack (CRITICAL)
+  - **Status:** Planning phase - TODOs documented, inline comments added
+  - **Scope:** TypeScript + React Query + TanStack Table + shadcn/ui + Tailwind
+  - **Timeline:** 20-30 hours across 8 phases
+  - **Documentation:** [ADMIN_DASHBOARD_REFACTOR_V2.md](../development/admin/ADMIN_DASHBOARD_REFACTOR_V2.md)
 - 🚧 **PRIORITY 1.1:** Add service layer tests (target 80% coverage)
 - 🚧 **PRIORITY 1.2:** Refactor API to use service layer properly
 - 🚧 **PRIORITY 1.3:** Complete JWT authentication implementation
 - 🚧 **PRIORITY 1.4:** Standardize model usage (remove domain model duplication)
 - 🚧 Backend API endpoint verification (unknown if CRUD works via direct API calls)
 
-#### Immediate Priorities (Next 2-4 Weeks)
+#### Immediate Priorities (Next 4-6 Weeks)
 
-**Phase 0: Admin Dashboard Fix (CRITICAL)**
-1. Fix admin routing (/admin/users not /users)
-2. Remove local mock data
-3. Connect CRUD operations to live backend API
-4. Fix blank white page redirects
-5. Implement user seeding in UI
+**AdminDashboardRefactorv2 - Plan C (Week 1-3)**
 
-**Phase 1: User Input Enablement (CRITICAL)**
-1. Admin dashboard user creation working
-2. Public user registration page
-3. Authentication flow (login/logout)
-4. Basic user profile creation
+See [ADMIN_DASHBOARD_REFACTOR_V2.md](../development/admin/ADMIN_DASHBOARD_REFACTOR_V2.md) for complete 165-task breakdown.
 
-**Phase 2: Profile Management**
-1. View user profiles (public and own)
-2. Add/edit experiences (all 9 types)
-3. NAICS classification integration
-4. Profile showcase page
+**Week 1: Foundation**
+- Phase 0: Setup (Install dependencies, configure TypeScript/Tailwind/React Query)
+- Phase 1: Core Infrastructure (API client, base components, shadcn/ui)
+
+**Week 2: Core Features**
+- Phase 2: Users Feature (Complete CRUD with search/filter/pagination)
+- Phase 3: Experiences Feature (All 9 types with polymorphic forms)
+
+**Week 3: Polish & Deploy**
+- Phase 4: NAICS Feature (Tag/category editing)
+- Phase 5: Dashboard (Analytics and charts)
+- Phase 6: Settings (Seed database form)
+- Phase 7: Routing (/admin prefix, route guards)
+- Phase 8: Production (Error handling, responsive design, deployment)
+
+**Post-Refactor (Week 4-6)**
+- User registration page (public-facing)
+- Profile viewing and editing
+- Advanced search and filtering
+- Gamification UI elements
 
 #### Planned (Medium-Term: 1-3 Months)
 - 📋 Experience timeline visualization

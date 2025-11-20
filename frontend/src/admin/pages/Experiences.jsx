@@ -1,3 +1,48 @@
+// ============================================================================
+// AdminDashboardRefactorv2: MIGRATE - Phase 3 (Experiences Feature)
+// ============================================================================
+// What: Migrate to features/experiences/ with TypeScript + polymorphic types
+// Why: Handle all 9 experience types with type safety
+// Risk: HIGH - complex polymorphic forms, multiple experience types
+// Phase: 3 (Experiences Feature)
+// Complexity: VERY HIGH (1017 lines! Needs decomposition)
+// Depends: Phase 1 (infrastructure), Phase 2 (pattern established from Users)
+//
+// CURRENT PROBLEMS:
+// 1. Massive 1000+ line file - needs decomposition
+// 2. No type safety for 9 different experience types
+// 3. Complex conditional rendering in forms
+// 4. Manual state management
+// 5. No proper validation per experience type
+//
+// NEW STRUCTURE (Phase 3):
+// features/experiences/
+//   ├── Experiences.tsx
+//   ├── api/experiences.queries.ts
+//   ├── api/experiences.mutations.ts
+//   ├── components/
+//   │   ├── ExperiencesTable.tsx
+//   │   ├── ExperienceForm.tsx (polymorphic form handler)
+//   │   ├── ExperienceFilters.tsx
+//   │   ├── ExperienceTypeSelector.tsx
+//   │   └── forms/ (9 type-specific forms)
+//   │       ├── CertificateForm.tsx
+//   │       ├── DegreeForm.tsx
+//   │       ├── CourseForm.tsx
+//   │       ├── GigForm.tsx
+//   │       ├── PartTimeForm.tsx
+//   │       ├── FullTimeForm.tsx
+//   │       ├── SoftSkillForm.tsx
+//   │       ├── HardSkillForm.tsx
+//   │       └── NativeSkillForm.tsx
+//   ├── schemas/ (Zod discriminated unions)
+//   ├── types/experience.types.ts (polymorphic types)
+//
+// MIGRATION TASKS (30 total - see ADMIN_DASHBOARD_REFACTOR_V2.md Phase 3)
+//
+// REPLACE THIS ENTIRE FILE after migration
+// ============================================================================
+
 /**
  * Experiences Page - Complete CRUD for all 9 experience types
  *
@@ -9,6 +54,7 @@
  */
 
 import React, { useState, useEffect } from "react";
+// AdminDashboardRefactorv2: REPLACE - Use React Query hooks
 import { useDataSource } from "../context/DataSourceContext";
 import Modal from "../components/Modal";
 import FormInput from "../components/forms/FormInput";

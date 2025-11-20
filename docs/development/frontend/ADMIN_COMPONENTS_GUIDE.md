@@ -115,6 +115,247 @@ import * as CustomComponents from '@/admin/components/custom'
 
 ## Components
 
+## Form Components
+
+### FormButton
+
+**Purpose:** Reusable button component with variant styles for forms and modals.
+
+**File:** `frontend/src/admin/components/forms/FormButton.jsx`
+
+#### Features
+
+- ✅ Three variants: `primary`, `secondary`, `danger`
+- ✅ ONETRUTH theme integration
+- ✅ Disabled state handling
+- ✅ Custom styling support
+- ✅ Full prop spreading
+
+#### Basic Usage
+
+```jsx
+import FormButton from '../components/forms/FormButton'
+
+function MyForm() {
+  return (
+    <div>
+      <FormButton variant="primary" onClick={handleSave}>
+        Save Changes
+      </FormButton>
+
+      <FormButton variant="secondary" onClick={handleCancel}>
+        Cancel
+      </FormButton>
+
+      <FormButton variant="danger" onClick={handleDelete}>
+        Delete Permanently
+      </FormButton>
+    </div>
+  )
+}
+```
+
+#### Variants
+
+```jsx
+// Primary (default) - Blue background
+<FormButton variant="primary" onClick={handleAction}>
+  Primary Action
+</FormButton>
+
+// Secondary - Gray background with border
+<FormButton variant="secondary" onClick={handleAction}>
+  Secondary Action
+</FormButton>
+
+// Danger - Red background for destructive actions
+<FormButton variant="danger" onClick={handleDelete}>
+  Delete
+</FormButton>
+```
+
+#### With Custom Styles
+
+```jsx
+<FormButton
+  variant="primary"
+  onClick={handleSave}
+  style={{ backgroundColor: ONETRUTH.colors.success }}
+>
+  Custom Styled Button
+</FormButton>
+```
+
+#### Disabled State
+
+```jsx
+<FormButton
+  variant="primary"
+  onClick={handleSave}
+  disabled={isLoading}
+>
+  {isLoading ? 'Saving...' : 'Save'}
+</FormButton>
+```
+
+#### API Reference
+
+```typescript
+interface FormButtonProps {
+  children: React.ReactNode
+  variant?: 'primary' | 'secondary' | 'danger'
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  disabled?: boolean
+  type?: 'button' | 'submit' | 'reset'
+  className?: string
+  style?: React.CSSProperties
+}
+```
+
+---
+
+### FormInput
+
+**Purpose:** Reusable input field with label, validation, and error display.
+
+**File:** `frontend/src/admin/components/forms/FormInput.jsx`
+
+#### Features
+
+- ✅ Label with required indicator
+- ✅ Error state styling
+- ✅ Help text support
+- ✅ Disabled state
+- ✅ ONETRUTH theme integration
+- ✅ All standard input types
+
+#### Basic Usage
+
+```jsx
+import FormInput from '../components/forms/FormInput'
+
+function UserForm() {
+  const [username, setUsername] = useState('')
+  const [error, setError] = useState('')
+
+  return (
+    <FormInput
+      label="Username"
+      name="username"
+      value={username}
+      onChange={(e) => setUsername(e.target.value)}
+      placeholder="Enter username"
+      required
+      error={error}
+      helpText="Username must be unique"
+    />
+  )
+}
+```
+
+#### With Validation
+
+```jsx
+<FormInput
+  label="Email"
+  name="email"
+  type="email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  error={emailError}
+  required
+/>
+```
+
+#### API Reference
+
+```typescript
+interface FormInputProps {
+  label?: string
+  name: string
+  type?: string
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  placeholder?: string
+  required?: boolean
+  error?: string
+  disabled?: boolean
+  helpText?: string
+}
+```
+
+---
+
+### FormTextarea
+
+**Purpose:** Reusable textarea field with label and validation.
+
+**File:** `frontend/src/admin/components/forms/FormTextarea.jsx`
+
+#### Features
+
+- ✅ Label with required indicator
+- ✅ Error state styling
+- ✅ Help text support
+- ✅ Disabled state
+- ✅ Configurable rows
+- ✅ ONETRUTH theme integration
+
+#### Basic Usage
+
+```jsx
+import FormTextarea from '../components/forms/FormTextarea'
+
+function NoteForm() {
+  const [notes, setNotes] = useState('')
+
+  return (
+    <FormTextarea
+      label="Admin Notes"
+      name="adminNotes"
+      value={notes}
+      onChange={(e) => setNotes(e.target.value)}
+      placeholder="Enter notes..."
+      rows={4}
+      helpText="Internal notes visible only to admins"
+    />
+  )
+}
+```
+
+#### With Validation
+
+```jsx
+<FormTextarea
+  label="Description"
+  name="description"
+  value={description}
+  onChange={(e) => setDescription(e.target.value)}
+  error={descriptionError}
+  required
+  rows={6}
+/>
+```
+
+#### API Reference
+
+```typescript
+interface FormTextareaProps {
+  label?: string
+  name: string
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
+  placeholder?: string
+  required?: boolean
+  error?: string
+  disabled?: boolean
+  helpText?: string
+  rows?: number
+}
+```
+
+---
+
 ## DataTable
 
 **Purpose:** Reusable data table with sorting, selection, and empty states.

@@ -708,6 +708,131 @@ VITE_API_URL=http://localhost:8000/api/v1
 **Warning:** Never commit `.env.local` to git. This file contains environment-specific configuration and should be listed in `.gitignore`.
 :::
 
+### API Data Transformation Layer ⭐
+
+**Location:** `/frontend/src/lib/transformers.ts`
+
+The frontend includes a global transformation layer that automatically converts between frontend camelCase and backend snake_case conventions.
+
+#### How It Works
+
+All API requests and responses are automatically transformed via axios interceptors:
+
+```typescript
+// Frontend code uses camelCase
+const userData = {
+  firstName: 'John',
+  lastName: 'Doe',
+  isActive: true
+}
+
+// Request interceptor transforms to snake_case
+api.post('/users', userData)
+// → Backend receives: { first_name: 'John', last_name: 'Doe', is_active: true }
+
+// Backend responds with snake_case
+// { user_id: 123, first_name: 'John', created_at: '2025-01-01T00:00:00Z' }
+
+// Response interceptor transforms to camelCase
+// → Frontend receives: { userId: 123, firstName: 'John', createdAt: '2025-01-01T00:00:00Z' }
+```
+
+#### Available Utilities
+
+```typescript
+import {
+  snakeToCamel,
+  camelToSnake,
+  keysToCamel,
+  keysToSnake,
+  transformPaginatedResponse
+} from '@/lib/transformers'
+
+// String transformations
+snakeToCamel('user_name')    // → 'userName'
+camelToSnake('userName')     // → 'user_name'
+
+// Object transformations (deep/recursive)
+keysToCamel({ user_name: 'John', is_active: true })
+// → { userName: 'John', isActive: true }
+
+keysToSnake({ userName: 'John', isActive: true })
+// → { user_name: 'John', is_active: true }
+
+// Paginated response normalization
+transformPaginatedResponse(response)
+// Handles both array responses and { items: [...], total: N } format
+// Returns: { data: [...], total: N, page: 1, pageSize: 50, totalPages: N }
+```
+
+#### Automatic Transformation
+
+The transformation is automatic via axios interceptors in `frontend/src/lib/api.ts`:
+
+```typescript
+// Request interceptor - transforms outgoing data
+apiClient.interceptors.request.use((config) => {
+  if (config.data) {
+    config.data = keysToSnake(config.data)
+  }
+  if (config.params) {
+    config.params = keysToSnake(config.params)
+  }
+  return config
+})
+
+// Response interceptor - transforms incoming data
+apiClient.interceptors.response.use((response) => {
+  if (response.data) {
+    response.data = keysToCamel(response.data)
+  }
+  return response
+})
+```
+
+#### Smart Handling
+
+The transformers handle complex scenarios:
+
+- ✅ **Nested objects** - Recursively transforms all levels
+- ✅ **Arrays** - Transforms all items in arrays
+- ✅ **Date objects** - Preserves Date instances
+- ✅ **Null/undefined** - Safely handles missing values
+- ✅ **Primitives** - Leaves strings, numbers, booleans unchanged
+- ✅ **Type safety** - Full TypeScript support with generics
+
+#### Example Usage
+
+```typescript
+// No manual transformation needed!
+// Just write code in camelCase, transformation happens automatically
+
+import { useUsers } from '@/admin/features/users/hooks/useUsers'
+
+function UsersPage() {
+  const { data, isLoading } = useUsers({
+    pageSize: 50,        // Sent as page_size
+    sortBy: 'createdAt'  // Sent as sort_by
+  })
+
+  // data.users is already in camelCase
+  return (
+    <div>
+      {data.users.map(user => (
+        <div key={user.id}>
+          {user.firstName} {user.lastName}  {/* Already camelCase! */}
+          {user.isActive ? '✅' : '❌'}
+        </div>
+      ))}
+    </div>
+  )
+}
+```
+
+:::success
+**Benefit:** Write clean, idiomatic JavaScript/TypeScript code without worrying about backend naming conventions. The transformation layer handles everything automatically!
+:::
+
 ### Making API Calls
 
 **Example: Fetching Users**

@@ -325,12 +325,12 @@ const Docs: React.FC = () => {
     }
 
     .markdown-content code {
-      background-color: ${ONETRUTH.colors.backgroundDark};
+      background-color: #0f151b;
       padding: 2px 6px;
       border-radius: ${ONETRUTH.borderRadius.sm};
       font-family: ${ONETRUTH.fonts.monospace};
       font-size: ${ONETRUTH.fonts.sizes.sm};
-      color: ${ONETRUTH.colors.textDark};
+      color: #ffd500;
     }
 
     .markdown-content pre {
@@ -418,6 +418,7 @@ const Docs: React.FC = () => {
       text-align: left;
       font-weight: ${ONETRUTH.fonts.weights.semibold};
       border: 1px solid ${ONETRUTH.colors.border};
+      color: #ffd500;
     }
 
     .markdown-content td {
@@ -564,6 +565,14 @@ const Docs: React.FC = () => {
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw, rehypeHighlight]}
+                components={{
+                  a: ({ node, children, ...props }) => {
+                    // Remove .md extension from link text if it exists
+                    const linkText = typeof children[0] === 'string' ? children[0] : '';
+                    const cleanedText = linkText.endsWith('.md') ? linkText.slice(0, -3) : linkText;
+                    return <a {...props}>{cleanedText || children}</a>;
+                  },
+                }}
               >
                 {docContent}
               </ReactMarkdown>

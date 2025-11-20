@@ -97,17 +97,10 @@ export default function NAICSCodes() {
           total_pages: results.total_pages,
         });
       } else {
-        // Use local data source (DataSourceContext)
-        const { getNAICSCodes } = await import("../context/DataSourceContext").then(
-          (m) => m.useDataSource()
-        );
-        const filters = {
-          search: searchTerm || undefined,
-          industry: industryFilter !== "all" ? industryFilter : undefined,
-          level: levelFilter !== "all" ? parseInt(levelFilter) : undefined,
-        };
-        const results = await getNAICSCodes(filters);
-        setCodes(results);
+        // For mock/local data source - this would need to be implemented
+        // in your DataSourceContext if you want to support it
+        console.warn("Local data source not fully implemented for NAICS codes");
+        setCodes([]);
       }
     } catch (error) {
       console.error("Error loading NAICS codes:", error);
@@ -116,7 +109,6 @@ export default function NAICSCodes() {
       setLoading(false);
     }
   };
-
   const handleEdit = (code) => {
     setSelectedCode(code);
     setFormData({

@@ -337,28 +337,28 @@ export default function Dashboard() {
         </h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <a
-            href="/users"
+            href="/admin/users"
             className="p-4 rounded-lg border-2 hover:shadow-md transition-all text-center"
             style={{ borderColor: ONETRUTH.colors.primary, color: ONETRUTH.colors.primary }}
           >
             <p className="font-semibold">Manage Users</p>
           </a>
           <a
-            href="/experiences"
+            href="/admin/experiences"
             className="p-4 rounded-lg border-2 hover:shadow-md transition-all text-center"
             style={{ borderColor: ONETRUTH.colors.secondary, color: ONETRUTH.colors.secondary }}
           >
             <p className="font-semibold">Manage Experiences</p>
           </a>
           <a
-            href="/naics"
+            href="/admin/naics"
             className="p-4 rounded-lg border-2 hover:shadow-md transition-all text-center"
             style={{ borderColor: ONETRUTH.colors.info, color: ONETRUTH.colors.info }}
           >
             <p className="font-semibold">Browse NAICS</p>
           </a>
           <a
-            href="/settings"
+            href="/admin/settings"
             className="p-4 rounded-lg border-2 hover:shadow-md transition-all text-center"
             style={{ borderColor: ONETRUTH.colors.textLight, color: ONETRUTH.colors.textLight }}
           >

@@ -35,18 +35,13 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import AdminLayout from "./layouts/AdminLayout";
-// AdminDashboardRefactorv2: BUG - Import paths are incorrect!
-// What: These imports show "./pages/admin/Dashboard" but files are at "./pages/Dashboard.jsx"
-// Why: Broken imports will cause runtime errors
-// Risk: High - app won't load
-// Phase: 0 (should fix immediately if blocking)
-// Complexity: Low (just fix the paths)
-// FIX: Change to "./pages/Dashboard", "./pages/Users", etc.
-import Dashboard from "./pages/admin/Dashboard";
-import Users from "./pages/admin/Users";
-import Experiences from "./pages/admin/Experiences";
-import NAICSCodes from "./pages/admin/NAICSCodes";
-import Settings from "./pages/admin/Settings";
+// AdminDashboardRefactorv2: BUG FIXED - Corrected import paths
+// Changed from "./pages/admin/Dashboard" to "./pages/Dashboard"
+import Dashboard from "./pages/Dashboard";
+import Users from "./pages/Users";
+import Experiences from "./pages/Experiences";
+import NAICSCodes from "./pages/NAICSCodes";
+import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 
 export default function App() {

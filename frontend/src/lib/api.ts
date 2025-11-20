@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { keysToCamel, keysToSnake } from './transformers'
 
 /**
  * API client configuration for admin dashboard
@@ -6,6 +7,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
  * Features:
  * - Centralized axios instance
  * - Request/response interceptors
+ * - Automatic snake_case ↔ camelCase transformation
  * - Error handling
  * - Type-safe API methods
  */
@@ -25,7 +27,9 @@ const apiClient: AxiosInstance = axios.create({
 
 /**
  * Request interceptor
- * Add authentication tokens, logging, etc.
+ * - Add authentication tokens
+ * - Transform request data from camelCase to snake_case
+ * - Log requests in development
  */
 apiClient.interceptors.request.use(
   (config) => {
@@ -33,6 +37,14 @@ apiClient.interceptors.request.use(
     const token = localStorage.getItem('adminToken')
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
+    }
+
+    // Transform request data and params from camelCase to snake_case
+    if (config.data) {
+      config.data = keysToSnake(config.data)
+    }
+    if (config.params) {
+      config.params = keysToSnake(config.params)
     }
 
     // Log request in development
@@ -50,10 +62,17 @@ apiClient.interceptors.request.use(
 
 /**
  * Response interceptor
- * Handle errors, transform responses, etc.
+ * - Transform response data from snake_case to camelCase
+ * - Handle errors
+ * - Log responses in development
  */
 apiClient.interceptors.response.use(
   (response: AxiosResponse) => {
+    // Transform response data from snake_case to camelCase
+    if (response.data) {
+      response.data = keysToCamel(response.data)
+    }
+
     // Log response in development
     if (import.meta.env.DEV) {
       console.log(`[API Response] ${response.config.method?.toUpperCase()} ${response.config.url}`, response.status)

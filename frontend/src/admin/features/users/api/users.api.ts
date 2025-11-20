@@ -2,9 +2,13 @@
  * API client methods for Users feature
  *
  * @module admin/features/users/api
+ *
+ * NOTE: All API responses are automatically transformed from snake_case to camelCase
+ * by the global API interceptor in @/lib/api. No manual transformation needed.
  */
 
 import { api } from '@/lib/api'
+import { transformPaginatedResponse } from '@/lib/transformers'
 import type { User, CreateUserPayload, UpdateUserPayload, UserFilterOptions, UserStats } from '../types/user.types'
 import type { PaginatedResponse, ListQueryParams } from '@/admin/types/common.types'
 
@@ -22,11 +26,25 @@ const ENDPOINTS = {
  *
  * @param params - Query parameters (pagination, search, filters)
  * @returns Paginated user list
+ *
+ * NOTE: Backend returns either:
+ * - Simple array: [user1, user2, ...]
+ * - Or paginated: { items: [...], total, page, page_size, total_pages }
+ *
+ * This function normalizes both formats to PaginatedResponse<User>
  */
 export async function getUsers(
   params?: ListQueryParams & UserFilterOptions
 ): Promise<PaginatedResponse<User>> {
-  return api.get<PaginatedResponse<User>>(ENDPOINTS.USERS, { params })
+  const response = await api.get<any>(ENDPOINTS.USERS, { params })
+
+  // If response is an array or has items/data, transform it
+  if (Array.isArray(response) || response.items || response.data) {
+    return transformPaginatedResponse<User>(response)
+  }
+
+  // Otherwise, assume it's already in the correct format
+  return response as PaginatedResponse<User>
 }
 
 /**

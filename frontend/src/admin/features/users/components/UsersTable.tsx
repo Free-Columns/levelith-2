@@ -179,19 +179,53 @@ export function UsersTable({
           ]
         : []),
 
-      // Username column
+      // Username column with avatar
       {
         accessorKey: 'username',
         header: 'Username',
-        cell: ({ row }) => (
-          <button
-            type="button"
-            onClick={() => onViewUser?.(row.original)}
-            className="font-medium text-blue-600 hover:text-blue-800 hover:underline"
-          >
-            {row.original.username}
-          </button>
-        ),
+        cell: ({ row }) => {
+          const user = row.original
+          const avatarUrl = user.profile?.avatarUrl
+          const displayName = user.profile?.displayName || user.username
+          const initials = displayName
+            .split(' ')
+            .map(n => n[0])
+            .join('')
+            .toUpperCase()
+            .slice(0, 2)
+
+          return (
+            <button
+              type="button"
+              onClick={() => onViewUser?.(user)}
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+            >
+              {/* Avatar */}
+              <div className="flex-shrink-0">
+                {avatarUrl ? (
+                  <img
+                    src={avatarUrl}
+                    alt={displayName}
+                    className="h-10 w-10 rounded-full object-cover ring-2 ring-gray-200"
+                  />
+                ) : (
+                  <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center ring-2 ring-gray-200">
+                    <span className="text-white text-sm font-semibold">{initials}</span>
+                  </div>
+                )}
+              </div>
+              {/* Username */}
+              <div className="text-left">
+                <div className="font-medium text-blue-600 hover:text-blue-800">
+                  {user.username}
+                </div>
+                {user.profile?.displayName && user.profile.displayName !== user.username && (
+                  <div className="text-xs text-gray-500">{user.profile.displayName}</div>
+                )}
+              </div>
+            </button>
+          )
+        },
       },
 
       // Email column

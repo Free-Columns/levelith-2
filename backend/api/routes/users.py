@@ -5,7 +5,7 @@ Provides REST API for user CRUD operations and authentication.
 """
 
 import random
-from typing import List
+from typing import List, Optional
 from datetime import datetime, timedelta
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -118,36 +118,81 @@ async def get_user(user_id: str, db: Session = Depends(get_db)):
     )
 
 
-@router.get("/", response_model=List[UserResponse])
-async def list_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+@router.get("/")
+async def list_users(
+    page: int = 1,
+    page_size: int = 50,
+    search: Optional[str] = None,
+    is_active: Optional[bool] = None,
+    is_verified: Optional[bool] = None,
+    db: Session = Depends(get_db)
+):
     """
-    List all users with pagination.
+    List all users with pagination, search, and filtering.
 
     Args:
-        skip: Number of records to skip
-        limit: Maximum number of records to return
+        page: Page number (default: 1)
+        page_size: Number of records per page (default: 50, max: 200)
+        search: Search query for username or email
+        is_active: Filter by active status
+        is_verified: Filter by verified status
         db: Database session
 
     Returns:
-        List of users
+        Paginated response with users and metadata
     """
-    users = db.query(UserDB).offset(skip).limit(limit).all()
+    # Validate and limit page_size
+    page_size = min(page_size, 200)
+    skip = (page - 1) * page_size
 
-    return [
-        UserResponse(
-            id=user.id,
-            username=user.username,
-            email=user.email,
-            is_active=user.is_active,
-            is_verified=user.is_verified,
-            profile_data=user.profile_data,
-            created_at=user.created_at,
-            updated_at=user.updated_at,
-            last_login=user.last_login,
-            experience_count=len(user.experiences)
+    # Build query
+    query = db.query(UserDB)
+
+    # Apply search filter
+    if search:
+        search_filter = f"%{search}%"
+        query = query.filter(
+            (UserDB.username.ilike(search_filter)) |
+            (UserDB.email.ilike(search_filter))
         )
-        for user in users
-    ]
+
+    # Apply status filters
+    if is_active is not None:
+        query = query.filter(UserDB.is_active == is_active)
+    if is_verified is not None:
+        query = query.filter(UserDB.is_verified == is_verified)
+
+    # Get total count
+    total = query.count()
+
+    # Apply pagination and ordering
+    users = query.order_by(UserDB.created_at.desc()).offset(skip).limit(page_size).all()
+
+    # Calculate total pages
+    total_pages = (total + page_size - 1) // page_size if total > 0 else 1
+
+    # Return paginated response format expected by frontend
+    return {
+        "data": [
+            {
+                "id": user.id,
+                "username": user.username,
+                "email": user.email,
+                "is_active": user.is_active,
+                "is_verified": user.is_verified,
+                "profile_data": user.profile_data,
+                "created_at": user.created_at,
+                "updated_at": user.updated_at,
+                "last_login": user.last_login,
+                "experience_count": len(user.experiences)
+            }
+            for user in users
+        ],
+        "total": total,
+        "page": page,
+        "page_size": page_size,
+        "total_pages": total_pages
+    }
 
 
 @router.patch("/{user_id}", response_model=UserResponse)
@@ -210,7 +255,7 @@ async def update_user(user_id: str, user_data: UserUpdate, db: Session = Depends
     )
 
 
-@router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{user_id}")
 async def delete_user(user_id: str, db: Session = Depends(get_db)):
     """
     Delete a user.
@@ -218,6 +263,9 @@ async def delete_user(user_id: str, db: Session = Depends(get_db)):
     Args:
         user_id: User ID
         db: Database session
+
+    Returns:
+        Deletion confirmation message
 
     Raises:
         HTTPException: If user not found
@@ -229,8 +277,14 @@ async def delete_user(user_id: str, db: Session = Depends(get_db)):
             detail="User not found"
         )
 
+    username = user.username
     db.delete(user)
     db.commit()
+
+    return {
+        "success": True,
+        "message": f"User '{username}' deleted successfully"
+    }
 
 
 @router.post("/login")
@@ -270,6 +324,92 @@ async def login(credentials: UserLogin, db: Session = Depends(get_db)):
         "user_id": user.id,
         "username": user.username,
         "note": "JWT token generation to be implemented"
+    }
+
+
+@router.get("/stats")
+async def get_user_stats(db: Session = Depends(get_db)):
+    """
+    Get user statistics for the dashboard.
+
+    Args:
+        db: Database session
+
+    Returns:
+        User statistics including total, active, inactive, and verified counts
+    """
+    total_users = db.query(UserDB).count()
+    active_users = db.query(UserDB).filter(UserDB.is_active == True).count()
+    inactive_users = db.query(UserDB).filter(UserDB.is_active == False).count()
+    verified_users = db.query(UserDB).filter(UserDB.is_verified == True).count()
+
+    # Get recent signups (last 30 days)
+    thirty_days_ago = datetime.utcnow() - timedelta(days=30)
+    recent_signups = db.query(UserDB).filter(UserDB.created_at >= thirty_days_ago).count()
+
+    return {
+        "total_users": total_users,
+        "active_users": active_users,
+        "inactive_users": inactive_users,
+        "verified_users": verified_users,
+        "recent_signups": recent_signups
+    }
+
+
+@router.post("/bulk-delete")
+async def bulk_delete_users(
+    ids: List[str],
+    db: Session = Depends(get_db)
+):
+    """
+    Delete multiple users at once.
+
+    Args:
+        ids: List of user IDs to delete
+        db: Database session
+
+    Returns:
+        Deletion statistics (success, deleted count, failed count)
+
+    Raises:
+        HTTPException: If deletion fails
+    """
+    if not ids:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No user IDs provided"
+        )
+
+    deleted_count = 0
+    failed_count = 0
+
+    for user_id in ids:
+        try:
+            user = db.query(UserDB).filter(UserDB.id == user_id).first()
+            if user:
+                db.delete(user)
+                deleted_count += 1
+            else:
+                failed_count += 1
+        except Exception as e:
+            failed_count += 1
+            # Log error but continue with other deletions
+            print(f"Failed to delete user {user_id}: {str(e)}")
+
+    # Commit all deletions
+    try:
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to commit bulk deletion: {str(e)}"
+        )
+
+    return {
+        "success": True,
+        "deleted": deleted_count,
+        "failed": failed_count
     }
 
 

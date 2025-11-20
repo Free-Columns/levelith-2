@@ -46,10 +46,10 @@ Complete rebuild of admin dashboard (`frontend/src/admin/`) using modern 2025 be
 **Goal:** Set up infrastructure, install dependencies, create folder structure
 
 #### Tasks (15 total)
-1. [] Install new dependencies (see dependency list below)
-2. [] Configure TypeScript (`tsconfig.json`)
-3. [] Set up Tailwind CSS
-4. [] Install shadcn/ui CLI and components
+1. [ ] Install new dependencies (see dependency list below)
+2. [ ] Configure TypeScript (`tsconfig.json`)
+3. [ ] Set up Tailwind CSS
+4. [ ] Install shadcn/ui CLI and components
 5. [] Configure React Query client
 6. [] Set up Vite for `/admin` base path
 7. [] Create new feature-based folder structure

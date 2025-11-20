@@ -34,6 +34,7 @@
 
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AdminLayout from "./layouts/AdminLayout";
 // AdminDashboardRefactorv2: BUG FIXED - Corrected import paths
 // Changed from "./pages/admin/Dashboard" to "./pages/Dashboard"
@@ -48,42 +49,57 @@ import Login from "./pages/Login";
 import { UsersPage } from "./pages/UsersPage";
 import { UserDetailPage } from "./pages/UserDetailPage";
 
+// NEW: React Query setup for data fetching and caching
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
+
 export default function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      {/* AdminDashboardRefactorv2: FIX - Wrong base route! Should be /admin not /
-       * What: Change path="/" to path="/admin" and add redirect from / to /admin
-       * Why: Admin dashboard should be at /admin/* not root level
-       * Risk: Low - just needs navigation link updates in AdminLayout
-       * Phase: 7 (Routing & Layout)
-       * Complexity: Low
-       */}
-      <Route path="/" element={<AdminLayout />}>
-        <Route index element={<Dashboard />} />
-        {/* AdminDashboardRefactorv2: NOTE - These routes will become /admin/users, /admin/experiences, etc.
-         * Currently: /users, /experiences, /naics, /settings
-         * After fix: /admin/users, /admin/experiences, /admin/naics, /admin/settings
+    <QueryClientProvider client={queryClient}>
+      <Routes>
+        <Route path="/admin/users/new" element={<CreateUserPage />} />
+        <Route path="/admin/users/:userId/edit" element={<EditUserPage />} />
+        <Route path="/login" element={<Login />} />
+        {/* AdminDashboardRefactorv2: FIX - Wrong base route! Should be /admin not /
+         * What: Change path="/" to path="/admin" and add redirect from / to /admin
+         * Why: Admin dashboard should be at /admin/* not root level
+         * Risk: Low - just needs navigation link updates in AdminLayout
+         * Phase: 7 (Routing & Layout)
+         * Complexity: Low
          */}
-        {/* NEW: User management routes with React Query & TanStack Table */}
-        <Route path="users" element={<UsersPage />} />
-        <Route path="users/:id" element={<UserDetailPage />} />
+        <Route path="/" element={<AdminLayout />}>
+          <Route index element={<Dashboard />} />
+          {/* AdminDashboardRefactorv2: NOTE - These routes will become /admin/users, /admin/experiences, etc.
+           * Currently: /users, /experiences, /naics, /settings
+           * After fix: /admin/users, /admin/experiences, /admin/naics, /admin/settings
+           */}
+          {/* NEW: User management routes with React Query & TanStack Table */}
+          <Route path="users" element={<UsersPage />} />
+          <Route path="users/:id" element={<UserDetailPage />} />
 
-        {/* OLD: Keep for backward compatibility (will be removed in Phase 7) */}
-        {/* <Route path="users-old" element={<Users />} /> */}
+          {/* OLD: Keep for backward compatibility (will be removed in Phase 7) */}
+          {/* <Route path="users-old" element={<Users />} /> */}
 
-        <Route path="experiences" element={<Experiences />} />
-        <Route path="naics" element={<NAICSCodes />} />
-        <Route path="settings" element={<Settings />} />
-      </Route>
-      {/* AdminDashboardRefactorv2: ADD - Missing routes
-       * What: Add redirect and 404 routes
-       * Why: Better UX (/ redirects to /admin, catch-all for typos)
-       * Phase: 7 (Routing & Layout)
-       * ADD:
-       * <Route path="/" element={<Navigate to="/admin" replace />} />
-       * <Route path="*" element={<NotFound />} />
-       */}
-    </Routes>
+          <Route path="experiences" element={<Experiences />} />
+          <Route path="naics" element={<NAICSCodes />} />
+          <Route path="settings" element={<Settings />} />
+        </Route>
+        {/* AdminDashboardRefactorv2: ADD - Missing routes
+         * What: Add redirect and 404 routes
+         * Why: Better UX (/ redirects to /admin, catch-all for typos)
+         * Phase: 7 (Routing & Layout)
+         * ADD:
+         * <Route path="/" element={<Navigate to="/admin" replace />} />
+         * <Route path="*" element={<NotFound />} />
+         */}
+      </Routes>
+    </QueryClientProvider>
   );
 }

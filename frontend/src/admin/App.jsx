@@ -1,11 +1,11 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import AdminLayout from "./layouts/AdminLayout";
-import Dashboard from "./pages/Dashboard";
-import Users from "./pages/Users";
-import Experiences from "./pages/Experiences";
-import NAICSCodes from "./pages/NAICSCodes";
-import Settings from "./pages/Settings";
+import Dashboard from "./pages/admin/Dashboard";
+import Users from "./pages/admin/Users";
+import Experiences from "./pages/admin/Experiences";
+import NAICSCodes from "./pages/admin/NAICSCodes";
+import Settings from "./pages/admin/Settings";
 import Login from "./pages/Login";
 
 export default function App() {

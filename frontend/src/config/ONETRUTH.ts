@@ -30,7 +30,7 @@ export const ONETRUTH = {
 
     // Neutral colors
     background: "#FFFFFF", // Light gray background
-    backgroundDark: "#000000", // Dark background for dark mode
+    backgroundDark: "#1f1f1fff", // Dark background for dark mode
     surface: "#F4F4F9", // White surface for cards, modals
     surfaceDark: "#2c3e50",
 

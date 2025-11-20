@@ -397,8 +397,11 @@ const Docs: React.FC = () => {
       padding-left: ${ONETRUTH.spacing.lg};
       margin-left: 0;
       margin-bottom: ${ONETRUTH.spacing.md};
-      color: ${ONETRUTH.colors.textLight};
+      color: ${ONETRUTH.colors.text};
       font-style: italic;
+      background-color: rgba(0, 126, 167, 0.05);
+      padding: ${ONETRUTH.spacing.md} ${ONETRUTH.spacing.lg};
+      border-radius: ${ONETRUTH.borderRadius.sm};
     }
 
     .markdown-content table {
@@ -566,11 +569,23 @@ const Docs: React.FC = () => {
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw, rehypeHighlight]}
                 components={{
-                  a: ({ node, children, ...props }) => {
-                    // Remove .md extension from link text if it exists
+                  a: ({ node, children, href, ...props }) => {
+                    // Remove .md extension from both link text and href
                     const linkText = typeof children[0] === 'string' ? children[0] : '';
                     const cleanedText = linkText.endsWith('.md') ? linkText.slice(0, -3) : linkText;
-                    return <a {...props}>{cleanedText || children}</a>;
+
+                    // Clean the href - remove .md extension and convert to proper /docs/ URL
+                    let cleanedHref = href;
+                    if (href && !href.startsWith('http') && !href.startsWith('#')) {
+                      // Internal doc link
+                      cleanedHref = href.endsWith('.md') ? href.slice(0, -3) : href;
+                      // If it doesn't start with /, make it relative to /docs/
+                      if (!cleanedHref.startsWith('/')) {
+                        cleanedHref = `/docs/${cleanedHref}`;
+                      }
+                    }
+
+                    return <a {...props} href={cleanedHref}>{cleanedText || children}</a>;
                   },
                 }}
               >

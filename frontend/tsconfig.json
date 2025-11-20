@@ -27,7 +27,12 @@
       "@/components/*": ["./src/components/*"],
       "@/lib/*": ["./src/lib/*"],
       "@/hooks/*": ["./src/hooks/*"],
-      "@/admin/*": ["./src/admin/*"]
+      "@/admin/*": ["./src/admin/*"],
+      "@/admin/features/*": ["./src/admin/features/*"],
+      "@/admin/components/*": ["./src/admin/components/*"],
+      "@/admin/lib/*": ["./src/admin/lib/*"],
+      "@/admin/hooks/*": ["./src/admin/hooks/*"],
+      "@/admin/types/*": ["./src/admin/types/*"]
     }
   },
   "include": ["src"],

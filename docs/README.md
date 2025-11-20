@@ -283,14 +283,49 @@ Location: `docs/deployment/`
 
 Frontend architecture, components, and user interface documentation.
 
-Location: `docs/frontend/`
+Location: `docs/development/frontend/`
 
-**Status:** No frontend-specific documentation yet.
+**Status:** Admin dashboard infrastructure complete (Phase 0 & Phase 1).
+
+**Available Documentation:**
+
+- **[INFRASTRUCTURE_OVERVIEW.md](development/frontend/INFRASTRUCTURE_OVERVIEW.md)** - Complete Phase 0 & 1 overview (15 min read)
+  - Technology stack (React, TypeScript, Vite, Tailwind, React Query)
+  - Folder structure and architecture principles
+  - Type system and validation schemas
+  - 35/165 tasks complete (21% progress)
+
+- **[ADMIN_COMPONENTS_GUIDE.md](development/frontend/ADMIN_COMPONENTS_GUIDE.md)** - Reusable UI components (30 min read)
+  - DataTable with sorting and selection
+  - SearchBar with debouncing
+  - FilterPanel, Pagination
+  - Loading states (spinner, skeleton)
+  - ErrorBoundary and ConfirmDialog
+  - Complete usage examples and API reference
+
+- **[ADMIN_HOOKS_GUIDE.md](development/frontend/ADMIN_HOOKS_GUIDE.md)** - Custom React hooks (20 min read)
+  - useDebounce for search optimization
+  - usePagination for state management
+  - useLocalStorage with cross-tab sync
+  - useDisclosure for modal state
+  - Problem-solution explanations
+
+- **[ADMIN_API_CLIENT_GUIDE.md](development/frontend/ADMIN_API_CLIENT_GUIDE.md)** - Type-safe API methods (25 min read)
+  - Users API (7 methods)
+  - Experiences API (9 methods, polymorphic)
+  - NAICS API (9 methods, hierarchy support)
+  - React Query integration patterns
+  - Request/response examples
+
+- **[ADMIN_DASHBOARD_REFACTOR_V2.md](development/admin/ADMIN_DASHBOARD_REFACTOR_V2.md)** - 8-phase implementation plan
+  - Phase 0: Setup (✅ Complete)
+  - Phase 1: Core Infrastructure (✅ Complete)
+  - Phases 2-8: Features and production (Planned)
 
 **Planned:**
-- Component library documentation
 - ONETRUTH theming guide
-- State management documentation
+- User-facing frontend documentation
+- State management patterns
 - UI/UX guidelines
 
 ---
@@ -353,7 +388,11 @@ cd backend && uvicorn main:app --reload
 
 ### Frontend Developers
 - [MANIFEST.md](agent/MANIFEST.md) - ONETRUTH branding section
-- Frontend docs (planned)
+- [INFRASTRUCTURE_OVERVIEW.md](development/frontend/INFRASTRUCTURE_OVERVIEW.md) - Phase 0 & 1 setup
+- [ADMIN_COMPONENTS_GUIDE.md](development/frontend/ADMIN_COMPONENTS_GUIDE.md) - Reusable components
+- [ADMIN_HOOKS_GUIDE.md](development/frontend/ADMIN_HOOKS_GUIDE.md) - Custom hooks
+- [ADMIN_API_CLIENT_GUIDE.md](development/frontend/ADMIN_API_CLIENT_GUIDE.md) - API methods
+- [ADMIN_DASHBOARD_REFACTOR_V2.md](development/admin/ADMIN_DASHBOARD_REFACTOR_V2.md) - Implementation plan
 
 ### DevOps Engineers
 - [RENDER_DEPLOYMENT.md](deployment/RENDER_DEPLOYMENT.md)
@@ -467,13 +506,13 @@ python dev/test_report_generator.py
 | Backend - Database | 9 | ✅ Complete | 100% |
 | Backend - NAICS | 4 | ✅ Complete | 100% |
 | Architecture | 1 | ✅ Complete | 100% |
-| Development - Admin | 1 | ✅ Complete | 100% |
+| Development - Admin | 2 | ✅ Complete | 100% |
 | Development - Testing | 2 | ✅ Complete | 100% |
 | Development - General | 3 | ✅ Complete | 100% |
+| Development - Frontend | 4 | ✅ Complete | 100% |
 | Deployment | 3 | ✅ Complete | 100% |
-| Frontend | 0 | ⏳ Planned | 0% |
 
-**Total:** 37 documentation files
+**Total:** 41 documentation files
 
 ---
 

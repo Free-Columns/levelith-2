@@ -7,7 +7,7 @@ category: "architecture"
 tags: ["manifest", "architecture", "ai-agents", "conventions", "project-vision", "development-guide"]
 author: "Semour Media Group"
 date: "2025-01-17"
-lastUpdated: "2025-11-19"
+lastUpdated: "2025-11-20"
 difficulty: "intermediate"
 readingTime: 25
 relatedPages:
@@ -26,14 +26,14 @@ searchKeywords:
 showTOC: true
 showBreadcrumbs: true
 showLastUpdated: true
-version: "2.0"
+version: "2.1"
 ---
 
 # Levelith Project Manifest
 
 > **TL;DR:** Levelith is an AI-first social-resume gamification platform that transforms professional experience tracking into an engaging, interactive experience. Built with test-driven development (80% min coverage), enforced golden rules, NAICS industry classification, and ONETRUTH branding. This manifest provides all context AI agents and developers need to understand project goals, architecture, and conventions.
 
-**Difficulty:** 🟡 Intermediate | **Time:** ⏱️ 25 minutes | **Last Updated:** November 19, 2025
+**Difficulty:** 🟡 Intermediate | **Time:** ⏱️ 25 minutes | **Last Updated:** November 20, 2025
 
 ---
 
@@ -99,11 +99,14 @@ This manifestation file provides **human-curated, broad-scope context** that AI 
 
 #### Deployment
 
-| Component | Value |
-|-----------|-------|
-| **Hosting** | Render.com |
-| **Domain** | levlith.online |
-| **Environment** | Production-ready cloud infrastructure |
+| Component | Status | Value |
+|-----------|--------|-------|
+| **Hosting** | ✅ Live | Render.com |
+| **Domain** | ✅ Live | levelith.online |
+| **Database** | ✅ Live | PostgreSQL on Render |
+| **Backend API** | ✅ Live | FastAPI on Render |
+| **Frontend** | 🚧 Static | Deployed to Render |
+| **Environment** | 🚧 Partial | Production infrastructure active |
 
 #### Platforms
 
@@ -118,9 +121,16 @@ This manifestation file provides **human-curated, broad-scope context** that AI 
 
 ### Primary Goals
 
+**Immediate Focus (Phase 0-2):**
+1. **Enable user input capabilities** - Fix admin dashboard CRUD, enable user registration
+2. **Replace traditional resumes** - Create compelling digital career showcase platform
+3. **Profile creation and management** - Allow users to build and display professional profiles
+4. **Experience tracking foundation** - Support all 9 experience types with NAICS classification
+
+**Long-Term Vision:**
 1. **Create engaging user experience** - Gamify professional development and experience tracking
-2. **Enable social professional networking** - Connect users based on experiences and skills
-3. **Maintain high quality** - Never sacrifice quality for speed
+2. **Enable social professional networking** - Connect users based on experiences and skills (guilds, parties, assets)
+3. **Maintain high quality** - Never sacrifice quality for speed (80% test coverage, Golden Rules)
 4. **Enable scalability** - Support growing user base and feature set
 5. **Demonstrate AI-first development** - Show effective AI-human collaboration
 6. **Foster professional growth** - Help users track and showcase their journey
@@ -909,31 +919,86 @@ pytest
 
 ## Project Status & Roadmap
 
-### Current Phase: Foundation (v1.0)
+### Current Phase: Foundation & Critical Fixes (Phase 1/2)
 
-#### Completed
+:::warning
+**Current Status:** In Phase 1/2 of development roadmap. No progress yet on Phase 1 critical tasks (service layer tests, JWT authentication, model standardization). Admin dashboard CRUD is non-functional and blocking all user input capabilities.
+:::
+
+#### Completed ✅
 - ✅ AI agent navigation system
 - ✅ Golden rules framework
 - ✅ Test system with enforcement
 - ✅ CI/CD pipelines
 - ✅ Documentation structure
+- ✅ Production infrastructure deployed (Render + PostgreSQL)
+- ✅ Backend API deployed to levelith.online
+- ✅ NAICS 2022 database integration
 
-#### In Progress
-- 🚧 Backend API implementation
-- 🚧 Frontend application
-- 🚧 Database integration
-- 🚧 User authentication
+#### In Progress 🚧
+- 🚧 **PRIORITY 0: AdminDashboardRefactorv2 (Plan C)** - Complete rebuild with modern stack (CRITICAL)
+  - **Status:** Planning phase - TODOs documented, inline comments added
+  - **Scope:** TypeScript + React Query + TanStack Table + shadcn/ui + Tailwind
+  - **Timeline:** 20-30 hours across 8 phases
+  - **Documentation:** [ADMIN_DASHBOARD_REFACTOR_V2.md](../development/admin/ADMIN_DASHBOARD_REFACTOR_V2.md)
+- 🚧 **PRIORITY 1.1:** Add service layer tests (target 80% coverage)
+- 🚧 **PRIORITY 1.2:** Refactor API to use service layer properly
+- 🚧 **PRIORITY 1.3:** Complete JWT authentication implementation
+- 🚧 **PRIORITY 1.4:** Standardize model usage (remove domain model duplication)
+- 🚧 Backend API endpoint verification (unknown if CRUD works via direct API calls)
 
-#### Planned
-- 📋 Full feature implementation
-- 📋 Production deployment
+#### Immediate Priorities (Next 4-6 Weeks)
+
+**AdminDashboardRefactorv2 - Plan C (Week 1-3)**
+
+See [ADMIN_DASHBOARD_REFACTOR_V2.md](../development/admin/ADMIN_DASHBOARD_REFACTOR_V2.md) for complete 165-task breakdown.
+
+**Week 1: Foundation**
+- Phase 0: Setup (Install dependencies, configure TypeScript/Tailwind/React Query)
+- Phase 1: Core Infrastructure (API client, base components, shadcn/ui)
+
+**Week 2: Core Features**
+- Phase 2: Users Feature (Complete CRUD with search/filter/pagination)
+- Phase 3: Experiences Feature (All 9 types with polymorphic forms)
+
+**Week 3: Polish & Deploy**
+- Phase 4: NAICS Feature (Tag/category editing)
+- Phase 5: Dashboard (Analytics and charts)
+- Phase 6: Settings (Seed database form)
+- Phase 7: Routing (/admin prefix, route guards)
+- Phase 8: Production (Error handling, responsive design, deployment)
+
+**Post-Refactor (Week 4-6)**
+- User registration page (public-facing)
+- Profile viewing and editing
+- Advanced search and filtering
+- Gamification UI elements
+
+#### Planned (Medium-Term: 1-3 Months)
+- 📋 Experience timeline visualization
+- 📋 Search and browse functionality
+- 📋 Gamification UI (points, levels, achievements)
 - 📋 Performance optimization
-- 📋 User documentation
+- 📋 Mobile-responsive design
+- 📋 E2E testing suite
 
-### Future Enhancements
+### Future Enhancements (Long-Term Vision)
 
+**Social & Collaboration Features**
+- User "Guilds" - groups emulating fiscal entities
+- Asset valuations and tracking
+- "Parties" - grouped experience objects
+- Social networking and connections
+- Profile sharing and discovery
+
+**Technical Improvements**
 - Multi-language support (JavaScript, Go, Rust)
 - Advanced AI agent capabilities
+- Real-time collaboration features
+- Performance monitoring and analytics
+- Automated refactoring suggestions
+- Mobile app (React Native)
+
 - Real-time collaboration features (MAYBE)
 - Performance monitoring (YES)
 - Automated refactoring suggestions (YES)
@@ -1028,7 +1093,7 @@ You are a valuable team member. Follow the golden rules, maintain quality standa
 
 ---
 
-**Last Updated:** November 19, 2025 | **Version:** 2.0 | **Maintained By:** Semour Media Group
+**Last Updated:** November 20, 2025 | **Version:** 2.1 | **Maintained By:** Semour Media Group
 
 ---
 

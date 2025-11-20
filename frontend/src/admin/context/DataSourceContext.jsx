@@ -1,3 +1,47 @@
+// ============================================================================
+// AdminDashboardRefactorv2: DELETE - This entire file must be DELETED!
+// ============================================================================
+// What: Delete DataSourceContext.jsx completely (408 lines)
+// Why: Replacing with React Query - no more LOCAL/SERVER switching
+// Risk: CRITICAL - Every component uses this context
+// Phase: 1 (Core Infrastructure - last step after all features migrated)
+// Complexity: CRITICAL - affects entire admin dashboard
+// Depends: ALL features (Phase 2-6) must be migrated to React Query first
+//
+// CURRENT ARCHITECTURE (BAD):
+// - DataSourceContext provides all CRUD methods
+// - Components call useDataSource() hook
+// - Manually switches between mock data and API
+// - Manual state management (useState, useCallback)
+// - No caching, no automatic refetching
+//
+// NEW ARCHITECTURE (GOOD - React Query):
+// - Individual query hooks per feature (e.g., useUsers, useCreateUser)
+// - Automatic caching, background refetching
+// - Optimistic updates
+// - Loading/error states handled automatically
+// - Type-safe with TypeScript
+//
+// REPLACEMENT PLAN:
+// Phase 1: Create lib/queryClient.ts, lib/api.ts
+// Phase 2: Create features/users/api/users.queries.ts → replaces getUsers, createUser, etc.
+// Phase 3: Create features/experiences/api/experiences.queries.ts → replaces getExperiences, etc.
+// Phase 4: Create features/naics/api/naics.queries.ts → replaces getNAICSCodes, etc.
+// Phase 5: Create features/dashboard/hooks/useDashboard.ts → replaces getStats
+// Phase 6: Create features/settings/hooks/useSeed.ts → replaces seedUsers
+// Phase 1 (final): Delete this file + mockData.js + DataSourceSwitcher.jsx
+//
+// FILES THAT IMPORT THIS (must update all):
+// - frontend/src/admin/main.jsx (DataSourceProvider wrapper)
+// - frontend/src/admin/pages/Users.jsx (useDataSource hook)
+// - frontend/src/admin/pages/Experiences.jsx (useDataSource hook)
+// - frontend/src/admin/pages/NAICSCodes.jsx (useDataSource hook)
+// - frontend/src/admin/pages/Dashboard.jsx (useDataSource hook)
+// - frontend/src/admin/pages/Settings.jsx (useDataSource hook)
+//
+// DO NOT DELETE until ALL pages are migrated to React Query!
+// ============================================================================
+
 /**
  * Data Source Context
  *
@@ -6,6 +50,7 @@
  */
 
 import React, { createContext, useContext, useState, useCallback } from "react";
+// AdminDashboardRefactorv2: DELETE - Remove all mock data imports
 import {
   mockUsers,
   mockExperiences,
@@ -18,6 +63,7 @@ import apiService from "../services/apiService";
 
 const DataSourceContext = createContext();
 
+// AdminDashboardRefactorv2: DELETE - Remove DATA_SOURCES enum (no more switching)
 export const DATA_SOURCES = {
   LOCAL: "local",
   SERVER: "server",

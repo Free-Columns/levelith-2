@@ -1,3 +1,32 @@
+// AdminDashboardRefactorv2: REPLACE - Convert to shadcn/ui Dialog component
+// What: Replace custom Modal with shadcn/ui Dialog component
+// Why: Better accessibility, keyboard navigation, focus management
+// Risk: Medium - used by many pages for create/edit/delete dialogs
+// Phase: 1 (Core Infrastructure)
+// Complexity: Medium
+// Depends: Phase 0 (shadcn/ui installation)
+//
+// CURRENT ISSUES:
+// - Line 47: `zIndex: ONETRUTH.zIndex.modal` causes crash if ONETRUTH undefined
+// - Line 56: `zIndex: ONETRUTH.zIndex.modalBackdrop` same issue
+// - Custom implementation lacks accessibility features
+//
+// NEW APPROACH (shadcn/ui Dialog):
+// import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+// <Dialog open={isOpen} onOpenChange={onClose}>
+//   <DialogContent>
+//     <DialogHeader><DialogTitle>{title}</DialogTitle></DialogHeader>
+//     {children}
+//   </DialogContent>
+// </Dialog>
+//
+// COMPONENTS USING THIS:
+// - Users.jsx (create/edit/delete modals)
+// - Experiences.jsx (create/edit/delete modals)
+// - NAICSCodes.jsx (edit/delete modals)
+// - Settings.jsx (confirmation modals)
+// ============================================================================
+
 /**
  * Modal Component
  *
@@ -5,6 +34,11 @@
  */
 
 import React, { useEffect } from "react";
+// AdminDashboardRefactorv2: BUG - This import can fail at runtime!
+// What: ONETRUTH import from theme.js which imports from ../../config/ONETRUTH
+// Why: If ../../config/ONETRUTH.ts export is wrong, this crashes
+// Risk: HIGH - causes "Cannot read properties of undefined (reading 'modal')" error
+// Fix: Change theme.js to: export default ONETRUTH; (not named export)
 import ONETRUTH from "../config/theme";
 
 export default function Modal({

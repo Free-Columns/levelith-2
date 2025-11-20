@@ -1,3 +1,25 @@
+// ============================================================================
+// AdminDashboardRefactorv2: DELETE - This entire file must be DELETED!
+// ============================================================================
+// What: Delete this file completely (mockData.js) - 536 lines of mock data
+// Why: Removing ALL mock data - admin dashboard will be server-only
+// Risk: High - many components currently import from this file
+// Phase: 1 (Core Infrastructure)
+// Complexity: High (affects many files)
+// Depends: Must migrate all components to React Query FIRST
+//
+// FILES THAT IMPORT THIS (must be updated):
+// - frontend/src/admin/context/DataSourceContext.jsx (imports mockUsers, mockExperiences, etc.)
+// - Any component using mock data for development
+//
+// MIGRATION PLAN:
+// 1. Phase 1: Set up React Query and API client
+// 2. Phase 2-6: Migrate all features to use React Query hooks
+// 3. Phase 1 (final step): Delete this file + DataSourceContext
+//
+// DO NOT DELETE until all components are migrated to React Query!
+// ============================================================================
+
 /**
  * Mock Data Generator for Admin Dashboard
  *

@@ -1,3 +1,25 @@
+// ============================================================================
+// AdminDashboardRefactorv2: DELETE - This entire file must be DELETED!
+// ============================================================================
+// What: Delete DataSourceSwitcher.jsx completely (95 lines)
+// Why: No more LOCAL/SERVER switching - server-only mode
+// Risk: Low - only used in AdminLayout header
+// Phase: 1 (Core Infrastructure - final step)
+// Complexity: Low
+// Depends: DataSourceContext must be deleted first
+//
+// FILES THAT IMPORT THIS:
+// - frontend/src/admin/layouts/AdminLayout.jsx (header component)
+//
+// REMOVAL STEPS:
+// 1. Remove <DataSourceSwitcher /> from AdminLayout header
+// 2. Delete this file
+//
+// OPTIONAL REPLACEMENT:
+// Could add environment indicator instead (dev/staging/prod badge)
+// - Example: <Badge variant="outline">Production</Badge>
+// ============================================================================
+
 /**
  * Data Source Switcher Component
  *
@@ -6,6 +28,7 @@
  */
 
 import React from "react";
+// AdminDashboardRefactorv2: DELETE - Will be removed when DataSourceContext is deleted
 import { useDataSource, DATA_SOURCES } from "../context/DataSourceContext";
 import ONETRUTH from "../config/theme";
 

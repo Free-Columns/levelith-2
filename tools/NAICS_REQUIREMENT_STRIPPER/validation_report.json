@@ -1,0 +1,2447 @@
+{
+  "validation_summary": {
+    "overall_valid": false,
+    "total_issues": 269,
+    "total_fixes_applied": 257
+  },
+  "check_results": {
+    "structure": {
+      "passed": true,
+      "issues_found": 0,
+      "details": []
+    },
+    "codes": {
+      "passed": true,
+      "issues_found": 0,
+      "details": []
+    },
+    "size_standards": {
+      "passed": true,
+      "issues_found": 0,
+      "details": []
+    },
+    "duplicates": {
+      "passed": false,
+      "issues_found": 6,
+      "details": [
+        {
+          "code": "237990",
+          "first_occurrence": "22",
+          "duplicate_in": "22"
+        },
+        {
+          "code": "238990",
+          "first_occurrence": "22",
+          "duplicate_in": "22"
+        },
+        {
+          "code": "488510",
+          "first_occurrence": "51",
+          "duplicate_in": "51"
+        },
+        {
+          "code": "541519",
+          "first_occurrence": "54",
+          "duplicate_in": "54"
+        },
+        {
+          "code": "562910",
+          "first_occurrence": "61",
+          "duplicate_in": "61"
+        },
+        {
+          "code": "611519",
+          "first_occurrence": "62",
+          "duplicate_in": "62"
+        }
+      ]
+    },
+    "data_quality": {
+      "passed": true,
+      "issues_found": 0,
+      "fixable": 0,
+      "details": []
+    }
+  },
+  "issues": [
+    {
+      "code": "237990",
+      "first_occurrence": "22",
+      "duplicate_in": "22"
+    },
+    {
+      "code": "238990",
+      "first_occurrence": "22",
+      "duplicate_in": "22"
+    },
+    {
+      "code": "488510",
+      "first_occurrence": "51",
+      "duplicate_in": "51"
+    },
+    {
+      "code": "541519",
+      "first_occurrence": "54",
+      "duplicate_in": "54"
+    },
+    {
+      "code": "562910",
+      "first_occurrence": "61",
+      "duplicate_in": "61"
+    },
+    {
+      "code": "611519",
+      "first_occurrence": "62",
+      "duplicate_in": "62"
+    },
+    {
+      "code": "111219",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "112320",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "113210",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "115114",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "212312",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "212313",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "212319",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "213115",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "236115",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "236116",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "236220",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "237110",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "237120",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "237130",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "238110",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "238120",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "238190",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "238210",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "238220",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "311351",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "311352",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "311514",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "311813",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "311824",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "311941",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "313220",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "314994",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "315220",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "315240",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "315990",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "316998",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "321213",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "321991",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "321999",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "322220",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "322299",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "324122",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "324191",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "324199",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "325194",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "325220",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "325320",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "325414",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "325992",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "325998",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "326112",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "326113",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "326121",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "326130",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "326150",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "326220",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "326291",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "327110",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "327120",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "327212",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "327215",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "327992",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "327999",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "331110",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "331210",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "331313",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "331410",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "331491",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "331492",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "331529",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "332119",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "332215",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "332311",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "332323",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "332722",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "332812",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "332813",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "332912",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "332994",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "332999",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333112",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333131",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333132",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333243",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333244",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333316",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333318",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333413",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333414",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333415",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333514",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333515",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333519",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333611",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333612",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333613",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333914",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333922",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333923",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333924",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333992",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333994",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333995",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "333999",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334118",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334220",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334290",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334413",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334416",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334418",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334510",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334511",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334512",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334513",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334514",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334515",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334519",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334613",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "334614",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "335121",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "335122",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "335311",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "335313",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "335929",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "335932",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "335999",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "336310",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "336320",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "336330",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "336350",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "336360",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "336413",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "336415",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "336419",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "336992",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "336999",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "337110",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "337122",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "337125",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "337212",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "337215",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "339991",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423110",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423120",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423310",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423320",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423330",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423390",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423410",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423430",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423440",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423450",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423490",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423510",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423520",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423610",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423620",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423690",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423720",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423730",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423740",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423810",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423820",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423830",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423850",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423860",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423910",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423920",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423940",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "423990",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424120",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424130",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424210",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424310",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424320",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424330",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424430",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424440",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424490",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424590",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424610",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424690",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424720",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424820",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424920",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424930",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424940",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424950",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "424990",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "441228",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "445110",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "453998",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "481211",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "481212",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "483114",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "484121",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "484122",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "484220",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "484230",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "485999",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "486910",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "488390",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "488510",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "512191",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "517312",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "519130",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "522320",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "524128",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "524292",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "531120",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "531130",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "532120",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "532411",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "532412",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "532420",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "532490",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "533110",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "541330-E1",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "541330-E2",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "541370",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "541611",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "541614",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "541690",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "541714",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "541715",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "541715-E3",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "541720",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "541990",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "561422",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "561439",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "561599",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "562219",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "562998",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "611430",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "621111",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "621330",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "621340",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "621399",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "621420",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "621493",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "621999",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "622310",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "623210",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "623220",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "624120",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "711310",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "711320",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "711410",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "721211",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "721214",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "721310",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "811118",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "811121",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "811212",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "811213",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "811219",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "811310",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "811411",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "811490",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "812320",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "813312",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "813990",
+      "issue": "Title contains newline character",
+      "can_fix": true
+    },
+    {
+      "code": "237990",
+      "first_occurrence": "22",
+      "duplicate_in": "22"
+    },
+    {
+      "code": "238990",
+      "first_occurrence": "22",
+      "duplicate_in": "22"
+    },
+    {
+      "code": "488510",
+      "first_occurrence": "51",
+      "duplicate_in": "51"
+    },
+    {
+      "code": "541519",
+      "first_occurrence": "54",
+      "duplicate_in": "54"
+    },
+    {
+      "code": "562910",
+      "first_occurrence": "61",
+      "duplicate_in": "61"
+    },
+    {
+      "code": "611519",
+      "first_occurrence": "62",
+      "duplicate_in": "62"
+    }
+  ],
+  "fixes_applied": [
+    {
+      "code": "111219",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "112320",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "113210",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "115114",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "212312",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "212313",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "212319",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "213115",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "236115",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "236116",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "236220",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "237110",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "237120",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "237130",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "238110",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "238120",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "238190",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "238210",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "238220",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "311351",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "311352",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "311514",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "311813",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "311824",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "311941",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "313220",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "314994",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "315220",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "315240",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "315990",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "316998",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "321213",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "321991",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "321999",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "322220",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "322299",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "324122",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "324191",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "324199",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "325194",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "325220",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "325320",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "325414",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "325992",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "325998",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "326112",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "326113",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "326121",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "326130",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "326150",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "326220",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "326291",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "327110",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "327120",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "327212",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "327215",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "327992",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "327999",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "331110",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "331210",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "331313",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "331410",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "331491",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "331492",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "331529",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "332119",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "332215",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "332311",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "332323",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "332722",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "332812",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "332813",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "332912",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "332994",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "332999",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333112",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333131",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333132",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333243",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333244",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333316",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333318",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333413",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333414",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333415",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333514",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333515",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333519",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333611",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333612",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333613",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333914",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333922",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333923",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333924",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333992",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333994",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333995",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "333999",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334118",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334220",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334290",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334413",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334416",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334418",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334510",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334511",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334512",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334513",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334514",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334515",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334519",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334613",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "334614",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "335121",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "335122",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "335311",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "335313",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "335929",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "335932",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "335999",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "336310",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "336320",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "336330",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "336350",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "336360",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "336413",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "336415",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "336419",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "336992",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "336999",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "337110",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "337122",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "337125",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "337212",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "337215",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "339991",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423110",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423120",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423310",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423320",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423330",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423390",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423410",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423430",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423440",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423450",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423490",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423510",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423520",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423610",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423620",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423690",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423720",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423730",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423740",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423810",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423820",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423830",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423850",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423860",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423910",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423920",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423940",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "423990",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424120",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424130",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424210",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424310",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424320",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424330",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424430",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424440",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424490",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424590",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424610",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424690",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424720",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424820",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424920",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424930",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424940",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424950",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "424990",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "441228",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "445110",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "453998",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "481211",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "481212",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "483114",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "484121",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "484122",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "484220",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "484230",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "485999",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "486910",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "488390",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "488510",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "512191",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "517312",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "519130",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "522320",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "524128",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "524292",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "531120",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "531130",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "532120",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "532411",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "532412",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "532420",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "532490",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "533110",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "541330-E1",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "541330-E2",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "541370",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "541611",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "541614",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "541690",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "541714",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "541715",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "541715-E3",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "541720",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "541990",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "561422",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "561439",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "561599",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "562219",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "562998",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "611430",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "621111",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "621330",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "621340",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "621399",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "621420",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "621493",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "621999",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "622310",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "623210",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "623220",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "624120",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "711310",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "711320",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "711410",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "721211",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "721214",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "721310",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "811118",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "811121",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "811212",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "811213",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "811219",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "811310",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "811411",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "811490",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "812320",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "813312",
+      "fix": "Removed newline from title"
+    },
+    {
+      "code": "813990",
+      "fix": "Removed newline from title"
+    }
+  ],
+  "statistics": {
+    "total_sectors": 18,
+    "total_industries": 1037
+  }
+}

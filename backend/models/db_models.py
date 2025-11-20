@@ -106,6 +106,26 @@ class NAICSCodeDB(Base):
     Maps to 'naics_codes' table in PostgreSQL.
     Stores the complete NAICS 2022 classification system.
 
+    Hierarchy Denormalization:
+        sector: 2-digit sector code (denormalized for fast queries)
+        subsector: 3-digit subsector code (denormalized)
+        industry_group: 4-digit industry group code (denormalized)
+        industry_detail: 6-digit national industry code (denormalized)
+
+    SBA Integration:
+        sba_size_standard: Small Business Administration size standard
+        sba_source: Source reference for SBA data
+
+    Enhanced Search/Discovery:
+        keywords: JSON array of searchable keywords
+        aliases: JSON array of alternative names/synonyms
+        examples: Text examples of businesses in this classification
+
+    Documentation:
+        cross_references: JSON array of related NAICS codes
+        notes: Additional notes about this classification
+        data_source: Source of the NAICS data
+
     Admin Additional Fields:
         tags: JSON array of custom tags for filtering and organization
         custom_category: Admin-defined category for internal classification
@@ -114,32 +134,73 @@ class NAICSCodeDB(Base):
 
     __tablename__ = "naics_codes"
 
-    # Primary key - NAICS code (2, 3, 4, or 6 digits)
+    # ========================================================================
+    # PRIMARY KEY
+    # ========================================================================
     code = Column(String(6), primary_key=True)
 
-    # Core fields
+    # ========================================================================
+    # CORE FIELDS
+    # ========================================================================
     title = Column(String(500), nullable=False)
     description = Column(Text, nullable=True)
 
-    # Hierarchy level (2=sector, 3=subsector, 4=industry_group, 6=national_industry)
+    # ========================================================================
+    # HIERARCHY
+    # ========================================================================
+    # Level indicator (2=sector, 3=subsector, 4=industry_group, 6=national_industry)
     level = Column(Integer, nullable=False, index=True)
+    
+    # Parent code for tree structure
+    parent_code = Column(String(6), nullable=True, index=True)
+    
+    # Denormalized hierarchy fields for fast queries without string parsing
+    sector = Column(String(2), nullable=True, index=True)  # First 2 digits
+    subsector = Column(String(3), nullable=True, index=True)  # First 3 digits
+    industry_group = Column(String(4), nullable=True, index=True)  # First 4 digits
+    industry_detail = Column(String(6), nullable=True)  # Full 6 digits (same as code for detail level)
 
-    # Category for filtering
+    # ========================================================================
+    # CATEGORIZATION
+    # ========================================================================
     category = Column(SQLEnum(NAICSCategory), nullable=False, index=True)
 
-    # Hierarchical relationship
-    parent_code = Column(String(6), nullable=True, index=True)
+    # ========================================================================
+    # SBA (SMALL BUSINESS ADMINISTRATION) INTEGRATION
+    # ========================================================================
+    sba_size_standard = Column(String(255), nullable=True)
+    sba_source = Column(String(255), nullable=True)
 
-    # Metadata
+    # ========================================================================
+    # ENHANCED SEARCH AND DISCOVERY
+    # ========================================================================
+    keywords = Column(JSON, default=list, nullable=False)  # Searchable keywords
+    aliases = Column(JSON, default=list, nullable=False)  # Alternative names/synonyms
+    examples = Column(Text, nullable=True)  # Example businesses in this category
+
+    # ========================================================================
+    # DOCUMENTATION AND RELATIONSHIPS
+    # ========================================================================
+    cross_references = Column(JSON, default=list, nullable=False)  # Related NAICS codes
+    notes = Column(Text, nullable=True)  # Additional notes
+    data_source = Column(String(255), nullable=True)  # Source of data
+
+    # ========================================================================
+    # METADATA
+    # ========================================================================
     is_active = Column(Boolean, default=True, nullable=False)
     year = Column(Integer, default=2022, nullable=False)
 
-    # Admin-specific fields for internal management
+    # ========================================================================
+    # ADMIN-SPECIFIC FIELDS
+    # ========================================================================
     tags = Column(JSON, default=list, nullable=False)
     custom_category = Column(String(100), nullable=True)
     admin_notes = Column(Text, nullable=True)
 
-    # Timestamps
+    # ========================================================================
+    # TIMESTAMPS
+    # ========================================================================
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 

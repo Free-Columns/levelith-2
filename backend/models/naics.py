@@ -185,10 +185,7 @@ def extract_parent_codes(code: str) -> List[str]:
 @dataclass
 class NAICSCode:
     """
-    NAICS Code domain model with complete metadata.
-
-    Represents a single NAICS code with its official title, description,
-    hierarchical information, and categorization for better UX.
+    NAICS Code domain model with complete metadata and enhanced search support.
 
     Attributes:
         code: The NAICS code (2, 3, 4, or 6 digits)
@@ -197,11 +194,35 @@ class NAICSCode:
         level: Hierarchical level (sector, subsector, industry group, national industry)
         category: High-level category for filtering (technology, education, etc.)
         parent_code: Parent code in the hierarchy (None for 2-digit sectors)
-        is_active: Whether this code is currently active in NAICS 2022
-        year: NAICS version year (default: 2022)
+        
+        # Denormalized hierarchy for fast queries
+        sector: 2-digit sector code
+        subsector: 3-digit subsector code
+        industry_group: 4-digit industry group code
+        industry_detail: 6-digit national industry code
+        
+        # SBA integration
+        sba_size_standard: Small Business Administration size standard
+        sba_source: Source reference for SBA data
+        
+        # Enhanced search and discovery
+        keywords: List of searchable keywords
+        aliases: List of alternative names/synonyms for better matching
+        examples: Text examples of businesses in this classification
+        
+        # Documentation
+        cross_references: List of related NAICS codes
+        notes: Additional notes about this classification
+        data_source: Source of the NAICS data
+        
+        # Admin fields
         tags: Custom tags for admin organization and filtering
         custom_category: Admin-defined category for internal classification
         admin_notes: Internal notes and comments for admin use only
+        
+        # Metadata
+        is_active: Whether this code is currently active in NAICS 2022
+        year: NAICS version year (default: 2022)
         created_at: When this code record was created
         updated_at: When this code record was last updated
     """
@@ -212,6 +233,28 @@ class NAICSCode:
     level: NAICSLevel = NAICSLevel.NATIONAL_INDUSTRY
     category: NAICSCategory = NAICSCategory.GENERAL
     parent_code: Optional[str] = None
+    
+    # Denormalized hierarchy
+    sector: Optional[str] = None
+    subsector: Optional[str] = None
+    industry_group: Optional[str] = None
+    industry_detail: Optional[str] = None
+    
+    # SBA integration
+    sba_size_standard: Optional[str] = None
+    sba_source: Optional[str] = None
+    
+    # Enhanced search
+    keywords: List[str] = field(default_factory=list)
+    aliases: List[str] = field(default_factory=list)
+    examples: Optional[str] = None
+    
+    # Documentation
+    cross_references: List[str] = field(default_factory=list)
+    notes: Optional[str] = None
+    data_source: Optional[str] = None
+    
+    # Admin fields
     is_active: bool = True
     year: int = 2022
     tags: List[str] = field(default_factory=list)
@@ -221,7 +264,9 @@ class NAICSCode:
     updated_at: datetime = field(default_factory=datetime.now)
 
     def __post_init__(self):
-        """Validate and normalize NAICS code after initialization."""
+        """Validate and auto-populate fields after initialization."""
+        from backend.models.naics import normalize_naics_code, get_naics_level, extract_parent_codes
+        
         # Normalize the code
         self.code = normalize_naics_code(self.code)
 
@@ -230,73 +275,90 @@ class NAICSCode:
         if detected_level:
             self.level = detected_level
 
+        # Auto-populate denormalized hierarchy fields
+        if len(self.code) >= 2:
+            self.sector = self.code[:2]
+        if len(self.code) >= 3:
+            self.subsector = self.code[:3]
+        if len(self.code) >= 4:
+            self.industry_group = self.code[:4]
+        if len(self.code) == 6:
+            self.industry_detail = self.code
+
         # Auto-set parent code based on hierarchy
         if not self.parent_code and len(self.code) > 2:
             parents = extract_parent_codes(self.code)
             if len(parents) > 1:
-                # Parent is the second-to-last code in the hierarchy
                 self.parent_code = parents[-2]
 
     def get_hierarchy(self) -> List[str]:
-        """
-        Get the full hierarchical path for this NAICS code.
-
-        Returns:
-            List of codes from sector to this code
-
-        Examples:
-            >>> code = NAICSCode(code="541511", title="...")
-            >>> code.get_hierarchy()
-            ['54', '541', '5415', '541511']
-        """
+        """Get the full hierarchical path for this NAICS code."""
+        from backend.models.naics import extract_parent_codes
         return extract_parent_codes(self.code)
 
-    def is_parent_of(self, other_code: str) -> bool:
+    def get_all_search_terms(self) -> List[str]:
         """
-        Check if this NAICS code is a parent of another code.
-
-        Args:
-            other_code: NAICS code to check
-
+        Get all searchable terms for this NAICS code.
+        
+        Combines title words, keywords, and aliases for comprehensive searching.
+        
         Returns:
-            True if this code is a parent of other_code
-
-        Examples:
-            >>> sector = NAICSCode(code="54", title="Professional Services")
-            >>> sector.is_parent_of("541511")
-            True
+            List of unique search terms (lowercased)
         """
-        if not other_code:
-            return False
+        terms = set()
+        
+        # Add title words
+        terms.update(self.title.lower().split())
+        
+        # Add keywords
+        terms.update(k.lower() for k in self.keywords)
+        
+        # Add aliases
+        terms.update(a.lower() for a in self.aliases)
+        
+        # Add code itself
+        terms.add(self.code)
+        
+        return sorted(list(terms))
 
-        # A code is a parent if the other code starts with it and is longer
-        return (other_code.startswith(self.code) and
-                len(other_code) > len(self.code))
-
-    def is_child_of(self, other_code: str) -> bool:
+    def matches_search_term(self, term: str) -> bool:
         """
-        Check if this NAICS code is a child of another code.
-
+        Check if this NAICS code matches a search term.
+        
+        Searches in: code, title, keywords, aliases, description
+        
         Args:
-            other_code: NAICS code to check
-
+            term: Search term (case-insensitive)
+            
         Returns:
-            True if this code is a child of other_code
+            True if term matches any searchable field
         """
-        if not other_code:
-            return False
-
-        # A code is a child if it starts with the other code and is longer
-        return (self.code.startswith(other_code) and
-                len(self.code) > len(other_code))
+        term_lower = term.lower()
+        
+        # Check code
+        if term_lower in self.code.lower():
+            return True
+        
+        # Check title
+        if term_lower in self.title.lower():
+            return True
+        
+        # Check keywords
+        if any(term_lower in k.lower() for k in self.keywords):
+            return True
+        
+        # Check aliases
+        if any(term_lower in a.lower() for a in self.aliases):
+            return True
+        
+        # Check description
+        if self.description and term_lower in self.description.lower():
+            return True
+        
+        return False
 
     def to_dict(self) -> dict:
-        """
-        Convert NAICS code to dictionary representation.
-
-        Returns:
-            dict: Dictionary representation of the NAICS code
-        """
+        """Convert NAICS code to dictionary representation."""
         return {
             "code": self.code,
             "title": self.title,
@@ -305,15 +367,41 @@ class NAICSCode:
             "level_value": self.level.value,
             "category": self.category.value,
             "parent_code": self.parent_code,
-            "is_active": self.is_active,
-            "year": self.year,
+            
+            # Hierarchy
+            "sector": self.sector,
+            "subsector": self.subsector,
+            "industry_group": self.industry_group,
+            "industry_detail": self.industry_detail,
+            "hierarchy": self.get_hierarchy(),
+            
+            # SBA
+            "sba_size_standard": self.sba_size_standard,
+            "sba_source": self.sba_source,
+            
+            # Search
+            "keywords": self.keywords,
+            "aliases": self.aliases,
+            "examples": self.examples,
+            
+            # Documentation
+            "cross_references": self.cross_references,
+            "notes": self.notes,
+            "data_source": self.data_source,
+            
+            # Admin
             "tags": self.tags,
             "custom_category": self.custom_category,
             "admin_notes": self.admin_notes,
-            "hierarchy": self.get_hierarchy(),
+            
+            # Metadata
+            "is_active": self.is_active,
+            "year": self.year,
             "created_at": self.created_at.isoformat(),
             "updated_at": self.updated_at.isoformat(),
         }
+
+
 
 
 def create_naics_code(

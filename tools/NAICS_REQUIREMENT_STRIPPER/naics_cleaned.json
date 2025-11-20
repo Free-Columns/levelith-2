@@ -1,0 +1,5412 @@
+{
+  "document_info": {
+    "title": "Table of Small Business Size Standards Matched to North American Industry Classification System Codes",
+    "source": "U.S. Small Business Administration",
+    "effective_date": "January 1, 2017",
+    "version": "NAICS 2022"
+  },
+  "sectors": [
+    {
+      "sector_code": "11",
+      "sector_name": "Agriculture, Forestry, Fishing and Hunting",
+      "industries": [
+        {
+          "code": "111110",
+          "title": "Soybean Farming",
+          "size_standard_millions": 2.0
+        },
+        {
+          "code": "111120",
+          "title": "Oilseed (except Soybean) Farming",
+          "size_standard_millions": 2.0
+        },
+        {
+          "code": "111130",
+          "title": "Dry Pea and Bean Farming",
+          "size_standard_millions": 2.5
+        },
+        {
+          "code": "111140",
+          "title": "Wheat Farming",
+          "size_standard_millions": 2.0
+        },
+        {
+          "code": "111150",
+          "title": "Corn Farming",
+          "size_standard_millions": 2.25
+        },
+        {
+          "code": "111160",
+          "title": "Rice Farming",
+          "size_standard_millions": 2.25
+        },
+        {
+          "code": "111191",
+          "title": "Oilseed and Grain Combination Farming",
+          "size_standard_millions": 2.0
+        },
+        {
+          "code": "111199",
+          "title": "All Other Grain Farming",
+          "size_standard_millions": 2.0
+        },
+        {
+          "code": "111211",
+          "title": "Potato Farming",
+          "size_standard_millions": 3.75
+        },
+        {
+          "code": "111219",
+          "title": "Other Vegetable (except Potato) and Melon Farming",
+          "size_standard_millions": 3.25
+        },
+        {
+          "code": "111310",
+          "title": "Orange Groves",
+          "size_standard_millions": 3.5
+        },
+        {
+          "code": "111320",
+          "title": "Citrus (except Orange) Groves",
+          "size_standard_millions": 3.75
+        },
+        {
+          "code": "111331",
+          "title": "Apple Orchards",
+          "size_standard_millions": 4.0
+        },
+        {
+          "code": "111332",
+          "title": "Grape Vineyards",
+          "size_standard_millions": 3.5
+        },
+        {
+          "code": "111333",
+          "title": "Strawberry Farming",
+          "size_standard_millions": 4.75
+        },
+        {
+          "code": "111334",
+          "title": "Berry (except Strawberry) Farming",
+          "size_standard_millions": 3.25
+        },
+        {
+          "code": "111335",
+          "title": "Tree Nut Farming",
+          "size_standard_millions": 3.25
+        },
+        {
+          "code": "111336",
+          "title": "Fruit and Tree Nut Combination Farming",
+          "size_standard_millions": 4.5
+        },
+        {
+          "code": "111339",
+          "title": "Other Noncitrus Fruit Farming",
+          "size_standard_millions": 3.0
+        },
+        {
+          "code": "111411",
+          "title": "Mushroom Production",
+          "size_standard_millions": 4.0
+        },
+        {
+          "code": "111419",
+          "title": "Other Food Crops Grown Under Cover",
+          "size_standard_millions": 4.0
+        },
+        {
+          "code": "111421",
+          "title": "Nursery and Tree Production",
+          "size_standard_millions": 2.75
+        },
+        {
+          "code": "111422",
+          "title": "Floriculture Production",
+          "size_standard_millions": 3.25
+        },
+        {
+          "code": "111910",
+          "title": "Tobacco Farming",
+          "size_standard_millions": 2.25
+        },
+        {
+          "code": "111920",
+          "title": "Cotton Farming",
+          "size_standard_millions": 2.75
+        },
+        {
+          "code": "111930",
+          "title": "Sugarcane Farming",
+          "size_standard_millions": 4.5
+        },
+        {
+          "code": "111940",
+          "title": "Hay Farming",
+          "size_standard_millions": 2.25
+        },
+        {
+          "code": "111991",
+          "title": "Sugar Beet Farming",
+          "size_standard_millions": 2.25
+        },
+        {
+          "code": "111992",
+          "title": "Peanut Farming",
+          "size_standard_millions": 2.25
+        },
+        {
+          "code": "111998",
+          "title": "All Other Miscellaneous Crop Farming",
+          "size_standard_millions": 2.25
+        },
+        {
+          "code": "112111",
+          "title": "Beef Cattle Ranching and Farming",
+          "size_standard_millions": 2.25
+        },
+        {
+          "code": "112112",
+          "title": "Cattle Feedlots",
+          "size_standard_millions": 19.5
+        },
+        {
+          "code": "112120",
+          "title": "Dairy Cattle and Milk Production",
+          "size_standard_millions": 3.25
+        },
+        {
+          "code": "112210",
+          "title": "Hog and Pig Farming",
+          "size_standard_millions": 3.5
+        },
+        {
+          "code": "112310",
+          "title": "Chicken Egg Production",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "112320",
+          "title": "Broilers and Other Meat Type Chicken Production",
+          "size_standard_millions": 3.0
+        },
+        {
+          "code": "112330",
+          "title": "Turkey Production",
+          "size_standard_millions": 3.25
+        },
+        {
+          "code": "112340",
+          "title": "Poultry Hatcheries",
+          "size_standard_millions": 3.5
+        },
+        {
+          "code": "112390",
+          "title": "Other Poultry Production",
+          "size_standard_millions": 3.25
+        },
+        {
+          "code": "112410",
+          "title": "Sheep Farming",
+          "size_standard_millions": 3.0
+        },
+        {
+          "code": "112420",
+          "title": "Goat Farming",
+          "size_standard_millions": 2.25
+        },
+        {
+          "code": "112511",
+          "title": "Finfish Farming and Fish Hatcheries",
+          "size_standard_millions": 3.25
+        },
+        {
+          "code": "112512",
+          "title": "Shellfish Farming",
+          "size_standard_millions": 3.25
+        },
+        {
+          "code": "112519",
+          "title": "Other Aquaculture",
+          "size_standard_millions": 3.25
+        },
+        {
+          "code": "112910",
+          "title": "Apiculture",
+          "size_standard_millions": 2.75
+        },
+        {
+          "code": "112920",
+          "title": "Horses and Other Equine Production",
+          "size_standard_millions": 2.5
+        },
+        {
+          "code": "112930",
+          "title": "Fur-Bearing Animal and Rabbit Production",
+          "size_standard_millions": 3.25
+        },
+        {
+          "code": "112990",
+          "title": "All Other Animal Production",
+          "size_standard_millions": 2.5
+        },
+        {
+          "code": "113110",
+          "title": "Timber Tract Operations",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "113210",
+          "title": "Forest Nurseries and Gathering of Forest Products",
+          "size_standard_millions": 18.0
+        },
+        {
+          "code": "113310",
+          "title": "Logging",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "114111",
+          "title": "Finfish Fishing",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "114112",
+          "title": "Shellfish Fishing",
+          "size_standard_millions": 12.5
+        },
+        {
+          "code": "114119",
+          "title": "Other Marine Fishing",
+          "size_standard_millions": 10.0
+        },
+        {
+          "code": "114210",
+          "title": "Hunting and Trapping",
+          "size_standard_millions": 7.5
+        },
+        {
+          "code": "115111",
+          "title": "Cotton Ginning",
+          "size_standard_millions": 14.0
+        },
+        {
+          "code": "115112",
+          "title": "Soil Preparation, Planting, and Cultivating",
+          "size_standard_millions": 8.5
+        },
+        {
+          "code": "115113",
+          "title": "Crop Harvesting, Primarily by Machine",
+          "size_standard_millions": 12.0
+        },
+        {
+          "code": "115114",
+          "title": "Postharvest Crop Activities (except Cotton Ginning)",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "115115",
+          "title": "Farm Labor Contractors and Crew Leaders",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "115116",
+          "title": "Farm Management Services",
+          "size_standard_millions": 13.5
+        },
+        {
+          "code": "115210",
+          "title": "Support Activities for Animal Production",
+          "size_standard_millions": 9.5
+        },
+        {
+          "code": "115310",
+          "title": "Support Activities for Forestry",
+          "size_standard_millions": 10.0
+        },
+        {
+          "code": "115310-E1",
+          "title": "Forest Fire Suppression1",
+          "exception": 1,
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "115310-E2",
+          "title": "Fuels Management Services1",
+          "exception": 2,
+          "size_standard_millions": 30.0
+        }
+      ]
+    },
+    {
+      "sector_code": "21",
+      "sector_name": "Mining, Quarrying, and Oil and Gas",
+      "industries": [
+        {
+          "code": "211120",
+          "title": "Crude Petroleum Extraction",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "211130",
+          "title": "Natural Gas Extraction",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "212111",
+          "title": "Bituminous Coal and Lignite Surface Mining",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "212112",
+          "title": "Bituminous Coal Underground Mining",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "212113",
+          "title": "Anthracite Mining",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "212210",
+          "title": "Iron Ore Mining",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "212221",
+          "title": "Gold Ore Mining",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "212222",
+          "title": "Silver Ore Mining",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "212230",
+          "title": "Copper, Nickel, Lead, and Zinc Mining",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "212291",
+          "title": "Uranium-Radium-Vanadium Ore Mining",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "212299",
+          "title": "All Other Metal Ore Mining",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "212311",
+          "title": "Dimension Stone Mining and Quarrying",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "212312",
+          "title": "Crushed and Broken Limestone Mining and Quarrying",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "212313",
+          "title": "Crushed and Broken Granite Mining and Quarrying",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "212319",
+          "title": "Other Crushed and Broken Stone Mining and Quarrying",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "212321",
+          "title": "Construction Sand and Gravel Mining",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "212322",
+          "title": "Industrial Sand Mining",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "212324",
+          "title": "Kaolin and Ball Clay Mining",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "212325",
+          "title": "Clay and Ceramic and Refractory Minerals Mining",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "212391",
+          "title": "Potash, Soda, and Borate Mineral Mining",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "212392",
+          "title": "Phosphate Rock Mining",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "212393",
+          "title": "Other Chemical and Fertilizer Mineral Mining",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "212399",
+          "title": "All Other Nonmetallic Mineral Mining",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "213111",
+          "title": "Drilling Oil and Gas Wells",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "213112",
+          "title": "Support Activities for Oil and Gas Operations",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "213113",
+          "title": "Support Activities for Coal Mining",
+          "size_standard_millions": 24.0
+        },
+        {
+          "code": "213114",
+          "title": "Support Activities for Metal Mining",
+          "size_standard_millions": 36.0
+        },
+        {
+          "code": "213115",
+          "title": "Support Activities for Nonmetallic Minerals (except Fuels)",
+          "size_standard_millions": 18.0
+        }
+      ]
+    },
+    {
+      "sector_code": "22",
+      "sector_name": "Utilities",
+      "industries": [
+        {
+          "code": "221111",
+          "title": "Hydroelectric Power Generation",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "221112",
+          "title": "Fossil Fuel Electric Power Generation",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "221113",
+          "title": "Nuclear Electric Power Generation",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "221114",
+          "title": "Solar Electric Power Generation",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "221115",
+          "title": "Wind Electric Power Generation",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "221116",
+          "title": "Geothermal Electric Power Generation",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "221117",
+          "title": "Biomass Electric Power Generation",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "221118",
+          "title": "Other Electric Power Generation",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "221121",
+          "title": "Electric Bulk Power Transmission and Control",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "221122",
+          "title": "Electric Power Distribution",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "221210",
+          "title": "Natural Gas Distribution",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "221310",
+          "title": "Water Supply and Irrigation Systems",
+          "size_standard_millions": 36.0
+        },
+        {
+          "code": "221320",
+          "title": "Sewage Treatment Facilities",
+          "size_standard_millions": 31.0
+        },
+        {
+          "code": "221330",
+          "title": "Steam and Air-Conditioning Supply",
+          "size_standard_millions": 26.5
+        },
+        {
+          "code": "236115",
+          "title": "New Single-family Housing Construction (Except For-Sale Builders)",
+          "size_standard_millions": 39.5
+        },
+        {
+          "code": "236116",
+          "title": "New Multifamily Housing Construction (except For-Sale Builders)",
+          "size_standard_millions": 39.5
+        },
+        {
+          "code": "236117",
+          "title": "New Housing For-Sale Builders",
+          "size_standard_millions": 39.5
+        },
+        {
+          "code": "236118",
+          "title": "Residential Remodelers",
+          "size_standard_millions": 39.5
+        },
+        {
+          "code": "236210",
+          "title": "Industrial Building Construction",
+          "size_standard_millions": 39.5
+        },
+        {
+          "code": "236220",
+          "title": "Commercial and Institutional Building Construction",
+          "size_standard_millions": 39.5
+        },
+        {
+          "code": "237110",
+          "title": "Water and Sewer Line and Related Structures Construction",
+          "size_standard_millions": 39.5
+        },
+        {
+          "code": "237120",
+          "title": "Oil and Gas Pipeline and Related Structures Construction",
+          "size_standard_millions": 39.5
+        },
+        {
+          "code": "237130",
+          "title": "Power and Communication Line and Related Structures Construction",
+          "size_standard_millions": 39.5
+        },
+        {
+          "code": "237210",
+          "title": "Land Subdivision",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "237310",
+          "title": "Highway, Street, and Bridge Construction",
+          "size_standard_millions": 39.5
+        },
+        {
+          "code": "237990",
+          "title": "Other Heavy and Civil Engineering Construction",
+          "size_standard_millions": 39.5
+        },
+        {
+          "code": "237990",
+          "title": "Dredging and Surface Cleanup Activities2",
+          "size_standard_millions": 32.5
+        },
+        {
+          "code": "238110",
+          "title": "Poured Concrete Foundation and Structure Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238120",
+          "title": "Structural Steel and Precast Concrete Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238130",
+          "title": "Framing Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238140",
+          "title": "Masonry Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238150",
+          "title": "Glass and Glazing Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238160",
+          "title": "Roofing Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238170",
+          "title": "Siding Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238190",
+          "title": "Other Foundation, Structure, and Building Exterior Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238210",
+          "title": "Electrical Contractors and Other Wiring Installation Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238220",
+          "title": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238290",
+          "title": "Other Building Equipment Contractors",
+          "size_standard_millions": 19.5
+        },
+        {
+          "code": "238310",
+          "title": "Drywall and Insulation Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238320",
+          "title": "Painting and Wall Covering Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238330",
+          "title": "Flooring Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238340",
+          "title": "Tile and Terrazzo Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238350",
+          "title": "Finish Carpentry Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238390",
+          "title": "Other Building Finishing Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238910",
+          "title": "Site Preparation Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238990",
+          "title": "All Other Specialty Trade Contractors",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "238990",
+          "title": "Building and Property Specialty Trade Services 13",
+          "size_standard_millions": 16.5
+        }
+      ]
+    },
+    {
+      "sector_code": "31",
+      "sector_name": "33 – Manufacturing",
+      "industries": [
+        {
+          "code": "311111",
+          "title": "Dog and Cat Food Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311119",
+          "title": "Other Animal Food Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "311211",
+          "title": "Flour Milling",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311212",
+          "title": "Rice Milling",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "311213",
+          "title": "Malt Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "311221",
+          "title": "Wet Corn Milling",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "311224",
+          "title": "Soybean and Other Oilseed Processing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311225",
+          "title": "Fats and Oils Refining and Blending",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311230",
+          "title": "Breakfast Cereal Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311313",
+          "title": "Beet Sugar Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "311314",
+          "title": "Cane Sugar Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311340",
+          "title": "Nonchocolate Confectionery Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311351",
+          "title": "Chocolate and Confectionery Manufacturing from Cacao Beans",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "311352",
+          "title": "Confectionery Manufacturing from Purchased Chocolate",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311411",
+          "title": "Frozen Fruit, Juice and Vegetable Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311412",
+          "title": "Frozen Specialty Food Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "311421",
+          "title": "Fruit and Vegetable Canning3",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311422",
+          "title": "Specialty Canning",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "311423",
+          "title": "Dried and Dehydrated Food Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "311511",
+          "title": "Fluid Milk Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311512",
+          "title": "Creamery Butter Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "311513",
+          "title": "Cheese Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "311514",
+          "title": "Dry, Condensed, and Evaporated Dairy Product Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "311520",
+          "title": "Ice Cream and Frozen Dessert Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311611",
+          "title": "Animal (except Poultry) Slaughtering",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311612",
+          "title": "Meat Processed from Carcasses",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311613",
+          "title": "Rendering and Meat Byproduct Processing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "311615",
+          "title": "Poultry Processing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "311710",
+          "title": "Seafood Product Preparation and Packaging",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "311811",
+          "title": "Retail Bakeries",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "311812",
+          "title": "Commercial Bakeries",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311813",
+          "title": "Frozen Cakes, Pies, and Other Pastries Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "311821",
+          "title": "Cookie and Cracker Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "311824",
+          "title": "Dry Pasta, Dough, and Flour Mixes Manufacturing from Purchased Flour",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "311830",
+          "title": "Tortilla Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "311911",
+          "title": "Roasted Nuts and Peanut Butter Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "311919",
+          "title": "Other Snack Food Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "311920",
+          "title": "Coffee and Tea Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "311930",
+          "title": "Flavoring Syrup and Concentrate Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "311941",
+          "title": "Mayonnaise, Dressing and Other Prepared Sauce Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "311942",
+          "title": "Spice and Extract Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "311991",
+          "title": "Perishable Prepared Food Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "311999",
+          "title": "All Other Miscellaneous Food Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "312111",
+          "title": "Soft Drink Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "312112",
+          "title": "Bottled Water Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "312113",
+          "title": "Ice Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "312120",
+          "title": "Breweries",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "312130",
+          "title": "Wineries",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "312140",
+          "title": "Distilleries",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "312230",
+          "title": "Tobacco Manufacturing",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "313110",
+          "title": "Fiber, Yarn, and Thread Mills",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "313210",
+          "title": "Broadwoven Fabric Mills",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "313220",
+          "title": "Narrow Fabric Mills and Schiffli Machine Embroidery",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "313230",
+          "title": "Nonwoven Fabric Mills",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "313240",
+          "title": "Knit Fabric Mills",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "313310",
+          "title": "Textile and Fabric Finishing Mills",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "313320",
+          "title": "Fabric Coating Mills",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "314110",
+          "title": "Carpet and Rug Mills",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "314120",
+          "title": "Curtain and Linen Mills",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "314910",
+          "title": "Textile Bag and Canvas Mills",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "314994",
+          "title": "Rope, Cordage, Twine, Tire Cord, and Tire Fabric Mills",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "314999",
+          "title": "All Other Miscellaneous Textile Product Mills",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "315110",
+          "title": "Hosiery and Sock Mills",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "315190",
+          "title": "Other Apparel Knitting Mills",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "315210",
+          "title": "Cut and Sew Apparel Contractors",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "315220",
+          "title": "Men's and Boys' Cut and Sew Apparel Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "315240",
+          "title": "Women's, Girls', and Infants' Cut and Sew Apparel Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "315280",
+          "title": "Other Cut and Sew Apparel Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "315990",
+          "title": "Apparel Accessories and Other Apparel Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "316110",
+          "title": "Leather and Hide Tanning and Finishing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "316210",
+          "title": "Footwear Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "316992",
+          "title": "Women’s Handbag and Purse Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "316998",
+          "title": "All Other Leather Good and Allied Product Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "321113",
+          "title": "Sawmills",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "321114",
+          "title": "Wood Preservation",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "321211",
+          "title": "Hardwood Veneer and Plywood Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "321212",
+          "title": "Softwood Veneer and Plywood Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "321213",
+          "title": "Engineered Wood Member (except Truss) Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "321214",
+          "title": "Truss Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "321219",
+          "title": "Reconstituted Wood Product Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "321911",
+          "title": "Wood Window and Door Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "321912",
+          "title": "Cut Stock, Resawing Lumber, and Planing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "321918",
+          "title": "Other Millwork (including Flooring)",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "321920",
+          "title": "Wood Container and Pallet Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "321991",
+          "title": "Manufactured Home (Mobile Home) Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "321992",
+          "title": "Prefabricated Wood Building Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "321999",
+          "title": "All Other Miscellaneous Wood Product Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "322110",
+          "title": "Pulp Mills",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "322121",
+          "title": "Paper (except Newsprint) Mills",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "322122",
+          "title": "Newsprint Mills",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "322130",
+          "title": "Paperboard Mills",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "322211",
+          "title": "Corrugated and Solid Fiber Box Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "322212",
+          "title": "Folding Paperboard Box Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "322219",
+          "title": "Other Paperboard Container Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "322220",
+          "title": "Paper Bag and Coated and Treated Paper Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "322230",
+          "title": "Stationery Product Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "322291",
+          "title": "Sanitary Paper Product Manufacturing",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "322299",
+          "title": "All Other Converted Paper Product Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "323111",
+          "title": "Commercial Printing (except Screen and Books)",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "323113",
+          "title": "Commercial Screen Printing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "323117",
+          "title": "Books Printing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "323120",
+          "title": "Support Activities for Printing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "324110",
+          "title": "Petroleum Refineries4",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "324121",
+          "title": "Asphalt Paving Mixture and Block Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "324122",
+          "title": "Asphalt Shingle and Coating Materials Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "324191",
+          "title": "Petroleum Lubricating Oil and Grease Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "324199",
+          "title": "All Other Petroleum and Coal Products Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "325110",
+          "title": "Petrochemical Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "325120",
+          "title": "Industrial Gas Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "325130",
+          "title": "Synthetic Dye and Pigment Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "325180",
+          "title": "Other Basic Inorganic Chemical Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "325193",
+          "title": "Ethyl Alcohol Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "325194",
+          "title": "Cyclic Crude, Intermediate, and Gum and Wood Chemical Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "325199",
+          "title": "All Other Basic Organic Chemical Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "325211",
+          "title": "Plastics Material and Resin Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "325212",
+          "title": "Synthetic Rubber Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "325220",
+          "title": "Artificial and Synthetic Fibers and Filaments Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "325311",
+          "title": "Nitrogenous Fertilizer Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "325312",
+          "title": "Phosphatic Fertilizer Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "325314",
+          "title": "Fertilizer (Mixing Only) Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "325320",
+          "title": "Pesticide and Other Agricultural Chemical Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "325411",
+          "title": "Medicinal and Botanical Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "325412",
+          "title": "Pharmaceutical Preparation Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "325413",
+          "title": "In-Vitro Diagnostic Substance Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "325414",
+          "title": "Biological Product (except Diagnostic) Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "325510",
+          "title": "Paint and Coating Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "325520",
+          "title": "Adhesive Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "325611",
+          "title": "Soap and Other Detergent Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "325612",
+          "title": "Polish and Other Sanitation Good Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "325613",
+          "title": "Surface Active Agent Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "325620",
+          "title": "Toilet Preparation Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "325910",
+          "title": "Printing Ink Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "325920",
+          "title": "Explosives Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "325991",
+          "title": "Custom Compounding of Purchased Resins",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "325992",
+          "title": "Photographic Film, Paper, Plate and Chemical Manufacturing",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "325998",
+          "title": "All Other Miscellaneous Chemical Product and Preparation Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "326111",
+          "title": "Plastic Bag and Pouch Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "326112",
+          "title": "Plastics Packaging Film and Sheet (including Laminated) Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "326113",
+          "title": "Unlaminated Plastics Film and Sheet (except Packaging) Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "326121",
+          "title": "Unlaminated Plastics Profile Shape Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "326122",
+          "title": "Plastics Pipe and Pipe Fitting Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "326130",
+          "title": "Laminated Plastics Plate, Sheet (except Packaging), and Shape Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "326140",
+          "title": "Polystyrene Foam Product Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "326150",
+          "title": "Urethane and Other Foam Product (except Polystyrene) Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "326160",
+          "title": "Plastics Bottle Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "326191",
+          "title": "Plastics Plumbing Fixture Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "326199",
+          "title": "All Other Plastics Product Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "326211",
+          "title": "Tire Manufacturing (except Retreading)5",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "326212",
+          "title": "Tire Retreading",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "326220",
+          "title": "Rubber and Plastics Hoses and Belting Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "326291",
+          "title": "Rubber Product Manufacturing for Mechanical Use",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "326299",
+          "title": "All Other Rubber Product Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "327110",
+          "title": "Pottery, Ceramics, and Plumbing Fixture Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "327120",
+          "title": "Clay Building Material and Refractories Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "327211",
+          "title": "Flat Glass Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "327212",
+          "title": "Other Pressed and Blown Glass and Glassware Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "327213",
+          "title": "Glass Container Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "327215",
+          "title": "Glass Product Manufacturing Made of Purchased Glass",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "327310",
+          "title": "Cement Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "327320",
+          "title": "Ready-Mix Concrete Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "327331",
+          "title": "Concrete Block and Brick Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "327332",
+          "title": "Concrete Pipe Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "327390",
+          "title": "Other Concrete Product Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "327410",
+          "title": "Lime Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "327420",
+          "title": "Gypsum Product Manufacturing",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "327910",
+          "title": "Abrasive Product Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "327991",
+          "title": "Cut Stone and Stone Product Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "327992",
+          "title": "Ground or Treated Mineral and Earth Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "327993",
+          "title": "Mineral Wool Manufacturing",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "327999",
+          "title": "All Other Miscellaneous Nonmetallic Mineral Product Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "331110",
+          "title": "Iron and Steel Mills and Ferroalloy Manufacturing",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "331210",
+          "title": "Iron and Steel Pipe and Tube Manufacturing from Purchased Steel",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "331221",
+          "title": "Rolled Steel Shape Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "331222",
+          "title": "Steel Wire Drawing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "331313",
+          "title": "Alumina Refining and Primary Aluminum Production",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "331314",
+          "title": "Secondary Smelting and Alloying of Aluminum",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "331315",
+          "title": "Aluminum Sheet, Plate and Foil Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "331318",
+          "title": "Other Aluminum Rolling, Drawing, and Extruding",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "331410",
+          "title": "Nonferrous Metal (except Aluminum) Smelting and Refining",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "331420",
+          "title": "Copper Rolling, Drawing, Extruding, and Alloying",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "331491",
+          "title": "Nonferrous Metal (except Copper and Aluminum) Rolling, Drawing and Extruding",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "331492",
+          "title": "Secondary Smelting, Refining, and Alloying of Nonferrous Metal (except Copper and Aluminum)",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "331511",
+          "title": "Iron Foundries",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "331512",
+          "title": "Steel Investment Foundries",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "331513",
+          "title": "Steel Foundries (except Investment)",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "331523",
+          "title": "Nonferrous Metal Die-Casting Foundries",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "331524",
+          "title": "Aluminum Foundries (except Die-Casting)",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "331529",
+          "title": "Other Nonferrous Metal Foundries (except Die- Casting)",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332111",
+          "title": "Iron and Steel Forging",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "332112",
+          "title": "Nonferrous Forging",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "332114",
+          "title": "Custom Roll Forming",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332117",
+          "title": "Powder Metallurgy Part Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332119",
+          "title": "Metal Crown, Closure, and Other Metal Stamping (except Automotive)",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332215",
+          "title": "Metal Kitchen Cookware, Utensil, Cutlery, and Flatware (except Precious) Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "332216",
+          "title": "Saw Blade and Handtool Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "332311",
+          "title": "Prefabricated Metal Building and Component Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "332312",
+          "title": "Fabricated Structural Metal Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332313",
+          "title": "Plate Work Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "332321",
+          "title": "Metal Window and Door Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "332322",
+          "title": "Sheet Metal Work Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332323",
+          "title": "Ornamental and Architectural Metal Work Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332410",
+          "title": "Power Boiler and Heat Exchanger Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "332420",
+          "title": "Metal Tank (Heavy Gauge) Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "332431",
+          "title": "Metal Can Manufacturing",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "332439",
+          "title": "Other Metal Container Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332510",
+          "title": "Hardware Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "332613",
+          "title": "Spring Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332618",
+          "title": "Other Fabricated Wire Product Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332710",
+          "title": "Machine Shops",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332721",
+          "title": "Precision Turned Product Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332722",
+          "title": "Bolt, Nut, Screw, Rivet and Washer Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332811",
+          "title": "Metal Heat Treating",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "332812",
+          "title": "Metal Coating, Engraving (except Jewelry and Silverware), and Allied Services to Manufacturers",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332813",
+          "title": "Electroplating, Plating, Polishing, Anodizing and Coloring",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332911",
+          "title": "Industrial Valve Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "332912",
+          "title": "Fluid Power Valve and Hose Fitting Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "332913",
+          "title": "Plumbing Fixture Fitting and Trim Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "332919",
+          "title": "Other Metal Valve and Pipe Fitting Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "332991",
+          "title": "Ball and Roller Bearing Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "332992",
+          "title": "Small Arms Ammunition Manufacturing",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "332993",
+          "title": "Ammunition (except Small Arms) Manufacturing",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "332994",
+          "title": "Small Arms, Ordnance, and Ordnance Accessories Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "332996",
+          "title": "Fabricated Pipe and Pipe Fitting Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "332999",
+          "title": "All Other Miscellaneous Fabricated Metal Product Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "333111",
+          "title": "Farm Machinery and Equipment Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "333112",
+          "title": "Lawn and Garden Tractor and Home Lawn and Garden Equipment Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "333120",
+          "title": "Construction Machinery Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "333131",
+          "title": "Mining Machinery and Equipment Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333132",
+          "title": "Oil and Gas Field Machinery and Equipment Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "333241",
+          "title": "Food Product Machinery Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333242",
+          "title": "Semiconductor Machinery Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "333243",
+          "title": "Sawmill, Woodworking, and Paper Machinery Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333244",
+          "title": "Printing Machinery and Equipment Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "333249",
+          "title": "Other Industrial Machinery Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333314",
+          "title": "Optical Instrument and Lens Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333316",
+          "title": "Photographic and Photocopying Equipment Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "333318",
+          "title": "Other Commercial and Service Industry Machinery Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "333413",
+          "title": "Industrial and Commercial Fan and Blower and Air Purification Equipment Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333414",
+          "title": "Heating Equipment (except Warm Air Furnaces) Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333415",
+          "title": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "333511",
+          "title": "Industrial Mold Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333514",
+          "title": "Special Die and Tool, Die Set, Jig and Fixture Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333515",
+          "title": "Cutting Tool and Machine Tool Accessory Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333517",
+          "title": "Machine Tool Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333519",
+          "title": "Rolling Mill and Other Metalworking Machinery Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333611",
+          "title": "Turbine and Turbine Generator Set Unit Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "333612",
+          "title": "Speed Changer, Industrial High-Speed Drive and Gear Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "333613",
+          "title": "Mechanical Power Transmission Equipment Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "333618",
+          "title": "Other Engine Equipment Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "333912",
+          "title": "Air and Gas Compressor Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "333914",
+          "title": "Measuring, Dispensing, and Other Pumping Equipment Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "333921",
+          "title": "Elevator and Moving Stairway Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "333922",
+          "title": "Conveyor and Conveying Equipment Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333923",
+          "title": "Overhead Traveling Crane, Hoist and Monorail System Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "333924",
+          "title": "Industrial Truck, Tractor, Trailer and Stacker Machinery Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "333991",
+          "title": "Power-Driven Hand Tool Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333992",
+          "title": "Welding and Soldering Equipment Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "333993",
+          "title": "Packaging Machinery Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333994",
+          "title": "Industrial Process Furnace and Oven Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333995",
+          "title": "Fluid Power Cylinder and Actuator Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "333996",
+          "title": "Fluid Power Pump and Motor Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "333997",
+          "title": "Scale and Balance Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "333999",
+          "title": "All Other Miscellaneous General Purpose Machinery Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "334111",
+          "title": "Electronic Computer Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "334112",
+          "title": "Computer Storage Device Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "334118",
+          "title": "Computer Terminal and Other Computer Peripheral Equipment Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "334210",
+          "title": "Telephone Apparatus Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "334220",
+          "title": "Radio and Television Broadcasting and Wireless Communications Equipment Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "334290",
+          "title": "Other Communications Equipment Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "334310",
+          "title": "Audio and Video Equipment Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "334412",
+          "title": "Bare Printed Circuit Board Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "334413",
+          "title": "Semiconductor and Related Device Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "334416",
+          "title": "Capacitor, Resistor, Coil, Transformer, and Other Inductor Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "334417",
+          "title": "Electronic Connector Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "334418",
+          "title": "Printed Circuit Assembly (Electronic Assembly) Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "334419",
+          "title": "Other Electronic Component Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "334510",
+          "title": "Electromedical and Electrotherapeutic Apparatus Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "334511",
+          "title": "Search, Detection, Navigation, Guidance, Aeronautical, and Nautical System and Instrument Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "334512",
+          "title": "Automatic Environmental Control Manufacturing for Residential, Commercial and Appliance Use6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "334513",
+          "title": "Instruments and Related Products Manufacturing for Measuring, Displaying, and Controlling Industrial Process Variables6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "334514",
+          "title": "Totalizing Fluid Meter and Counting Device Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "334515",
+          "title": "Instrument Manufacturing for Measuring and Testing Electricity and Electrical Signals6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "334516",
+          "title": "Analytical Laboratory Instrument Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "334517",
+          "title": "Irradiation Apparatus Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "334519",
+          "title": "Other Measuring and Controlling Device Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "334613",
+          "title": "Blank Magnetic and Optical Recording Media Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "334614",
+          "title": "Software and Other Prerecorded Compact Disc, Tape, and Record Reproducing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "335110",
+          "title": "Electric Lamp Bulb and Part Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "335121",
+          "title": "Residential Electric Lighting Fixture Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "335122",
+          "title": "Commercial, Industrial and Institutional Electric Lighting Fixture Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "335129",
+          "title": "Other Lighting Equipment Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "335210",
+          "title": "Small Electrical Appliance Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "335220",
+          "title": "Major Household Appliance Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "335311",
+          "title": "Power, Distribution and Specialty Transformer Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "335312",
+          "title": "Motor and Generator Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "335313",
+          "title": "Switchgear and Switchboard Apparatus Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "335314",
+          "title": "Relay and Industrial Control Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "335911",
+          "title": "Storage Battery Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "335912",
+          "title": "Primary Battery Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "335921",
+          "title": "Fiber Optic Cable Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "335929",
+          "title": "Other Communication and Energy Wire Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "335931",
+          "title": "Current-Carrying Wiring Device Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "335932",
+          "title": "Noncurrent-Carrying Wiring Device Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "335991",
+          "title": "Carbon and Graphite Product Manufacturing6",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "335999",
+          "title": "All Other Miscellaneous Electrical Equipment and Component Manufacturing6",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "336111",
+          "title": "Automobile Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "336112",
+          "title": "Light Truck and Utility Vehicle Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "336120",
+          "title": "Heavy Duty Truck Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "336211",
+          "title": "Motor Vehicle Body Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "336212",
+          "title": "Truck Trailer Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "336213",
+          "title": "Motor Home Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "336214",
+          "title": "Travel Trailer and Camper Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "336310",
+          "title": "Motor Vehicle Gasoline Engine and Engine Parts Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "336320",
+          "title": "Motor Vehicle Electrical and Electronic Equipment Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "336330",
+          "title": "Motor Vehicle Steering and Suspension Components (except Spring) Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "336340",
+          "title": "Motor Vehicle Brake System Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "336350",
+          "title": "Motor Vehicle Transmission and Power Train Parts Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "336360",
+          "title": "Motor Vehicle Seating and Interior Trim Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "336370",
+          "title": "Motor Vehicle Metal Stamping6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "336390",
+          "title": "Other Motor Vehicle Parts Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "336411",
+          "title": "Aircraft Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "336412",
+          "title": "Aircraft Engine and Engine Parts Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "336413",
+          "title": "Other Aircraft Part and Auxiliary Equipment Manufacturing6,7",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "336414",
+          "title": "Guided Missile and Space Vehicle Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "336415",
+          "title": "Guided Missile and Space Vehicle Propulsion Unit and Propulsion Unit Parts Manufacturing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "336419",
+          "title": "Other Guided Missile and Space Vehicle Parts and Auxiliary Equipment Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "336510",
+          "title": "Railroad Rolling Stock Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "336611",
+          "title": "Ship Building and Repairing6",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "336612",
+          "title": "Boat Building6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "336991",
+          "title": "Motorcycle, Bicycle and Parts Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "336992",
+          "title": "Military Armored Vehicle, Tank and Tank Component Manufacturing6",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "336999",
+          "title": "All Other Transportation Equipment Manufacturing6",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "337110",
+          "title": "Wood Kitchen Cabinet and Counter Top Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "337121",
+          "title": "Upholstered Household Furniture Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "337122",
+          "title": "Nonupholstered Wood Household Furniture Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "337124",
+          "title": "Metal Household Furniture Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "337125",
+          "title": "Household Furniture (except Wood and Metal) Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "337127",
+          "title": "Institutional Furniture Manufacturing",
+          "size_standard_employees": 500
+        }
+      ]
+    },
+    {
+      "sector_code": "42",
+      "sector_name": "Wholesale Trade",
+      "industries": [
+        {
+          "code": "337211",
+          "title": "Wood Office Furniture Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "337212",
+          "title": "Custom Architectural Woodwork and Millwork Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "337214",
+          "title": "Office Furniture (Except Wood) Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "337215",
+          "title": "Showcase, Partition, Shelving, and Locker Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "337910",
+          "title": "Mattress Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "337920",
+          "title": "Blind and Shade Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "339112",
+          "title": "Surgical and Medical Instrument Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "339113",
+          "title": "Surgical Appliance and Supplies Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "339114",
+          "title": "Dental Equipment and Supplies Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "339115",
+          "title": "Ophthalmic Goods Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "339116",
+          "title": "Dental Laboratories",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "339910",
+          "title": "Jewelry and Silverware Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "339920",
+          "title": "Sporting and Athletic Goods Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "339930",
+          "title": "Doll, Toy, and Game Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "339940",
+          "title": "Office Supplies (except Paper) Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "339950",
+          "title": "Sign Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "339991",
+          "title": "Gasket, Packing, and Sealing Device Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "339992",
+          "title": "Musical Instrument Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "339993",
+          "title": "Fastener, Button, Needle and Pin Manufacturing",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "339994",
+          "title": "Broom, Brush and Mop Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "339995",
+          "title": "Burial Casket Manufacturing",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "339999",
+          "title": "All Other Miscellaneous Manufacturing",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "423110",
+          "title": "Automobile and Other Motor Vehicle Merchant Wholesalers",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "423120",
+          "title": "Motor Vehicle Supplies and New Parts Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "423130",
+          "title": "Tire and Tube Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "423140",
+          "title": "Motor Vehicle Parts (Used) Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "423210",
+          "title": "Furniture Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "423220",
+          "title": "Home Furnishing Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "423310",
+          "title": "Lumber, Plywood, Millwork, and Wood Panel Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "423320",
+          "title": "Brick, Stone, and Related Construction Material Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "423330",
+          "title": "Roofing, Siding, and Insulation Material Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "423390",
+          "title": "Other Construction Material Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "423410",
+          "title": "Photographic Equipment and Supplies Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "423420",
+          "title": "Office Equipment Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "423430",
+          "title": "Computer and Computer Peripheral Equipment and Software Merchant Wholesalers",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "423440",
+          "title": "Other Commercial Equipment Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "423450",
+          "title": "Medical, Dental, and Hospital Equipment and Supplies Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "423460",
+          "title": "Ophthalmic Goods Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "423490",
+          "title": "Other Professional Equipment and Supplies Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "423510",
+          "title": "Metal Service Centers and Other Metal Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "423520",
+          "title": "Coal and Other Mineral and Ore Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "423610",
+          "title": "Electrical Apparatus and Equipment, Wiring Supplies, and Related Equipment Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "423620",
+          "title": "Household Appliances, Electric Housewares, and Consumer Electronics Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "423690",
+          "title": "Other Electronic Parts and Equipment Merchant Wholesalers",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "423710",
+          "title": "Hardware Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "423720",
+          "title": "Plumbing and Heating Equipment and Supplies (Hydronics) Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "423730",
+          "title": "Warm Air Heating and Air-Conditioning Equipment and Supplies Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "423740",
+          "title": "Refrigeration Equipment and Supplies Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "423810",
+          "title": "Construction and Mining (except Oil Well) Machinery and Equipment Merchant Wholesalers",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "423820",
+          "title": "Farm and Garden Machinery and Equipment Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "423830",
+          "title": "Industrial Machinery and Equipment Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "423840",
+          "title": "Industrial Supplies Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "423850",
+          "title": "Service Establishment Equipment and Supplies Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "423860",
+          "title": "Transportation Equipment and Supplies (except Motor Vehicle) Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "423910",
+          "title": "Sporting and Recreational Goods and Supplies Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "423920",
+          "title": "Toy and Hobby Goods and Supplies Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "423930",
+          "title": "Recyclable Material Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "423940",
+          "title": "Jewelry, Watch, Precious Stone, and Precious Metal Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "423990",
+          "title": "Other Miscellaneous Durable Goods Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "424110",
+          "title": "Printing and Writing Paper Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "424120",
+          "title": "Stationary and Office Supplies Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "424130",
+          "title": "Industrial and Personal Service Paper Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "424210",
+          "title": "Drugs and Druggists’ Sundries Merchant Wholesalers",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "424310",
+          "title": "Piece Goods, Notions, and Other Dry Goods Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "424320",
+          "title": "Men’s and Boys’ Clothing and Furnishings Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "424330",
+          "title": "Women’s, Children’s, and Infants’ Clothing and Accessories Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "424340",
+          "title": "Footwear Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "424410",
+          "title": "General Line Grocery Merchant Wholesalers",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "424420",
+          "title": "Packaged Frozen Food Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "424430",
+          "title": "Dairy Product (except Dried or Canned) Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "424440",
+          "title": "Poultry and Poultry Product Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "424450",
+          "title": "Confectionery Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "424460",
+          "title": "Fish and Seafood Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "424470",
+          "title": "Meat and Meat Product Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "424480",
+          "title": "Fresh Fruit and Vegetable Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "424490",
+          "title": "Other Grocery and Related Products Merchant Wholesalers",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "424510",
+          "title": "Grain and Field Bean Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "424520",
+          "title": "Livestock Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "424590",
+          "title": "Other Farm Product Raw Material Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "424610",
+          "title": "Plastics Materials and Basic Forms and Shapes Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "424690",
+          "title": "Other Chemical and Allied Products Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "424710",
+          "title": "Petroleum Bulk Stations and Terminals",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "424720",
+          "title": "Petroleum and Petroleum Products Merchant Wholesalers (except Bulk Stations and Terminals)",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "424810",
+          "title": "Beer and Ale Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "424820",
+          "title": "Wine and Distilled Alcoholic Beverage Merchant Wholesalers",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "424910",
+          "title": "Farm Supplies Merchant Wholesalers",
+          "size_standard_employees": 200
+        }
+      ]
+    },
+    {
+      "sector_code": "44",
+      "sector_name": "45 – Retail Trade",
+      "industries": [
+        {
+          "code": "424920",
+          "title": "Book, Periodical, and Newspaper Merchant Wholesalers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "424930",
+          "title": "Flower, Nursery Stock, and Florists’ Supplies Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "424940",
+          "title": "Tobacco and Tobacco Product Merchant Wholesalers",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "424950",
+          "title": "Paint, Varnish, and Supplies Merchant Wholesalers",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "424990",
+          "title": "Other Miscellaneous Nondurable Goods Merchant Wholesalers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "425110",
+          "title": "Business to Business Electronic Markets",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "425120",
+          "title": "Wholesale Trade Agents and Brokers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "441110",
+          "title": "New Car Dealers",
+          "size_standard_employees": 200
+        },
+        {
+          "code": "441120",
+          "title": "Used Car Dealers",
+          "size_standard_millions": 27.0
+        },
+        {
+          "code": "441210",
+          "title": "Recreational Vehicle Dealers",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "441222",
+          "title": "Boat Dealers",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "441228",
+          "title": "Motorcycle, ATV, and All Other Motor Vehicle Dealers",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "441310",
+          "title": "Automotive Parts and Accessories Stores",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "441320",
+          "title": "Tire Dealers",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "442110",
+          "title": "Furniture Stores",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "442210",
+          "title": "Floor Covering Stores",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "442291",
+          "title": "Window Treatment Stores",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "442299",
+          "title": "All Other Home Furnishings Stores",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "443141",
+          "title": "Household Appliance Stores",
+          "size_standard_millions": 12.0
+        },
+        {
+          "code": "443142",
+          "title": "Electronics Stores",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "444110",
+          "title": "Home Centers",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "444120",
+          "title": "Paint and Wallpaper Stores",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "444130",
+          "title": "Hardware Stores",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "444190",
+          "title": "Other Building Material Dealers",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "444210",
+          "title": "Outdoor Power Equipment Stores",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "444220",
+          "title": "Nursery and Garden Centers",
+          "size_standard_millions": 12.0
+        },
+        {
+          "code": "445110",
+          "title": "Supermarkets and Other Grocery (except Convenience) Stores",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "445120",
+          "title": "Convenience Stores",
+          "size_standard_millions": 32.0
+        },
+        {
+          "code": "445210",
+          "title": "Meat Markets",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "445220",
+          "title": "Fish and Seafood Markets",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "445230",
+          "title": "Fruit and Vegetable Markets",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "445291",
+          "title": "Baked Goods Stores",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "445292",
+          "title": "Confectionery and Nut Stores",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "445299",
+          "title": "All Other Specialty Food Stores",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "445310",
+          "title": "Beer, Wine and Liquor Stores",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "446110",
+          "title": "Pharmacies and Drug Stores",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "446120",
+          "title": "Cosmetics, Beauty Supplies and Perfume Stores",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "446130",
+          "title": "Optical Goods Stores",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "446191",
+          "title": "Food (Health) Supplement Stores",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "446199",
+          "title": "All Other Health and Personal Care Stores",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "447110",
+          "title": "Gasoline Stations with Convenience Stores",
+          "size_standard_millions": 32.0
+        },
+        {
+          "code": "447190",
+          "title": "Other Gasoline Stations",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "448110",
+          "title": "Men’s Clothing Stores",
+          "size_standard_millions": 12.0
+        },
+        {
+          "code": "448120",
+          "title": "Women’s Clothing Stores",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "448130",
+          "title": "Children’s and Infants’ Clothing Stores",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "448140",
+          "title": "Family Clothing Stores",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "448150",
+          "title": "Clothing Accessories Stores",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "448190",
+          "title": "Other Clothing Stores",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "448210",
+          "title": "Shoe Stores",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "448310",
+          "title": "Jewelry Stores",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "448320",
+          "title": "Luggage and Leather Goods Stores",
+          "size_standard_millions": 30.0
+        }
+      ]
+    },
+    {
+      "sector_code": "48",
+      "sector_name": "49 – Transportation and Warehousing",
+      "industries": [
+        {
+          "code": "451110",
+          "title": "Sporting Goods Stores",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "451120",
+          "title": "Hobby, Toy and Game Stores",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "451130",
+          "title": "Sewing, Needlework and Piece Goods Stores",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "451140",
+          "title": "Musical Instrument and Supplies Stores",
+          "size_standard_millions": 12.0
+        },
+        {
+          "code": "451211",
+          "title": "Book Stores",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "451212",
+          "title": "News Dealers and Newsstands",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "452210",
+          "title": "Department Stores",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "452311",
+          "title": "Warehouse Clubs and Supercenters",
+          "size_standard_millions": 32.0
+        },
+        {
+          "code": "452319",
+          "title": "All Other General Merchandise Stores",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "453110",
+          "title": "Florists",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "453210",
+          "title": "Office Supplies and Stationery Stores",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "453220",
+          "title": "Gift, Novelty and Souvenir Stores",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "453310",
+          "title": "Used Merchandise Stores",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "453910",
+          "title": "Pet and Pet Supplies Stores",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "453920",
+          "title": "Art Dealers",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "453930",
+          "title": "Manufactured (Mobile) Home Dealers",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "453991",
+          "title": "Tobacco Stores",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "453998",
+          "title": "All Other Miscellaneous Store Retailers (except Tobacco Stores)",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "454110",
+          "title": "Electronic Shopping and Mail-Order Houses",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "454210",
+          "title": "Vending Machine Operators",
+          "size_standard_millions": 12.0
+        },
+        {
+          "code": "454310",
+          "title": "Fuel Dealers",
+          "size_standard_employees": 100
+        },
+        {
+          "code": "454390",
+          "title": "Other Direct Selling Establishments",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "481111",
+          "title": "Scheduled Passenger Air Transportation",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "481112",
+          "title": "Scheduled Freight Air Transportation",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "481211",
+          "title": "Nonscheduled Chartered Passenger Air Transportation",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "481212",
+          "title": "Nonscheduled Chartered Freight Air Transportation",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "481219",
+          "title": "Other Nonscheduled Air Transportation",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "482111",
+          "title": "Line-Haul Railroads",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "482112",
+          "title": "Short Line Railroads",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "483111",
+          "title": "Deep Sea Freight Transportation",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "483112",
+          "title": "Deep Sea Passenger Transportation",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "483113",
+          "title": "Coastal and Great Lakes Freight Transportation",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "483114",
+          "title": "Coastal and Great Lakes Passenger Transportation",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "483211",
+          "title": "Inland Water Freight Transportation",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "483212",
+          "title": "Inland Water Passenger Transportation",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "484110",
+          "title": "General Freight Trucking, Local",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "484121",
+          "title": "General Freight Trucking, Long-Distance, Truckload",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "484122",
+          "title": "General Freight Trucking, Long-Distance, Less Than Truckload",
+          "size_standard_millions": 38.0
+        },
+        {
+          "code": "484210",
+          "title": "Used Household and Office Goods Moving",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "484220",
+          "title": "Specialized Freight (except Used Goods) Trucking, Local",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "484230",
+          "title": "Specialized Freight (except Used Goods) Trucking, Long-Distance",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "485111",
+          "title": "Mixed Mode Transit Systems",
+          "size_standard_millions": 25.5
+        },
+        {
+          "code": "485112",
+          "title": "Commuter Rail Systems",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "485113",
+          "title": "Bus and Other Motor Vehicle Transit Systems",
+          "size_standard_millions": 28.5
+        },
+        {
+          "code": "485119",
+          "title": "Other Urban Transit Systems",
+          "size_standard_millions": 33.0
+        },
+        {
+          "code": "485210",
+          "title": "Interurban and Rural Bus Transportation",
+          "size_standard_millions": 28.0
+        },
+        {
+          "code": "485310",
+          "title": "Taxi Service",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "485320",
+          "title": "Limousine Service",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "485410",
+          "title": "School and Employee Bus Transportation",
+          "size_standard_millions": 26.5
+        },
+        {
+          "code": "485510",
+          "title": "Charter Bus Industry",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "485991",
+          "title": "Special Needs Transportation",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "485999",
+          "title": "All Other Transit and Ground Passenger Transportation",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "486110",
+          "title": "Pipeline Transportation of Crude Oil",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "486210",
+          "title": "Pipeline Transportation of Natural Gas",
+          "size_standard_millions": 36.5
+        },
+        {
+          "code": "486910",
+          "title": "Pipeline Transportation of Refined Petroleum Products",
+          "size_standard_employees": 1500
+        }
+      ]
+    },
+    {
+      "sector_code": "51",
+      "sector_name": "Information",
+      "industries": [
+        {
+          "code": "486990",
+          "title": "All Other Pipeline Transportation",
+          "size_standard_millions": 40.5
+        },
+        {
+          "code": "487110",
+          "title": "Scenic and Sightseeing Transportation, Land",
+          "size_standard_millions": 18.0
+        },
+        {
+          "code": "487210",
+          "title": "Scenic and Sightseeing Transportation, Water",
+          "size_standard_millions": 12.5
+        },
+        {
+          "code": "487990",
+          "title": "Scenic and Sightseeing Transportation, Other",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "488111",
+          "title": "Air Traffic Control",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "488119",
+          "title": "Other Airport Operations",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "488190",
+          "title": "Other Support Activities for Air Transportation",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "488210",
+          "title": "Support Activities for Rail Transportation",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "488310",
+          "title": "Port and Harbor Operations",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "488320",
+          "title": "Marine Cargo Handling",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "488330",
+          "title": "Navigational Services to Shipping",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "488390",
+          "title": "Other Support Activities for Water Transportation",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "488410",
+          "title": "Motor Vehicle Towing",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "488490",
+          "title": "Other Support Activities for Road Transportation",
+          "size_standard_millions": 16.0
+        },
+        {
+          "code": "488510",
+          "title": "Freight Transportation Arrangement10",
+          "size_standard_millions": 17.5
+        },
+        {
+          "code": "488510",
+          "title": "Non-Vessel Owning Common Carriers and Household Goods Forwarders",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "488991",
+          "title": "Packing and Crating",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "488999",
+          "title": "All Other Support Activities for Transportation",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "491110",
+          "title": "Postal Service",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "492110",
+          "title": "Couriers and Express Delivery Services",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "492210",
+          "title": "Local Messengers and Local Delivery",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "493110",
+          "title": "General Warehousing and Storage",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "493120",
+          "title": "Refrigerated Warehousing and Storage",
+          "size_standard_millions": 32.0
+        },
+        {
+          "code": "493130",
+          "title": "Farm Product Warehousing and Storage",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "493190",
+          "title": "Other Warehousing and Storage",
+          "size_standard_millions": 32.0
+        },
+        {
+          "code": "511110",
+          "title": "Newspaper Publishers",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "511120",
+          "title": "Periodical Publishers",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "511130",
+          "title": "Book Publishers",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "511140",
+          "title": "Directory and Mailing List Publishers",
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "511191",
+          "title": "Greeting Card Publishers",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "511199",
+          "title": "All Other Publishers",
+          "size_standard_employees": 500
+        },
+        {
+          "code": "511210",
+          "title": "Software Publishers15",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "512110",
+          "title": "Motion Picture and Video Production",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "512120",
+          "title": "Motion Picture and Video Distribution",
+          "size_standard_millions": 34.5
+        },
+        {
+          "code": "512131",
+          "title": "Motion Picture Theaters (except Drive-Ins)",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "512132",
+          "title": "Drive-In Motion Picture Theaters",
+          "size_standard_millions": 11.0
+        },
+        {
+          "code": "512191",
+          "title": "Teleproduction and Other Postproduction Services",
+          "size_standard_millions": 34.5
+        },
+        {
+          "code": "512199",
+          "title": "Other Motion Picture and Video Industries",
+          "size_standard_millions": 25.0
+        },
+        {
+          "code": "512230",
+          "title": "Music Publishers",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "512240",
+          "title": "Sound Recording Studios",
+          "size_standard_millions": 9.5
+        },
+        {
+          "code": "512250",
+          "title": "Record Production and Distribution",
+          "size_standard_employees": 250
+        },
+        {
+          "code": "512290",
+          "title": "Other Sound Recording Industries",
+          "size_standard_millions": 20.0
+        },
+        {
+          "code": "515111",
+          "title": "Radio Networks",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "515112",
+          "title": "Radio Stations",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "515120",
+          "title": "Television Broadcasting",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "515210",
+          "title": "Cable and Other Subscription Programming",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "517311",
+          "title": "Wired Telecommunications Carriers",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "517312",
+          "title": "Wireless Telecommunications Carriers (except Satellite)",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "517410",
+          "title": "Satellite Telecommunications",
+          "size_standard_millions": 38.5
+        },
+        {
+          "code": "517911",
+          "title": "Telecommunications Resellers",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "517919",
+          "title": "All Other Telecommunications",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "518210",
+          "title": "Data Processing, Hosting, and Related Services",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "519110",
+          "title": "News Syndicates",
+          "size_standard_millions": 32.0
+        },
+        {
+          "code": "519120",
+          "title": "Libraries and Archives",
+          "size_standard_millions": 18.5
+        },
+        {
+          "code": "519130",
+          "title": "Internet Publishing and Broadcasting and Web Search Portals",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "519190",
+          "title": "All Other Information Services",
+          "size_standard_millions": 30.0
+        }
+      ]
+    },
+    {
+      "sector_code": "52",
+      "sector_name": "Finance and Insurance",
+      "industries": [
+        {
+          "code": "522110",
+          "title": "Commercial Banking8",
+          "size_standard_type": "assets",
+          "size_standard_millions": 750.0
+        },
+        {
+          "code": "522120",
+          "title": "Savings Institutions8",
+          "size_standard_type": "assets",
+          "size_standard_millions": 750.0
+        },
+        {
+          "code": "522130",
+          "title": "Credit Unions8",
+          "size_standard_type": "assets",
+          "size_standard_millions": 750.0
+        },
+        {
+          "code": "522190",
+          "title": "Other Depository Credit Intermediation8",
+          "size_standard_type": "assets",
+          "size_standard_millions": 750.0
+        },
+        {
+          "code": "522210",
+          "title": "Credit Card Issuing8",
+          "size_standard_type": "assets",
+          "size_standard_millions": 750.0
+        },
+        {
+          "code": "522220",
+          "title": "Sales Financing",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "522291",
+          "title": "Consumer Lending",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "522292",
+          "title": "Real Estate Credit",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "522293",
+          "title": "International Trade Financing",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "522294",
+          "title": "Secondary Market Financing",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "522298",
+          "title": "All Other Nondepository Credit Intermediation",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "522310",
+          "title": "Mortgage and Nonmortgage Loan Brokers",
+          "size_standard_millions": 13.0
+        },
+        {
+          "code": "522320",
+          "title": "Financial Transactions Processing, Reserve, and Clearinghouse Activities",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "522390",
+          "title": "Other Activities Related to Credit Intermediation",
+          "size_standard_millions": 25.0
+        },
+        {
+          "code": "523110",
+          "title": "Investment Banking and Securities Dealing",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "523120",
+          "title": "Securities Brokerage",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "523130",
+          "title": "Commodity Contracts Dealing",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "523140",
+          "title": "Commodity Contracts Brokerage",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "523210",
+          "title": "Securities and Commodity Exchanges",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "523910",
+          "title": "Miscellaneous Intermediation",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "523920",
+          "title": "Portfolio Management",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "523930",
+          "title": "Investment Advice",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "523991",
+          "title": "Trust, Fiduciary and Custody Activities",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "523999",
+          "title": "Miscellaneous Financial Investment Activities",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "524113",
+          "title": "Direct Life Insurance Carriers",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "524114",
+          "title": "Direct Health and Medical Insurance Carriers",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "524126",
+          "title": "Direct Property and Casualty Insurance Carriers",
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "524127",
+          "title": "Direct Title Insurance Carriers",
+          "size_standard_millions": 41.5
+        }
+      ]
+    },
+    {
+      "sector_code": "53",
+      "sector_name": "Real Estate and Rental and Leasing",
+      "industries": [
+        {
+          "code": "524128",
+          "title": "Other Direct Insurance (except Life, Health and Medical) Carriers",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "524130",
+          "title": "Reinsurance Carriers",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "524210",
+          "title": "Insurance Agencies and Brokerages",
+          "size_standard_millions": 13.0
+        },
+        {
+          "code": "524291",
+          "title": "Claims Adjusting",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "524292",
+          "title": "Third Party Administration of Insurance and Pension Funds",
+          "size_standard_millions": 40.0
+        },
+        {
+          "code": "524298",
+          "title": "All Other Insurance Related Activities",
+          "size_standard_millions": 27.0
+        },
+        {
+          "code": "525110",
+          "title": "Pension Funds",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "525120",
+          "title": "Health and Welfare Funds",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "525190",
+          "title": "Other Insurance Funds",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "525910",
+          "title": "Open-End Investment Funds",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "525920",
+          "title": "Trusts, Estates, and Agency Accounts",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "525990",
+          "title": "Other Financial Vehicles",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "531110",
+          "title": "Lessors of Residential Buildings and Dwellings9",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "531120",
+          "title": "Lessors of Nonresidential Buildings (except Miniwarehouses)9",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "531130",
+          "title": "Lessors of Miniwarehouses and Self Storage Units9",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "531190",
+          "title": "Lessors of Other Real Estate Property9",
+          "size_standard_millions": 30.0
+        }
+      ]
+    },
+    {
+      "sector_code": "54",
+      "sector_name": "Professional, Scientific and Technical Services",
+      "industries": [
+        {
+          "code": "531210",
+          "title": "Offices of Real Estate Agents and Brokers10",
+          "size_standard_millions": 13.0
+        },
+        {
+          "code": "531311",
+          "title": "Residential Property Managers",
+          "size_standard_millions": 11.0
+        },
+        {
+          "code": "531312",
+          "title": "Nonresidential Property Managers",
+          "size_standard_millions": 17.0
+        },
+        {
+          "code": "531320",
+          "title": "Offices of Real Estate Appraisers",
+          "size_standard_millions": 8.5
+        },
+        {
+          "code": "531390",
+          "title": "Other Activities Related to Real Estate",
+          "size_standard_millions": 17.0
+        },
+        {
+          "code": "532111",
+          "title": "Passenger Car Rental",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "532112",
+          "title": "Passenger Car Leasing",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "532120",
+          "title": "Truck, Utility Trailer, and RV (Recreational Vehicle) Rental and Leasing",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "532210",
+          "title": "Consumer Electronics and Appliances Rental",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "532281",
+          "title": "Formal Wear and Costume Rental",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "532282",
+          "title": "Video Tape and Disc Rental",
+          "size_standard_millions": 31.0
+        },
+        {
+          "code": "532283",
+          "title": "Home Health Equipment Rental",
+          "size_standard_millions": 36.0
+        },
+        {
+          "code": "532284",
+          "title": "Recreational Goods Rental",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "532289",
+          "title": "All Other Consumer Goods Rental",
+          "size_standard_millions": 11.0
+        },
+        {
+          "code": "532310",
+          "title": "General Rental Centers",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "532411",
+          "title": "Commercial Air, Rail, and Water Transportation Equipment Rental and Leasing",
+          "size_standard_millions": 40.0
+        },
+        {
+          "code": "532412",
+          "title": "Construction, Mining and Forestry Machinery and Equipment Rental and Leasing",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "532420",
+          "title": "Office Machinery and Equipment Rental and Leasing",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "532490",
+          "title": "Other Commercial and Industrial Machinery and Equipment Rental and Leasing",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "533110",
+          "title": "Lessors of Nonfinancial Intangible Assets (except Copyrighted Works)",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "541110",
+          "title": "Offices of Lawyers",
+          "size_standard_millions": 13.5
+        },
+        {
+          "code": "541191",
+          "title": "Title Abstract and Settlement Offices",
+          "size_standard_millions": 17.0
+        },
+        {
+          "code": "541199",
+          "title": "All Other Legal Services",
+          "size_standard_millions": 18.0
+        },
+        {
+          "code": "541211",
+          "title": "Offices of Certified Public Accountants",
+          "size_standard_millions": 23.5
+        },
+        {
+          "code": "541213",
+          "title": "Tax Preparation Services",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "541214",
+          "title": "Payroll Services",
+          "size_standard_millions": 34.5
+        },
+        {
+          "code": "541219",
+          "title": "Other Accounting Services",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "541310",
+          "title": "Architectural Services",
+          "size_standard_millions": 11.0
+        },
+        {
+          "code": "541320",
+          "title": "Landscape Architectural Services",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "541330",
+          "title": "Engineering Services",
+          "size_standard_millions": 22.5
+        },
+        {
+          "code": "541330-E1",
+          "title": "Military and Aerospace Equipment and Military Weapons",
+          "exception": 1,
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "541330-E2",
+          "title": "Contracts and Subcontracts for Engineering Services Awarded Under the National Energy Policy Act of 1992",
+          "exception": 2,
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "541330-E3",
+          "title": "Marine Engineering and Naval Architecture",
+          "exception": 3,
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "541340",
+          "title": "Drafting Services",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "541350",
+          "title": "Building Inspection Services",
+          "size_standard_millions": 10.0
+        },
+        {
+          "code": "541360",
+          "title": "Geophysical Surveying and Mapping Services",
+          "size_standard_millions": 25.0
+        },
+        {
+          "code": "541370",
+          "title": "Surveying and Mapping (except Geophysical) Services",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "541380",
+          "title": "Testing Laboratories",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "541410",
+          "title": "Interior Design Services",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "541420",
+          "title": "Industrial Design Services",
+          "size_standard_millions": 15.0
+        },
+        {
+          "code": "541430",
+          "title": "Graphic Design Services",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "541490",
+          "title": "Other Specialized Design Services",
+          "size_standard_millions": 12.0
+        },
+        {
+          "code": "541511",
+          "title": "Custom Computer Programming Services",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "541512",
+          "title": "Computer Systems Design Services",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "541513",
+          "title": "Computer Facilities Management Services",
+          "size_standard_millions": 32.5
+        },
+        {
+          "code": "541519",
+          "title": "Other Computer Related Services",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "541519",
+          "title": "Information Technology Value Added Resellers18",
+          "size_standard_employees": 150
+        },
+        {
+          "code": "541611",
+          "title": "Administrative Management and General Management Consulting Services",
+          "size_standard_millions": 21.5
+        },
+        {
+          "code": "541612",
+          "title": "Human Resources Consulting Services",
+          "size_standard_millions": 25.5
+        },
+        {
+          "code": "541613",
+          "title": "Marketing Consulting Services",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "541614",
+          "title": "Process, Physical Distribution and Logistics Consulting Services",
+          "size_standard_millions": 17.5
+        },
+        {
+          "code": "541618",
+          "title": "Other Management Consulting Services",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "541620",
+          "title": "Environmental Consulting Services",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "541690",
+          "title": "Other Scientific and Technical Consulting Services",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "541713",
+          "title": "Research and Technology in Nanotechnology11",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "541714",
+          "title": "Research and Technology in Biotechnology (except Nanobiotechnology)11",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "541715",
+          "title": "Research and Development in the Physical, Engineering, and Life Sciences (except Nanotechnology and Biotechnology) 11",
+          "size_standard_employees": 1000
+        },
+        {
+          "code": "541715-E1",
+          "title": "Aircraft, Aircraft Engine and Engine Parts11",
+          "exception": 1,
+          "size_standard_employees": 1500
+        },
+        {
+          "code": "541715-E2",
+          "title": "Other Aircraft Parts and Auxiliary Equipment11",
+          "exception": 2,
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "541715-E3",
+          "title": "Guided Missiles and Space Vehicles, Their Propulsion Units and Propulsion Parts11",
+          "exception": 3,
+          "size_standard_employees": 1250
+        },
+        {
+          "code": "541720",
+          "title": "Research and Development in the Social Sciences and Humanities",
+          "size_standard_millions": 24.5
+        },
+        {
+          "code": "541810",
+          "title": "Advertising Agencies10",
+          "size_standard_millions": 22.5
+        },
+        {
+          "code": "541820",
+          "title": "Public Relations Agencies",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "541830",
+          "title": "Media Buying Agencies",
+          "size_standard_millions": 28.5
+        },
+        {
+          "code": "541840",
+          "title": "Media Representatives",
+          "size_standard_millions": 18.5
+        },
+        {
+          "code": "541850",
+          "title": "Outdoor Advertising",
+          "size_standard_millions": 30.5
+        },
+        {
+          "code": "541860",
+          "title": "Direct Mail Advertising",
+          "size_standard_millions": 19.5
+        },
+        {
+          "code": "541870",
+          "title": "Advertising Material Distribution Services",
+          "size_standard_millions": 25.0
+        },
+        {
+          "code": "541890",
+          "title": "Other Services Related to Advertising",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "541910",
+          "title": "Marketing Research and Public Opinion Polling",
+          "size_standard_millions": 20.0
+        },
+        {
+          "code": "541921",
+          "title": "Photography Studios, Portrait",
+          "size_standard_millions": 14.0
+        },
+        {
+          "code": "541922",
+          "title": "Commercial Photography",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "541930",
+          "title": "Translation and Interpretation Services",
+          "size_standard_millions": 20.0
+        },
+        {
+          "code": "541940",
+          "title": "Veterinary Services",
+          "size_standard_millions": 9.0
+        },
+        {
+          "code": "541990",
+          "title": "All Other Professional, Scientific and Technical Services",
+          "size_standard_millions": 17.0
+        }
+      ]
+    },
+    {
+      "sector_code": "55",
+      "sector_name": "Management of Companies and Enterprises",
+      "industries": [
+        {
+          "code": "551111",
+          "title": "Offices of Bank Holding Companies",
+          "size_standard_millions": 34.0
+        },
+        {
+          "code": "551112",
+          "title": "Offices of Other Holding Companies",
+          "size_standard_millions": 40.0
+        },
+        {
+          "code": "561110",
+          "title": "Office Administrative Services",
+          "size_standard_millions": 11.0
+        },
+        {
+          "code": "561210",
+          "title": "Facilities Support Services12",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "561311",
+          "title": "Employment Placement Agencies",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "561312",
+          "title": "Executive Search Services",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "561320",
+          "title": "Temporary Help Services",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "561330",
+          "title": "Professional Employer Organizations",
+          "size_standard_millions": 36.5
+        },
+        {
+          "code": "561410",
+          "title": "Document Preparation Services",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "561421",
+          "title": "Telephone Answering Services",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "561422",
+          "title": "Telemarketing Bureaus and Other contact Centers",
+          "size_standard_millions": 22.5
+        },
+        {
+          "code": "561431",
+          "title": "Private Mail Centers",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "561439",
+          "title": "Other Business Service Centers (including Copy Shops)",
+          "size_standard_millions": 23.5
+        },
+        {
+          "code": "561440",
+          "title": "Collection Agencies",
+          "size_standard_millions": 17.0
+        },
+        {
+          "code": "561450",
+          "title": "Credit Bureaus",
+          "size_standard_millions": 36.0
+        },
+        {
+          "code": "561491",
+          "title": "Repossession Services",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "561492",
+          "title": "Court Reporting and Stenotype Services",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "561499",
+          "title": "All Other Business Support Services",
+          "size_standard_millions": 19.0
+        },
+        {
+          "code": "561510",
+          "title": "Travel Agencies10",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "561520",
+          "title": "Tour Operators10",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "561591",
+          "title": "Convention and Visitors Bureaus",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "561599",
+          "title": "All Other Travel Arrangement and Reservation Services",
+          "size_standard_millions": 28.5
+        },
+        {
+          "code": "561611",
+          "title": "Investigation Services",
+          "size_standard_millions": 22.0
+        }
+      ]
+    },
+    {
+      "sector_code": "61",
+      "sector_name": "Educational Services",
+      "industries": [
+        {
+          "code": "561612",
+          "title": "Security Guards and Patrol Services",
+          "size_standard_millions": 25.5
+        },
+        {
+          "code": "561613",
+          "title": "Armored Car Services",
+          "size_standard_millions": 38.0
+        },
+        {
+          "code": "561621",
+          "title": "Security Systems Services (except Locksmiths)",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "561622",
+          "title": "Locksmiths",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "561710",
+          "title": "Exterminating and Pest Control Services",
+          "size_standard_millions": 15.5
+        },
+        {
+          "code": "561720",
+          "title": "Janitorial Services",
+          "size_standard_millions": 19.5
+        },
+        {
+          "code": "561730",
+          "title": "Landscaping Services",
+          "size_standard_millions": 8.5
+        },
+        {
+          "code": "561740",
+          "title": "Carpet and Upholstery Cleaning Services",
+          "size_standard_millions": 7.5
+        },
+        {
+          "code": "561790",
+          "title": "Other Services to Buildings and Dwellings",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "561910",
+          "title": "Packaging and Labeling Services",
+          "size_standard_millions": 17.0
+        },
+        {
+          "code": "561920",
+          "title": "Convention and Trade Show Organizers10",
+          "size_standard_millions": 17.5
+        },
+        {
+          "code": "561990",
+          "title": "All Other Support Services",
+          "size_standard_millions": 14.5
+        },
+        {
+          "code": "562111",
+          "title": "Solid Waste Collection",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "562112",
+          "title": "Hazardous Waste Collection",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "562119",
+          "title": "Other Waste Collection",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "562211",
+          "title": "Hazardous Waste Treatment and Disposal",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "562212",
+          "title": "Solid Waste Landfill",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "562213",
+          "title": "Solid Waste Combustors and Incinerators",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "562219",
+          "title": "Other Nonhazardous Waste Treatment and Disposal",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "562910",
+          "title": "Remediation Services",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "562910",
+          "title": "Environmental Remediation Services14",
+          "size_standard_employees": 750
+        },
+        {
+          "code": "562920",
+          "title": "Materials Recovery Facilities",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "562991",
+          "title": "Septic Tank and Related Services",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "562998",
+          "title": "All Other Miscellaneous Waste Management Services",
+          "size_standard_millions": 14.5
+        },
+        {
+          "code": "611110",
+          "title": "Elementary and Secondary Schools",
+          "size_standard_millions": 17.5
+        },
+        {
+          "code": "611210",
+          "title": "Junior Colleges",
+          "size_standard_millions": 28.5
+        }
+      ]
+    },
+    {
+      "sector_code": "62",
+      "sector_name": "Health Care and Social Assistance",
+      "industries": [
+        {
+          "code": "611310",
+          "title": "Colleges, Universities and Professional Schools",
+          "size_standard_millions": 30.5
+        },
+        {
+          "code": "611410",
+          "title": "Business and Secretarial Schools",
+          "size_standard_millions": 18.0
+        },
+        {
+          "code": "611420",
+          "title": "Computer Training",
+          "size_standard_millions": 14.0
+        },
+        {
+          "code": "611430",
+          "title": "Professional and Management Development Training",
+          "size_standard_millions": 13.0
+        },
+        {
+          "code": "611511",
+          "title": "Cosmetology and Barber Schools",
+          "size_standard_millions": 11.5
+        },
+        {
+          "code": "611512",
+          "title": "Flight Training",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "611513",
+          "title": "Apprenticeship Training",
+          "size_standard_millions": 10.0
+        },
+        {
+          "code": "611519",
+          "title": "Other Technical and Trade Schools",
+          "size_standard_millions": 18.5
+        },
+        {
+          "code": "611519",
+          "title": "Job Corps Centers16",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "611610",
+          "title": "Fine Arts Schools",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "611620",
+          "title": "Sports and Recreation Instruction",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "611630",
+          "title": "Language Schools",
+          "size_standard_millions": 18.0
+        },
+        {
+          "code": "611691",
+          "title": "Exam Preparation and Tutoring",
+          "size_standard_millions": 11.0
+        },
+        {
+          "code": "611692",
+          "title": "Automobile Driving Schools",
+          "size_standard_millions": 9.0
+        },
+        {
+          "code": "611699",
+          "title": "All Other Miscellaneous Schools and Instruction",
+          "size_standard_millions": 14.5
+        },
+        {
+          "code": "611710",
+          "title": "Educational Support Services",
+          "size_standard_millions": 21.0
+        },
+        {
+          "code": "621111",
+          "title": "Offices of Physicians (except Mental Health Specialists)",
+          "size_standard_millions": 14.0
+        },
+        {
+          "code": "621112",
+          "title": "Offices of Physicians, Mental Health Specialists",
+          "size_standard_millions": 12.0
+        },
+        {
+          "code": "621210",
+          "title": "Offices of Dentists",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "621310",
+          "title": "Offices of Chiropractors",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "621320",
+          "title": "Offices of Optometrists",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "621330",
+          "title": "Offices of Mental Health Practitioners (except Physicians)",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "621340",
+          "title": "Offices of Physical, Occupational and Speech Therapists and Audiologists",
+          "size_standard_millions": 11.0
+        },
+        {
+          "code": "621391",
+          "title": "Offices of Podiatrists",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "621399",
+          "title": "Offices of All Other Miscellaneous Health Practitioners",
+          "size_standard_millions": 9.0
+        },
+        {
+          "code": "621410",
+          "title": "Family Planning Centers",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "621420",
+          "title": "Outpatient Mental Health and Substance Abuse Centers",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "621491",
+          "title": "HMO Medical Centers",
+          "size_standard_millions": 39.0
+        },
+        {
+          "code": "621492",
+          "title": "Kidney Dialysis Centers",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "621493",
+          "title": "Freestanding Ambulatory Surgical and Emergency Centers",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "621498",
+          "title": "All Other Outpatient Care Centers",
+          "size_standard_millions": 22.5
+        },
+        {
+          "code": "621511",
+          "title": "Medical Laboratories",
+          "size_standard_millions": 36.5
+        },
+        {
+          "code": "621512",
+          "title": "Diagnostic Imaging Centers",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "621610",
+          "title": "Home Health Care Services",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "621910",
+          "title": "Ambulance Services",
+          "size_standard_millions": 20.0
+        },
+        {
+          "code": "621991",
+          "title": "Blood and Organ Banks",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "621999",
+          "title": "All Other Miscellaneous Ambulatory Health Care Services",
+          "size_standard_millions": 18.0
+        },
+        {
+          "code": "622110",
+          "title": "General Medical and Surgical Hospitals",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "622210",
+          "title": "Psychiatric and Substance Abuse Hospitals",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "622310",
+          "title": "Specialty (except Psychiatric and Substance Abuse) Hospitals",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "623110",
+          "title": "Nursing Care Facilities (Skilled Nursing Facilities)",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "623210",
+          "title": "Residential Intellectual and Developmental Disability Facilities",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "623220",
+          "title": "Residential Mental Health and Substance Abuse Facilities",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "623311",
+          "title": "Continuing Care Retirement Communities",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "623312",
+          "title": "Assisted Living Facilities for the Elderly",
+          "size_standard_millions": 20.5
+        },
+        {
+          "code": "623990",
+          "title": "Other Residential Care Facilities",
+          "size_standard_millions": 14.0
+        },
+        {
+          "code": "624110",
+          "title": "Child and Youth Services",
+          "size_standard_millions": 13.5
+        },
+        {
+          "code": "624120",
+          "title": "Services for the Elderly and Persons with Disabilities",
+          "size_standard_millions": 13.0
+        },
+        {
+          "code": "624190",
+          "title": "Other Individual and Family Services",
+          "size_standard_millions": 14.0
+        },
+        {
+          "code": "624210",
+          "title": "Community Food Services",
+          "size_standard_millions": 17.0
+        },
+        {
+          "code": "624221",
+          "title": "Temporary Shelters",
+          "size_standard_millions": 12.0
+        },
+        {
+          "code": "624229",
+          "title": "Other Community Housing Services",
+          "size_standard_millions": 16.5
+        }
+      ]
+    },
+    {
+      "sector_code": "71",
+      "sector_name": "Arts, Entertainment and Recreation",
+      "industries": [
+        {
+          "code": "624230",
+          "title": "Emergency and Other Relief Services",
+          "size_standard_millions": 36.5
+        },
+        {
+          "code": "624310",
+          "title": "Vocational Rehabilitation Services",
+          "size_standard_millions": 13.0
+        },
+        {
+          "code": "624410",
+          "title": "Child Day Care Services",
+          "size_standard_millions": 8.5
+        },
+        {
+          "code": "711110",
+          "title": "Theater Companies and Dinner Theaters",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "711120",
+          "title": "Dance Companies",
+          "size_standard_millions": 16.0
+        },
+        {
+          "code": "711130",
+          "title": "Musical Groups and Artists",
+          "size_standard_millions": 13.0
+        },
+        {
+          "code": "711190",
+          "title": "Other Performing Arts Companies",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "711211",
+          "title": "Sports Teams and Clubs",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "711212",
+          "title": "Race Tracks",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "711219",
+          "title": "Other Spectator Sports",
+          "size_standard_millions": 14.5
+        },
+        {
+          "code": "711310",
+          "title": "Promoters of Performing Arts, Sports and Similar Events with Facilities",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "711320",
+          "title": "Promoters of Performing Arts, Sports and Similar Events without Facilities",
+          "size_standard_millions": 19.5
+        },
+        {
+          "code": "711410",
+          "title": "Agents and Managers for Artists, Athletes, Entertainers and Other Public Figures",
+          "size_standard_millions": 15.5
+        },
+        {
+          "code": "711510",
+          "title": "Independent Artists, Writers, and Performers",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "712110",
+          "title": "Museums",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "712120",
+          "title": "Historical Sites",
+          "size_standard_millions": 11.5
+        },
+        {
+          "code": "712130",
+          "title": "Zoos and Botanical Gardens",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "712190",
+          "title": "Nature Parks and Other Similar Institutions",
+          "size_standard_millions": 17.0
+        },
+        {
+          "code": "713110",
+          "title": "Amusement and Theme Parks",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "713120",
+          "title": "Amusement Arcades",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "713210",
+          "title": "Casinos (except Casino Hotels)",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "713290",
+          "title": "Other Gambling Industries",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "713910",
+          "title": "Golf Courses and Country Clubs",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "713920",
+          "title": "Skiing Facilities",
+          "size_standard_millions": 31.0
+        },
+        {
+          "code": "713930",
+          "title": "Marinas",
+          "size_standard_millions": 9.5
+        },
+        {
+          "code": "713940",
+          "title": "Fitness and Recreational Sports Centers",
+          "size_standard_millions": 15.5
+        }
+      ]
+    },
+    {
+      "sector_code": "72",
+      "sector_name": "Accommodation and Food Services",
+      "industries": [
+        {
+          "code": "713950",
+          "title": "Bowling Centers",
+          "size_standard_millions": 11.0
+        },
+        {
+          "code": "713990",
+          "title": "All Other Amusement and Recreation Industries",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "721110",
+          "title": "Hotels (except Casino Hotels) and Motels",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "721120",
+          "title": "Casino Hotels",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "721191",
+          "title": "Bed-and-Breakfast Inns",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "721199",
+          "title": "All Other Traveler Accommodation",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "721211",
+          "title": "RV (Recreational Vehicle) Parks and Campgrounds",
+          "size_standard_millions": 9.0
+        },
+        {
+          "code": "721214",
+          "title": "Recreational and Vacation Camps (except Campgrounds)",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "721310",
+          "title": "Rooming and Boarding Houses, Dormitories, and Workers’ Camps",
+          "size_standard_millions": 12.5
+        },
+        {
+          "code": "722310",
+          "title": "Food Service Contractors",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "722320",
+          "title": "Caterers",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "722330",
+          "title": "Mobile Food Services",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "722410",
+          "title": "Drinking Places (Alcoholic Beverages)",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "722511",
+          "title": "Full-Service Restaurants",
+          "size_standard_millions": 10.0
+        },
+        {
+          "code": "722513",
+          "title": "Limited-Service Restaurants",
+          "size_standard_millions": 12.0
+        },
+        {
+          "code": "722514",
+          "title": "Cafeterias, Grill Buffets, and Buffets",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "722515",
+          "title": "Snack and Nonalcoholic Beverage Bars",
+          "size_standard_millions": 20.0
+        },
+        {
+          "code": "811111",
+          "title": "General Automotive Repair",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "811112",
+          "title": "Automotive Exhaust System Repair",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "811113",
+          "title": "Automotive Transmission Repair",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "811118",
+          "title": "Other Automotive Mechanical and Electrical Repair and Maintenance",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "811121",
+          "title": "Automotive Body, Paint and Interior Repair and Maintenance",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "811122",
+          "title": "Automotive Glass Replacement Shops",
+          "size_standard_millions": 15.5
+        },
+        {
+          "code": "811191",
+          "title": "Automotive Oil Change and Lubrication Shops",
+          "size_standard_millions": 9.5
+        },
+        {
+          "code": "811192",
+          "title": "Car Washes",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "811198",
+          "title": "All Other Automotive Repair and Maintenance",
+          "size_standard_millions": 9.0
+        },
+        {
+          "code": "811211",
+          "title": "Consumer Electronics Repair and Maintenance",
+          "size_standard_millions": 22.5
+        },
+        {
+          "code": "811212",
+          "title": "Computer and Office Machine Repair and Maintenance",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "811213",
+          "title": "Communication Equipment Repair and Maintenance",
+          "size_standard_millions": 19.5
+        },
+        {
+          "code": "811219",
+          "title": "Other Electronic and Precision Equipment Repair and Maintenance",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "811310",
+          "title": "Commercial and Industrial Machinery and Equipment (except Automotive and Electronic) Repair and Maintenance",
+          "size_standard_millions": 11.0
+        },
+        {
+          "code": "811411",
+          "title": "Home and Garden Equipment Repair and Maintenance",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "811412",
+          "title": "Appliance Repair and Maintenance",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "811420",
+          "title": "Reupholstery and Furniture Repair",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "811430",
+          "title": "Footwear and Leather Goods Repair",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "811490",
+          "title": "Other Personal and Household Goods Repair and Maintenance",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "812111",
+          "title": "Barber Shops",
+          "size_standard_millions": 8.5
+        },
+        {
+          "code": "812112",
+          "title": "Beauty Salons",
+          "size_standard_millions": 8.5
+        },
+        {
+          "code": "812113",
+          "title": "Nail Salons",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "812191",
+          "title": "Diet and Weight Reducing Centers",
+          "size_standard_millions": 24.0
+        },
+        {
+          "code": "812199",
+          "title": "Other Personal Care Services",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "812210",
+          "title": "Funeral Homes and Funeral Services",
+          "size_standard_millions": 11.0
+        },
+        {
+          "code": "812220",
+          "title": "Cemeteries and Crematories",
+          "size_standard_millions": 22.0
+        },
+        {
+          "code": "812310",
+          "title": "Coin-Operated Laundries and Drycleaners",
+          "size_standard_millions": 11.5
+        },
+        {
+          "code": "812320",
+          "title": "Drycleaning and Laundry Services (except Coin-Operated)",
+          "size_standard_millions": 7.0
+        }
+      ]
+    },
+    {
+      "sector_code": "92",
+      "sector_name": "Public Administration17",
+      "industries": [
+        {
+          "code": "812331",
+          "title": "Linen Supply",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "812332",
+          "title": "Industrial Launderers",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "812910",
+          "title": "Pet Care (except Veterinary) Services",
+          "size_standard_millions": 8.0
+        },
+        {
+          "code": "812921",
+          "title": "Photofinishing Laboratories (except One-Hour)",
+          "size_standard_millions": 26.0
+        },
+        {
+          "code": "812922",
+          "title": "One-Hour Photofinishing",
+          "size_standard_millions": 16.5
+        },
+        {
+          "code": "812930",
+          "title": "Parking Lots and Garages",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "812990",
+          "title": "All Other Personal Services",
+          "size_standard_millions": 13.0
+        },
+        {
+          "code": "813110",
+          "title": "Religious Organizations",
+          "size_standard_millions": 11.5
+        },
+        {
+          "code": "813211",
+          "title": "Grantmaking Foundations",
+          "size_standard_millions": 35.0
+        },
+        {
+          "code": "813212",
+          "title": "Voluntary Health Organizations",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "813219",
+          "title": "Other Grantmaking and Giving Services",
+          "size_standard_millions": 41.5
+        },
+        {
+          "code": "813311",
+          "title": "Human Rights Organizations",
+          "size_standard_millions": 30.0
+        },
+        {
+          "code": "813312",
+          "title": "Environment, Conservation and Wildlife Organizations",
+          "size_standard_millions": 17.0
+        },
+        {
+          "code": "813319",
+          "title": "Other Social Advocacy Organizations",
+          "size_standard_millions": 16.0
+        },
+        {
+          "code": "813410",
+          "title": "Civic and Social Organizations",
+          "size_standard_millions": 8.5
+        },
+        {
+          "code": "813910",
+          "title": "Business Associations",
+          "size_standard_millions": 13.5
+        },
+        {
+          "code": "813920",
+          "title": "Professional Organizations",
+          "size_standard_millions": 20.5
+        },
+        {
+          "code": "813930",
+          "title": "Labor Unions and Similar Labor Organizations",
+          "size_standard_millions": 14.5
+        },
+        {
+          "code": "813940",
+          "title": "Political Organizations",
+          "size_standard_millions": 12.5
+        },
+        {
+          "code": "813990",
+          "title": "Other Similar Organizations (except Business, Professional, Labor, and Political Organizations)",
+          "size_standard_millions": 12.0
+        }
+      ]
+    },
+    {
+      "sector_code": "92",
+      "sector_name": "Small business size standards are not established for this sector.",
+      "industries": []
+    }
+  ],
+  "footnotes": [
+    {
+      "number": "2",
+      "text": "NAICS code 237990 – Dredging: To be considered small for purposes of Government\nprocurement, a firm or its similarly situated subcontractors must perform at least 40\npercent of the volume dredged with their own equipment or equipment owned by\nanother small dredging concern."
+    },
+    {
+      "number": "3",
+      "text": "NAICS code 311421 – For purposes of Government procurement for food canning and\npreserving, the standard of 500 employees excludes agricultural labor as defined in\nsection 3306(k) of the Internal Revenue Code, 26 U."
+    },
+    {
+      "number": "4",
+      "text": "NAICS code 324110 – To qualify as small for purposes of Government procurement,\nthe petroleum refiner, including its affiliates, must be a concern that has either no\nmore than 1,500 employees or no more than 200,000 barrels per calendar day total\nOperable Atmospheric Crude Oil Distillation capacity."
+    },
+    {
+      "number": "5",
+      "text": "NAICS code 326211 –For Government procurement, a firm is small for bidding on a\ncontract for pneumatic tires within Census NAICS Product Classification codes\n3262111 and 3262113, provided that:\na."
+    },
+    {
+      "number": "6",
+      "text": "NAICS Subsectors 333, 334, 335 and 336 – For rebuilding machinery or equipment on a\nfactory basis, or equivalent, use the NAICS code for a newly manufactured product."
+    },
+    {
+      "number": "7",
+      "text": "NAICS code 336413 – Contracts for the rebuilding or overhaul of aircraft ground support\nequipment on a contract basis are classified under NAICS code 336413."
+    },
+    {
+      "number": "8",
+      "text": "NAICS codes 522110, 522120, 522130, 522190, and 522210 – A financial institution's\nassets are determined by averaging the assets reported on its four quarterly financial\nstatements for the preceding year."
+    },
+    {
+      "number": "9",
+      "text": "NAICS codes 531110, 531120, 531130, and 531190 – Leasing of building space to the\nFederal Government by Owners: For Government procurement, a size standard of\n$41."
+    },
+    {
+      "number": "10",
+      "text": "NAICS codes 488510 (excluding the exception), 531210, 541810, 561510, 561520 and\n561920 – As measured by total revenues, but excluding funds received in trust for an\nunaffiliated third party, such as bookings or sales subject to commissions."
+    },
+    {
+      "number": "11",
+      "text": "NAICS codes 541713, 541714 and 541715:\na."
+    },
+    {
+      "number": "12",
+      "text": "NAICS code 561210 – Facilities Support Services:\na."
+    },
+    {
+      "number": "13",
+      "text": "NAICS code 238990 – Building and Property Specialty Trade Services: If a procurement\nrequires the use of multiple specialty trade contractors (i."
+    },
+    {
+      "number": "14",
+      "text": "NAICS code 562910 – Environmental Remediation Services:\na."
+    },
+    {
+      "number": "15",
+      "text": "NAICS code 511210 – For purposes of Government procurement, the purchase of\nsoftware subject to potential waiver of the nonmanufacturer rule pursuant to\n§121."
+    },
+    {
+      "number": "16",
+      "text": "NAICS code 611519 – Job Corps Centers."
+    },
+    {
+      "number": "17",
+      "text": "NAICS Sector 92 – Small business size standards are not established for this sector."
+    },
+    {
+      "number": "18",
+      "text": "NAICS code 541519 – An Information Technology Value Added Reseller (ITVAR)\nprovides a total solution to information technology acquisitions by providing multi-\nvendor hardware and software along with significant value added services."
+    }
+  ],
+  "metadata": {
+    "total_sectors": 18,
+    "total_industries": 1037,
+    "extraction_date": "2025-11-20T01:40:10.557828",
+    "size_standard_types": [
+      {
+        "type": "size_standard_millions",
+        "description": "Annual receipts in millions of dollars",
+        "unit": "USD (millions)"
+      },
+      {
+        "type": "size_standard_employees",
+        "description": "Number of employees",
+        "unit": "employees"
+      },
+      {
+        "type": "size_standard_assets",
+        "description": "Total assets in millions of dollars (financial institutions)",
+        "unit": "USD (millions)"
+      }
+    ],
+    "notes": [
+      "Sector 42 and 44-45 codes should not be used for Government supply acquisitions",
+      "Manufacturing NAICS codes should be used for supply acquisitions instead",
+      "Some industries have exceptions with different size standards"
+    ]
+  }
+}

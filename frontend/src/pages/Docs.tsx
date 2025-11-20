@@ -111,8 +111,8 @@ const Docs: React.FC = () => {
   // Filter docs based on search
   const filteredDocs = searchTerm
     ? allFiles.filter(doc =>
-        doc.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        doc.path.toLowerCase().includes(searchTerm.toLowerCase())
+        doc.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        doc.path?.toLowerCase().includes(searchTerm.toLowerCase())
       )
     : [];
 

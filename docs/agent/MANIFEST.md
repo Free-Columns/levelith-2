@@ -7,7 +7,7 @@ category: "architecture"
 tags: ["manifest", "architecture", "ai-agents", "conventions", "project-vision", "development-guide"]
 author: "Semour Media Group"
 date: "2025-01-17"
-lastUpdated: "2025-11-19"
+lastUpdated: "2025-11-20"
 difficulty: "intermediate"
 readingTime: 25
 relatedPages:
@@ -26,14 +26,14 @@ searchKeywords:
 showTOC: true
 showBreadcrumbs: true
 showLastUpdated: true
-version: "2.0"
+version: "2.1"
 ---
 
 # Levelith Project Manifest
 
 > **TL;DR:** Levelith is an AI-first social-resume gamification platform that transforms professional experience tracking into an engaging, interactive experience. Built with test-driven development (80% min coverage), enforced golden rules, NAICS industry classification, and ONETRUTH branding. This manifest provides all context AI agents and developers need to understand project goals, architecture, and conventions.
 
-**Difficulty:** 🟡 Intermediate | **Time:** ⏱️ 25 minutes | **Last Updated:** November 19, 2025
+**Difficulty:** 🟡 Intermediate | **Time:** ⏱️ 25 minutes | **Last Updated:** November 20, 2025
 
 ---
 
@@ -99,11 +99,14 @@ This manifestation file provides **human-curated, broad-scope context** that AI 
 
 #### Deployment
 
-| Component | Value |
-|-----------|-------|
-| **Hosting** | Render.com |
-| **Domain** | levlith.online |
-| **Environment** | Production-ready cloud infrastructure |
+| Component | Status | Value |
+|-----------|--------|-------|
+| **Hosting** | ✅ Live | Render.com |
+| **Domain** | ✅ Live | levelith.online |
+| **Database** | ✅ Live | PostgreSQL on Render |
+| **Backend API** | ✅ Live | FastAPI on Render |
+| **Frontend** | 🚧 Static | Deployed to Render |
+| **Environment** | 🚧 Partial | Production infrastructure active |
 
 #### Platforms
 
@@ -118,9 +121,16 @@ This manifestation file provides **human-curated, broad-scope context** that AI 
 
 ### Primary Goals
 
+**Immediate Focus (Phase 0-2):**
+1. **Enable user input capabilities** - Fix admin dashboard CRUD, enable user registration
+2. **Replace traditional resumes** - Create compelling digital career showcase platform
+3. **Profile creation and management** - Allow users to build and display professional profiles
+4. **Experience tracking foundation** - Support all 9 experience types with NAICS classification
+
+**Long-Term Vision:**
 1. **Create engaging user experience** - Gamify professional development and experience tracking
-2. **Enable social professional networking** - Connect users based on experiences and skills
-3. **Maintain high quality** - Never sacrifice quality for speed
+2. **Enable social professional networking** - Connect users based on experiences and skills (guilds, parties, assets)
+3. **Maintain high quality** - Never sacrifice quality for speed (80% test coverage, Golden Rules)
 4. **Enable scalability** - Support growing user base and feature set
 5. **Demonstrate AI-first development** - Show effective AI-human collaboration
 6. **Foster professional growth** - Help users track and showcase their journey
@@ -909,34 +919,75 @@ pytest
 
 ## Project Status & Roadmap
 
-### Current Phase: Foundation (v1.0)
+### Current Phase: Foundation & Critical Fixes (Phase 1/2)
 
-#### Completed
+:::warning
+**Current Status:** In Phase 1/2 of development roadmap. No progress yet on Phase 1 critical tasks (service layer tests, JWT authentication, model standardization). Admin dashboard CRUD is non-functional and blocking all user input capabilities.
+:::
+
+#### Completed ✅
 - ✅ AI agent navigation system
 - ✅ Golden rules framework
 - ✅ Test system with enforcement
 - ✅ CI/CD pipelines
 - ✅ Documentation structure
+- ✅ Production infrastructure deployed (Render + PostgreSQL)
+- ✅ Backend API deployed to levelith.online
+- ✅ NAICS 2022 database integration
 
-#### In Progress
-- 🚧 Backend API implementation
-- 🚧 Frontend application
-- 🚧 Database integration
-- 🚧 User authentication
+#### In Progress 🚧
+- 🚧 **PRIORITY 0:** Fix Admin Dashboard CRUD operations (CRITICAL - blocks all user input)
+- 🚧 **PRIORITY 1.1:** Add service layer tests (target 80% coverage)
+- 🚧 **PRIORITY 1.2:** Refactor API to use service layer properly
+- 🚧 **PRIORITY 1.3:** Complete JWT authentication implementation
+- 🚧 **PRIORITY 1.4:** Standardize model usage (remove domain model duplication)
+- 🚧 Backend API endpoint verification (unknown if CRUD works via direct API calls)
 
-#### Planned
-- 📋 Full feature implementation
-- 📋 Production deployment
+#### Immediate Priorities (Next 2-4 Weeks)
+
+**Phase 0: Admin Dashboard Fix (CRITICAL)**
+1. Fix admin routing (/admin/users not /users)
+2. Remove local mock data
+3. Connect CRUD operations to live backend API
+4. Fix blank white page redirects
+5. Implement user seeding in UI
+
+**Phase 1: User Input Enablement (CRITICAL)**
+1. Admin dashboard user creation working
+2. Public user registration page
+3. Authentication flow (login/logout)
+4. Basic user profile creation
+
+**Phase 2: Profile Management**
+1. View user profiles (public and own)
+2. Add/edit experiences (all 9 types)
+3. NAICS classification integration
+4. Profile showcase page
+
+#### Planned (Medium-Term: 1-3 Months)
+- 📋 Experience timeline visualization
+- 📋 Search and browse functionality
+- 📋 Gamification UI (points, levels, achievements)
 - 📋 Performance optimization
-- 📋 User documentation
+- 📋 Mobile-responsive design
+- 📋 E2E testing suite
 
-### Future Enhancements
+### Future Enhancements (Long-Term Vision)
 
+**Social & Collaboration Features**
+- User "Guilds" - groups emulating fiscal entities
+- Asset valuations and tracking
+- "Parties" - grouped experience objects
+- Social networking and connections
+- Profile sharing and discovery
+
+**Technical Improvements**
 - Multi-language support (JavaScript, Go, Rust)
 - Advanced AI agent capabilities
 - Real-time collaboration features
-- Performance monitoring
+- Performance monitoring and analytics
 - Automated refactoring suggestions
+- Mobile app (React Native)
 
 ---
 
@@ -1028,7 +1079,7 @@ You are a valuable team member. Follow the golden rules, maintain quality standa
 
 ---
 
-**Last Updated:** November 19, 2025 | **Version:** 2.0 | **Maintained By:** Semour Media Group
+**Last Updated:** November 20, 2025 | **Version:** 2.1 | **Maintained By:** Semour Media Group
 
 ---
 

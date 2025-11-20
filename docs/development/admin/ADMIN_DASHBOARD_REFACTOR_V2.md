@@ -50,17 +50,17 @@ Complete rebuild of admin dashboard (`frontend/src/admin/`) using modern 2025 be
 2. [ ] Configure TypeScript (`tsconfig.json`)
 3. [ ] Set up Tailwind CSS
 4. [ ] Install shadcn/ui CLI and components
-5. [] Configure React Query client
-6. [] Set up Vite for `/admin` base path
-7. [] Create new feature-based folder structure
-8. [] Set up path aliases in `tsconfig.json`
-9. [] Configure ESLint for TypeScript
-10. [] Set up Prettier with Tailwind plugin
-11. [] Create type definition files for backend API
-12. [] Set up Zod schemas for all entities
-13. [] Create utility functions (cn, formatters, etc.)
-14. [] Configure build for production deployment
-15. [] Create migration checklist tracking system
+5. [  ] Configure React Query client
+6. [  ] Set up Vite for `/admin` base path
+7. [  ] Create new feature-based folder structure
+8. [  ] Set up path aliases in `tsconfig.json`
+9. [  ] Configure ESLint for TypeScript
+10. [  ] Set up Prettier with Tailwind plugin
+11. [  ] Create type definition files for backend API
+12. [  ] Set up Zod schemas for all entities
+13. [  ] Create utility functions (cn, formatters, etc.)
+14. [  ] Configure build for production deployment
+15. [  ] Create migration checklist tracking system
 
 **Dependencies to Install:**
 ```json
@@ -92,26 +92,26 @@ Complete rebuild of admin dashboard (`frontend/src/admin/`) using modern 2025 be
 **Goal:** Build reusable foundation (API client, React Query setup, base components)
 
 #### Tasks (20 total)
-1. [] Create TypeScript API client (`lib/api.ts`)
-2. [] Set up React Query with providers
-3. [] Install shadcn/ui base components (button, input, dialog, table, etc.)
-4. [] Create custom DataTable wrapper for TanStack Table
-5. [] Build SearchBar component
-6. [] Build FilterPanel component
-7. [] Build Pagination component
-8. [] Build LoadingSpinner component
-9. [] Build ErrorBoundary component
-10. [] Create toast notification system
-11. [] Build ConfirmDialog component
-12. [] Create utility hooks (useDebounce, usePagination)
-13. [] Create formatters (date, currency, etc.)
-14. [] Create validators
-15. [] Set up error handling utilities
-16. [] Create constants file (enums, config)
-17. [] Build AuthProvider (if needed)
-18. [] Create route guards
-19. [] Set up layout components
-20. [] Test all base components
+1. [  ] Create TypeScript API client (`lib/api.ts`)
+2. [  ] Set up React Query with providers
+3. [  ] Install shadcn/ui base components (button, input, dialog, table, etc.)
+4. [  ] Create custom DataTable wrapper for TanStack Table
+5. [  ] Build SearchBar component
+6. [  ] Build FilterPanel component
+7. [  ] Build Pagination component
+8. [  ] Build LoadingSpinner component
+9. [  ] Build ErrorBoundary component
+10. [  ] Create toast notification system
+11. [  ] Build ConfirmDialog component
+12. [  ] Create utility hooks (useDebounce, usePagination)
+13. [  ] Create formatters (date, currency, etc.)
+14. [  ] Create validators
+15. [  ] Set up error handling utilities
+16. [  ] Create constants file (enums, config)
+17. [  ] Build AuthProvider (if needed)
+18. [  ] Create route guards
+19. [  ] Set up layout components
+20. [  ] Test all base components
 
 ---
 
@@ -119,31 +119,31 @@ Complete rebuild of admin dashboard (`frontend/src/admin/`) using modern 2025 be
 **Goal:** Complete CRUD for users with search/filter/pagination
 
 #### Tasks (25 total)
-1. [] Create user types (`features/users/types/user.types.ts`)
-2. [] Create user Zod schemas (`features/users/schemas/user.schema.ts`)
-3. [] Build user API queries (`features/users/api/users.queries.ts`)
-4. [] Build user API mutations (`features/users/api/users.mutations.ts`)
-5. [] Create useUsers custom hook
-6. [] Build UsersTable component with TanStack Table
-7. [] Add search functionality to UsersTable
-8. [] Add filter dropdowns (active/inactive/verified)
-9. [] Add pagination to UsersTable
-10. [] Add sorting to UsersTable
-11. [] Build UserForm component (create/edit)
-12. [] Add form validation with Zod + React Hook Form
-13. [] Build CreateUserDialog
-14. [] Build EditUserDialog
-15. [] Build DeleteUserDialog with confirmation
-16. [] Add loading states to all operations
-17. [] Add error handling with toast notifications
-18. [] Add optimistic updates for mutations
-19. [] Build UserStats widget (active/inactive counts)
-20. [] Add user avatar display
-21. [] Add user status badges
-22. [] Add action dropdown menu per row
-23. [] Test create user flow
-24. [] Test edit user flow
-25. [] Test delete user flow
+1. [  ] Create user types (`features/users/types/user.types.ts`)
+2. [  ] Create user Zod schemas (`features/users/schemas/user.schema.ts`)
+3. [  ] Build user API queries (`features/users/api/users.queries.ts`)
+4. [  ] Build user API mutations (`features/users/api/users.mutations.ts`)
+5. [  ] Create useUsers custom hook
+6. [  ] Build UsersTable component with TanStack Table
+7. [  ] Add search functionality to UsersTable
+8. [  ] Add filter dropdowns (active/inactive/verified)
+9. [  ] Add pagination to UsersTable
+10. [  ] Add sorting to UsersTable
+11. [  ] Build UserForm component (create/edit)
+12. [  ] Add form validation with Zod + React Hook Form
+13. [  ] Build CreateUserDialog
+14. [  ] Build EditUserDialog
+15. [  ] Build DeleteUserDialog with confirmation
+16. [  ] Add loading states to all operations
+17. [  ] Add error handling with toast notifications
+18. [  ] Add optimistic updates for mutations
+19. [  ] Build UserStats widget (active/inactive counts)
+20. [  ] Add user avatar display
+21. [  ] Add user status badges
+22. [  ] Add action dropdown menu per row
+23. [  ] Test create user flow
+24. [  ] Test edit user flow
+25. [  ] Test delete user flow
 
 ---
 
@@ -151,36 +151,36 @@ Complete rebuild of admin dashboard (`frontend/src/admin/`) using modern 2025 be
 **Goal:** Complete CRUD for all 9 experience types with advanced filtering
 
 #### Tasks (30 total)
-1. [] Create experience types for all 9 variants
-2. [] Create experience Zod schemas (polymorphic)
-3. [] Build experience API queries
-4. [] Build experience API mutations
-5. [] Create useExperiences custom hook
-6. [] Build ExperiencesTable component
-7. [] Add category filter (Education/Workplace/Skills)
-8. [] Add type filter (9 specific types)
-9. [] Add NAICS code filter
-10. [] Add date range filter
-11. [] Add search by title/description
-12. [] Add pagination
-13. [] Add sorting by multiple columns
-14. [] Build ExperienceForm component
-15. [] Implement dynamic form fields based on type
-16. [] Add certificate-specific fields
-17. [] Add degree-specific fields
-18. [] Add course-specific fields
-19. [] Add gig-specific fields
-20. [] Add part-time-specific fields
-21. [] Add full-time-specific fields
-22. [] Add soft-skill-specific fields
-23. [] Add hard-skill-specific fields
-24. [] Add native-skill-specific fields
-25. [] Integrate NAICS code selector
-26. [] Add skills-gained multi-select
-27. [] Build CreateExperienceDialog
-28. [] Build EditExperienceDialog
-29. [] Build DeleteExperienceDialog
-30. [] Test all 9 experience type flows
+1. [  ] Create experience types for all 9 variants
+2. [  ] Create experience Zod schemas (polymorphic)
+3. [  ] Build experience API queries
+4. [  ] Build experience API mutations
+5. [  ] Create useExperiences custom hook
+6. [  ] Build ExperiencesTable component
+7. [  ] Add category filter (Education/Workplace/Skills)
+8. [  ] Add type filter (9 specific types)
+9. [  ] Add NAICS code filter
+10. [  ] Add date range filter
+11. [  ] Add search by title/description
+12. [  ] Add pagination
+13. [  ] Add sorting by multiple columns
+14. [  ] Build ExperienceForm component
+15. [  ] Implement dynamic form fields based on type
+16. [  ] Add certificate-specific fields
+17. [  ] Add degree-specific fields
+18. [  ] Add course-specific fields
+19. [  ] Add gig-specific fields
+20. [  ] Add part-time-specific fields
+21. [  ] Add full-time-specific fields
+22. [  ] Add soft-skill-specific fields
+23. [  ] Add hard-skill-specific fields
+24. [  ] Add native-skill-specific fields
+25. [  ] Integrate NAICS code selector
+26. [  ] Add skills-gained multi-select
+27. [  ] Build CreateExperienceDialog
+28. [  ] Build EditExperienceDialog
+29. [  ] Build DeleteExperienceDialog
+30. [  ] Test all 9 experience type flows
 
 ---
 
@@ -188,26 +188,26 @@ Complete rebuild of admin dashboard (`frontend/src/admin/`) using modern 2025 be
 **Goal:** NAICS browsing with tag/category editing
 
 #### Tasks (20 total)
-1. [] Create NAICS types
-2. [] Create NAICS Zod schemas
-3. [] Build NAICS API queries (paginated)
-4. [] Build NAICS API mutations (update tags/category)
-5. [] Create useNAICS custom hook
-6. [] Build NAICSTable component
-7. [] Add server-side search
-8. [] Add category filter
-9. [] Add level filter (2/3/4/6 digit)
-10. [] Add pagination (50 per page)
-11. [] Display tags column
-12. [] Build NAICSEditDialog
-13. [] Add TagInput component for tags
-14. [] Add custom category input
-15. [] Add admin notes textarea
-16. [] Add save functionality
-17. [] Build DeleteNAICSDialog with warning
-18. [] Add NAICS code badge styling
-19. [] Add industry color coding
-20. [] Test NAICS edit/delete flows
+1. [  ] Create NAICS types
+2. [  ] Create NAICS Zod schemas
+3. [  ] Build NAICS API queries (paginated)
+4. [  ] Build NAICS API mutations (update tags/category)
+5. [  ] Create useNAICS custom hook
+6. [  ] Build NAICSTable component
+7. [  ] Add server-side search
+8. [  ] Add category filter
+9. [  ] Add level filter (2/3/4/6 digit)
+10. [  ] Add pagination (50 per page)
+11. [  ] Display tags column
+12. [  ] Build NAICSEditDialog
+13. [  ] Add TagInput component for tags
+14. [  ] Add custom category input
+15. [  ] Add admin notes textarea
+16. [  ] Add save functionality
+17. [  ] Build DeleteNAICSDialog with warning
+18. [  ] Add NAICS code badge styling
+19. [  ] Add industry color coding
+20. [  ] Test NAICS edit/delete flows
 
 ---
 
@@ -215,21 +215,21 @@ Complete rebuild of admin dashboard (`frontend/src/admin/`) using modern 2025 be
 **Goal:** Overview dashboard with statistics and charts
 
 #### Tasks (15 total)
-1. [] Create dashboard types
-2. [] Build stats API queries
-3. [] Create useDashboard hook
-4. [] Build StatsCard component
-5. [] Display total users stat
-6. [] Display active users stat
-7. [] Display total experiences stat
-8. [] Build user growth chart (recharts)
-9. [] Build experience distribution chart
-10. [] Build NAICS industry chart
-11. [] Build recent activity feed
-12. [] Add quick action buttons
-13. [] Add refresh functionality
-14. [] Add loading states
-15. [] Add empty states
+1. [  ] Create dashboard types
+2. [  ] Build stats API queries
+3. [  ] Create useDashboard hook
+4. [  ] Build StatsCard component
+5. [  ] Display total users stat
+6. [  ] Display active users stat
+7. [  ] Display total experiences stat
+8. [  ] Build user growth chart (recharts)
+9. [  ] Build experience distribution chart
+10. [  ] Build NAICS industry chart
+11. [  ] Build recent activity feed
+12. [  ] Add quick action buttons
+13. [  ] Add refresh functionality
+14. [  ] Add loading states
+15. [  ] Add empty states
 
 ---
 
@@ -237,16 +237,16 @@ Complete rebuild of admin dashboard (`frontend/src/admin/`) using modern 2025 be
 **Goal:** Settings page with database seeding
 
 #### Tasks (10 total)
-1. [] Build Settings page layout
-2. [] Add seed database form
-3. [] Add user count input (default 50)
-4. [] Add seed button with loading state
-5. [] Add seed API mutation
-6. [] Display seed statistics after completion
-7. [] Add environment info display
-8. [] Add API base URL display
-9. [] Add clear cache button (React Query)
-10. [] Add about/version info
+1. [  ] Build Settings page layout
+2. [  ] Add seed database form
+3. [  ] Add user count input (default 50)
+4. [  ] Add seed button with loading state
+5. [  ] Add seed API mutation
+6. [  ] Display seed statistics after completion
+7. [  ] Add environment info display
+8. [  ] Add API base URL display
+9. [  ] Add clear cache button (React Query)
+10. [  ] Add about/version info
 
 ---
 
@@ -254,18 +254,18 @@ Complete rebuild of admin dashboard (`frontend/src/admin/`) using modern 2025 be
 **Goal:** Fix routing with `/admin` prefix, proper layouts
 
 #### Tasks (12 total)
-1. [] Update App.tsx with `/admin` base route
-2. [] Update all navigation links to include `/admin`
-3. [] Create AdminLayout with sidebar
-4. [] Add navigation menu
-5. [] Add breadcrumbs
-6. [] Add user menu in header
-7. [] Add logout functionality
-8. [] Create login page (if needed)
-9. [] Add route guards for authentication
-10. [] Add 404 page
-11. [] Configure Vite base path
-12. [] Test all routes
+1. [  ] Update App.tsx with `/admin` base route
+2. [  ] Update all navigation links to include `/admin`
+3. [  ] Create AdminLayout with sidebar
+4. [  ] Add navigation menu
+5. [  ] Add breadcrumbs
+6. [  ] Add user menu in header
+7. [  ] Add logout functionality
+8. [  ] Create login page (if needed)
+9. [  ] Add route guards for authentication
+10. [  ] Add 404 page
+11. [  ] Configure Vite base path
+12. [  ] Test all routes
 
 ---
 
@@ -273,24 +273,24 @@ Complete rebuild of admin dashboard (`frontend/src/admin/`) using modern 2025 be
 **Goal:** Error handling, loading states, responsive design, deployment
 
 #### Tasks (18 total)
-1. [] Add comprehensive error boundaries
-2. [] Add loading skeletons for all tables
-3. [] Add empty states for all lists
-4. [] Test responsive design on mobile
-5. [] Test responsive design on tablet
-6. [] Add keyboard shortcuts
-7. [] Add accessibility labels
-8. [] Test screen reader compatibility
-9. [] Add rate limiting UI feedback
-10. [] Add offline detection
-11. [] Configure production build
-12. [] Optimize bundle size
-13. [] Add source maps
-14. [] Configure deployment to admin.levelith.online
-15. [] Test production build locally
-16. [] Deploy to staging
-17. [] Smoke test on staging
-18. [] Deploy to production
+1. [  ] Add comprehensive error boundaries
+2. [  ] Add loading skeletons for all tables
+3. [  ] Add empty states for all lists
+4. [  ] Test responsive design on mobile
+5. [  ] Test responsive design on tablet
+6. [  ] Add keyboard shortcuts
+7. [  ] Add accessibility labels
+8. [  ] Test screen reader compatibility
+9. [  ] Add rate limiting UI feedback
+10. [  ] Add offline detection
+11. [  ] Configure production build
+12. [  ] Optimize bundle size
+13. [  ] Add source maps
+14. [  ] Configure deployment to admin.levelith.online
+15. [  ] Test production build locally
+16. [  ] Deploy to staging
+17. [  ] Smoke test on staging
+18. [  ] Deploy to production
 
 ---
 
@@ -540,28 +540,28 @@ All inline TODOs follow this format:
 ## 🎯 Success Criteria
 
 ### Definition of Done - Each Phase
-- [] All tasks completed
-- [] TypeScript compilation successful (0 errors)
-- [] ESLint passes (0 errors, minimal warnings)
-- [] Components render without errors
-- [] API integration tested
-- [] Loading states functional
-- [] Error handling tested
-- [] Responsive design verified
-- [] Documentation updated
+- [  ] All tasks completed
+- [  ] TypeScript compilation successful (0 errors)
+- [  ] ESLint passes (0 errors, minimal warnings)
+- [  ] Components render without errors
+- [  ] API integration tested
+- [  ] Loading states functional
+- [  ] Error handling tested
+- [  ] Responsive design verified
+- [  ] Documentation updated
 
 ### Definition of Done - Complete Project
-- [] All 8 phases completed
-- [] All mock data removed
-- [] Full TypeScript coverage
-- [] All CRUD operations functional
-- [] Search/filtering on all tables
-- [] NAICS tag/category editing working
-- [] Seed database form functional
-- [] Production build successful
-- [] Deployed to admin.levelith.online
-- [] Smoke tests passing
-- [] Documentation complete
+- [  ] All 8 phases completed
+- [  ] All mock data removed
+- [  ] Full TypeScript coverage
+- [  ] All CRUD operations functional
+- [  ] Search/filtering on all tables
+- [  ] NAICS tag/category editing working
+- [  ] Seed database form functional
+- [  ] Production build successful
+- [  ] Deployed to admin.levelith.online
+- [  ] Smoke tests passing
+- [  ] Documentation complete
 
 ---
 

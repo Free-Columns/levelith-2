@@ -18,7 +18,7 @@ import Button from "../components/forms/Button";
 import ONETRUTH, { getStatusColor } from "../config/theme";
 
 export default function Users() {
-  const { getUsers, createUser, updateUser, deleteUser } = useDataSource();
+  const { getUsers, createUser, updateUser, deleteUser, seedUsers } = useDataSource();
 
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -30,6 +30,10 @@ export default function Users() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+
+  // Seed states
+  const [seeding, setSeeding] = useState(false);
+  const [seedMessage, setSeedMessage] = useState(null);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -188,6 +192,37 @@ export default function Users() {
     setShowDeleteModal(true);
   };
 
+  // Seed database handler
+  const handleSeedDatabase = async () => {
+    if (!window.confirm("Seed database with 50 new users? This will ADD new users to the existing ones.")) {
+      return;
+    }
+
+    setSeeding(true);
+    setSeedMessage(null);
+
+    try {
+      const result = await seedUsers(50);
+      setSeedMessage({
+        type: "success",
+        text: result.message,
+        stats: result.statistics
+      });
+      // Reload users to show the new data
+      loadUsers();
+    } catch (error) {
+      console.error("Error seeding database:", error);
+      setSeedMessage({
+        type: "error",
+        text: error.response?.data?.detail || "Failed to seed database"
+      });
+    } finally {
+      setSeeding(false);
+      // Clear message after 5 seconds
+      setTimeout(() => setSeedMessage(null), 5000);
+    }
+  };
+
   // Statistics
   const stats = {
     total: users.length,
@@ -269,19 +304,43 @@ export default function Users() {
             ))}
           </div>
 
-          <Button
-            variant="primary"
-            onClick={() => setShowCreateModal(true)}
-            icon={
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+          <div className="flex gap-2">
+            <Button
+              variant="secondary"
+              onClick={handleSeedDatabase}
+              disabled={seeding}
+              icon={
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
+                </svg>
+              }
+            >
+              {seeding ? "Seeding..." : "Seed Database (50)"}
+            </Button>
+
+            <Button
+              variant="primary"
+              onClick={() => setShowCreateModal(true)}
+              icon={
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   strokeWidth={2}
                   d="M12 4v16m8-8H4"
                 />
@@ -290,8 +349,41 @@ export default function Users() {
           >
             Create User
           </Button>
+          </div>
         </div>
       </div>
+
+      {/* Seed Message */}
+      {seedMessage && (
+        <div
+          className="p-4 rounded-lg shadow"
+          style={{
+            backgroundColor: seedMessage.type === "success"
+              ? ONETRUTH.colors.success + "20"
+              : ONETRUTH.colors.error + "20",
+            borderLeft: `4px solid ${seedMessage.type === "success"
+              ? ONETRUTH.colors.success
+              : ONETRUTH.colors.error}`,
+          }}
+        >
+          <p
+            className="font-medium"
+            style={{
+              color: seedMessage.type === "success"
+                ? ONETRUTH.colors.success
+                : ONETRUTH.colors.error,
+            }}
+          >
+            {seedMessage.text}
+          </p>
+          {seedMessage.stats && (
+            <p className="text-sm mt-2" style={{ color: ONETRUTH.colors.text }}>
+              Users: {seedMessage.stats.users_created} | Experiences: {seedMessage.stats.experiences_created} |
+              Avg: {seedMessage.stats.average_experiences_per_user} per user
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Users Table */}
       <div

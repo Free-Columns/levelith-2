@@ -315,27 +315,27 @@ const Docs: React.FC = () => {
     }
 
     .markdown-content a {
-      color: ${ONETRUTH.colors.primary};
+      color: ${ONETRUTH.colors.linkText};
       text-decoration: underline;
       transition: color ${ONETRUTH.transitions.fast};
     }
 
     .markdown-content a:hover {
-      color: ${ONETRUTH.colors.primaryDark};
+      color: ${ONETRUTH.colors.linkHover};
     }
 
     .markdown-content code {
-      background-color: #0f151b;
+      background-color: ${ONETRUTH.colors.codeBackground};
       padding: 2px 6px;
       border-radius: ${ONETRUTH.borderRadius.sm};
       font-family: ${ONETRUTH.fonts.monospace};
       font-size: ${ONETRUTH.fonts.sizes.sm};
-      color: #ffd500;
+      color: ${ONETRUTH.colors.codeText};
     }
 
     .markdown-content pre {
-      background-color: ${ONETRUTH.colors.surfaceDark};
-      color: ${ONETRUTH.colors.textInverse};
+      background-color: ${ONETRUTH.colors.codeBlockBackground};
+      color: ${ONETRUTH.colors.codeBlockText};
       padding: ${ONETRUTH.spacing.lg};
       border-radius: ${ONETRUTH.borderRadius.md};
       overflow-x: auto;
@@ -393,12 +393,15 @@ const Docs: React.FC = () => {
     }
 
     .markdown-content blockquote {
-      border-left: 4px solid ${ONETRUTH.colors.primary};
+      border-left: 4px solid ${ONETRUTH.colors.blockquoteBorder};
       padding-left: ${ONETRUTH.spacing.lg};
       margin-left: 0;
       margin-bottom: ${ONETRUTH.spacing.md};
-      color: ${ONETRUTH.colors.textLight};
+      color: ${ONETRUTH.colors.blockquoteText};
       font-style: italic;
+      background-color: ${ONETRUTH.colors.blockquoteBackground};
+      padding: ${ONETRUTH.spacing.md} ${ONETRUTH.spacing.lg};
+      border-radius: ${ONETRUTH.borderRadius.sm};
     }
 
     .markdown-content table {
@@ -410,7 +413,7 @@ const Docs: React.FC = () => {
     }
 
     .markdown-content thead {
-      background-color: ${ONETRUTH.colors.backgroundDark};
+      background-color: ${ONETRUTH.colors.tableHeaderBackground};
     }
 
     .markdown-content th {
@@ -418,7 +421,7 @@ const Docs: React.FC = () => {
       text-align: left;
       font-weight: ${ONETRUTH.fonts.weights.semibold};
       border: 1px solid ${ONETRUTH.colors.border};
-      color: #ffd500;
+      color: ${ONETRUTH.colors.tableHeaderText};
     }
 
     .markdown-content td {
@@ -427,7 +430,7 @@ const Docs: React.FC = () => {
     }
 
     .markdown-content tr:nth-child(even) {
-      background-color: ${ONETRUTH.colors.backgroundLight};
+      background-color: ${ONETRUTH.colors.tableRowEven};
     }
 
     .markdown-content hr {
@@ -566,11 +569,23 @@ const Docs: React.FC = () => {
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw, rehypeHighlight]}
                 components={{
-                  a: ({ node, children, ...props }) => {
-                    // Remove .md extension from link text if it exists
+                  a: ({ node, children, href, ...props }) => {
+                    // Remove .md extension from both link text and href
                     const linkText = typeof children[0] === 'string' ? children[0] : '';
                     const cleanedText = linkText.endsWith('.md') ? linkText.slice(0, -3) : linkText;
-                    return <a {...props}>{cleanedText || children}</a>;
+
+                    // Clean the href - remove .md extension and convert to proper /docs/ URL
+                    let cleanedHref = href;
+                    if (href && !href.startsWith('http') && !href.startsWith('#')) {
+                      // Internal doc link
+                      cleanedHref = href.endsWith('.md') ? href.slice(0, -3) : href;
+                      // If it doesn't start with /, make it relative to /docs/
+                      if (!cleanedHref.startsWith('/')) {
+                        cleanedHref = `/docs/${cleanedHref}`;
+                      }
+                    }
+
+                    return <a {...props} href={cleanedHref}>{cleanedText || children}</a>;
                   },
                 }}
               >

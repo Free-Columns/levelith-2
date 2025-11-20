@@ -214,6 +214,16 @@ class APIService {
     return response.data;
   }
 
+  /**
+   * Seed database with mock users
+   * @param {number} userCount - Number of users to create (default: 50)
+   * @returns {Promise<Object>} Seed statistics
+   */
+  async seedUsers(userCount = 50) {
+    const response = await apiClient.post(`/users/seed?user_count=${userCount}`);
+    return response.data;
+  }
+
   // ==================== EXPERIENCES ====================
 
   /**

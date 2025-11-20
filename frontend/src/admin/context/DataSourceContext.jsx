@@ -334,6 +334,33 @@ export const DataSourceProvider = ({ children }) => {
     }
   }, [dataSource]);
 
+  // ==================== SEED DATABASE ====================
+
+  const seedUsers = useCallback(
+    async (userCount = 50) => {
+      if (dataSource === DATA_SOURCES.LOCAL) {
+        // For local data source, generate mock users
+        const newUsers = generateMockUsers(userCount);
+        const newExperiences = generateMockExperiences(userCount);
+        setLocalUsers((prev) => [...prev, ...newUsers]);
+        setLocalExperiences((prev) => [...prev, ...newExperiences]);
+        return {
+          success: true,
+          message: `Successfully seeded ${userCount} users locally`,
+          statistics: {
+            users_created: userCount,
+            experiences_created: newExperiences.length,
+            average_experiences_per_user: (newExperiences.length / userCount).toFixed(1)
+          }
+        };
+      } else {
+        // Server API call
+        return await apiService.seedUsers(userCount);
+      }
+    },
+    [dataSource]
+  );
+
   const value = {
     // Data source
     dataSource,
@@ -345,6 +372,7 @@ export const DataSourceProvider = ({ children }) => {
     createUser,
     updateUser,
     deleteUser,
+    seedUsers,
 
     // Experience operations
     getExperiences,

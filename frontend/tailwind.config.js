@@ -7,15 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        // ONETRUTH color palette
+        // ONETRUTH color palette - Synced with frontend/src/config/ONETRUTH.ts
         primary: {
-          DEFAULT: '#3498db',
+          DEFAULT: '#007EA7',
           dark: '#2980b9',
           light: '#5dade2',
         },
         secondary: {
-          DEFAULT: '#2ecc71',
-          dark: '#27ae60',
+          DEFAULT: '#088732',
+          dark: '#0b752eff',
           light: '#58d68d',
         },
         accent: {
@@ -24,23 +24,64 @@ export default {
           light: '#ec7063',
         },
         background: {
-          DEFAULT: '#ecf0f1',
-          dark: '#34495e',
-          light: '#ffffff',
+          DEFAULT: '#FFFFFF',
+          dark: '#000000',
+          surface: '#F4F4F9',
         },
         surface: {
-          DEFAULT: '#ffffff',
+          DEFAULT: '#F4F4F9',
           dark: '#2c3e50',
         },
         text: {
           DEFAULT: '#2c3e50',
-          light: '#7f8c8d',
-          dark: '#1a252f',
+          light: '#FFFFFF',
+          dark: '#0f151bff',
           inverse: '#ffffff',
+          muted: '#95a5a6',
+          subdued: '#7f8c8d',
+          highlight: '#ffd500',
+          code: '#e74c3c',
         },
-        education: '#9b59b6',
-        workplace: '#e67e22',
-        skills: '#1abc9c',
+        // Experience type colors
+        education: '#088732',
+        workplace: '#007EA7',
+        skills: '#F24236',
+        // Status colors
+        success: '#2ecc71',
+        warning: '#f39c12',
+        error: '#e74c3c',
+        info: '#3498db',
+        // Markdown & Documentation specific colors
+        code: {
+          text: '#ffd500',
+          background: '#0f151b',
+          block: {
+            background: '#2c3e50',
+            text: '#ffffff',
+          },
+        },
+        blockquote: {
+          text: '#7f8c8d',
+          background: 'rgba(0, 126, 167, 0.05)',
+          border: '#007EA7',
+        },
+        table: {
+          header: {
+            background: '#000000',
+            text: '#ffd500',
+          },
+          rowEven: '#f8f9fa',
+        },
+        link: {
+          text: '#007EA7',
+          hover: '#2980b9',
+        },
+        // Borders
+        border: {
+          DEFAULT: '#bdc3c7',
+          light: '#ecf0f1',
+        },
+        divider: '#d5dbdb',
       },
       fontFamily: {
         heading: ['"Montserrat"', '"Helvetica Neue"', 'Arial', 'sans-serif'],

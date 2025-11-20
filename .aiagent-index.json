@@ -1,41 +1,4 @@
 {
-  "tests/test_api_users.py": {
-    "path": "/home/user/levelith-2/tests/test_api_users.py",
-    "docstring": "Unit tests for user API endpoints\n\nComprehensive tests for user CRUD operations via REST API.",
-    "classes": [
-      "TestUserCreation",
-      "TestUserRetrieval",
-      "TestUserUpdate",
-      "TestUserDeletion",
-      "TestUserLogin"
-    ],
-    "functions": [
-      "override_get_db",
-      "setup_database",
-      "client",
-      "sample_user_data"
-    ],
-    "imports": [
-      "pytest",
-      "fastapi.testclient",
-      "sqlalchemy",
-      "sqlalchemy.orm",
-      "backend.database",
-      "backend.main"
-    ],
-    "exports": [
-      "TestUserCreation",
-      "TestUserRetrieval",
-      "TestUserUpdate",
-      "TestUserDeletion",
-      "TestUserLogin",
-      "override_get_db",
-      "setup_database",
-      "client",
-      "sample_user_data"
-    ],
-    "complexity_score": 29
-  },
   "tests/test_system.py": {
     "path": "/home/user/levelith-2/tests/test_system.py",
     "docstring": "Levelith-2 Internal Test System\n\nThis module provides a comprehensive testing framework for all code changes.\nEvery AI-assisted change MUST include corresponding tests.\n\nGolden Rule: No code ships without tests.",
@@ -67,106 +30,44 @@
     ],
     "complexity_score": 21
   },
-  "tests/test_user.py": {
-    "path": "/home/user/levelith-2/tests/test_user.py",
-    "docstring": "Unit tests for user.py\n\nComprehensive tests for User model and authentication functions.\nTests follow the 80% minimum coverage requirement from AI_AGENT_GOLDEN_RULES.md",
+  "tests/test_experience.py": {
+    "path": "/home/user/levelith-2/tests/test_experience.py",
+    "docstring": "Unit tests for experience.py\n\nComprehensive tests for Experience model, all 9 experience subtypes, and NAICS validation.\nTests follow the 80% minimum coverage requirement from AI_AGENT_GOLDEN_RULES.md",
     "classes": [
-      "TestUser",
-      "TestPasswordFunctions",
-      "TestCreateUser",
-      "TestUserEdgeCases"
+      "TestNAICSValidation",
+      "TestExperience",
+      "TestCertificate",
+      "TestDegree",
+      "TestCourse",
+      "TestGig",
+      "TestPartTime",
+      "TestFullTime",
+      "TestSoftSkill",
+      "TestHardSkill",
+      "TestNativeSkill",
+      "TestExperienceIntegration"
     ],
     "functions": [],
     "imports": [
       "pytest",
       "datetime",
-      "backend.models.user"
+      "backend.models.experience"
     ],
     "exports": [
-      "TestUser",
-      "TestPasswordFunctions",
-      "TestCreateUser",
-      "TestUserEdgeCases"
+      "TestNAICSValidation",
+      "TestExperience",
+      "TestCertificate",
+      "TestDegree",
+      "TestCourse",
+      "TestGig",
+      "TestPartTime",
+      "TestFullTime",
+      "TestSoftSkill",
+      "TestHardSkill",
+      "TestNativeSkill",
+      "TestExperienceIntegration"
     ],
-    "complexity_score": 15
-  },
-  "tests/test_naics.py": {
-    "path": "/home/user/levelith-2/tests/test_naics.py",
-    "docstring": "Tests for NAICS Domain Model\n\nThis module tests the NAICS code domain model, validation functions,\nand hierarchical operations.\n\nTest coverage includes:\n- NAICS code creation and validation\n- Hierarchical relationships (parent/child)\n- Code normalization\n- Level detection\n- Factory functions",
-    "classes": [
-      "TestNAICSCodeNormalization",
-      "TestNAICSLevelDetection",
-      "TestParentCodeExtraction",
-      "TestNAICSCodeCreation",
-      "TestNAICSCodeFactory",
-      "TestNAICSCodeHierarchy",
-      "TestNAICSCodeSerialization",
-      "TestFallbackNAICS"
-    ],
-    "functions": [],
-    "imports": [
-      "pytest",
-      "datetime",
-      "backend.models.naics"
-    ],
-    "exports": [
-      "TestNAICSCodeNormalization",
-      "TestNAICSLevelDetection",
-      "TestParentCodeExtraction",
-      "TestNAICSCodeCreation",
-      "TestNAICSCodeFactory",
-      "TestNAICSCodeHierarchy",
-      "TestNAICSCodeSerialization",
-      "TestFallbackNAICS"
-    ],
-    "complexity_score": 27
-  },
-  "tests/test_naics_db_models.py": {
-    "path": "/home/user/levelith-2/tests/test_naics_db_models.py",
-    "docstring": "Tests for NAICS Database Models\n\nTests the NAICSCodeDB ORM model and database interactions.",
-    "classes": [
-      "TestNAICSCodeDB"
-    ],
-    "functions": [],
-    "imports": [
-      "pytest",
-      "datetime",
-      "sqlalchemy.exc",
-      "backend.models.db_models",
-      "backend.models.naics",
-      "backend.database"
-    ],
-    "exports": [
-      "TestNAICSCodeDB"
-    ],
-    "complexity_score": 9
-  },
-  "tests/test_test_system.py": {
-    "path": "/home/user/levelith-2/tests/test_test_system.py",
-    "docstring": "Unit tests for the test system itself.\n\nThis demonstrates the test framework in action and validates\nthe test enforcement and generation tools.",
-    "classes": [
-      "TestTestRequirement",
-      "TestTestGenerator",
-      "TestTestValidator",
-      "TestTestSystemIntegration"
-    ],
-    "functions": [],
-    "imports": [
-      "pytest",
-      "pathlib",
-      "sys",
-      "os",
-      "test_system",
-      "test_system",
-      "test_system"
-    ],
-    "exports": [
-      "TestTestRequirement",
-      "TestTestGenerator",
-      "TestTestValidator",
-      "TestTestSystemIntegration"
-    ],
-    "complexity_score": 19
+    "complexity_score": 39
   },
   "tests/test_api_naics.py": {
     "path": "/home/user/levelith-2/tests/test_api_naics.py",
@@ -209,22 +110,45 @@
     ],
     "complexity_score": 42
   },
-  "tests/test_user_repository.py": {
-    "path": "/home/user/levelith-2/tests/test_user_repository.py",
-    "docstring": "Tests for UserRepository\n\nThis module contains comprehensive tests for the UserRepository class,\nensuring all data access operations work correctly.\n\nTest Coverage:\n- User creation and storage\n- User retrieval (by ID, email, username)\n- User updates\n- User deletion\n- Index management (email, username)\n- Duplicate detection\n- Search functionality\n- Edge cases and error handling",
+  "tests/test_user.py": {
+    "path": "/home/user/levelith-2/tests/test_user.py",
+    "docstring": "Unit tests for user.py\n\nComprehensive tests for User model and authentication functions.\nTests follow the 80% minimum coverage requirement from AI_AGENT_GOLDEN_RULES.md",
     "classes": [
-      "TestUserRepository"
+      "TestUser",
+      "TestPasswordFunctions",
+      "TestCreateUser",
+      "TestUserEdgeCases"
     ],
     "functions": [],
     "imports": [
       "pytest",
       "datetime",
-      "backend.repositories.user_repository",
-      "backend.models.user",
+      "backend.models.user"
+    ],
+    "exports": [
+      "TestUser",
+      "TestPasswordFunctions",
+      "TestCreateUser",
+      "TestUserEdgeCases"
+    ],
+    "complexity_score": 15
+  },
+  "tests/test_experience_repository.py": {
+    "path": "/home/user/levelith-2/tests/test_experience_repository.py",
+    "docstring": "Tests for ExperienceRepository\n\nThis module contains comprehensive tests for the ExperienceRepository class,\nensuring all data access operations work correctly for all 9 experience types.\n\nTest Coverage:\n- Experience creation and storage (all 9 types)\n- Experience retrieval (by ID, user, category, type, NAICS)\n- Experience updates\n- Experience deletion\n- Index management (user, NAICS, category, type)\n- Search functionality\n- Edge cases and error handling",
+    "classes": [
+      "TestExperienceRepository"
+    ],
+    "functions": [],
+    "imports": [
+      "pytest",
+      "datetime",
+      "backend.repositories.experience_repository",
+      "backend.models.experience",
       "time"
     ],
     "exports": [
-      "TestUserRepository"
+      "TestExperienceRepository"
     ],
     "complexity_score": 8
   },
@@ -271,69 +195,36 @@
     ],
     "complexity_score": 39
   },
-  "tests/test_experience_repository.py": {
-    "path": "/home/user/levelith-2/tests/test_experience_repository.py",
-    "docstring": "Tests for ExperienceRepository\n\nThis module contains comprehensive tests for the ExperienceRepository class,\nensuring all data access operations work correctly for all 9 experience types.\n\nTest Coverage:\n- Experience creation and storage (all 9 types)\n- Experience retrieval (by ID, user, category, type, NAICS)\n- Experience updates\n- Experience deletion\n- Index management (user, NAICS, category, type)\n- Search functionality\n- Edge cases and error handling",
+  "tests/test_naics.py": {
+    "path": "/home/user/levelith-2/tests/test_naics.py",
+    "docstring": "Tests for NAICS Domain Model\n\nThis module tests the NAICS code domain model, validation functions,\nand hierarchical operations.\n\nTest coverage includes:\n- NAICS code creation and validation\n- Hierarchical relationships (parent/child)\n- Code normalization\n- Level detection\n- Factory functions",
     "classes": [
-      "TestExperienceRepository"
+      "TestNAICSCodeNormalization",
+      "TestNAICSLevelDetection",
+      "TestParentCodeExtraction",
+      "TestNAICSCodeCreation",
+      "TestNAICSCodeFactory",
+      "TestNAICSCodeHierarchy",
+      "TestNAICSCodeSerialization",
+      "TestFallbackNAICS"
     ],
     "functions": [],
     "imports": [
       "pytest",
       "datetime",
-      "backend.repositories.experience_repository",
-      "backend.models.experience",
-      "time"
-    ],
-    "exports": [
-      "TestExperienceRepository"
-    ],
-    "complexity_score": 8
-  },
-  "tests/test_api_health.py": {
-    "path": "/home/user/levelith-2/tests/test_api_health.py",
-    "docstring": "Unit tests for health check endpoints\n\nTests the health, readiness, and liveness endpoints.\nCritical for Render deployment verification.",
-    "classes": [
-      "TestHealthEndpoints",
-      "TestRootEndpoint",
-      "TestHealthIntegration"
-    ],
-    "functions": [
-      "client"
-    ],
-    "imports": [
-      "pytest",
-      "fastapi.testclient",
-      "backend.main",
-      "time"
-    ],
-    "exports": [
-      "TestHealthEndpoints",
-      "TestRootEndpoint",
-      "TestHealthIntegration",
-      "client"
-    ],
-    "complexity_score": 15
-  },
-  "tests/test_naics_db_repository.py": {
-    "path": "/home/user/levelith-2/tests/test_naics_db_repository.py",
-    "docstring": "Tests for NAICS Database Repository\n\nTests the NAICSDBRepository class and its database operations.",
-    "classes": [
-      "TestNAICSDBRepository"
-    ],
-    "functions": [],
-    "imports": [
-      "pytest",
-      "backend.repositories.naics_db_repository",
-      "backend.models.naics",
-      "backend.models.db_models",
-      "backend.database",
       "backend.models.naics"
     ],
     "exports": [
-      "TestNAICSDBRepository"
+      "TestNAICSCodeNormalization",
+      "TestNAICSLevelDetection",
+      "TestParentCodeExtraction",
+      "TestNAICSCodeCreation",
+      "TestNAICSCodeFactory",
+      "TestNAICSCodeHierarchy",
+      "TestNAICSCodeSerialization",
+      "TestFallbackNAICS"
     ],
-    "complexity_score": 9
+    "complexity_score": 27
   },
   "tests/test_database_integration.py": {
     "path": "/home/user/levelith-2/tests/test_database_integration.py",
@@ -374,138 +265,6 @@
       "test_database_integration_summary"
     ],
     "complexity_score": 35
-  },
-  "tests/test_naics_service.py": {
-    "path": "/home/user/levelith-2/tests/test_naics_service.py",
-    "docstring": "Tests for NAICS Service\n\nThis module tests the NAICS service business logic layer.\n\nTest coverage includes:\n- Code lookup and validation\n- Search and autocomplete\n- Experience-based suggestions\n- Category and level filtering\n- Hierarchical operations",
-    "classes": [
-      "TestNAICSServiceInitialization",
-      "TestCodeLookup",
-      "TestCodeValidation",
-      "TestSearch",
-      "TestAutocomplete",
-      "TestExperienceSuggestions",
-      "TestCategoryOperations",
-      "TestLevelOperations",
-      "TestHierarchicalOperations",
-      "TestExperienceCategoryMapping"
-    ],
-    "functions": [
-      "mock_repo",
-      "naics_service",
-      "sample_naics_code"
-    ],
-    "imports": [
-      "pytest",
-      "unittest.mock",
-      "backend.services.naics_service",
-      "backend.repositories.naics_repository",
-      "backend.models.naics"
-    ],
-    "exports": [
-      "TestNAICSServiceInitialization",
-      "TestCodeLookup",
-      "TestCodeValidation",
-      "TestSearch",
-      "TestAutocomplete",
-      "TestExperienceSuggestions",
-      "TestCategoryOperations",
-      "TestLevelOperations",
-      "TestHierarchicalOperations",
-      "TestExperienceCategoryMapping",
-      "mock_repo",
-      "naics_service",
-      "sample_naics_code"
-    ],
-    "complexity_score": 41
-  },
-  "tests/test_api_experiences.py": {
-    "path": "/home/user/levelith-2/tests/test_api_experiences.py",
-    "docstring": "Unit tests for experience API endpoints\n\nComprehensive tests for experience CRUD operations via REST API.",
-    "classes": [
-      "TestExperienceCreation",
-      "TestExperienceRetrieval",
-      "TestExperienceUpdate",
-      "TestExperienceDeletion",
-      "TestExperienceSummary"
-    ],
-    "functions": [
-      "override_get_db",
-      "setup_database",
-      "client",
-      "test_user",
-      "sample_experience_data"
-    ],
-    "imports": [
-      "pytest",
-      "fastapi.testclient",
-      "sqlalchemy",
-      "sqlalchemy.orm",
-      "backend.database",
-      "backend.main",
-      "backend.models.experience"
-    ],
-    "exports": [
-      "TestExperienceCreation",
-      "TestExperienceRetrieval",
-      "TestExperienceUpdate",
-      "TestExperienceDeletion",
-      "TestExperienceSummary",
-      "override_get_db",
-      "setup_database",
-      "client",
-      "test_user",
-      "sample_experience_data"
-    ],
-    "complexity_score": 32
-  },
-  "tests/__init__.py": {
-    "path": "/home/user/levelith-2/tests/__init__.py",
-    "docstring": "Levelith-2 Test Suite\n\nThis package contains all tests for the Levelith-2 project.\n\nTest Organization:\n- unit/: Unit tests for individual components\n- integration/: Integration tests for component interactions\n- e2e/: End-to-end tests for complete workflows\n- fixtures/: Shared test fixtures and data\n\nGolden Rule: Every code change must include tests.\nMinimum coverage: 80%",
-    "classes": [],
-    "functions": [],
-    "imports": [],
-    "exports": [],
-    "complexity_score": 0
-  },
-  "tests/test_experience.py": {
-    "path": "/home/user/levelith-2/tests/test_experience.py",
-    "docstring": "Unit tests for experience.py\n\nComprehensive tests for Experience model, all 9 experience subtypes, and NAICS validation.\nTests follow the 80% minimum coverage requirement from AI_AGENT_GOLDEN_RULES.md",
-    "classes": [
-      "TestNAICSValidation",
-      "TestExperience",
-      "TestCertificate",
-      "TestDegree",
-      "TestCourse",
-      "TestGig",
-      "TestPartTime",
-      "TestFullTime",
-      "TestSoftSkill",
-      "TestHardSkill",
-      "TestNativeSkill",
-      "TestExperienceIntegration"
-    ],
-    "functions": [],
-    "imports": [
-      "pytest",
-      "datetime",
-      "backend.models.experience"
-    ],
-    "exports": [
-      "TestNAICSValidation",
-      "TestExperience",
-      "TestCertificate",
-      "TestDegree",
-      "TestCourse",
-      "TestGig",
-      "TestPartTime",
-      "TestFullTime",
-      "TestSoftSkill",
-      "TestHardSkill",
-      "TestNativeSkill",
-      "TestExperienceIntegration"
-    ],
-    "complexity_score": 39
   },
   "tests/test_aiagent_navigator_v2.py": {
     "path": "/home/user/levelith-2/tests/test_aiagent_navigator_v2.py",
@@ -557,6 +316,247 @@
     ],
     "complexity_score": 49
   },
+  "tests/test_naics_db_models.py": {
+    "path": "/home/user/levelith-2/tests/test_naics_db_models.py",
+    "docstring": "Tests for NAICS Database Models\n\nTests the NAICSCodeDB ORM model and database interactions.",
+    "classes": [
+      "TestNAICSCodeDB"
+    ],
+    "functions": [],
+    "imports": [
+      "pytest",
+      "datetime",
+      "sqlalchemy.exc",
+      "backend.models.db_models",
+      "backend.models.naics",
+      "backend.database"
+    ],
+    "exports": [
+      "TestNAICSCodeDB"
+    ],
+    "complexity_score": 9
+  },
+  "tests/test_api_experiences.py": {
+    "path": "/home/user/levelith-2/tests/test_api_experiences.py",
+    "docstring": "Unit tests for experience API endpoints\n\nComprehensive tests for experience CRUD operations via REST API.",
+    "classes": [
+      "TestExperienceCreation",
+      "TestExperienceRetrieval",
+      "TestExperienceUpdate",
+      "TestExperienceDeletion",
+      "TestExperienceSummary"
+    ],
+    "functions": [
+      "override_get_db",
+      "setup_database",
+      "client",
+      "test_user",
+      "sample_experience_data"
+    ],
+    "imports": [
+      "pytest",
+      "fastapi.testclient",
+      "sqlalchemy",
+      "sqlalchemy.orm",
+      "backend.database",
+      "backend.main",
+      "backend.models.experience"
+    ],
+    "exports": [
+      "TestExperienceCreation",
+      "TestExperienceRetrieval",
+      "TestExperienceUpdate",
+      "TestExperienceDeletion",
+      "TestExperienceSummary",
+      "override_get_db",
+      "setup_database",
+      "client",
+      "test_user",
+      "sample_experience_data"
+    ],
+    "complexity_score": 32
+  },
+  "tests/test_test_system.py": {
+    "path": "/home/user/levelith-2/tests/test_test_system.py",
+    "docstring": "Unit tests for the test system itself.\n\nThis demonstrates the test framework in action and validates\nthe test enforcement and generation tools.",
+    "classes": [
+      "TestTestRequirement",
+      "TestTestGenerator",
+      "TestTestValidator",
+      "TestTestSystemIntegration"
+    ],
+    "functions": [],
+    "imports": [
+      "pytest",
+      "pathlib",
+      "sys",
+      "os",
+      "test_system",
+      "test_system",
+      "test_system"
+    ],
+    "exports": [
+      "TestTestRequirement",
+      "TestTestGenerator",
+      "TestTestValidator",
+      "TestTestSystemIntegration"
+    ],
+    "complexity_score": 19
+  },
+  "tests/__init__.py": {
+    "path": "/home/user/levelith-2/tests/__init__.py",
+    "docstring": "Levelith-2 Test Suite\n\nThis package contains all tests for the Levelith-2 project.\n\nTest Organization:\n- unit/: Unit tests for individual components\n- integration/: Integration tests for component interactions\n- e2e/: End-to-end tests for complete workflows\n- fixtures/: Shared test fixtures and data\n\nGolden Rule: Every code change must include tests.\nMinimum coverage: 80%",
+    "classes": [],
+    "functions": [],
+    "imports": [],
+    "exports": [],
+    "complexity_score": 0
+  },
+  "tests/test_api_users.py": {
+    "path": "/home/user/levelith-2/tests/test_api_users.py",
+    "docstring": "Unit tests for user API endpoints\n\nComprehensive tests for user CRUD operations via REST API.",
+    "classes": [
+      "TestUserCreation",
+      "TestUserRetrieval",
+      "TestUserUpdate",
+      "TestUserDeletion",
+      "TestUserLogin"
+    ],
+    "functions": [
+      "override_get_db",
+      "setup_database",
+      "client",
+      "sample_user_data"
+    ],
+    "imports": [
+      "pytest",
+      "fastapi.testclient",
+      "sqlalchemy",
+      "sqlalchemy.orm",
+      "backend.database",
+      "backend.main"
+    ],
+    "exports": [
+      "TestUserCreation",
+      "TestUserRetrieval",
+      "TestUserUpdate",
+      "TestUserDeletion",
+      "TestUserLogin",
+      "override_get_db",
+      "setup_database",
+      "client",
+      "sample_user_data"
+    ],
+    "complexity_score": 29
+  },
+  "tests/test_user_repository.py": {
+    "path": "/home/user/levelith-2/tests/test_user_repository.py",
+    "docstring": "Tests for UserRepository\n\nThis module contains comprehensive tests for the UserRepository class,\nensuring all data access operations work correctly.\n\nTest Coverage:\n- User creation and storage\n- User retrieval (by ID, email, username)\n- User updates\n- User deletion\n- Index management (email, username)\n- Duplicate detection\n- Search functionality\n- Edge cases and error handling",
+    "classes": [
+      "TestUserRepository"
+    ],
+    "functions": [],
+    "imports": [
+      "pytest",
+      "datetime",
+      "backend.repositories.user_repository",
+      "backend.models.user",
+      "time"
+    ],
+    "exports": [
+      "TestUserRepository"
+    ],
+    "complexity_score": 8
+  },
+  "tests/test_naics_db_repository.py": {
+    "path": "/home/user/levelith-2/tests/test_naics_db_repository.py",
+    "docstring": "Tests for NAICS Database Repository\n\nTests the NAICSDBRepository class and its database operations.",
+    "classes": [
+      "TestNAICSDBRepository"
+    ],
+    "functions": [],
+    "imports": [
+      "pytest",
+      "backend.repositories.naics_db_repository",
+      "backend.models.naics",
+      "backend.models.db_models",
+      "backend.database",
+      "backend.models.naics"
+    ],
+    "exports": [
+      "TestNAICSDBRepository"
+    ],
+    "complexity_score": 9
+  },
+  "tests/test_naics_service.py": {
+    "path": "/home/user/levelith-2/tests/test_naics_service.py",
+    "docstring": "Tests for NAICS Service\n\nThis module tests the NAICS service business logic layer.\n\nTest coverage includes:\n- Code lookup and validation\n- Search and autocomplete\n- Experience-based suggestions\n- Category and level filtering\n- Hierarchical operations",
+    "classes": [
+      "TestNAICSServiceInitialization",
+      "TestCodeLookup",
+      "TestCodeValidation",
+      "TestSearch",
+      "TestAutocomplete",
+      "TestExperienceSuggestions",
+      "TestCategoryOperations",
+      "TestLevelOperations",
+      "TestHierarchicalOperations",
+      "TestExperienceCategoryMapping"
+    ],
+    "functions": [
+      "mock_repo",
+      "naics_service",
+      "sample_naics_code"
+    ],
+    "imports": [
+      "pytest",
+      "unittest.mock",
+      "backend.services.naics_service",
+      "backend.repositories.naics_repository",
+      "backend.models.naics"
+    ],
+    "exports": [
+      "TestNAICSServiceInitialization",
+      "TestCodeLookup",
+      "TestCodeValidation",
+      "TestSearch",
+      "TestAutocomplete",
+      "TestExperienceSuggestions",
+      "TestCategoryOperations",
+      "TestLevelOperations",
+      "TestHierarchicalOperations",
+      "TestExperienceCategoryMapping",
+      "mock_repo",
+      "naics_service",
+      "sample_naics_code"
+    ],
+    "complexity_score": 41
+  },
+  "tests/test_api_health.py": {
+    "path": "/home/user/levelith-2/tests/test_api_health.py",
+    "docstring": "Unit tests for health check endpoints\n\nTests the health, readiness, and liveness endpoints.\nCritical for Render deployment verification.",
+    "classes": [
+      "TestHealthEndpoints",
+      "TestRootEndpoint",
+      "TestHealthIntegration"
+    ],
+    "functions": [
+      "client"
+    ],
+    "imports": [
+      "pytest",
+      "fastapi.testclient",
+      "backend.main",
+      "time"
+    ],
+    "exports": [
+      "TestHealthEndpoints",
+      "TestRootEndpoint",
+      "TestHealthIntegration",
+      "client"
+    ],
+    "complexity_score": 15
+  },
   "tests/test_api_stats.py": {
     "path": "/home/user/levelith-2/tests/test_api_stats.py",
     "docstring": "Unit tests for statistics API endpoints\n\nTests the statistics endpoint that provides aggregated data for the admin dashboard.",
@@ -578,31 +578,6 @@
       "TestStatsEndpoint",
       "TestStatsIntegration",
       "client"
-    ],
-    "complexity_score": 13
-  },
-  "backend/seed_naics.py": {
-    "path": "/home/user/levelith-2/backend/seed_naics.py",
-    "docstring": "NAICS Database Seeding Script\n\nSeeds the NAICS database table from the existing JSON file.\nThis provides a quick way to populate the database with the reference NAICS codes.\n\nUsage:\n    python backend/seed_naics.py\n    python backend/seed_naics.py --clear\n    python backend/seed_naics.py --verbose",
-    "classes": [],
-    "functions": [
-      "seed_naics_from_json",
-      "main"
-    ],
-    "imports": [
-      "sys",
-      "argparse",
-      "logging",
-      "pathlib",
-      "backend.config",
-      "backend.database",
-      "backend.models.db_models",
-      "backend.repositories.naics_repository",
-      "backend.models.naics"
-    ],
-    "exports": [
-      "seed_naics_from_json",
-      "main"
     ],
     "complexity_score": 13
   },
@@ -635,6 +610,141 @@
       "main"
     ],
     "complexity_score": 18
+  },
+  "backend/seed_naics.py": {
+    "path": "/home/user/levelith-2/backend/seed_naics.py",
+    "docstring": "NAICS Database Seeding Script\n\nSeeds the NAICS database table from the existing JSON file.\nThis provides a quick way to populate the database with the reference NAICS codes.\n\nUsage:\n    python backend/seed_naics.py\n    python backend/seed_naics.py --clear\n    python backend/seed_naics.py --verbose",
+    "classes": [],
+    "functions": [
+      "seed_naics_from_json",
+      "main"
+    ],
+    "imports": [
+      "sys",
+      "argparse",
+      "logging",
+      "pathlib",
+      "backend.config",
+      "backend.database",
+      "backend.models.db_models",
+      "backend.repositories.naics_repository",
+      "backend.models.naics"
+    ],
+    "exports": [
+      "seed_naics_from_json",
+      "main"
+    ],
+    "complexity_score": 13
+  },
+  "backend/main.py": {
+    "path": "/home/user/levelith-2/backend/main.py",
+    "docstring": "Levelith Backend - FastAPI Application\n\nMain application entry point for the Levelith backend API.\nProvides RESTful endpoints for user management and experience tracking.",
+    "classes": [],
+    "functions": [],
+    "imports": [
+      "logging",
+      "contextlib",
+      "typing",
+      "fastapi",
+      "fastapi.middleware.cors",
+      "fastapi.middleware.gzip",
+      "fastapi.responses",
+      "backend.config",
+      "backend.database",
+      "backend.api.routes",
+      "uvicorn"
+    ],
+    "exports": [],
+    "complexity_score": 11
+  },
+  "backend/init_db.py": {
+    "path": "/home/user/levelith-2/backend/init_db.py",
+    "docstring": "Database Initialization Script\n\nInitializes the PostgreSQL database with all required tables.\nSafe to run multiple times - creates tables only if they don't exist.\n\nUsage:\n    python backend/init_db.py              # Initialize database\n    python backend/init_db.py --reset      # Drop and recreate all tables (WARNING: destroys data!)\n    python backend/init_db.py --check      # Check database connection",
+    "classes": [],
+    "functions": [
+      "check_database_connection",
+      "initialize_database",
+      "reset_database",
+      "main"
+    ],
+    "imports": [
+      "sys",
+      "argparse",
+      "logging",
+      "pathlib",
+      "backend.config",
+      "backend.database",
+      "backend.models.db_models"
+    ],
+    "exports": [
+      "check_database_connection",
+      "initialize_database",
+      "reset_database",
+      "main"
+    ],
+    "complexity_score": 15
+  },
+  "backend/seed_db.py": {
+    "path": "/home/user/levelith-2/backend/seed_db.py",
+    "docstring": "Database Seeding Script\n\nPopulates the PostgreSQL database with realistic mock data for testing.\nGenerates users and experiences matching the admin dashboard mock data structure.\n\nUsage:\n    python backend/seed_db.py              # Seed with default data (25 users)\n    python backend/seed_db.py --users 50   # Seed with 50 users\n    python backend/seed_db.py --clear      # Clear all data first\n    python backend/seed_db.py --verbose    # Show detailed logging",
+    "classes": [],
+    "functions": [
+      "generate_mock_user",
+      "generate_mock_experience",
+      "seed_database",
+      "main"
+    ],
+    "imports": [
+      "sys",
+      "random",
+      "argparse",
+      "logging",
+      "pathlib",
+      "datetime",
+      "typing",
+      "backend.config",
+      "backend.database",
+      "backend.models.db_models",
+      "backend.models.experience",
+      "passlib.context"
+    ],
+    "exports": [
+      "generate_mock_user",
+      "generate_mock_experience",
+      "seed_database",
+      "main"
+    ],
+    "complexity_score": 20
+  },
+  "backend/__init__.py": {
+    "path": "/home/user/levelith-2/backend/__init__.py",
+    "docstring": "Levelith Backend Package\n\nFastAPI-based REST API for experience tracking and user management.",
+    "classes": [],
+    "functions": [],
+    "imports": [],
+    "exports": [],
+    "complexity_score": 0
+  },
+  "backend/config.py": {
+    "path": "/home/user/levelith-2/backend/config.py",
+    "docstring": "Configuration Settings for Levelith Backend\n\nManages environment variables and application settings using Pydantic Settings.\nSupports multiple environments (development, staging, production).",
+    "classes": [
+      "Settings"
+    ],
+    "functions": [
+      "get_settings"
+    ],
+    "imports": [
+      "functools",
+      "typing",
+      "pydantic",
+      "pydantic_settings"
+    ],
+    "exports": [
+      "Settings",
+      "get_settings"
+    ],
+    "complexity_score": 9
   },
   "backend/database.py": {
     "path": "/home/user/levelith-2/backend/database.py",
@@ -673,173 +783,6 @@
       "reset_db"
     ],
     "complexity_score": 26
-  },
-  "backend/config.py": {
-    "path": "/home/user/levelith-2/backend/config.py",
-    "docstring": "Configuration Settings for Levelith Backend\n\nManages environment variables and application settings using Pydantic Settings.\nSupports multiple environments (development, staging, production).",
-    "classes": [
-      "Settings"
-    ],
-    "functions": [
-      "get_settings"
-    ],
-    "imports": [
-      "functools",
-      "typing",
-      "pydantic",
-      "pydantic_settings"
-    ],
-    "exports": [
-      "Settings",
-      "get_settings"
-    ],
-    "complexity_score": 9
-  },
-  "backend/seed_db.py": {
-    "path": "/home/user/levelith-2/backend/seed_db.py",
-    "docstring": "Database Seeding Script\n\nPopulates the PostgreSQL database with realistic mock data for testing.\nGenerates users and experiences matching the admin dashboard mock data structure.\n\nUsage:\n    python backend/seed_db.py              # Seed with default data (25 users)\n    python backend/seed_db.py --users 50   # Seed with 50 users\n    python backend/seed_db.py --clear      # Clear all data first\n    python backend/seed_db.py --verbose    # Show detailed logging",
-    "classes": [],
-    "functions": [
-      "generate_mock_user",
-      "generate_mock_experience",
-      "seed_database",
-      "main"
-    ],
-    "imports": [
-      "sys",
-      "random",
-      "argparse",
-      "logging",
-      "pathlib",
-      "datetime",
-      "typing",
-      "backend.config",
-      "backend.database",
-      "backend.models.db_models",
-      "backend.models.experience",
-      "passlib.context"
-    ],
-    "exports": [
-      "generate_mock_user",
-      "generate_mock_experience",
-      "seed_database",
-      "main"
-    ],
-    "complexity_score": 20
-  },
-  "backend/main.py": {
-    "path": "/home/user/levelith-2/backend/main.py",
-    "docstring": "Levelith Backend - FastAPI Application\n\nMain application entry point for the Levelith backend API.\nProvides RESTful endpoints for user management and experience tracking.",
-    "classes": [],
-    "functions": [],
-    "imports": [
-      "logging",
-      "contextlib",
-      "typing",
-      "fastapi",
-      "fastapi.middleware.cors",
-      "fastapi.middleware.gzip",
-      "fastapi.responses",
-      "backend.config",
-      "backend.database",
-      "backend.api.routes",
-      "uvicorn"
-    ],
-    "exports": [],
-    "complexity_score": 11
-  },
-  "backend/__init__.py": {
-    "path": "/home/user/levelith-2/backend/__init__.py",
-    "docstring": "Levelith Backend Package\n\nFastAPI-based REST API for experience tracking and user management.",
-    "classes": [],
-    "functions": [],
-    "imports": [],
-    "exports": [],
-    "complexity_score": 0
-  },
-  "backend/init_db.py": {
-    "path": "/home/user/levelith-2/backend/init_db.py",
-    "docstring": "Database Initialization Script\n\nInitializes the PostgreSQL database with all required tables.\nSafe to run multiple times - creates tables only if they don't exist.\n\nUsage:\n    python backend/init_db.py              # Initialize database\n    python backend/init_db.py --reset      # Drop and recreate all tables (WARNING: destroys data!)\n    python backend/init_db.py --check      # Check database connection",
-    "classes": [],
-    "functions": [
-      "check_database_connection",
-      "initialize_database",
-      "reset_database",
-      "main"
-    ],
-    "imports": [
-      "sys",
-      "argparse",
-      "logging",
-      "pathlib",
-      "backend.config",
-      "backend.database",
-      "backend.models.db_models"
-    ],
-    "exports": [
-      "check_database_connection",
-      "initialize_database",
-      "reset_database",
-      "main"
-    ],
-    "complexity_score": 15
-  },
-  "backend/models/user.py": {
-    "path": "/home/user/levelith-2/backend/models/user.py",
-    "docstring": "User Domain Model\n\nThis module defines the User model for the Levelith application.\nUsers have username/password authentication and maintain an array of experiences.\n\nAccording to MANIFEST.md:\n- Authentication: Username + password (traditional authentication)\n- JWT tokens for session management\n- Secure password hashing (bcrypt)\n- Each user has an array of Experience objects",
-    "classes": [
-      "User"
-    ],
-    "functions": [
-      "hash_password",
-      "verify_password",
-      "create_user"
-    ],
-    "imports": [
-      "dataclasses",
-      "datetime",
-      "typing",
-      "hashlib",
-      "secrets"
-    ],
-    "exports": [
-      "User",
-      "hash_password",
-      "verify_password",
-      "create_user"
-    ],
-    "complexity_score": 14
-  },
-  "backend/models/naics.py": {
-    "path": "/home/user/levelith-2/backend/models/naics.py",
-    "docstring": "NAICS Code Domain Models\n\nThis module defines the NAICS (North American Industry Classification System)\ndomain model with metadata support.\n\nNAICS codes are hierarchical:\n- 2-digit: Sector (e.g., \"54\" = Professional, Scientific, and Technical Services)\n- 3-digit: Subsector (e.g., \"541\" = Professional, Scientific, and Technical Services)\n- 4-digit: Industry Group (e.g., \"5415\" = Computer Systems Design and Related Services)\n- 6-digit: National Industry (e.g., \"541511\" = Custom Computer Programming Services)\n\nBased on the 2022 NAICS codes from the U.S. Census Bureau.",
-    "classes": [
-      "NAICSLevel",
-      "NAICSCategory",
-      "NAICSCode"
-    ],
-    "functions": [
-      "get_naics_level",
-      "normalize_naics_code",
-      "extract_parent_codes",
-      "create_naics_code"
-    ],
-    "imports": [
-      "dataclasses",
-      "datetime",
-      "typing",
-      "enum"
-    ],
-    "exports": [
-      "NAICSLevel",
-      "NAICSCategory",
-      "NAICSCode",
-      "get_naics_level",
-      "normalize_naics_code",
-      "extract_parent_codes",
-      "create_naics_code"
-    ],
-    "complexity_score": 21
   },
   "backend/models/db_models.py": {
     "path": "/home/user/levelith-2/backend/models/db_models.py",
@@ -885,17 +828,36 @@
     ],
     "complexity_score": 44
   },
-  "backend/models/__init__.py": {
-    "path": "/home/user/levelith-2/backend/models/__init__.py",
-    "docstring": "Levelith Domain Models\n\nThis module contains the core domain models for the Levelith application.\nAll models follow the architecture defined in MANIFEST.md.\n\nModels:\n    - User: User account and profile\n    - Experience: Base class for all experience types\n    - Education experiences: Certificate, Degree, Course\n    - Workplace experiences: Gig, PartTime, FullTime\n    - Skills experiences: SoftSkill, HardSkill, NativeSkill",
-    "classes": [],
-    "functions": [],
-    "imports": [
-      "backend.models.user",
-      "backend.models.experience"
+  "backend/models/naics.py": {
+    "path": "/home/user/levelith-2/backend/models/naics.py",
+    "docstring": "NAICS Code Domain Models\n\nThis module defines the NAICS (North American Industry Classification System)\ndomain model with metadata support.\n\nNAICS codes are hierarchical:\n- 2-digit: Sector (e.g., \"54\" = Professional, Scientific, and Technical Services)\n- 3-digit: Subsector (e.g., \"541\" = Professional, Scientific, and Technical Services)\n- 4-digit: Industry Group (e.g., \"5415\" = Computer Systems Design and Related Services)\n- 6-digit: National Industry (e.g., \"541511\" = Custom Computer Programming Services)\n\nBased on the 2022 NAICS codes from the U.S. Census Bureau.",
+    "classes": [
+      "NAICSLevel",
+      "NAICSCategory",
+      "NAICSCode"
     ],
-    "exports": [],
-    "complexity_score": 2
+    "functions": [
+      "get_naics_level",
+      "normalize_naics_code",
+      "extract_parent_codes",
+      "create_naics_code"
+    ],
+    "imports": [
+      "dataclasses",
+      "datetime",
+      "typing",
+      "enum"
+    ],
+    "exports": [
+      "NAICSLevel",
+      "NAICSCategory",
+      "NAICSCode",
+      "get_naics_level",
+      "normalize_naics_code",
+      "extract_parent_codes",
+      "create_naics_code"
+    ],
+    "complexity_score": 21
   },
   "backend/models/experience.py": {
     "path": "/home/user/levelith-2/backend/models/experience.py",
@@ -940,6 +902,72 @@
     ],
     "complexity_score": 42
   },
+  "backend/models/user.py": {
+    "path": "/home/user/levelith-2/backend/models/user.py",
+    "docstring": "User Domain Model\n\nThis module defines the User model for the Levelith application.\nUsers have username/password authentication and maintain an array of experiences.\n\nAccording to MANIFEST.md:\n- Authentication: Username + password (traditional authentication)\n- JWT tokens for session management\n- Secure password hashing (bcrypt)\n- Each user has an array of Experience objects",
+    "classes": [
+      "User"
+    ],
+    "functions": [
+      "hash_password",
+      "verify_password",
+      "create_user"
+    ],
+    "imports": [
+      "dataclasses",
+      "datetime",
+      "typing",
+      "hashlib",
+      "secrets"
+    ],
+    "exports": [
+      "User",
+      "hash_password",
+      "verify_password",
+      "create_user"
+    ],
+    "complexity_score": 14
+  },
+  "backend/models/__init__.py": {
+    "path": "/home/user/levelith-2/backend/models/__init__.py",
+    "docstring": "Levelith Domain Models\n\nThis module contains the core domain models for the Levelith application.\nAll models follow the architecture defined in MANIFEST.md.\n\nModels:\n    - User: User account and profile\n    - Experience: Base class for all experience types\n    - Education experiences: Certificate, Degree, Course\n    - Workplace experiences: Gig, PartTime, FullTime\n    - Skills experiences: SoftSkill, HardSkill, NativeSkill",
+    "classes": [],
+    "functions": [],
+    "imports": [
+      "backend.models.user",
+      "backend.models.experience"
+    ],
+    "exports": [],
+    "complexity_score": 2
+  },
+  "backend/schemas/experience.py": {
+    "path": "/home/user/levelith-2/backend/schemas/experience.py",
+    "docstring": "Experience API Schemas\n\nPydantic models for experience-related API requests and responses.",
+    "classes": [
+      "ExperienceBase",
+      "ExperienceCreate",
+      "ExperienceUpdate",
+      "ExperienceResponse",
+      "ExperienceList",
+      "Config"
+    ],
+    "functions": [],
+    "imports": [
+      "datetime",
+      "typing",
+      "pydantic",
+      "backend.models.experience"
+    ],
+    "exports": [
+      "ExperienceBase",
+      "ExperienceCreate",
+      "ExperienceUpdate",
+      "ExperienceResponse",
+      "ExperienceList",
+      "Config"
+    ],
+    "complexity_score": 22
+  },
   "backend/schemas/user.py": {
     "path": "/home/user/levelith-2/backend/schemas/user.py",
     "docstring": "User API Schemas\n\nPydantic models for user-related API requests and responses.",
@@ -983,33 +1011,123 @@
     "exports": [],
     "complexity_score": 2
   },
-  "backend/schemas/experience.py": {
-    "path": "/home/user/levelith-2/backend/schemas/experience.py",
-    "docstring": "Experience API Schemas\n\nPydantic models for experience-related API requests and responses.",
+  "backend/repositories/user_repository.py": {
+    "path": "/home/user/levelith-2/backend/repositories/user_repository.py",
+    "docstring": "User Repository\n\nThis module implements the Repository pattern for User data access.\nThe repository abstracts data storage operations and provides a clean\ninterface for CRUD operations on User entities.\n\nAccording to MANIFEST.md:\n- Repository Pattern: Separates data access from business logic\n- Dependency Injection: Repositories are injected into services\n- Type Safety: All methods use type hints for clarity\n\nArchitecture:\n    Controllers/API \u2192 Services \u2192 Repositories \u2192 Data Store\n\nThe repository layer handles:\n- Data persistence (create, read, update, delete)\n- Query construction and execution\n- Data mapping between storage and domain models\n- Transaction management",
     "classes": [
-      "ExperienceBase",
-      "ExperienceCreate",
-      "ExperienceUpdate",
-      "ExperienceResponse",
-      "ExperienceList",
-      "Config"
+      "UserRepository"
     ],
     "functions": [],
     "imports": [
-      "datetime",
       "typing",
-      "pydantic",
+      "datetime",
+      "backend.models.user"
+    ],
+    "exports": [
+      "UserRepository"
+    ],
+    "complexity_score": 6
+  },
+  "backend/repositories/naics_db_repository.py": {
+    "path": "/home/user/levelith-2/backend/repositories/naics_db_repository.py",
+    "docstring": "NAICS Database Repository\n\nDatabase-backed implementation of the NAICS Repository pattern.\nQueries NAICS codes from PostgreSQL instead of JSON files.\n\nThis repository provides the same interface as NAICSRepository but uses\nthe database for persistent storage and querying.",
+    "classes": [
+      "NAICSDBRepository"
+    ],
+    "functions": [],
+    "imports": [
+      "typing",
+      "sqlalchemy.orm",
+      "sqlalchemy",
+      "backend.models.naics",
+      "backend.models.db_models",
+      "backend.database",
+      "backend.database",
+      "datetime"
+    ],
+    "exports": [
+      "NAICSDBRepository"
+    ],
+    "complexity_score": 11
+  },
+  "backend/repositories/__init__.py": {
+    "path": "/home/user/levelith-2/backend/repositories/__init__.py",
+    "docstring": "Levelith Repository Layer\n\nThis module contains the repository implementations for the Levelith application.\nRepositories implement the Repository Pattern, providing an abstraction layer\nbetween the domain models and data storage.\n\nAccording to MANIFEST.md:\n- Repository Pattern: Separates data access from business logic\n- Dependency Injection: Repositories are injected into services\n- Type Safety: All repositories use type hints\n- Testability: Easy to mock for unit testing\n\nArchitecture:\n    Controllers/API -> Services -> Repositories -> Data Store\n\nRepositories:\n    - UserRepository: CRUD operations for User entities\n    - ExperienceRepository: CRUD operations for Experience entities (all 9 types)\n\nUsage:\n    >>> from backend.repositories import UserRepository, ExperienceRepository\n    >>> user_repo = UserRepository()\n    >>> exp_repo = ExperienceRepository()",
+    "classes": [],
+    "functions": [],
+    "imports": [
+      "backend.repositories.user_repository",
+      "backend.repositories.experience_repository"
+    ],
+    "exports": [],
+    "complexity_score": 2
+  },
+  "backend/repositories/naics_repository.py": {
+    "path": "/home/user/levelith-2/backend/repositories/naics_repository.py",
+    "docstring": "NAICS Repository\n\nThis module implements the Repository pattern for NAICS code data access.\nThe repository provides efficient lookups, search, and filtering of NAICS codes.\n\nArchitecture:\n    Controllers/API \u2192 Services \u2192 Repositories \u2192 Data Store\n\nThe NAICS repository handles:\n- NAICS code storage and retrieval\n- Search and autocomplete functionality\n- Hierarchical code lookups (parent/child relationships)\n- Category-based filtering\n- Code validation against official NAICS database",
+    "classes": [
+      "NAICSRepository"
+    ],
+    "functions": [],
+    "imports": [
+      "typing",
+      "json",
+      "os",
+      "pathlib",
+      "backend.models.naics"
+    ],
+    "exports": [
+      "NAICSRepository"
+    ],
+    "complexity_score": 8
+  },
+  "backend/repositories/experience_repository.py": {
+    "path": "/home/user/levelith-2/backend/repositories/experience_repository.py",
+    "docstring": "Experience Repository\n\nThis module implements the Repository pattern for Experience data access.\nThe repository abstracts data storage operations and provides a clean\ninterface for CRUD operations on Experience entities and their subtypes.\n\nAccording to MANIFEST.md:\n- Repository Pattern: Separates data access from business logic\n- Supports all 9 experience types (Certificate, Degree, Course, Gig, PartTime,\n  FullTime, SoftSkill, HardSkill, NativeSkill)\n- NAICS code filtering and search capabilities\n- Type Safety: All methods use type hints\n\nArchitecture:\n    Controllers/API \u2192 Services \u2192 Repositories \u2192 Data Store\n\nThe repository layer handles:\n- Data persistence for all experience types\n- Query construction with filtering capabilities\n- NAICS-based categorization and search\n- User-experience relationship management",
+    "classes": [
+      "ExperienceRepository"
+    ],
+    "functions": [],
+    "imports": [
+      "typing",
+      "datetime",
       "backend.models.experience"
     ],
     "exports": [
-      "ExperienceBase",
-      "ExperienceCreate",
-      "ExperienceUpdate",
-      "ExperienceResponse",
-      "ExperienceList",
-      "Config"
+      "ExperienceRepository"
     ],
-    "complexity_score": 22
+    "complexity_score": 6
+  },
+  "backend/services/user_service.py": {
+    "path": "/home/user/levelith-2/backend/services/user_service.py",
+    "docstring": "User Service\n\nThis module implements the Service layer for User business logic.\nThe service layer sits between the API/controllers and repositories,\nhandling business logic, validation, and orchestration.\n\nAccording to MANIFEST.md:\n- Service Layer: Contains business logic and orchestration\n- Dependency Injection: Services receive repositories as dependencies\n- Validation: Input validation and business rule enforcement\n- Security: Password hashing, authentication logic\n\nArchitecture:\n    Controllers/API \u2192 Services \u2192 Repositories \u2192 Data Store\n\nThe service layer handles:\n- User registration and authentication\n- Password management (hashing, verification)\n- Profile management\n- Business rule validation\n- Experience management for users\n- User lifecycle operations (activate, deactivate, verify)",
+    "classes": [
+      "UserService"
+    ],
+    "functions": [],
+    "imports": [
+      "typing",
+      "datetime",
+      "backend.models.user",
+      "backend.repositories.user_repository",
+      "backend.models.user"
+    ],
+    "exports": [
+      "UserService"
+    ],
+    "complexity_score": 8
+  },
+  "backend/services/__init__.py": {
+    "path": "/home/user/levelith-2/backend/services/__init__.py",
+    "docstring": "Levelith Service Layer\n\nThis module contains the service implementations for the Levelith application.\nServices implement the Service Layer Pattern, encapsulating business logic\nand orchestrating operations across repositories.\n\nAccording to MANIFEST.md:\n- Service Layer: Contains business logic separate from data access\n- Dependency Injection: Services receive repositories as dependencies\n- Business Rules: Validates and enforces business rules\n- Orchestration: Coordinates operations across multiple repositories\n\nArchitecture:\n    Controllers/API -> Services -> Repositories -> Data Store\n\nServices:\n    - UserService: User management, authentication, profile operations\n    - ExperienceService: Experience CRUD for all 9 types, NAICS validation\n\nUsage:\n    >>> from backend.repositories import UserRepository, ExperienceRepository\n    >>> from backend.services import UserService, ExperienceService\n    >>>\n    >>> # Initialize repositories\n    >>> user_repo = UserRepository()\n    >>> exp_repo = ExperienceRepository()\n    >>>\n    >>> # Initialize services with dependency injection\n    >>> user_service = UserService(user_repo=user_repo)\n    >>> exp_service = ExperienceService(experience_repo=exp_repo)\n    >>>\n    >>> # Use services for business operations\n    >>> user = user_service.register_user(\n    ...     username=\"johndoe\",\n    ...     email=\"john@example.com\",\n    ...     password=\"SecurePass123!\"\n    ... )",
+    "classes": [],
+    "functions": [],
+    "imports": [
+      "backend.services.user_service",
+      "backend.services.experience_service"
+    ],
+    "exports": [],
+    "complexity_score": 2
   },
   "backend/services/naics_service.py": {
     "path": "/home/user/levelith-2/backend/services/naics_service.py",
@@ -1048,37 +1166,6 @@
     ],
     "complexity_score": 8
   },
-  "backend/services/__init__.py": {
-    "path": "/home/user/levelith-2/backend/services/__init__.py",
-    "docstring": "Levelith Service Layer\n\nThis module contains the service implementations for the Levelith application.\nServices implement the Service Layer Pattern, encapsulating business logic\nand orchestrating operations across repositories.\n\nAccording to MANIFEST.md:\n- Service Layer: Contains business logic separate from data access\n- Dependency Injection: Services receive repositories as dependencies\n- Business Rules: Validates and enforces business rules\n- Orchestration: Coordinates operations across multiple repositories\n\nArchitecture:\n    Controllers/API -> Services -> Repositories -> Data Store\n\nServices:\n    - UserService: User management, authentication, profile operations\n    - ExperienceService: Experience CRUD for all 9 types, NAICS validation\n\nUsage:\n    >>> from backend.repositories import UserRepository, ExperienceRepository\n    >>> from backend.services import UserService, ExperienceService\n    >>>\n    >>> # Initialize repositories\n    >>> user_repo = UserRepository()\n    >>> exp_repo = ExperienceRepository()\n    >>>\n    >>> # Initialize services with dependency injection\n    >>> user_service = UserService(user_repo=user_repo)\n    >>> exp_service = ExperienceService(experience_repo=exp_repo)\n    >>>\n    >>> # Use services for business operations\n    >>> user = user_service.register_user(\n    ...     username=\"johndoe\",\n    ...     email=\"john@example.com\",\n    ...     password=\"SecurePass123!\"\n    ... )",
-    "classes": [],
-    "functions": [],
-    "imports": [
-      "backend.services.user_service",
-      "backend.services.experience_service"
-    ],
-    "exports": [],
-    "complexity_score": 2
-  },
-  "backend/services/user_service.py": {
-    "path": "/home/user/levelith-2/backend/services/user_service.py",
-    "docstring": "User Service\n\nThis module implements the Service layer for User business logic.\nThe service layer sits between the API/controllers and repositories,\nhandling business logic, validation, and orchestration.\n\nAccording to MANIFEST.md:\n- Service Layer: Contains business logic and orchestration\n- Dependency Injection: Services receive repositories as dependencies\n- Validation: Input validation and business rule enforcement\n- Security: Password hashing, authentication logic\n\nArchitecture:\n    Controllers/API \u2192 Services \u2192 Repositories \u2192 Data Store\n\nThe service layer handles:\n- User registration and authentication\n- Password management (hashing, verification)\n- Profile management\n- Business rule validation\n- Experience management for users\n- User lifecycle operations (activate, deactivate, verify)",
-    "classes": [
-      "UserService"
-    ],
-    "functions": [],
-    "imports": [
-      "typing",
-      "datetime",
-      "backend.models.user",
-      "backend.repositories.user_repository",
-      "backend.models.user"
-    ],
-    "exports": [
-      "UserService"
-    ],
-    "complexity_score": 8
-  },
   "backend/api/__init__.py": {
     "path": "/home/user/levelith-2/backend/api/__init__.py",
     "docstring": null,
@@ -1088,21 +1175,39 @@
     "exports": [],
     "complexity_score": 0
   },
-  "backend/api/routes/health.py": {
-    "path": "/home/user/levelith-2/backend/api/routes/health.py",
-    "docstring": "Health Check and Monitoring Endpoints\n\nProvides endpoints for health checks, readiness, and system status.\nCritical for Render deployment monitoring.",
+  "backend/api/routes/users.py": {
+    "path": "/home/user/levelith-2/backend/api/routes/users.py",
+    "docstring": "User Management API Endpoints\n\nProvides REST API for user CRUD operations and authentication.",
     "classes": [],
     "functions": [],
     "imports": [
-      "datetime",
       "typing",
       "fastapi",
-      "fastapi.responses",
-      "backend.config",
-      "backend.database"
+      "sqlalchemy.orm",
+      "backend.database",
+      "backend.models.db_models",
+      "backend.models.user",
+      "backend.schemas.user"
     ],
     "exports": [],
-    "complexity_score": 6
+    "complexity_score": 7
+  },
+  "backend/api/routes/experiences.py": {
+    "path": "/home/user/levelith-2/backend/api/routes/experiences.py",
+    "docstring": "Experience Management API Endpoints\n\nProvides REST API for experience CRUD operations.",
+    "classes": [],
+    "functions": [],
+    "imports": [
+      "typing",
+      "fastapi",
+      "sqlalchemy.orm",
+      "backend.database",
+      "backend.models.db_models",
+      "backend.models.experience",
+      "backend.schemas.experience"
+    ],
+    "exports": [],
+    "complexity_score": 7
   },
   "backend/api/routes/naics.py": {
     "path": "/home/user/levelith-2/backend/api/routes/naics.py",
@@ -1145,39 +1250,21 @@
     ],
     "complexity_score": 38
   },
-  "backend/api/routes/experiences.py": {
-    "path": "/home/user/levelith-2/backend/api/routes/experiences.py",
-    "docstring": "Experience Management API Endpoints\n\nProvides REST API for experience CRUD operations.",
+  "backend/api/routes/health.py": {
+    "path": "/home/user/levelith-2/backend/api/routes/health.py",
+    "docstring": "Health Check and Monitoring Endpoints\n\nProvides endpoints for health checks, readiness, and system status.\nCritical for Render deployment monitoring.",
     "classes": [],
     "functions": [],
     "imports": [
+      "datetime",
       "typing",
       "fastapi",
-      "sqlalchemy.orm",
-      "backend.database",
-      "backend.models.db_models",
-      "backend.models.experience",
-      "backend.schemas.experience"
+      "fastapi.responses",
+      "backend.config",
+      "backend.database"
     ],
     "exports": [],
-    "complexity_score": 7
-  },
-  "backend/api/routes/users.py": {
-    "path": "/home/user/levelith-2/backend/api/routes/users.py",
-    "docstring": "User Management API Endpoints\n\nProvides REST API for user CRUD operations and authentication.",
-    "classes": [],
-    "functions": [],
-    "imports": [
-      "typing",
-      "fastapi",
-      "sqlalchemy.orm",
-      "backend.database",
-      "backend.models.db_models",
-      "backend.models.user",
-      "backend.schemas.user"
-    ],
-    "exports": [],
-    "complexity_score": 7
+    "complexity_score": 6
   },
   "backend/api/routes/__init__.py": {
     "path": "/home/user/levelith-2/backend/api/routes/__init__.py",
@@ -1187,21 +1274,6 @@
     "imports": [],
     "exports": [],
     "complexity_score": 0
-  },
-  "backend/api/routes/docs.py": {
-    "path": "/home/user/levelith-2/backend/api/routes/docs.py",
-    "docstring": "Documentation API Routes\n\nProvides endpoints for serving documentation files.",
-    "classes": [],
-    "functions": [],
-    "imports": [
-      "os",
-      "pathlib",
-      "typing",
-      "fastapi",
-      "fastapi.responses"
-    ],
-    "exports": [],
-    "complexity_score": 5
   },
   "backend/api/routes/stats.py": {
     "path": "/home/user/levelith-2/backend/api/routes/stats.py",
@@ -1220,92 +1292,20 @@
     "exports": [],
     "complexity_score": 7
   },
-  "backend/repositories/user_repository.py": {
-    "path": "/home/user/levelith-2/backend/repositories/user_repository.py",
-    "docstring": "User Repository\n\nThis module implements the Repository pattern for User data access.\nThe repository abstracts data storage operations and provides a clean\ninterface for CRUD operations on User entities.\n\nAccording to MANIFEST.md:\n- Repository Pattern: Separates data access from business logic\n- Dependency Injection: Repositories are injected into services\n- Type Safety: All methods use type hints for clarity\n\nArchitecture:\n    Controllers/API \u2192 Services \u2192 Repositories \u2192 Data Store\n\nThe repository layer handles:\n- Data persistence (create, read, update, delete)\n- Query construction and execution\n- Data mapping between storage and domain models\n- Transaction management",
-    "classes": [
-      "UserRepository"
-    ],
-    "functions": [],
-    "imports": [
-      "typing",
-      "datetime",
-      "backend.models.user"
-    ],
-    "exports": [
-      "UserRepository"
-    ],
-    "complexity_score": 6
-  },
-  "backend/repositories/naics_repository.py": {
-    "path": "/home/user/levelith-2/backend/repositories/naics_repository.py",
-    "docstring": "NAICS Repository\n\nThis module implements the Repository pattern for NAICS code data access.\nThe repository provides efficient lookups, search, and filtering of NAICS codes.\n\nArchitecture:\n    Controllers/API \u2192 Services \u2192 Repositories \u2192 Data Store\n\nThe NAICS repository handles:\n- NAICS code storage and retrieval\n- Search and autocomplete functionality\n- Hierarchical code lookups (parent/child relationships)\n- Category-based filtering\n- Code validation against official NAICS database",
-    "classes": [
-      "NAICSRepository"
-    ],
-    "functions": [],
-    "imports": [
-      "typing",
-      "json",
-      "os",
-      "pathlib",
-      "backend.models.naics"
-    ],
-    "exports": [
-      "NAICSRepository"
-    ],
-    "complexity_score": 8
-  },
-  "backend/repositories/experience_repository.py": {
-    "path": "/home/user/levelith-2/backend/repositories/experience_repository.py",
-    "docstring": "Experience Repository\n\nThis module implements the Repository pattern for Experience data access.\nThe repository abstracts data storage operations and provides a clean\ninterface for CRUD operations on Experience entities and their subtypes.\n\nAccording to MANIFEST.md:\n- Repository Pattern: Separates data access from business logic\n- Supports all 9 experience types (Certificate, Degree, Course, Gig, PartTime,\n  FullTime, SoftSkill, HardSkill, NativeSkill)\n- NAICS code filtering and search capabilities\n- Type Safety: All methods use type hints\n\nArchitecture:\n    Controllers/API \u2192 Services \u2192 Repositories \u2192 Data Store\n\nThe repository layer handles:\n- Data persistence for all experience types\n- Query construction with filtering capabilities\n- NAICS-based categorization and search\n- User-experience relationship management",
-    "classes": [
-      "ExperienceRepository"
-    ],
-    "functions": [],
-    "imports": [
-      "typing",
-      "datetime",
-      "backend.models.experience"
-    ],
-    "exports": [
-      "ExperienceRepository"
-    ],
-    "complexity_score": 6
-  },
-  "backend/repositories/naics_db_repository.py": {
-    "path": "/home/user/levelith-2/backend/repositories/naics_db_repository.py",
-    "docstring": "NAICS Database Repository\n\nDatabase-backed implementation of the NAICS Repository pattern.\nQueries NAICS codes from PostgreSQL instead of JSON files.\n\nThis repository provides the same interface as NAICSRepository but uses\nthe database for persistent storage and querying.",
-    "classes": [
-      "NAICSDBRepository"
-    ],
-    "functions": [],
-    "imports": [
-      "typing",
-      "sqlalchemy.orm",
-      "sqlalchemy",
-      "backend.models.naics",
-      "backend.models.db_models",
-      "backend.database",
-      "backend.database",
-      "datetime"
-    ],
-    "exports": [
-      "NAICSDBRepository"
-    ],
-    "complexity_score": 11
-  },
-  "backend/repositories/__init__.py": {
-    "path": "/home/user/levelith-2/backend/repositories/__init__.py",
-    "docstring": "Levelith Repository Layer\n\nThis module contains the repository implementations for the Levelith application.\nRepositories implement the Repository Pattern, providing an abstraction layer\nbetween the domain models and data storage.\n\nAccording to MANIFEST.md:\n- Repository Pattern: Separates data access from business logic\n- Dependency Injection: Repositories are injected into services\n- Type Safety: All repositories use type hints\n- Testability: Easy to mock for unit testing\n\nArchitecture:\n    Controllers/API -> Services -> Repositories -> Data Store\n\nRepositories:\n    - UserRepository: CRUD operations for User entities\n    - ExperienceRepository: CRUD operations for Experience entities (all 9 types)\n\nUsage:\n    >>> from backend.repositories import UserRepository, ExperienceRepository\n    >>> user_repo = UserRepository()\n    >>> exp_repo = ExperienceRepository()",
+  "backend/api/routes/docs.py": {
+    "path": "/home/user/levelith-2/backend/api/routes/docs.py",
+    "docstring": "Documentation API Routes\n\nProvides endpoints for serving documentation files.",
     "classes": [],
     "functions": [],
     "imports": [
-      "backend.repositories.user_repository",
-      "backend.repositories.experience_repository"
+      "os",
+      "pathlib",
+      "typing",
+      "fastapi",
+      "fastapi.responses"
     ],
     "exports": [],
-    "complexity_score": 2
+    "complexity_score": 5
   },
   "backend/alembic/env.py": {
     "path": "/home/user/levelith-2/backend/alembic/env.py",
@@ -1416,31 +1416,6 @@
     ],
     "complexity_score": 70
   },
-  "dev/test_report_generator.py": {
-    "path": "/home/user/levelith-2/dev/test_report_generator.py",
-    "docstring": "Levelith-2 Test Report Generator\n\nGenerates comprehensive test execution reports with pass/fail status and reasons.",
-    "classes": [],
-    "functions": [
-      "run_tests",
-      "parse_pytest_output",
-      "generate_markdown_report",
-      "main"
-    ],
-    "imports": [
-      "subprocess",
-      "json",
-      "datetime",
-      "pathlib",
-      "typing"
-    ],
-    "exports": [
-      "run_tests",
-      "parse_pytest_output",
-      "generate_markdown_report",
-      "main"
-    ],
-    "complexity_score": 13
-  },
   "dev/example_ai_agent_usage.py": {
     "path": "/home/user/levelith-2/dev/example_ai_agent_usage.py",
     "docstring": "Example: How an AI Agent Would Use the Intelligent Navigator\n\nThis demonstrates a simulated AI agent exploring a codebase using\nthe intelligent tooling instead of pre-generated context nodes.",
@@ -1483,6 +1458,31 @@
     ],
     "exports": [
       "TestDebugger",
+      "main"
+    ],
+    "complexity_score": 13
+  },
+  "dev/test_report_generator.py": {
+    "path": "/home/user/levelith-2/dev/test_report_generator.py",
+    "docstring": "Levelith-2 Test Report Generator\n\nGenerates comprehensive test execution reports with pass/fail status and reasons.",
+    "classes": [],
+    "functions": [
+      "run_tests",
+      "parse_pytest_output",
+      "generate_markdown_report",
+      "main"
+    ],
+    "imports": [
+      "subprocess",
+      "json",
+      "datetime",
+      "pathlib",
+      "typing"
+    ],
+    "exports": [
+      "run_tests",
+      "parse_pytest_output",
+      "generate_markdown_report",
       "main"
     ],
     "complexity_score": 13

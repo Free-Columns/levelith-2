@@ -45,9 +45,11 @@ import NAICSCodes from "./pages/NAICSCodes";
 import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 
-// NEW: User management pages
+// NEW: User management pages with React Query & TanStack Table
 import { UsersPage } from "./pages/UsersPage";
 import { UserDetailPage } from "./pages/UserDetailPage";
+import { CreateUserPage } from "./pages/CreateUserPage";
+import { EditUserPage } from "./pages/EditUserPage";
 
 // NEW: React Query setup for data fetching and caching
 const queryClient = new QueryClient({
@@ -64,8 +66,6 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route path="/admin/users/new" element={<CreateUserPage />} />
-        <Route path="/admin/users/:userId/edit" element={<EditUserPage />} />
         <Route path="/login" element={<Login />} />
         {/* AdminDashboardRefactorv2: FIX - Wrong base route! Should be /admin not /
          * What: Change path="/" to path="/admin" and add redirect from / to /admin
@@ -83,6 +83,8 @@ export default function App() {
           {/* NEW: User management routes with React Query & TanStack Table */}
           <Route path="users" element={<UsersPage />} />
           <Route path="users/:id" element={<UserDetailPage />} />
+          <Route path="users/new" element={<CreateUserPage />} />
+          <Route path="users/:userId/edit" element={<EditUserPage />} />
 
           {/* OLD: Keep for backward compatibility (will be removed in Phase 7) */}
           {/* <Route path="users-old" element={<Users />} /> */}

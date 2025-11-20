@@ -7,19 +7,48 @@
 
 ## Quick Navigation
 
-- **For AI Agents:** Start with [Core Documentation](#core-documentation)
+- **For AI Agents:** Start with [Agent Documentation](#agent-documentation)
 - **For Developers:** See [Getting Started](#getting-started)
 - **For Deployment:** See [Deployment Documentation](#deployment-documentation)
 - **For API Reference:** See [API Documentation](#api-documentation)
-- **For Executive Summary:** See [Codebase Summary Report](#executive-summary)
+- **For Executive Summary:** See [Reports](#reports)
 
 ---
 
-## Executive Summary
+## Documentation Structure
 
-**New:** Comprehensive analysis report for quick understanding of the project status.
+```
+docs/
+├── agent/               # AI agent guides and tooling
+├── api/                 # API endpoint reference
+├── architecture/        # Architecture analysis and comparisons
+│   └── trees/
+├── backend/            # Backend implementation docs
+│   ├── database/       # Database architecture and models
+│   │   ├── models/     # Individual model docs
+│   │   ├── tools/      # Database tools
+│   │   └── utils/      # Database utilities
+│   ├── naics/          # NAICS classification system
+│   │   └── data/       # NAICS TSV data files
+│   └── core/           # Core backend documentation
+├── deployment/         # Deployment guides
+├── development/        # Development documentation
+│   ├── admin/          # Admin dashboard
+│   ├── ci-cd/          # CI/CD pipeline
+│   └── testing/        # Testing guides
+├── frontend/           # Frontend documentation
+└── reports/            # Status reports and analysis
+```
 
-- **[CODEBASE_SUMMARY_REPORT.md](CODEBASE_SUMMARY_REPORT.md)** - Executive summary of codebase analysis, current state, and production roadmap (12 min read)
+---
+
+## Reports
+
+Executive summaries and status reports for quick understanding of project health.
+
+Location: `docs/reports/`
+
+- **[CODEBASE_SUMMARY_REPORT.md](reports/CODEBASE_SUMMARY_REPORT.md)** - Executive summary of codebase analysis (12 min read)
   - Overall grade: B+ (85/100)
   - Current metrics and status
   - Critical issues summary
@@ -28,25 +57,20 @@
 
 ---
 
-## Core Documentation
+## Agent Documentation
 
-Essential documentation for understanding the project and AI agent operation.
+Essential documentation for AI agent operation and navigation.
 
-### AI Agent Operation
-- **[AI_AGENT_GUIDE.md](core/AI_AGENT_GUIDE.md)** - Complete AI agent learning and operating guide v2.0
-- **[AI_AGENT_GOLDEN_RULES.md](core/AI_AGENT_GOLDEN_RULES.md)** - ⚠️ MANDATORY rules for all AI agents
-- **[MANIFEST.md](core/MANIFEST.md)** - ⚠️ Project vision, goals, architecture (START HERE for AI agents)
-- **[claude_navigation.md](core/claude_navigation.md)** - Navigation system overview
-
-### Project Foundation
-Location: `docs/core/`
+Location: `docs/agent/`
 
 | Document | Purpose | Audience |
 |----------|---------|----------|
-| MANIFEST.md | Project vision, goals, conventions | AI Agents, All Developers |
-| AI_AGENT_GOLDEN_RULES.md | 10 mandatory development rules | AI Agents |
-| AI_AGENT_GUIDE.md | Complete AI operating guide v2.0 | AI Agents |
-| claude_navigation.md | Navigation system explained | AI Agents, Developers |
+| [MANIFEST.md](agent/MANIFEST.md) | ⚠️ Project vision, goals, architecture (START HERE) | AI Agents, All Developers |
+| [AI_AGENT_GOLDEN_RULES.md](agent/AI_AGENT_GOLDEN_RULES.md) | ⚠️ MANDATORY 10 development rules | AI Agents |
+| [AI_AGENT_GUIDE.md](agent/AI_AGENT_GUIDE.md) | Complete AI operating guide v2.0 | AI Agents |
+| [AI_AGENT_TOOLING.md](agent/AI_AGENT_TOOLING.md) | Technical documentation for AI navigation system | AI Agents, Developers |
+| [claude_navigation.md](agent/claude_navigation.md) | Navigation system overview | AI Agents, Developers |
+| [KNOWN_ISSUES.md](agent/KNOWN_ISSUES.md) | Critical issues and gaps tracker | AI Agents, All Developers |
 
 ---
 
@@ -67,11 +91,83 @@ Location: `docs/api/`
 
 ## Backend Documentation
 
-Backend architecture, features, and implementation details.
+### Database
 
-Location: `docs/backend/`
+Complete database architecture, schema reference, and usage guides.
 
-- **[NAICS_EXPANSION_SUMMARY.md](backend/NAICS_EXPANSION_SUMMARY.md)** - NAICS 2022 system implementation
+Location: `docs/backend/database/`
+
+#### Overview & Architecture
+
+- **[DATABASE_OVERVIEW.md](backend/database/DATABASE_OVERVIEW.md)** - Entry point for database documentation
+  - PostgreSQL + SQLAlchemy ORM
+  - Core tables (users, experiences, naics_codes)
+  - Design philosophy and key features
+  - Connection management and health checks
+
+- **[DATABASE_ARCHITECTURE.md](backend/database/DATABASE_ARCHITECTURE.md)** - Design decisions and patterns
+  - Layered architecture explanation
+  - Single table inheritance rationale
+  - Denormalized NAICS hierarchy
+  - JSON fields strategy
+  - Trade-offs and alternatives
+
+- **[SCHEMA_REFERENCE.md](backend/database/SCHEMA_REFERENCE.md)** - Complete schema documentation
+  - All 3 tables with column specifications
+  - Constraints and indexes
+  - Relationships and foreign keys
+  - Example SQL queries
+
+#### Usage & Testing
+
+- **[USAGE_GUIDE.md](backend/database/USAGE_GUIDE.md)** - How to use the database
+  - CRUD operations examples
+  - Working with relationships
+  - Common patterns (pagination, search, filtering)
+  - Best practices and error handling
+
+- **[TESTING_DATABASE.md](backend/database/TESTING_DATABASE.md)** - Testing strategies
+  - Test fixtures and factories
+  - Test patterns for CRUD, relationships, cascade deletes
+  - Mocking strategies
+  - 80% coverage requirements
+
+- **[DATA_MODELS.md](backend/database/DATA_MODELS.md)** - ORM model reference
+  - UserDB model complete specification
+  - ExperienceDB model and 9 polymorphic subtypes
+  - NAICSCodeDB model
+  - Model relationships and enums
+
+#### Model Documentation
+
+Location: `docs/backend/database/models/`
+
+- **[user.md](backend/database/models/user.md)** - Complete UserDB model reference
+  - Field specifications and constraints
+  - profile_data JSON schema
+  - Relationships and cascade behavior
+  - Usage examples and best practices
+
+- **[experience.md](backend/database/models/experience.md)** - Complete ExperienceDB model reference
+  - Base model definition
+  - All 9 polymorphic subtypes (Certificate, Degree, Course, Gig, PartTime, FullTime, SoftSkill, HardSkill, NativeSkill)
+  - type_specific_data schemas
+  - Polymorphic query examples
+
+- **[naics.md](backend/database/models/naics.md)** - Complete NAICSCodeDB model reference
+  - NAICS 2022 hierarchy structure (2/3/4/6 digit levels)
+  - Denormalized fields for performance
+  - Search fields (keywords, aliases, examples)
+  - SBA integration
+  - Usage examples and optimization
+
+### NAICS Classification
+
+NAICS 2022 industry classification system implementation.
+
+Location: `docs/backend/naics/`
+
+- **[NAICS_EXPANSION_SUMMARY.md](backend/naics/NAICS_EXPANSION_SUMMARY.md)** - NAICS 2022 system implementation
   - 60+ official industry codes (expandable via TSV import)
   - 14 industry categories
   - Hierarchical support (2/3/4/6 digit levels)
@@ -80,86 +176,80 @@ Location: `docs/backend/`
   - Admin dashboard with visualizations
   - 197 comprehensive tests (98% coverage)
 
----
+- **[NAICS_IMPORT_GUIDE.md](backend/naics/NAICS_IMPORT_GUIDE.md)** - Complete guide for importing NAICS codes from TSV files
+  - TSV file format specification
+  - Import command reference
+  - Troubleshooting common issues
 
-## Database Documentation
+- **[NAICS_QUICK_REFERENCE.md](backend/naics/NAICS_QUICK_REFERENCE.md)** - Quick reference for NAICS database import commands
+  - One-line import commands
+  - Common usage patterns
 
-Complete database architecture, schema reference, and usage guides.
+#### NAICS Data Files
 
-Location: `docs/database/`
+Location: `docs/backend/naics/data/`
 
-- **[DATABASE_OVERVIEW.md](database/DATABASE_OVERVIEW.md)** - Entry point for database documentation
-  - PostgreSQL + SQLAlchemy ORM
-  - Core tables (users, experiences, naics_codes)
-  - Design philosophy and key features
-  - Connection management and health checks
-
-- **[DATABASE_ARCHITECTURE.md](database/DATABASE_ARCHITECTURE.md)** - Design decisions and patterns
-  - Layered architecture explanation
-  - Single table inheritance rationale
-  - Denormalized NAICS hierarchy
-  - JSON fields strategy
-  - Trade-offs and alternatives
-
-- **[SCHEMA_REFERENCE.md](database/SCHEMA_REFERENCE.md)** - Complete schema documentation
-  - All 3 tables with column specifications
-  - Constraints and indexes
-  - Relationships and foreign keys
-  - Example SQL queries
-
-- **[USAGE_GUIDE.md](database/USAGE_GUIDE.md)** - How to use the database
-  - CRUD operations examples
-  - Working with relationships
-  - Common patterns (pagination, search, filtering)
-  - Best practices and error handling
-
-- **[TESTING_DATABASE.md](database/TESTING_DATABASE.md)** - Testing strategies
-  - Test fixtures and factories
-  - Test patterns for CRUD, relationships, cascade deletes
-  - Mocking strategies
-  - 80% coverage requirements
-
-- **[DATA_MODELS.md](database/DATA_MODELS.md)** - ORM model reference
-  - UserDB model complete specification
-  - ExperienceDB model and 9 polymorphic subtypes
-  - NAICSCodeDB model
-  - Model relationships and enums
+- `naics_2022_all_10k_rows.tsv` - 10k NAICS codes dataset
+- `naics_2022_sample_62_rows.tsv` - Sample 62 codes for testing
 
 ---
 
-## Frontend Documentation
+## Architecture Documentation
 
-Frontend architecture, components, and user interface documentation.
+System architecture, design decisions, and comparisons.
 
-Location: `docs/frontend/`
+Location: `docs/architecture/`
 
-**Status:** No frontend-specific documentation yet.
-
-**Planned:**
-- Component library documentation
-- ONETRUTH theming guide
-- State management documentation
-- UI/UX guidelines
+- **[COMPARISON.md](architecture/COMPARISON.md)** - Approach comparisons (Context Nodes vs AI Tooling)
+  - Maintenance overhead comparison
+  - Setup time analysis
+  - Trade-off evaluation
 
 ---
 
-## Development Tools Documentation
+## Development Documentation
 
-Development tooling, testing, and AI agent navigation.
+Development tooling, testing, CI/CD, and admin dashboard.
 
-Location: `docs/dev/`
+Location: `docs/development/`
 
-| Document | Purpose |
-|----------|---------|
-| [AI_AGENT_TOOLING.md](dev/AI_AGENT_TOOLING.md) | Technical documentation for AI navigation system |
-| [NAVIGATION.md](dev/NAVIGATION.md) | Auto-generated codebase navigation guide |
-| [CODEBASE_ANALYSIS.md](dev/CODEBASE_ANALYSIS.md) | **NEW:** Comprehensive codebase analysis report (architecture, coverage, quality) |
-| [DEVELOPMENT_PRIORITIES.md](dev/DEVELOPMENT_PRIORITIES.md) | **NEW:** Development roadmap and priorities (60-100 hour plan) |
-| [TEST_REPORT.md](dev/TEST_REPORT.md) | Test system reports and coverage |
-| [NAICS_IMPORT_GUIDE.md](dev/NAICS_IMPORT_GUIDE.md) | Complete guide for importing NAICS codes from TSV files |
-| [NAICS_QUICK_REFERENCE.md](dev/NAICS_QUICK_REFERENCE.md) | Quick reference for NAICS database import commands |
-| [ADMIN_PANEL_GUIDE.md](dev/ADMIN_PANEL_GUIDE.md) | Complete admin dashboard integration and usage guide |
-| [COMPREHENSIVE_TODO_REPORT.md](dev/COMPREHENSIVE_TODO_REPORT.md) | Complete TODO analysis and action plan |
+### Admin Dashboard
+
+Location: `docs/development/admin/`
+
+- **[ADMIN_PANEL_GUIDE.md](development/admin/ADMIN_PANEL_GUIDE.md)** - Complete admin dashboard integration and usage guide
+  - User management interface
+  - NAICS code management
+  - Bulk import functionality
+  - Visualization features
+
+### Testing
+
+Location: `docs/development/testing/`
+
+- **[TEST_REPORT.md](development/testing/TEST_REPORT.md)** - Test system reports and coverage
+  - Current test coverage metrics
+  - Failed/passing tests summary
+  - Coverage gaps analysis
+
+- **[COMPREHENSIVE_TODO_REPORT.md](development/testing/COMPREHENSIVE_TODO_REPORT.md)** - Complete TODO analysis and action plan
+  - All TODOs in codebase
+  - Prioritized action items
+  - Estimated completion times
+
+### General Development
+
+Location: `docs/development/`
+
+- **[NAVIGATION.md](development/NAVIGATION.md)** - Auto-generated codebase navigation guide
+- **[CODEBASE_ANALYSIS.md](development/CODEBASE_ANALYSIS.md)** - Comprehensive codebase analysis report
+  - Architecture overview
+  - Code quality metrics
+  - Test coverage analysis
+- **[DEVELOPMENT_PRIORITIES.md](development/DEVELOPMENT_PRIORITIES.md)** - Development roadmap and priorities
+  - 60-100 hour plan to production
+  - Prioritized tasks with time estimates
+  - Critical path items
 
 ---
 
@@ -189,16 +279,19 @@ Location: `docs/deployment/`
 
 ---
 
-## Architecture Documentation
+## Frontend Documentation
 
-System architecture, design decisions, and comparisons.
+Frontend architecture, components, and user interface documentation.
 
-Location: `docs/architecture/`
+Location: `docs/frontend/`
 
-- **[COMPARISON.md](architecture/COMPARISON.md)** - Approach comparisons (Context Nodes vs AI Tooling)
-  - Maintenance overhead comparison
-  - Setup time analysis
-  - Trade-off evaluation
+**Status:** No frontend-specific documentation yet.
+
+**Planned:**
+- Component library documentation
+- ONETRUTH theming guide
+- State management documentation
+- UI/UX guidelines
 
 ---
 
@@ -208,10 +301,10 @@ Location: `docs/architecture/`
 
 **Read in this order:**
 
-1. **[docs/core/MANIFEST.md](core/MANIFEST.md)** - Project vision and context
-2. **[docs/core/AI_AGENT_GOLDEN_RULES.md](core/AI_AGENT_GOLDEN_RULES.md)** - Mandatory rules
-3. **[docs/core/AI_AGENT_GUIDE.md](core/AI_AGENT_GUIDE.md)** - Complete operating guide
-4. **[docs/dev/NAVIGATION.md](dev/NAVIGATION.md)** - Codebase navigation
+1. **[docs/agent/MANIFEST.md](agent/MANIFEST.md)** - Project vision and context
+2. **[docs/agent/AI_AGENT_GOLDEN_RULES.md](agent/AI_AGENT_GOLDEN_RULES.md)** - Mandatory rules
+3. **[docs/agent/AI_AGENT_GUIDE.md](agent/AI_AGENT_GUIDE.md)** - Complete operating guide
+4. **[docs/development/NAVIGATION.md](development/NAVIGATION.md)** - Codebase navigation
 
 **Then run:**
 ```bash
@@ -230,7 +323,7 @@ python dev/aiagent_navigator.py ask "How does authentication work?"
 **Read in this order:**
 
 1. **[../README.md](../README.md)** - Project overview and quick start
-2. **[docs/core/MANIFEST.md](core/MANIFEST.md)** - Project context and conventions
+2. **[docs/agent/MANIFEST.md](agent/MANIFEST.md)** - Project context and conventions
 3. **[docs/api/API_DOCUMENTATION.md](api/API_DOCUMENTATION.md)** - API reference
 4. **[docs/deployment/RENDER_DEPLOYMENT.md](deployment/RENDER_DEPLOYMENT.md)** - Deployment guide
 
@@ -253,29 +346,33 @@ cd backend && uvicorn main:app --reload
 
 ### Backend Developers
 - [API_DOCUMENTATION.md](api/API_DOCUMENTATION.md)
-- [NAICS_EXPANSION_SUMMARY.md](backend/NAICS_EXPANSION_SUMMARY.md)
-- [MANIFEST.md](core/MANIFEST.md) - Architecture section
+- [DATABASE_OVERVIEW.md](backend/database/DATABASE_OVERVIEW.md)
+- [DATABASE_ARCHITECTURE.md](backend/database/DATABASE_ARCHITECTURE.md)
+- [NAICS_EXPANSION_SUMMARY.md](backend/naics/NAICS_EXPANSION_SUMMARY.md)
+- [MANIFEST.md](agent/MANIFEST.md) - Architecture section
 
 ### Frontend Developers
-- [MANIFEST.md](core/MANIFEST.md) - ONETRUTH branding section
+- [MANIFEST.md](agent/MANIFEST.md) - ONETRUTH branding section
 - Frontend docs (planned)
 
 ### DevOps Engineers
 - [RENDER_DEPLOYMENT.md](deployment/RENDER_DEPLOYMENT.md)
 - [DEPLOYMENT.md](deployment/DEPLOYMENT.md)
+- [DATABASE_SETUP_NOTES.md](deployment/DATABASE_SETUP_NOTES.md)
 
 ### QA Engineers
-- [TEST_REPORT.md](dev/TEST_REPORT.md)
-- [AI_AGENT_GOLDEN_RULES.md](core/AI_AGENT_GOLDEN_RULES.md) - Testing requirements
+- [TEST_REPORT.md](development/testing/TEST_REPORT.md)
+- [TESTING_DATABASE.md](backend/database/TESTING_DATABASE.md)
+- [AI_AGENT_GOLDEN_RULES.md](agent/AI_AGENT_GOLDEN_RULES.md) - Testing requirements
 
 ### AI Agents
-- [MANIFEST.md](core/MANIFEST.md) - START HERE
-- [AI_AGENT_GOLDEN_RULES.md](core/AI_AGENT_GOLDEN_RULES.md) - MANDATORY
-- [AI_AGENT_GUIDE.md](core/AI_AGENT_GUIDE.md)
-- [KNOWN_ISSUES.md](core/KNOWN_ISSUES.md) - **NEW:** Critical issues to be aware of
-- [CODEBASE_ANALYSIS.md](dev/CODEBASE_ANALYSIS.md) - **NEW:** Complete analysis report
-- [DEVELOPMENT_PRIORITIES.md](dev/DEVELOPMENT_PRIORITIES.md) - **NEW:** Development roadmap
-- [AI_AGENT_TOOLING.md](dev/AI_AGENT_TOOLING.md)
+- [MANIFEST.md](agent/MANIFEST.md) - START HERE
+- [AI_AGENT_GOLDEN_RULES.md](agent/AI_AGENT_GOLDEN_RULES.md) - MANDATORY
+- [AI_AGENT_GUIDE.md](agent/AI_AGENT_GUIDE.md)
+- [KNOWN_ISSUES.md](agent/KNOWN_ISSUES.md) - Critical issues to be aware of
+- [CODEBASE_ANALYSIS.md](development/CODEBASE_ANALYSIS.md) - Complete analysis report
+- [DEVELOPMENT_PRIORITIES.md](development/DEVELOPMENT_PRIORITIES.md) - Development roadmap
+- [AI_AGENT_TOOLING.md](agent/AI_AGENT_TOOLING.md)
 
 ---
 
@@ -306,13 +403,16 @@ All documentation in this repository follows these standards:
 ### Adding New Documentation
 
 1. **Choose the correct directory:**
-   - `core/` - Project fundamentals and AI agent guides
+   - `agent/` - AI agent guides and project fundamentals
    - `api/` - API endpoint documentation
-   - `backend/` - Backend implementation details
+   - `backend/database/` - Database architecture and models
+   - `backend/naics/` - NAICS classification system
+   - `backend/core/` - Core backend implementation
    - `frontend/` - Frontend implementation details
-   - `dev/` - Development tools and processes
+   - `development/` - Development tools and processes
    - `deployment/` - Deployment and infrastructure
    - `architecture/` - Design decisions and comparisons
+   - `reports/` - Status reports and analysis
 
 2. **Follow naming conventions:**
    - Use UPPERCASE.md for critical documents
@@ -343,8 +443,8 @@ All documentation in this repository follows these standards:
 
 Some documentation is automatically generated and should NOT be manually edited:
 
-- **[dev/NAVIGATION.md](dev/NAVIGATION.md)** - Generated by `aiagent_navigator.py`
-- **[dev/TEST_REPORT.md](dev/TEST_REPORT.md)** - Generated by test runs
+- **[development/NAVIGATION.md](development/NAVIGATION.md)** - Generated by `aiagent_navigator.py`
+- **[development/testing/TEST_REPORT.md](development/testing/TEST_REPORT.md)** - Generated by test runs
 
 To regenerate:
 ```bash
@@ -361,46 +461,56 @@ python dev/test_report_generator.py
 
 | Category | Files | Status | Coverage |
 |----------|-------|--------|----------|
-| Executive Summary | 1 | ✅ Complete | 100% |
-| Core | 5 | ✅ Complete | 100% |
+| Reports | 1 | ✅ Complete | 100% |
+| Agent | 6 | ✅ Complete | 100% |
 | API | 1 | ✅ Complete | 100% |
-| Backend | 1 | ✅ Complete | 100% |
-| Database | 6 | ✅ Complete | 100% |
-| Frontend | 1 | ✅ Complete | 100% |
-| Dev Tools | 11 | ✅ Complete | 100% |
-| Deployment | 3 | ✅ Complete | 100% |
+| Backend - Database | 9 | ✅ Complete | 100% |
+| Backend - NAICS | 4 | ✅ Complete | 100% |
 | Architecture | 1 | ✅ Complete | 100% |
+| Development - Admin | 1 | ✅ Complete | 100% |
+| Development - Testing | 2 | ✅ Complete | 100% |
+| Development - General | 3 | ✅ Complete | 100% |
+| Deployment | 3 | ✅ Complete | 100% |
+| Frontend | 0 | ⏳ Planned | 0% |
 
-**Total:** 31 documentation files
+**Total:** 37 documentation files
 
 ---
 
 ## Quick Reference Links
 
 ### Most Important Documents
-1. [CODEBASE_SUMMARY_REPORT.md](CODEBASE_SUMMARY_REPORT.md) - **NEW:** Executive summary (START HERE)
-2. [MANIFEST.md](core/MANIFEST.md) - Project context
-3. [AI_AGENT_GOLDEN_RULES.md](core/AI_AGENT_GOLDEN_RULES.md) - Development rules
-4. [KNOWN_ISSUES.md](core/KNOWN_ISSUES.md) - Critical issues and gaps
-5. [CODEBASE_ANALYSIS.md](dev/CODEBASE_ANALYSIS.md) - Complete analysis report
-6. [DEVELOPMENT_PRIORITIES.md](dev/DEVELOPMENT_PRIORITIES.md) - Roadmap to production
+1. [CODEBASE_SUMMARY_REPORT.md](reports/CODEBASE_SUMMARY_REPORT.md) - Executive summary (START HERE)
+2. [MANIFEST.md](agent/MANIFEST.md) - Project context
+3. [AI_AGENT_GOLDEN_RULES.md](agent/AI_AGENT_GOLDEN_RULES.md) - Development rules
+4. [KNOWN_ISSUES.md](agent/KNOWN_ISSUES.md) - Critical issues and gaps
+5. [CODEBASE_ANALYSIS.md](development/CODEBASE_ANALYSIS.md) - Complete analysis report
+6. [DEVELOPMENT_PRIORITIES.md](development/DEVELOPMENT_PRIORITIES.md) - Roadmap to production
 7. [API_DOCUMENTATION.md](api/API_DOCUMENTATION.md) - API reference
-8. [RENDER_DEPLOYMENT.md](deployment/RENDER_DEPLOYMENT.md) - Deployment guide
+8. [DATABASE_OVERVIEW.md](backend/database/DATABASE_OVERVIEW.md) - Database documentation
+9. [RENDER_DEPLOYMENT.md](deployment/RENDER_DEPLOYMENT.md) - Deployment guide
 
 ### Frequently Accessed
-- [AI Agent Guide](core/AI_AGENT_GUIDE.md)
-- [NAICS Implementation](backend/NAICS_EXPANSION_SUMMARY.md)
-- [Navigation Guide](dev/NAVIGATION.md)
-- [Testing Documentation](dev/TEST_REPORT.md)
+- [AI Agent Guide](agent/AI_AGENT_GUIDE.md)
+- [Database Architecture](backend/database/DATABASE_ARCHITECTURE.md)
+- [NAICS Implementation](backend/naics/NAICS_EXPANSION_SUMMARY.md)
+- [Navigation Guide](development/NAVIGATION.md)
+- [Testing Documentation](development/testing/TEST_REPORT.md)
+
+### Model Reference
+- [User Model](backend/database/models/user.md)
+- [Experience Model](backend/database/models/experience.md)
+- [NAICS Model](backend/database/models/naics.md)
 
 ---
 
 ## Getting Help
 
-- **For AI agents:** Read [AI_AGENT_GUIDE.md](core/AI_AGENT_GUIDE.md)
-- **For developers:** Check [MANIFEST.md](core/MANIFEST.md) troubleshooting section
+- **For AI agents:** Read [AI_AGENT_GUIDE.md](agent/AI_AGENT_GUIDE.md)
+- **For developers:** Check [MANIFEST.md](agent/MANIFEST.md) troubleshooting section
 - **For deployment issues:** See [RENDER_DEPLOYMENT.md](deployment/RENDER_DEPLOYMENT.md)
-- **For testing:** See [AI_AGENT_GOLDEN_RULES.md](core/AI_AGENT_GOLDEN_RULES.md) Rule 1
+- **For testing:** See [AI_AGENT_GOLDEN_RULES.md](agent/AI_AGENT_GOLDEN_RULES.md) Rule 1
+- **For database:** See [DATABASE_OVERVIEW.md](backend/database/DATABASE_OVERVIEW.md)
 
 ---
 

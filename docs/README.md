@@ -1,6 +1,6 @@
 # Levelith Documentation Index
 
-**Last Updated:** 2025-11-18
+**Last Updated:** 2025-11-20
 **Project:** Levelith-2 - Social Resume Gamification Platform
 
 ---
@@ -79,6 +79,51 @@ Location: `docs/backend/`
   - TSV import/export functionality
   - Admin dashboard with visualizations
   - 197 comprehensive tests (98% coverage)
+
+---
+
+## Database Documentation
+
+Complete database architecture, schema reference, and usage guides.
+
+Location: `docs/database/`
+
+- **[DATABASE_OVERVIEW.md](database/DATABASE_OVERVIEW.md)** - Entry point for database documentation
+  - PostgreSQL + SQLAlchemy ORM
+  - Core tables (users, experiences, naics_codes)
+  - Design philosophy and key features
+  - Connection management and health checks
+
+- **[DATABASE_ARCHITECTURE.md](database/DATABASE_ARCHITECTURE.md)** - Design decisions and patterns
+  - Layered architecture explanation
+  - Single table inheritance rationale
+  - Denormalized NAICS hierarchy
+  - JSON fields strategy
+  - Trade-offs and alternatives
+
+- **[SCHEMA_REFERENCE.md](database/SCHEMA_REFERENCE.md)** - Complete schema documentation
+  - All 3 tables with column specifications
+  - Constraints and indexes
+  - Relationships and foreign keys
+  - Example SQL queries
+
+- **[USAGE_GUIDE.md](database/USAGE_GUIDE.md)** - How to use the database
+  - CRUD operations examples
+  - Working with relationships
+  - Common patterns (pagination, search, filtering)
+  - Best practices and error handling
+
+- **[TESTING_DATABASE.md](database/TESTING_DATABASE.md)** - Testing strategies
+  - Test fixtures and factories
+  - Test patterns for CRUD, relationships, cascade deletes
+  - Mocking strategies
+  - 80% coverage requirements
+
+- **[DATA_MODELS.md](database/DATA_MODELS.md)** - ORM model reference
+  - UserDB model complete specification
+  - ExperienceDB model and 9 polymorphic subtypes
+  - NAICSCodeDB model
+  - Model relationships and enums
 
 ---
 
@@ -320,12 +365,13 @@ python dev/test_report_generator.py
 | Core | 5 | ✅ Complete | 100% |
 | API | 1 | ✅ Complete | 100% |
 | Backend | 1 | ✅ Complete | 100% |
+| Database | 6 | ✅ Complete | 100% |
 | Frontend | 1 | ✅ Complete | 100% |
 | Dev Tools | 11 | ✅ Complete | 100% |
 | Deployment | 3 | ✅ Complete | 100% |
 | Architecture | 1 | ✅ Complete | 100% |
 
-**Total:** 25 documentation files
+**Total:** 31 documentation files
 
 ---
 

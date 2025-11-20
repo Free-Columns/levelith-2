@@ -44,6 +44,10 @@ import NAICSCodes from "./pages/NAICSCodes";
 import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 
+// NEW: User management pages
+import { UsersPage } from "./pages/UsersPage";
+import { UserDetailPage } from "./pages/UserDetailPage";
+
 export default function App() {
   return (
     <Routes>
@@ -61,7 +65,13 @@ export default function App() {
          * Currently: /users, /experiences, /naics, /settings
          * After fix: /admin/users, /admin/experiences, /admin/naics, /admin/settings
          */}
-        <Route path="users" element={<Users />} />
+        {/* NEW: User management routes with React Query & TanStack Table */}
+        <Route path="users" element={<UsersPage />} />
+        <Route path="users/:id" element={<UserDetailPage />} />
+
+        {/* OLD: Keep for backward compatibility (will be removed in Phase 7) */}
+        {/* <Route path="users-old" element={<Users />} /> */}
+
         <Route path="experiences" element={<Experiences />} />
         <Route path="naics" element={<NAICSCodes />} />
         <Route path="settings" element={<Settings />} />

@@ -1,0 +1,95 @@
+code,title,size_standard_millions,size_standard_employees
+531210,Offices of Real Estate Agents and Brokers10,13.0,
+531311,Residential Property Managers,11.0,
+531312,Nonresidential Property Managers,17.0,
+531320,Offices of Real Estate Appraisers,8.5,
+531390,Other Activities Related to Real Estate,17.0,
+532111,Passenger Car Rental,41.5,
+532112,Passenger Car Leasing,41.5,
+532120,"Truck, Utility Trailer, and RV (Recreational
+Vehicle) Rental and Leasing",41.5,
+532210,Consumer Electronics and Appliances Rental,41.5,
+532281,Formal Wear and Costume Rental,22.0,
+532282,Video Tape and Disc Rental,31.0,
+532283,Home Health Equipment Rental,36.0,
+532284,Recreational Goods Rental,8.0,
+532289,All Other Consumer Goods Rental,11.0,
+532310,General Rental Centers,8.0,
+532411,"Commercial Air, Rail, and Water Transportation
+Equipment Rental and Leasing",40.0,
+532412,"Construction, Mining and Forestry Machinery
+and Equipment Rental and Leasing",35.0,
+532420,"Office Machinery and Equipment Rental and
+Leasing",35.0,
+532490,"Other Commercial and Industrial Machinery and
+Equipment Rental and Leasing",35.0,
+533110,"Lessors of Nonfinancial Intangible Assets (except
+Copyrighted Works)",41.5,
+541110,Offices of Lawyers,13.5,
+541191,Title Abstract and Settlement Offices,17.0,
+541199,All Other Legal Services,18.0,
+541211,Offices of Certified Public Accountants,23.5,
+541213,Tax Preparation Services,22.0,
+541214,Payroll Services,34.5,
+541219,Other Accounting Services,22.0,
+541310,Architectural Services,11.0,
+541320,Landscape Architectural Services,8.0,
+541330,Engineering Services,22.5,
+541330-E1,"Military and Aerospace Equipment and Military
+Weapons",41.5,
+541330-E2,"Contracts and Subcontracts for Engineering
+Services Awarded Under the National Energy
+Policy Act of 1992",41.5,
+541330-E3,Marine Engineering and Naval Architecture,41.5,
+541340,Drafting Services,8.0,
+541350,Building Inspection Services,10.0,
+541360,Geophysical Surveying and Mapping Services,25.0,
+541370,"Surveying and Mapping (except Geophysical)
+Services",16.5,
+541380,Testing Laboratories,16.5,
+541410,Interior Design Services,8.0,
+541420,Industrial Design Services,15.0,
+541430,Graphic Design Services,8.0,
+541490,Other Specialized Design Services,12.0,
+541511,Custom Computer Programming Services,30.0,
+541512,Computer Systems Design Services,30.0,
+541513,Computer Facilities Management Services,32.5,
+541519,Other Computer Related Services,30.0,
+541519,Information Technology Value Added Resellers18,,150
+541611,"Administrative Management and General
+Management Consulting Services",21.5,
+541612,Human Resources Consulting Services,25.5,
+541613,Marketing Consulting Services,16.5,
+541614,"Process, Physical Distribution and Logistics
+Consulting Services",17.5,
+541618,Other Management Consulting Services,16.5,
+541620,Environmental Consulting Services,16.5,
+541690,"Other Scientific and Technical Consulting
+Services",16.5,
+541713,Research and Technology in Nanotechnology11,,1000
+541714,"Research and Technology in Biotechnology
+(except Nanobiotechnology)11",,1000
+541715,"Research and Development in the Physical,
+Engineering, and Life Sciences (except
+Nanotechnology and Biotechnology) 11",,1000
+541715-E1,"Aircraft, Aircraft Engine and Engine Parts11",,1500
+541715-E2,Other Aircraft Parts and Auxiliary Equipment11,,1250
+541715-E3,"Guided Missiles and Space Vehicles, Their
+Propulsion Units and Propulsion Parts11",,1250
+541720,"Research and Development in the Social
+Sciences and Humanities",24.5,
+541810,Advertising Agencies10,22.5,
+541820,Public Relations Agencies,16.5,
+541830,Media Buying Agencies,28.5,
+541840,Media Representatives,18.5,
+541850,Outdoor Advertising,30.5,
+541860,Direct Mail Advertising,19.5,
+541870,Advertising Material Distribution Services,25.0,
+541890,Other Services Related to Advertising,16.5,
+541910,Marketing Research and Public Opinion Polling,20.0,
+541921,"Photography Studios, Portrait",14.0,
+541922,Commercial Photography,8.0,
+541930,Translation and Interpretation Services,20.0,
+541940,Veterinary Services,9.0,
+541990,"All Other Professional, Scientific and Technical
+Services",17.0,

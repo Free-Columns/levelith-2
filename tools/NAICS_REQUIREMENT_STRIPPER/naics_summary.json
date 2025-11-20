@@ -1,0 +1,171 @@
+{
+  "sectors": [
+    {
+      "code": "11",
+      "name": "Agriculture, Forestry, Fishing and Hunting",
+      "total_industries": 65,
+      "size_standards": {
+        "millions": 64,
+        "employees": 1
+      }
+    },
+    {
+      "code": "21",
+      "name": "Mining, Quarrying, and Oil and Gas",
+      "total_industries": 28,
+      "size_standards": {
+        "millions": 4,
+        "employees": 24
+      }
+    },
+    {
+      "code": "22",
+      "name": "Utilities",
+      "total_industries": 47,
+      "size_standards": {
+        "millions": 36,
+        "employees": 11
+      }
+    },
+    {
+      "code": "31",
+      "name": "33 \u2013 Manufacturing",
+      "total_industries": 338,
+      "size_standards": {
+        "millions": 0,
+        "employees": 338
+      }
+    },
+    {
+      "code": "42",
+      "name": "Wholesale Trade",
+      "total_industries": 86,
+      "size_standards": {
+        "millions": 0,
+        "employees": 86
+      }
+    },
+    {
+      "code": "44",
+      "name": "45 \u2013 Retail Trade",
+      "total_industries": 51,
+      "size_standards": {
+        "millions": 43,
+        "employees": 8
+      }
+    },
+    {
+      "code": "48",
+      "name": "49 \u2013 Transportation and Warehousing",
+      "total_industries": 55,
+      "size_standards": {
+        "millions": 40,
+        "employees": 15
+      }
+    },
+    {
+      "code": "51",
+      "name": "Information",
+      "total_industries": 56,
+      "size_standards": {
+        "millions": 43,
+        "employees": 13
+      }
+    },
+    {
+      "code": "52",
+      "name": "Finance and Insurance",
+      "total_industries": 28,
+      "size_standards": {
+        "millions": 27,
+        "employees": 1
+      }
+    },
+    {
+      "code": "53",
+      "name": "Real Estate and Rental and Leasing",
+      "total_industries": 16,
+      "size_standards": {
+        "millions": 16,
+        "employees": 0
+      }
+    },
+    {
+      "code": "54",
+      "name": "Professional, Scientific and Technical Services",
+      "total_industries": 75,
+      "size_standards": {
+        "millions": 68,
+        "employees": 7
+      }
+    },
+    {
+      "code": "55",
+      "name": "Management of Companies and Enterprises",
+      "total_industries": 23,
+      "size_standards": {
+        "millions": 23,
+        "employees": 0
+      }
+    },
+    {
+      "code": "61",
+      "name": "Educational Services",
+      "total_industries": 26,
+      "size_standards": {
+        "millions": 25,
+        "employees": 1
+      }
+    },
+    {
+      "code": "62",
+      "name": "Health Care and Social Assistance",
+      "total_industries": 52,
+      "size_standards": {
+        "millions": 52,
+        "employees": 0
+      }
+    },
+    {
+      "code": "71",
+      "name": "Arts, Entertainment and Recreation",
+      "total_industries": 26,
+      "size_standards": {
+        "millions": 26,
+        "employees": 0
+      }
+    },
+    {
+      "code": "72",
+      "name": "Accommodation and Food Services",
+      "total_industries": 45,
+      "size_standards": {
+        "millions": 45,
+        "employees": 0
+      }
+    },
+    {
+      "code": "92",
+      "name": "Public Administration17",
+      "total_industries": 20,
+      "size_standards": {
+        "millions": 20,
+        "employees": 0
+      }
+    },
+    {
+      "code": "92",
+      "name": "Small business size standards are not established for this sector.",
+      "total_industries": 0,
+      "size_standards": {
+        "millions": 0,
+        "employees": 0
+      }
+    }
+  ],
+  "size_standard_distribution": {
+    "by_millions": 532,
+    "by_employees": 505,
+    "by_assets": 0
+  }
+}

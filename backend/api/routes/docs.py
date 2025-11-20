@@ -148,6 +148,20 @@ async def get_doc(doc_path: str) -> Response:
         if not file_path.exists():
             raise HTTPException(status_code=404, detail=f"Documentation not found: {doc_path}")
 
+        # Check if the path is a directory instead of a file
+        if file_path.is_dir():
+            raise HTTPException(
+                status_code=400, 
+                detail=f"Path is a directory, not a file. Please select a specific document from: {doc_path}"
+            )
+
+        # Check if it's actually a file
+        if not file_path.is_file():
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid path type: {doc_path}"
+            )
+
         # Read and return the markdown content
         content = file_path.read_text(encoding="utf-8")
 
@@ -162,6 +176,9 @@ async def get_doc(doc_path: str) -> Response:
     except ValueError:
         # is_relative_to can raise ValueError in some cases
         raise HTTPException(status_code=400, detail="Invalid documentation path")
+    except HTTPException:
+        # Re-raise HTTP exceptions as-is
+        raise
     except Exception as e:
         raise HTTPException(
             status_code=500,

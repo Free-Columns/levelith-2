@@ -15,6 +15,17 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
+    # Neural Hive (AI & Vector DB)
+    openai_api_key: str = "sk-..."
+    pinecone_api_key: str = "pcsk_..."
+    pinecone_index_name: str = "industry-classifier"
+    pinecone_env: str = "us-east-1"  # or your specific region
+    
+    # Namespaces
+    namespace_naics: str = "naics-codes"
+    namespace_onet: str = "onet-codes"
+
+
     # Application
     app_name: str = "Levelith API"
     app_version: str = "2.0.0"

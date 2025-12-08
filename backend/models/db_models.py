@@ -10,7 +10,7 @@ from datetime import datetime
 from typing import List
 
 from sqlalchemy import (
-    Column, String, Boolean, DateTime, JSON, ForeignKey, Text, Enum as SQLEnum, Integer
+    Column, String, Boolean, DateTime, JSON, ForeignKey, Text, Enum as SQLEnum, Integer, Float
 )
 from sqlalchemy.orm import relationship
 
@@ -37,6 +37,14 @@ class UserDB(Base):
     is_active = Column(Boolean, default=True, nullable=False)
     is_verified = Column(Boolean, default=False, nullable=False)
     profile_data = Column(JSON, default=dict, nullable=False)
+
+    # XP and Leveling fields
+    professional_xp = Column(Float, default=0.0, nullable=False)
+    education_xp = Column(Float, default=0.0, nullable=False)
+    skills_xp = Column(Float, default=0.0, nullable=False)
+    vocational_xp = Column(Float, default=0.0, nullable=False)
+    total_xp = Column(Float, default=0.0, nullable=False)
+    level = Column(Integer, default=0, nullable=False)
 
     # Timestamps
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)

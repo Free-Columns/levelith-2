@@ -57,15 +57,18 @@ docs/
 │   └── AI_AGENT_GOLDEN_RULES.md
 ├── api/                   # API documentation
 │   └── API_DOCUMENTATION.md
+├── features/              # Feature documentation
+│   ├── admin-dashboard.md # Complete admin dashboard guide
+│   └── naics-system.md    # NAICS industry classification
 ├── backend/               # Backend technical docs
-│   ├── database/          # Database schemas & models
-│   └── naics/             # NAICS system docs
+│   └── database/          # Database schemas & models
+│       └── README.md      # Database overview
 ├── deployment/            # Deployment guides
 │   └── RENDER_DEPLOYMENT.md
-└── all/                   # Comprehensive guides (legacy)
+└── archive/               # Historical docs (outdated)
 ```
 
-**Note:** Most `docs/all/*` files are outdated. Use MVP_GUIDE.md instead.
+**Note:** Legacy documentation has been archived. Use MVP_GUIDE.md and the consolidated feature docs.
 
 ---
 
@@ -113,37 +116,20 @@ docs/
 - ✅ docs/api/API_DOCUMENTATION.md
 - ✅ docs/deployment/RENDER_DEPLOYMENT.md
 - ✅ docs/backend/database/* (technical references)
-- ✅ docs/backend/naics/* (NAICS documentation)
+- ✅ docs/features/admin-dashboard.md (admin dashboard guide)
+- ✅ docs/features/naics-system.md (NAICS documentation)
 
-### Files Marked for Cleanup (Redundant)
+### Files Archived (Completed)
 
-**Legacy/Outdated:**
-- ⚠️ NAVIGATION.md (redundant with this index)
-- ⚠️ PHASE_2_IMPLEMENTATION_SUMMARY.md (outdated, info in PROGRESS_REPORT)
-- ⚠️ docs/all/* (most files - info consolidated in MVP_GUIDE)
-- ⚠️ docs/development/admin/* (old admin dashboard - removed)
-- ⚠️ docs/frontend/* (old frontend - removed)
-- ⚠️ docs/reports/* (outdated reports)
+**Successfully archived:**
+- ✅ _deprecated/* (deleted)
+- ✅ docs/all/* (moved to docs/archive/)
+- ✅ docs/development/admin/* (merged into docs/features/admin-dashboard.md)
+- ✅ docs/development/frontend/* (merged into docs/features/admin-dashboard.md)
+- ✅ docs/backend/naics/* (merged into docs/features/naics-system.md)
+- ✅ Root clutter files (NAVIGATION.md, PHASE_2_*.md, etc.)
 
-**Deprecated:**
-- ❌ _deprecated/* (already marked for removal)
-
-### Cleanup Commands (Optional)
-
-To remove redundant documentation (run at your discretion):
-
-```bash
-# Archive old documentation
-mkdir -p _archived_docs
-mv NAVIGATION.md _archived_docs/
-mv PHASE_2_IMPLEMENTATION_SUMMARY.md _archived_docs/
-mv docs/all/ _archived_docs/
-mv docs/development/admin/ _archived_docs/
-mv docs/frontend/ _archived_docs/
-mv docs/reports/ _archived_docs/
-```
-
-**Note:** These files are not causing issues. Only clean up if you want leaner documentation.
+**Result:** ~50% reduction in markdown files (~80 → ~40 files)
 
 ---
 
@@ -158,8 +144,9 @@ mv docs/reports/ _archived_docs/
 | Understand XP system | [MVP_GUIDE.md](./MVP_GUIDE.md) → XP System Details |
 | Use dev interface | [MVP_GUIDE.md](./MVP_GUIDE.md) → Dev Interface Setup |
 | API reference | http://localhost:8000/docs (Swagger UI) |
-| Database schema | [docs/backend/database/](./docs/backend/database/) |
-| NAICS codes | [docs/backend/naics/](./docs/backend/naics/) |
+| Database schema | [docs/backend/database/README.md](./docs/backend/database/README.md) |
+| NAICS codes | [docs/features/naics-system.md](./docs/features/naics-system.md) |
+| Admin dashboard | [docs/features/admin-dashboard.md](./docs/features/admin-dashboard.md) |
 | Project vision | [docs/agent/MANIFEST.md](./docs/agent/MANIFEST.md) |
 
 ### Quick Links

@@ -93,15 +93,14 @@ cd backend && uvicorn main:app --reload
 | [**Known Issues**](docs/core/KNOWN_ISSUES.md) | 🐛 Critical issues tracker |
 | [**Priorities**](docs/dev/DEVELOPMENT_PRIORITIES.md) | 🗺️ Development roadmap |
 
-**Frontend Development:**
+**Feature Documentation:**
 
 | Document | Purpose |
 |----------|---------|
-| [**Infrastructure Overview**](docs/development/frontend/INFRASTRUCTURE_OVERVIEW.md) | 🏗️ Phase 0 & 1 complete setup |
-| [**Custom Components**](docs/development/frontend/ADMIN_COMPONENTS_GUIDE.md) | 🎨 Reusable UI components (DataTable, SearchBar, etc.) |
-| [**Custom Hooks**](docs/development/frontend/ADMIN_HOOKS_GUIDE.md) | 🪝 React hooks (debounce, pagination, localStorage) |
-| [**API Client**](docs/development/frontend/ADMIN_API_CLIENT_GUIDE.md) | 🔌 Type-safe API methods for all endpoints |
-| [**Admin Dashboard Refactor**](docs/development/admin/ADMIN_DASHBOARD_REFACTOR_V2.md) | 📋 Complete 8-phase implementation plan |
+| [**Admin Dashboard**](docs/features/admin-dashboard.md) | 🎛️ Complete admin dashboard guide (setup, features, API) |
+| [**NAICS System**](docs/features/naics-system.md) | 🏭 Industry classification system (2222+ codes, import, API) |
+| [**Database Guide**](docs/backend/database/README.md) | 🗄️ Schema, models, and database operations |
+| [**API Documentation**](docs/api/API_DOCUMENTATION.md) | 🔌 Complete API reference (37 endpoints) |
 
 **All Documentation:** [docs/README.md](docs/README.md)
 

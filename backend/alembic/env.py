@@ -8,7 +8,11 @@ from sqlalchemy import pool
 from alembic import context
 
 # Add parent directory to path to import backend modules
-sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+# __file__ is backend/alembic/env.py
+# We need to go up to the project root (3 levels up) to import backend
+backend_dir = os.path.dirname(os.path.dirname(__file__))  # backend/
+project_root = os.path.dirname(backend_dir)  # project root
+sys.path.insert(0, project_root)
 
 # Import our application's database configuration
 from backend.config import settings

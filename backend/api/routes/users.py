@@ -2,6 +2,7 @@
 User Management API Endpoints
 
 Provides REST API for user CRUD operations and authentication.
+Refactored to use service layer following clean architecture principles.
 """
 
 import random
@@ -12,6 +13,8 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from backend.database import get_db
+from backend.dependencies import get_user_service
+from backend.services.user_service import UserService
 from backend.models.db_models import UserDB, ExperienceDB
 from backend.models.user import hash_password, verify_password
 from backend.models.experience import ExperienceCategory, ExperienceType
@@ -23,13 +26,16 @@ router = APIRouter()
 
 
 @router.post("/", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
-async def create_user(user_data: UserCreate, db: Session = Depends(get_db)):
+async def create_user(
+    user_data: UserCreate,
+    user_service: UserService = Depends(get_user_service)
+):
     """
     Create a new user.
 
     Args:
         user_data: User creation data
-        db: Database session
+        user_service: User service (injected)
 
     Returns:
         Created user information
@@ -37,60 +43,53 @@ async def create_user(user_data: UserCreate, db: Session = Depends(get_db)):
     Raises:
         HTTPException: If username or email already exists
     """
-    # Check if username already exists
-    existing_user = db.query(UserDB).filter(UserDB.username == user_data.username).first()
-    if existing_user:
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail="Username already exists"
+    try:
+        # Use service layer to register user
+        user = user_service.register_user(
+            username=user_data.username,
+            email=user_data.email,
+            password=user_data.password,
+            **(user_data.profile_data or {})
         )
 
-    # Check if email already exists
-    existing_email = db.query(UserDB).filter(UserDB.email == user_data.email).first()
-    if existing_email:
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail="Email already exists"
+        # Convert domain model to response schema
+        return UserResponse(
+            id=user.id,
+            username=user.username,
+            email=user.email,
+            is_active=user.is_active,
+            is_verified=user.is_verified,
+            profile_data=user.profile_data,
+            created_at=user.created_at,
+            updated_at=user.updated_at,
+            last_login=user.last_login,
+            experience_count=len(user.experiences)
         )
-
-    # Hash password
-    password_hash = hash_password(user_data.password)
-
-    # Create user
-    db_user = UserDB(
-        username=user_data.username,
-        email=user_data.email,
-        password_hash=password_hash,
-        profile_data=user_data.profile_data or {}
-    )
-
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-
-    # Convert to response schema
-    return UserResponse(
-        id=db_user.id,
-        username=db_user.username,
-        email=db_user.email,
-        is_active=db_user.is_active,
-        is_verified=db_user.is_verified,
-        profile_data=db_user.profile_data,
-        created_at=db_user.created_at,
-        updated_at=db_user.updated_at,
-        last_login=db_user.last_login,
-        experience_count=len(db_user.experiences)
-    )
+    except ValueError as e:
+        # Service raises ValueError for business rule violations
+        error_msg = str(e)
+        if "already taken" in error_msg or "already registered" in error_msg:
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail=error_msg
+            )
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=error_msg
+        )
 
 
 @router.get("/{user_id}", response_model=UserWithExperiences)
-async def get_user(user_id: str, db: Session = Depends(get_db)):
+async def get_user(
+    user_id: str,
+    user_service: UserService = Depends(get_user_service)
+):
     """
     Get user by ID.
 
     Args:
         user_id: User ID
-        db: Database session
+        user_service: User service (injected)
 
     Returns:
         User information with experiences
@@ -98,7 +97,7 @@ async def get_user(user_id: str, db: Session = Depends(get_db)):
     Raises:
         HTTPException: If user not found
     """
-    user = db.query(UserDB).filter(UserDB.id == user_id).first()
+    user = user_service.get_user_by_id(user_id)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -116,7 +115,7 @@ async def get_user(user_id: str, db: Session = Depends(get_db)):
         updated_at=user.updated_at,
         last_login=user.last_login,
         experience_count=len(user.experiences),
-        experiences=[exp.id for exp in user.experiences]
+        experiences=user.experiences  # Already list of IDs from domain model
     )
 
 
@@ -127,7 +126,7 @@ async def list_users(
     search: Optional[str] = None,
     is_active: Optional[bool] = None,
     is_verified: Optional[bool] = None,
-    db: Session = Depends(get_db)
+    user_service: UserService = Depends(get_user_service)
 ):
     """
     List all users with pagination, search, and filtering.
@@ -138,37 +137,35 @@ async def list_users(
         search: Search query for username or email
         is_active: Filter by active status
         is_verified: Filter by verified status
-        db: Database session
+        user_service: User service (injected)
 
     Returns:
         Paginated response with users and metadata
     """
     # Validate and limit page_size
     page_size = min(page_size, 200)
-    skip = (page - 1) * page_size
+    offset = (page - 1) * page_size
 
-    # Build query
-    query = db.query(UserDB)
-
-    # Apply search filter
+    # Get users from service layer
     if search:
-        search_filter = f"%{search}%"
-        query = query.filter(
-            (UserDB.username.ilike(search_filter)) |
-            (UserDB.email.ilike(search_filter))
+        # Use search functionality
+        all_users = user_service.search_users(search)
+        # Apply additional filters
+        if is_active is not None:
+            all_users = [u for u in all_users if u.is_active == is_active]
+        if is_verified is not None:
+            all_users = [u for u in all_users if u.is_verified == is_verified]
+        total = len(all_users)
+        users = all_users[offset:offset + page_size]
+    else:
+        # Use list functionality with filters
+        users = user_service.list_users(
+            active_only=is_active if is_active else False,
+            verified_only=is_verified if is_verified else False,
+            limit=page_size,
+            offset=offset
         )
-
-    # Apply status filters
-    if is_active is not None:
-        query = query.filter(UserDB.is_active == is_active)
-    if is_verified is not None:
-        query = query.filter(UserDB.is_verified == is_verified)
-
-    # Get total count
-    total = query.count()
-
-    # Apply pagination and ordering
-    users = query.order_by(UserDB.created_at.desc()).offset(skip).limit(page_size).all()
+        total = user_service.get_user_count()
 
     # Calculate total pages
     total_pages = (total + page_size - 1) // page_size if total > 0 else 1
@@ -198,73 +195,79 @@ async def list_users(
 
 
 @router.patch("/{user_id}", response_model=UserResponse)
-async def update_user(user_id: str, user_data: UserUpdate, db: Session = Depends(get_db)):
+async def update_user(
+    user_id: str,
+    user_data: UserUpdate,
+    user_service: UserService = Depends(get_user_service)
+):
     """
     Update user information.
 
     Args:
         user_id: User ID
         user_data: Updated user data
-        db: Database session
+        user_service: User service (injected)
 
     Returns:
         Updated user information
 
     Raises:
-        HTTPException: If user not found
+        HTTPException: If user not found or email already exists
     """
-    user = db.query(UserDB).filter(UserDB.id == user_id).first()
-    if not user:
+    try:
+        # Update profile data if provided
+        if user_data.profile_data is not None:
+            user = user_service.update_profile(user_id, user_data.profile_data)
+        else:
+            user = user_service.get_user_by_id(user_id)
+            if not user:
+                raise ValueError(f"User with ID '{user_id}' not found")
+
+        # Handle activation/deactivation if specified
+        if user_data.is_active is not None:
+            if user_data.is_active and not user.is_active:
+                user = user_service.activate_user(user_id)
+            elif not user_data.is_active and user.is_active:
+                user = user_service.deactivate_user(user_id)
+
+        # Note: Email update not supported by service layer yet
+        # This is intentional - email changes should require verification
+        if user_data.email is not None:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Email updates require email verification flow (not yet implemented)"
+            )
+
+        return UserResponse(
+            id=user.id,
+            username=user.username,
+            email=user.email,
+            is_active=user.is_active,
+            is_verified=user.is_verified,
+            profile_data=user.profile_data,
+            created_at=user.created_at,
+            updated_at=user.updated_at,
+            last_login=user.last_login,
+            experience_count=len(user.experiences)
+        )
+    except ValueError as e:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="User not found"
+            detail=str(e)
         )
-
-    # Update fields
-    if user_data.email is not None:
-        # Check if email is already taken
-        existing = db.query(UserDB).filter(
-            UserDB.email == user_data.email,
-            UserDB.id != user_id
-        ).first()
-        if existing:
-            raise HTTPException(
-                status_code=status.HTTP_409_CONFLICT,
-                detail="Email already exists"
-            )
-        user.email = user_data.email
-
-    if user_data.profile_data is not None:
-        user.profile_data.update(user_data.profile_data)
-
-    if user_data.is_active is not None:
-        user.is_active = user_data.is_active
-
-    db.commit()
-    db.refresh(user)
-
-    return UserResponse(
-        id=user.id,
-        username=user.username,
-        email=user.email,
-        is_active=user.is_active,
-        is_verified=user.is_verified,
-        profile_data=user.profile_data,
-        created_at=user.created_at,
-        updated_at=user.updated_at,
-        last_login=user.last_login,
-        experience_count=len(user.experiences)
-    )
 
 
 @router.delete("/{user_id}")
-async def delete_user(user_id: str, db: Session = Depends(get_db)):
+async def delete_user(
+    user_id: str,
+    user_service: UserService = Depends(get_user_service)
+):
     """
     Delete a user.
 
     Args:
         user_id: User ID
-        db: Database session
+        user_service: User service (injected)
 
     Returns:
         Deletion confirmation message
@@ -272,7 +275,8 @@ async def delete_user(user_id: str, db: Session = Depends(get_db)):
     Raises:
         HTTPException: If user not found
     """
-    user = db.query(UserDB).filter(UserDB.id == user_id).first()
+    # Get user first to retrieve username for response message
+    user = user_service.get_user_by_id(user_id)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -280,8 +284,14 @@ async def delete_user(user_id: str, db: Session = Depends(get_db)):
         )
 
     username = user.username
-    db.delete(user)
-    db.commit()
+
+    # Delete user via service
+    success = user_service.delete_user(user_id)
+    if not success:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
 
     return {
         "success": True,
@@ -430,24 +440,27 @@ async def get_current_user_info(current_user: UserDB = Depends(get_current_user)
 
 
 @router.get("/stats")
-async def get_user_stats(db: Session = Depends(get_db)):
+async def get_user_stats(user_service: UserService = Depends(get_user_service)):
     """
     Get user statistics for the dashboard.
 
     Args:
-        db: Database session
+        user_service: User service (injected)
 
     Returns:
         User statistics including total, active, inactive, and verified counts
     """
-    total_users = db.query(UserDB).count()
-    active_users = db.query(UserDB).filter(UserDB.is_active == True).count()
-    inactive_users = db.query(UserDB).filter(UserDB.is_active == False).count()
-    verified_users = db.query(UserDB).filter(UserDB.is_verified == True).count()
+    total_users = user_service.get_user_count()
+
+    # Get active and inactive counts
+    all_users = user_service.list_users()
+    active_users = sum(1 for u in all_users if u.is_active)
+    inactive_users = sum(1 for u in all_users if not u.is_active)
+    verified_users = sum(1 for u in all_users if u.is_verified)
 
     # Get recent signups (last 30 days)
     thirty_days_ago = datetime.utcnow() - timedelta(days=30)
-    recent_signups = db.query(UserDB).filter(UserDB.created_at >= thirty_days_ago).count()
+    recent_signups = sum(1 for u in all_users if u.created_at >= thirty_days_ago)
 
     return {
         "total_users": total_users,
@@ -461,20 +474,20 @@ async def get_user_stats(db: Session = Depends(get_db)):
 @router.post("/bulk-delete")
 async def bulk_delete_users(
     ids: List[str],
-    db: Session = Depends(get_db)
+    user_service: UserService = Depends(get_user_service)
 ):
     """
     Delete multiple users at once.
 
     Args:
         ids: List of user IDs to delete
-        db: Database session
+        user_service: User service (injected)
 
     Returns:
         Deletion statistics (success, deleted count, failed count)
 
     Raises:
-        HTTPException: If deletion fails
+        HTTPException: If no IDs provided
     """
     if not ids:
         raise HTTPException(
@@ -487,9 +500,8 @@ async def bulk_delete_users(
 
     for user_id in ids:
         try:
-            user = db.query(UserDB).filter(UserDB.id == user_id).first()
-            if user:
-                db.delete(user)
+            success = user_service.delete_user(user_id)
+            if success:
                 deleted_count += 1
             else:
                 failed_count += 1
@@ -497,16 +509,6 @@ async def bulk_delete_users(
             failed_count += 1
             # Log error but continue with other deletions
             print(f"Failed to delete user {user_id}: {str(e)}")
-
-    # Commit all deletions
-    try:
-        db.commit()
-    except Exception as e:
-        db.rollback()
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Failed to commit bulk deletion: {str(e)}"
-        )
 
     return {
         "success": True,

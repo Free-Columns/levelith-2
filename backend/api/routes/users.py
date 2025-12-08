@@ -15,7 +15,9 @@ from backend.database import get_db
 from backend.models.db_models import UserDB, ExperienceDB
 from backend.models.user import hash_password, verify_password
 from backend.models.experience import ExperienceCategory, ExperienceType
-from backend.schemas.user import UserCreate, UserResponse, UserUpdate, UserLogin, UserWithExperiences
+from backend.schemas.user import UserCreate, UserResponse, UserUpdate, UserLogin, UserWithExperiences, TokenResponse
+from backend.auth import create_access_token, create_refresh_token, verify_refresh_token, get_current_user
+from backend.config import settings
 
 router = APIRouter()
 
@@ -287,20 +289,20 @@ async def delete_user(user_id: str, db: Session = Depends(get_db)):
     }
 
 
-@router.post("/login")
+@router.post("/login", response_model=TokenResponse)
 async def login(credentials: UserLogin, db: Session = Depends(get_db)):
     """
-    Authenticate user and return access token.
+    Authenticate user and return JWT access and refresh tokens.
 
     Args:
-        credentials: Login credentials
+        credentials: Login credentials (username and password)
         db: Database session
 
     Returns:
-        Authentication token information
+        TokenResponse with access_token, refresh_token, and expiration info
 
     Raises:
-        HTTPException: If credentials are invalid
+        HTTPException: If credentials are invalid or user is inactive
     """
     # Find user by username
     user = db.query(UserDB).filter(UserDB.username == credentials.username).first()
@@ -308,7 +310,8 @@ async def login(credentials: UserLogin, db: Session = Depends(get_db)):
     if not user or not verify_password(credentials.password, user.password_hash):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid username or password"
+            detail="Invalid username or password",
+            headers={"WWW-Authenticate": "Bearer"},
         )
 
     if not user.is_active:
@@ -317,14 +320,113 @@ async def login(credentials: UserLogin, db: Session = Depends(get_db)):
             detail="User account is inactive"
         )
 
-    # TODO: Implement JWT token generation
-    # For now, return basic user info
-    return {
-        "message": "Login successful",
-        "user_id": user.id,
+    # Update last login timestamp
+    user.last_login = datetime.utcnow()
+    db.commit()
+
+    # Create token payload
+    token_data = {
+        "sub": user.id,
         "username": user.username,
-        "note": "JWT token generation to be implemented"
+        "email": user.email,
     }
+
+    # Generate tokens
+    access_token = create_access_token(data=token_data)
+    refresh_token = create_refresh_token(data=token_data)
+
+    return TokenResponse(
+        access_token=access_token,
+        refresh_token=refresh_token,
+        token_type="bearer",
+        expires_in=settings.access_token_expire_minutes * 60  # Convert to seconds
+    )
+
+
+@router.post("/refresh", response_model=TokenResponse)
+async def refresh_token(refresh_token: str, db: Session = Depends(get_db)):
+    """
+    Refresh access token using a valid refresh token.
+
+    Args:
+        refresh_token: Valid refresh token
+        db: Database session
+
+    Returns:
+        New TokenResponse with fresh access and refresh tokens
+
+    Raises:
+        HTTPException: If refresh token is invalid or user not found
+    """
+    # Verify and decode refresh token
+    payload = verify_refresh_token(refresh_token)
+    user_id = payload.get("sub")
+
+    if not user_id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid refresh token",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    # Get user from database
+    user = db.query(UserDB).filter(UserDB.id == user_id).first()
+
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="User not found",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    if not user.is_active:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User account is inactive"
+        )
+
+    # Create new token payload
+    token_data = {
+        "sub": user.id,
+        "username": user.username,
+        "email": user.email,
+    }
+
+    # Generate new tokens
+    new_access_token = create_access_token(data=token_data)
+    new_refresh_token = create_refresh_token(data=token_data)
+
+    return TokenResponse(
+        access_token=new_access_token,
+        refresh_token=new_refresh_token,
+        token_type="bearer",
+        expires_in=settings.access_token_expire_minutes * 60
+    )
+
+
+@router.get("/me", response_model=UserResponse)
+async def get_current_user_info(current_user: UserDB = Depends(get_current_user)):
+    """
+    Get current authenticated user's information.
+
+    Args:
+        current_user: Current user from JWT token
+
+    Returns:
+        Current user's profile information
+    """
+    return UserResponse(
+        id=current_user.id,
+        username=current_user.username,
+        email=current_user.email,
+        is_active=current_user.is_active,
+        is_verified=current_user.is_verified,
+        profile_data=current_user.profile_data,
+        created_at=current_user.created_at,
+        updated_at=current_user.updated_at,
+        last_login=current_user.last_login,
+        experience_count=len(current_user.experiences)
+    )
 
 
 @router.get("/stats")

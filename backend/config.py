@@ -16,8 +16,8 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
     # Neural Hive (AI & Vector DB)
-    openai_api_key: str = "sk-..."
-    pinecone_api_key: str = "pcsk_..."
+    openai_api_key: str = "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"
+    pinecone_api_key: str = "pcsk_4fnA2U_EMr42M8ufmrmFKsmWPWwnrQtjAdyed4CvgTAADbNKLRnn7nNdA3GaBxNshA2f2S"
     pinecone_index_name: str = "industry-classifier"
     pinecone_env: str = "us-east-1"  # or your specific region
     

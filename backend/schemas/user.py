@@ -54,6 +54,15 @@ class UserResponse(UserBase):
     is_active: bool
     is_verified: bool
     profile_data: Dict
+
+    # XP and Leveling
+    professional_xp: float = Field(default=0.0, description="Professional experience XP")
+    education_xp: float = Field(default=0.0, description="Education XP")
+    skills_xp: float = Field(default=0.0, description="Skills XP")
+    vocational_xp: float = Field(default=0.0, description="Vocational XP")
+    total_xp: float = Field(default=0.0, description="Total XP (sum of all categories)")
+    level: int = Field(default=0, description="User level")
+
     created_at: datetime
     updated_at: datetime
     last_login: Optional[datetime] = None

@@ -12,6 +12,7 @@ from backend.database import get_db
 from backend.services.user_service import UserService
 from backend.services.experience_service import ExperienceService
 from backend.services.naics_service import NAICSService
+from backend.services.xp_service import XPService
 from backend.repositories.user_repository import UserRepository
 from backend.repositories.experience_repository import ExperienceRepository
 from backend.repositories.naics_repository import NAICSRepository
@@ -136,3 +137,16 @@ def get_naics_service(
         NAICSService: Service for NAICS business logic
     """
     return NAICSService(naics_repo=naics_repo)
+
+
+def get_xp_service(db: Session = Depends(get_db)) -> XPService:
+    """
+    Provide an XPService instance.
+
+    Args:
+        db: Database session (injected)
+
+    Returns:
+        XPService: Service for XP calculation and management
+    """
+    return XPService(db=db)

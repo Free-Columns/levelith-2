@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levelith MVP Dev Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #5568d3;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .response {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 13px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .response.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .response.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .xp-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .xp-display h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .xp-category {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .xp-category:last-child {
+            border-bottom: none;
+        }
+
+        .xp-total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .auth-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .auth-status.logged-in {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .auth-status.logged-out {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .leaderboard-table th,
+        .leaderboard-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .leaderboard-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .leaderboard-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .rank {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Levelith MVP Dev Interface</h1>
+            <p>Test account creation, profiles, XP calculation, and job correlation</p>
+            <div>
+                <span>Status:</span>
+                <span class="auth-status logged-out" id="authStatus">Not Logged In</span>
+                <span id="currentUser"></span>
+            </div>
+        </div>
+
+        <div class="grid">
+            <!-- User Registration -->
+            <div class="card">
+                <h2>1. Register Account</h2>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="regUsername" placeholder="johndoe">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="regEmail" placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="regPassword" placeholder="Min 8 characters">
+                </div>
+                <button onclick="registerUser()">Create Account</button>
+                <div id="regResponse"></div>
+            </div>
+
+            <!-- User Login -->
+            <div class="card">
+                <h2>2. Login</h2>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="loginUsername" placeholder="johndoe">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Your password">
+                </div>
+                <button onclick="loginUser()">Login</button>
+                <div id="loginResponse"></div>
+            </div>
+
+            <!-- User Profile & XP -->
+            <div class="card">
+                <h2>3. View Profile & XP</h2>
+                <button onclick="getUserProfile()">Load My Profile</button>
+                <div id="profileResponse"></div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <!-- Create Experience -->
+            <div class="card">
+                <h2>4. Create Experience</h2>
+                <div class="form-group">
+                    <label>Type</label>
+                    <select id="expType">
+                        <optgroup label="Professional">
+                            <option value="full_time">Full Time Job</option>
+                            <option value="part_time">Part Time Job</option>
+                            <option value="gig">Gig/Contract</option>
+                        </optgroup>
+                        <optgroup label="Education">
+                            <option value="degree">Degree</option>
+                            <option value="certificate">Certificate</option>
+                            <option value="course">Course</option>
+                        </optgroup>
+                        <optgroup label="Skills">
+                            <option value="hard_skill">Hard Skill</option>
+                            <option value="soft_skill">Soft Skill</option>
+                            <option value="native_skill">Native Skill</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="expTitle" placeholder="Software Engineer">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="expDescription" placeholder="Describe your experience..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" id="expStartDate">
+                </div>
+                <div class="form-group">
+                    <label>End Date (leave empty if current)</label>
+                    <input type="date" id="expEndDate">
+                </div>
+                <div class="form-group" id="hoursGroup">
+                    <label id="hoursLabel">Hours per Week</label>
+                    <input type="number" id="expHours" placeholder="40" min="0">
+                    <small>For calculating XP (10 XP per hour)</small>
+                </div>
+                <button onclick="createExperience()">Add Experience</button>
+                <div id="expResponse"></div>
+            </div>
+
+            <!-- Neural Hive - Job Correlation -->
+            <div class="card">
+                <h2>5. Neural Hive - Job Correlation</h2>
+                <p style="margin-bottom: 15px; color: #666; font-size: 14px;">
+                    AI-powered industry classification using Pinecone & OpenAI
+                </p>
+                <div class="form-group">
+                    <label>Journal Entry</label>
+                    <textarea id="journalText" rows="6" placeholder="Example: Today I worked on building a new React dashboard for our customer analytics platform. Spent 4 hours coding and 2 hours in meetings with the design team..."></textarea>
+                    <small>Describe your work activities and the Neural Hive will classify them with NAICS/O*NET codes</small>
+                </div>
+                <button onclick="processJournal()">Process with Neural Hive</button>
+                <div id="journalResponse"></div>
+            </div>
+
+            <!-- Leaderboard -->
+            <div class="card">
+                <h2>6. Leaderboard</h2>
+                <div class="form-group">
+                    <label>Top Users</label>
+                    <select id="leaderboardLimit">
+                        <option value="5">Top 5</option>
+                        <option value="10" selected>Top 10</option>
+                        <option value="20">Top 20</option>
+                    </select>
+                </div>
+                <button onclick="getLeaderboard()">Load Leaderboard</button>
+                <div id="leaderboardResponse"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000/api/v1';
+        let authToken = localStorage.getItem('authToken');
+        let currentUserId = localStorage.getItem('userId');
+
+        // Update auth status on load
+        updateAuthStatus();
+
+        function updateAuthStatus() {
+            const statusEl = document.getElementById('authStatus');
+            const userEl = document.getElementById('currentUser');
+
+            if (authToken) {
+                statusEl.textContent = 'Logged In';
+                statusEl.className = 'auth-status logged-in';
+                userEl.textContent = ` (User ID: ${currentUserId})`;
+            } else {
+                statusEl.textContent = 'Not Logged In';
+                statusEl.className = 'auth-status logged-out';
+                userEl.textContent = '';
+            }
+        }
+
+        function showResponse(elementId, message, isError = false) {
+            const el = document.getElementById(elementId);
+            el.className = `response ${isError ? 'error' : 'success'}`;
+            el.textContent = typeof message === 'object' ? JSON.stringify(message, null, 2) : message;
+            el.style.display = 'block';
+        }
+
+        async function registerUser() {
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            if (!username || !email || !password) {
+                showResponse('regResponse', 'Please fill in all fields', true);
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/users`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showResponse('regResponse', `Account created! User ID: ${data.id}\nYou can now login.`);
+                } else {
+                    showResponse('regResponse', `Error: ${data.detail || 'Registration failed'}`, true);
+                }
+            } catch (error) {
+                showResponse('regResponse', `Error: ${error.message}`, true);
+            }
+        }
+
+        async function loginUser() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (!username || !password) {
+                showResponse('loginResponse', 'Please fill in all fields', true);
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/users/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    authToken = data.access_token;
+                    currentUserId = data.user_id;
+                    localStorage.setItem('authToken', authToken);
+                    localStorage.setItem('userId', currentUserId);
+                    updateAuthStatus();
+                    showResponse('loginResponse', `Login successful!\nUser ID: ${currentUserId}\nToken expires in ${data.expires_in} seconds`);
+                } else {
+                    showResponse('loginResponse', `Error: ${data.detail || 'Login failed'}`, true);
+                }
+            } catch (error) {
+                showResponse('loginResponse', `Error: ${error.message}`, true);
+            }
+        }
+
+        async function getUserProfile() {
+            if (!authToken) {
+                showResponse('profileResponse', 'Please login first', true);
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/users/me`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Display profile with XP
+                    const profileHtml = `
+                        <div class="response success">
+                            <strong>Username:</strong> ${data.username}<br>
+                            <strong>Email:</strong> ${data.email}<br>
+                            <strong>Verified:</strong> ${data.is_verified ? 'Yes' : 'No'}<br>
+                            <strong>Experiences:</strong> ${data.experience_count}
+                        </div>
+                        <div class="xp-display">
+                            <h3>XP Breakdown <span class="level-badge">Level ${data.level}</span></h3>
+                            <div class="xp-category">
+                                <span>Professional XP:</span>
+                                <strong>${data.professional_xp.toFixed(1)}</strong>
+                            </div>
+                            <div class="xp-category">
+                                <span>Education XP:</span>
+                                <strong>${data.education_xp.toFixed(1)}</strong>
+                            </div>
+                            <div class="xp-category">
+                                <span>Skills XP:</span>
+                                <strong>${data.skills_xp.toFixed(1)}</strong>
+                            </div>
+                            <div class="xp-category">
+                                <span>Vocational XP:</span>
+                                <strong>${data.vocational_xp.toFixed(1)}</strong>
+                            </div>
+                            <div class="xp-total">
+                                <div class="xp-category">
+                                    <span>Total XP:</span>
+                                    <strong>${data.total_xp.toFixed(1)}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById('profileResponse').innerHTML = profileHtml;
+                } else {
+                    showResponse('profileResponse', `Error: ${data.detail || 'Failed to load profile'}`, true);
+                }
+            } catch (error) {
+                showResponse('profileResponse', `Error: ${error.message}`, true);
+            }
+        }
+
+        async function createExperience() {
+            if (!authToken || !currentUserId) {
+                showResponse('expResponse', 'Please login first', true);
+                return;
+            }
+
+            const expType = document.getElementById('expType').value;
+            const title = document.getElementById('expTitle').value;
+            const description = document.getElementById('expDescription').value;
+            const startDate = document.getElementById('expStartDate').value;
+            const endDate = document.getElementById('expEndDate').value;
+            const hours = document.getElementById('expHours').value;
+
+            if (!title || !description || !startDate) {
+                showResponse('expResponse', 'Please fill in required fields (Type, Title, Description, Start Date)', true);
+                return;
+            }
+
+            // Determine category from type
+            const typeToCategory = {
+                'full_time': 'workplace', 'part_time': 'workplace', 'gig': 'workplace',
+                'degree': 'education', 'certificate': 'education', 'course': 'education',
+                'hard_skill': 'skills', 'soft_skill': 'skills', 'native_skill': 'skills'
+            };
+
+            const category = typeToCategory[expType];
+
+            // Build type_specific_data with hours
+            const typeSpecificData = {};
+            if (hours) {
+                if (expType === 'full_time' || expType === 'part_time') {
+                    typeSpecificData.hours_per_week = parseFloat(hours);
+                } else if (expType === 'gig') {
+                    typeSpecificData.total_hours = parseFloat(hours);
+                } else if (category === 'education') {
+                    typeSpecificData.hours = parseFloat(hours);
+                } else if (category === 'skills') {
+                    typeSpecificData.practice_hours = parseFloat(hours);
+                }
+            }
+
+            const experienceData = {
+                category,
+                experience_type: expType,
+                title,
+                description,
+                naics_code: '123456',
+                start_date: new Date(startDate).toISOString(),
+                end_date: endDate ? new Date(endDate).toISOString() : null,
+                is_current: !endDate,
+                type_specific_data: typeSpecificData
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/experiences/?user_id=${currentUserId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify(experienceData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showResponse('expResponse', `Experience created!\nID: ${data.id}\nXP has been recalculated automatically.`);
+                    // Refresh profile to show updated XP
+                    setTimeout(() => getUserProfile(), 500);
+                } else {
+                    showResponse('expResponse', `Error: ${data.detail || 'Failed to create experience'}`, true);
+                }
+            } catch (error) {
+                showResponse('expResponse', `Error: ${error.message}`, true);
+            }
+        }
+
+        async function processJournal() {
+            if (!authToken || !currentUserId) {
+                showResponse('journalResponse', 'Please login first', true);
+                return;
+            }
+
+            const text = document.getElementById('journalText').value;
+
+            if (!text) {
+                showResponse('journalResponse', 'Please enter a journal entry', true);
+                return;
+            }
+
+            showResponse('journalResponse', 'Processing with Neural Hive... This may take 10-30 seconds.');
+
+            try {
+                const response = await fetch(`${API_BASE}/neural-hive/process`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        user_id: currentUserId,
+                        text: text
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showResponse('journalResponse', `Success!\n\n${JSON.stringify(data, null, 2)}\n\nExperiences created with auto-classified NAICS codes!`);
+                    // Refresh profile to show updated XP
+                    setTimeout(() => getUserProfile(), 500);
+                } else {
+                    showResponse('journalResponse', `Error: ${data.detail || 'Neural Hive processing failed'}`, true);
+                }
+            } catch (error) {
+                showResponse('journalResponse', `Error: ${error.message}`, true);
+            }
+        }
+
+        async function getLeaderboard() {
+            const limit = document.getElementById('leaderboardLimit').value;
+
+            try {
+                const response = await fetch(`${API_BASE}/leaderboard?limit=${limit}`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    let tableHtml = `
+                        <table class="leaderboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Username</th>
+                                    <th>Level</th>
+                                    <th>Total XP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+
+                    data.entries.forEach(entry => {
+                        tableHtml += `
+                            <tr>
+                                <td class="rank">#${entry.rank}</td>
+                                <td>${entry.username}</td>
+                                <td><span class="level-badge">${entry.level}</span></td>
+                                <td>${entry.total_xp.toFixed(1)}</td>
+                            </tr>
+                        `;
+                    });
+
+                    tableHtml += `
+                            </tbody>
+                        </table>
+                    `;
+
+                    document.getElementById('leaderboardResponse').innerHTML = tableHtml;
+                } else {
+                    showResponse('leaderboardResponse', `Error: ${data.detail || 'Failed to load leaderboard'}`, true);
+                }
+            } catch (error) {
+                showResponse('leaderboardResponse', `Error: ${error.message}`, true);
+            }
+        }
+
+        // Update hours label based on experience type
+        document.getElementById('expType').addEventListener('change', function() {
+            const expType = this.value;
+            const hoursLabel = document.getElementById('hoursLabel');
+            const hoursInput = document.getElementById('expHours');
+
+            if (expType === 'full_time') {
+                hoursLabel.textContent = 'Hours per Week';
+                hoursInput.placeholder = '40';
+            } else if (expType === 'part_time') {
+                hoursLabel.textContent = 'Hours per Week';
+                hoursInput.placeholder = '20';
+            } else if (expType === 'gig') {
+                hoursLabel.textContent = 'Total Hours';
+                hoursInput.placeholder = '160';
+            } else if (['degree', 'certificate', 'course'].includes(expType)) {
+                hoursLabel.textContent = 'Total Hours';
+                hoursInput.placeholder = '120';
+            } else if (['hard_skill', 'soft_skill', 'native_skill'].includes(expType)) {
+                hoursLabel.textContent = 'Practice Hours';
+                hoursInput.placeholder = '50';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -16,7 +16,7 @@ from fastapi.responses import JSONResponse
 
 from backend.config import settings
 from backend.database import init_db
-from backend.api.routes import health, users, experiences, naics, docs, stats, neural_hive 
+from backend.api.routes import health, users, experiences, naics, docs, stats, neural_hive, xp 
 # Configure logging
 logging.basicConfig(
     level=getattr(logging, settings.log_level.upper()),
@@ -112,9 +112,14 @@ app.include_router(
     tags=["Statistics"]
 )
 app.include_router(
-    neural_hive.router, 
-    prefix=f"{settings.api_v1_prefix}/neural-hive", 
+    neural_hive.router,
+    prefix=f"{settings.api_v1_prefix}/neural-hive",
     tags=["Neural Hive"]
+)
+app.include_router(
+    xp.router,
+    prefix=f"{settings.api_v1_prefix}",
+    tags=["XP & Leveling"]
 )
 
 

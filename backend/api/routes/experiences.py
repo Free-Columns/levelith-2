@@ -11,9 +11,10 @@ from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
 
 from backend.database import get_db
-from backend.dependencies import get_experience_service, get_user_service
+from backend.dependencies import get_experience_service, get_user_service, get_xp_service
 from backend.services.experience_service import ExperienceService
 from backend.services.user_service import UserService
+from backend.services.xp_service import XPService
 from backend.models.db_models import ExperienceDB
 from backend.models.experience import ExperienceCategory, ExperienceType
 from backend.schemas.experience import (
@@ -31,7 +32,8 @@ async def create_experience(
     experience_data: ExperienceCreate,
     user_id: str = Query(..., description="User ID who owns this experience"),
     user_service: UserService = Depends(get_user_service),
-    experience_service: ExperienceService = Depends(get_experience_service)
+    experience_service: ExperienceService = Depends(get_experience_service),
+    xp_service: XPService = Depends(get_xp_service)
 ):
     """
     Create a new experience for a user.
@@ -98,6 +100,9 @@ async def create_experience(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Invalid experience type: {exp_type}"
             )
+
+        # Recalculate XP for the user after creating experience
+        xp_service.calculate_user_xp(user_id)
 
         return ExperienceResponse.model_validate(experience)
     except Exception as e:
@@ -212,7 +217,9 @@ async def list_experiences(
 async def update_experience(
     experience_id: str,
     experience_data: ExperienceUpdate,
-    experience_service: ExperienceService = Depends(get_experience_service)
+    experience_service: ExperienceService = Depends(get_experience_service),
+    xp_service: XPService = Depends(get_xp_service),
+    db: Session = Depends(get_db)
 ):
     """
     Update experience information.
@@ -229,11 +236,21 @@ async def update_experience(
         HTTPException: If experience not found
     """
     try:
+        # Get the experience first to find the user_id
+        existing_experience = db.query(ExperienceDB).filter(ExperienceDB.id == experience_id).first()
+        if not existing_experience:
+            raise ValueError(f"Experience {experience_id} not found")
+
+        user_id = existing_experience.user_id
+
         # Convert update data to dictionary (exclude unset fields)
         update_data = experience_data.model_dump(exclude_unset=True)
 
         # Update experience via service
         experience = experience_service.update_experience(experience_id, **update_data)
+
+        # Recalculate XP for the user after updating experience
+        xp_service.calculate_user_xp(user_id)
 
         return ExperienceResponse.model_validate(experience)
     except ValueError as e:
@@ -246,7 +263,9 @@ async def update_experience(
 @router.delete("/{experience_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_experience(
     experience_id: str,
-    experience_service: ExperienceService = Depends(get_experience_service)
+    experience_service: ExperienceService = Depends(get_experience_service),
+    xp_service: XPService = Depends(get_xp_service),
+    db: Session = Depends(get_db)
 ):
     """
     Delete an experience.
@@ -254,16 +273,32 @@ async def delete_experience(
     Args:
         experience_id: Experience ID
         experience_service: Experience service (injected)
+        xp_service: XP service (injected)
+        db: Database session (injected)
 
     Raises:
         HTTPException: If experience not found
     """
+    # Get the experience first to find the user_id
+    existing_experience = db.query(ExperienceDB).filter(ExperienceDB.id == experience_id).first()
+    if not existing_experience:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Experience not found"
+        )
+
+    user_id = existing_experience.user_id
+
+    # Delete the experience
     success = experience_service.delete_experience(experience_id)
     if not success:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Experience not found"
         )
+
+    # Recalculate XP for the user after deleting experience
+    xp_service.calculate_user_xp(user_id)
 
 
 @router.get("/user/{user_id}/summary")

@@ -16,9 +16,9 @@ Transform professional experience tracking into an engaging platform with NAICS-
 
 **⚠️ MANDATORY before making ANY changes:**
 
-1. [**MANIFEST.md**](docs/core/MANIFEST.md) — Project vision and architecture
-2. [**AI_AGENT_GOLDEN_RULES.md**](docs/core/AI_AGENT_GOLDEN_RULES.md) — 10 mandatory rules
-3. [**AI_AGENT_GUIDE.md**](docs/core/AI_AGENT_GUIDE.md) — Complete operating guide
+1. [**MANIFEST.md**](docs/agent/MANIFEST.md) — Project vision and architecture
+2. [**AI_AGENT_GOLDEN_RULES.md**](docs/agent/AI_AGENT_GOLDEN_RULES.md) — 10 mandatory rules
+3. [**AI_AGENT_GUIDE.md**](docs/agent/AI_AGENT_GUIDE.md) — Complete operating guide
 
 ```bash
 # Build index and explore codebase
@@ -76,7 +76,7 @@ cd backend && uvicorn main:app --reload
 | Main Frontend | ❌ Not started | 0% |
 | Documentation | ✅ Excellent | 95% |
 
-**Path to Production:** 60-100 hours — See [Development Priorities](docs/dev/DEVELOPMENT_PRIORITIES.md)
+**Path to Production:** 60-100 hours — See [Development Priorities](docs/reports/DEVELOPMENT_PRIORITIES.md)
 
 ---
 
@@ -86,12 +86,12 @@ cd backend && uvicorn main:app --reload
 
 | Document | Purpose |
 |----------|---------|
-| [**MANIFEST.md**](docs/core/MANIFEST.md) | 🎯 Project vision (START HERE) |
-| [**Golden Rules**](docs/core/AI_AGENT_GOLDEN_RULES.md) | ⚠️ MANDATORY development rules |
+| [**MANIFEST.md**](docs/agent/MANIFEST.md) | 🎯 Project vision (START HERE) |
+| [**Golden Rules**](docs/agent/AI_AGENT_GOLDEN_RULES.md) | ⚠️ MANDATORY development rules |
 | [**Codebase Summary**](docs/CODEBASE_SUMMARY_REPORT.md) | 📊 Executive analysis report |
 | [**API Docs**](docs/api/API_DOCUMENTATION.md) | 🔌 Complete API reference |
-| [**Known Issues**](docs/core/KNOWN_ISSUES.md) | 🐛 Critical issues tracker |
-| [**Priorities**](docs/dev/DEVELOPMENT_PRIORITIES.md) | 🗺️ Development roadmap |
+| [**Known Issues**](docs/reports/KNOWN_ISSUES.md) | 🐛 Critical issues tracker |
+| [**Priorities**](docs/reports/DEVELOPMENT_PRIORITIES.md) | 🗺️ Development roadmap |
 
 **Feature Documentation:**
 
@@ -162,7 +162,7 @@ Before production deployment:
 3. **Complete JWT auth** (2-3 hrs) — Token generation missing
 4. **Build main frontend** (40-80 hrs) — User-facing app
 
-**Details:** [Known Issues](docs/core/KNOWN_ISSUES.md)
+**Details:** [Known Issues](docs/reports/KNOWN_ISSUES.md)
 
 ---
 
@@ -226,10 +226,10 @@ git add . && git commit -m "feat: description"
 
 ## 🤝 Contributing
 
-1. **Read the Golden Rules** — [AI_AGENT_GOLDEN_RULES.md](docs/core/AI_AGENT_GOLDEN_RULES.md)
+1. **Read the Golden Rules** — [AI_AGENT_GOLDEN_RULES.md](docs/agent/AI_AGENT_GOLDEN_RULES.md)
 2. **Write tests first** — `python tests/test_system.py generate <module>`
 3. **Update AI index** — `python dev/aiagent_navigator.py index`
-4. **Follow conventions** — See [MANIFEST.md](docs/core/MANIFEST.md)
+4. **Follow conventions** — See [MANIFEST.md](docs/agent/MANIFEST.md)
 
 ---
 
@@ -241,11 +241,11 @@ git add . && git commit -m "feat: description"
 
 ## 🔗 Key Resources
 
-- 🎯 [MANIFEST](docs/core/MANIFEST.md) — Project context (start here!)
-- ⚠️ [Golden Rules](docs/core/AI_AGENT_GOLDEN_RULES.md) — Development standards
+- 🎯 [MANIFEST](docs/agent/MANIFEST.md) — Project context (start here!)
+- ⚠️ [Golden Rules](docs/agent/AI_AGENT_GOLDEN_RULES.md) — Development standards
 - 📊 [Codebase Summary](docs/CODEBASE_SUMMARY_REPORT.md) — Executive analysis
 - 🔌 [API Docs](docs/api/API_DOCUMENTATION.md) — Endpoint reference
-- 🗺️ [Roadmap](docs/dev/DEVELOPMENT_PRIORITIES.md) — Path to production
+- 🗺️ [Roadmap](docs/reports/DEVELOPMENT_PRIORITIES.md) — Path to production
 - 📚 [Full Docs](docs/README.md) — Complete documentation index
 
 ---
